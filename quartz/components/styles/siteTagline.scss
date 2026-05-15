@@ -7,6 +7,30 @@
   margin: 0;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .site-tagline-wrap {
+    animation: tagline-wrap-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes tagline-wrap-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-tagline-wrap {
+    animation: none;
+  }
+}
+
 .site-tagline {
   margin: 0;
   text-align: center;

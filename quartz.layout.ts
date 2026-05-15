@@ -9,10 +9,10 @@ export const sharedPageComponents: SharedLayout = {
   footer: Component.Footer({
     socialLinks: [
       { name: "GitHub", url: "https://github.com/y-Adrian", icon: "github" },
-      { name: "CSDN", url: "https://blog.csdn.net/", icon: "csdn" },
-      { name: "小红书", url: "https://www.xiaohongshu.com/", icon: "xiaohongshu" },
-      { name: "X", url: "https://x.com/", icon: "x" },
       { name: "Gmail", url: "mailto:storyvs7263@gmail.com", icon: "gmail" },
+      { name: "X", url: "https://x.com/", icon: "x" },
+      { name: "小红书", url: "https://www.xiaohongshu.com/", icon: "xiaohongshu" },
+      { name: "CSDN", url: "https://blog.csdn.net/", icon: "csdn" },
     ],
   }),
 }
