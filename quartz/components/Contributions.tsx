@@ -57,11 +57,20 @@ function toPosix(p: string): string {
   return p.replace(/\\/g, "/")
 }
 
-/** 统计 / 展示用的博客 Markdown：`pathPrefix` 下 `.md`，且排除各层级的 `index.md` */
+/** `pathPrefix` 下是否处于 `leetcode/` 子目录（该目录下变更不展示） */
+function isUnderLeetcode(relPosix: string, pathPrefix: string): boolean {
+  const p = toPosix(relPosix).replace(/^.\//, "")
+  const prefix = toPosix(pathPrefix).replace(/\/?$/, "/")
+  if (!p.startsWith(prefix)) return false
+  return p.slice(prefix.length).toLowerCase().startsWith("leetcode/")
+}
+
+/** 统计 / 展示用的博客 Markdown：`pathPrefix` 下 `.md`，排除各层级的 `index.md` 与 `leetcode/` */
 function isBlogMarkdown(relPosix: string, pathPrefix: string): boolean {
   const p = toPosix(relPosix).replace(/^.\//, "")
   const prefix = toPosix(pathPrefix).replace(/\/?$/, "/")
   if (!p.startsWith(prefix) || !p.toLowerCase().endsWith(".md")) return false
+  if (isUnderLeetcode(p, pathPrefix)) return false
   const base = path.posix.basename(p).toLowerCase()
   return base !== "index.md"
 }
@@ -182,6 +191,7 @@ function parseNameStatusBlogLog(
       if (parts.length < 3) return
       const from = toPosix(parts[1])
       const to = toPosix(parts[2])
+      if (isUnderLeetcode(from, pathPrefix) || isUnderLeetcode(to, pathPrefix)) return
       const fromOk = isBlogMarkdown(from, pathPrefix)
       const toOk = isBlogMarkdown(to, pathPrefix)
       if (!fromOk && !toOk) return
@@ -312,7 +322,7 @@ function groupActivityByMonth(rows: ActivityRow[]): { label: string; items: stri
   })
 }
 
-/** 首页：根据 Git 对博客 Markdown（排除 index.md）的增删改绘制热力图与时间线（仅构建时执行 git） */
+/** 首页：根据 Git 对博客 Markdown（排除 index.md、leetcode/）的增删改绘制热力图与时间线（仅构建时执行 git） */
 const Contributions: QuartzComponent = (props: QuartzComponentProps) => {
   const contentRoot = path.resolve(props.ctx.argv.directory)
   const end = new Date()
