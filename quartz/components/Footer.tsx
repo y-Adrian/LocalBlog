@@ -37,7 +37,14 @@ export default ((opts?: Options) => {
           <ul class="social-links">
             {socialLinks.map(({ name, url, icon }) => (
               <li>
-                <a href={url} aria-label={name} title={name} target="_blank" rel="noopener noreferrer">
+                <a
+                  class={`social-link social-link--${icon}`}
+                  href={url}
+                  aria-label={name}
+                  title={name}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <SocialIcon name={icon} />
                 </a>
               </li>

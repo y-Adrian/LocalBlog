@@ -15,7 +15,7 @@ footer {
     align-items: center;
     gap: 0.65rem;
 
-    a {
+    a.social-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -29,12 +29,33 @@ footer {
         color: var(--secondary);
         opacity: 1;
       }
+
+      svg {
+        width: 1.1rem;
+        height: 1.1rem;
+        display: block;
+      }
     }
 
-    svg {
-      width: 1.1rem;
+    /* 字标类图标在 24×24 视口内较扁，单独放大以匹配 GitHub / X 视觉重量 */
+    a.social-link--csdn {
+      width: 1.75rem;
       height: 1.1rem;
-      display: block;
+
+      svg {
+        transform: scale(1.55);
+        transform-origin: center;
+      }
+    }
+
+    a.social-link--xiaohongshu {
+      width: 1.9rem;
+      height: 1.1rem;
+
+      svg {
+        transform: scale(1.65);
+        transform-origin: center;
+      }
     }
   }
 }

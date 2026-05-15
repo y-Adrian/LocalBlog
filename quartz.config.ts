@@ -12,8 +12,10 @@ const config: QuartzConfig = {
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
+    // 免费个人站统计：https://www.goatcounter.com 注册后把 websiteId 改成你的站点代号
     analytics: {
-      provider: "plausible",
+      provider: "goatcounter",
+      websiteId: "adrianblog",
     },
     locale: "zh-CN",
     baseUrl: "y-Adrian.github.io/LocalBlog",
