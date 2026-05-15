@@ -274,5 +274,3 @@ rg -n "rte_memseg_list|rte_mempool_get_bulk|rte_mem_virt2iova" lib/eal lib/mempo
 ---
 
 *本文强调机制与读源码路径；具体结构体字段与 API 以你使用的 DPDK release 头文件与 Release Notes 为最终依据。*
-
-[^1]: 
