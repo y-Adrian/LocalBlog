@@ -2,7 +2,6 @@
 tags:
   - Linux
   - 嵌入式
-  - 学习路径
 title: Shell、Makefile、Git 命令行基础
 description: 嵌入式 Linux 学习路径第一阶段：命令行编辑、编译与版本追溯
 ---

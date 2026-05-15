@@ -285,3 +285,14 @@ footer {
     margin: 0;
   }
 }
+
+/* 文章列表：加宽日期列，避免「2026年5月15日」换行 */
+li.section-li > .section {
+  grid-template-columns: fit-content(12em) minmax(0, 3fr) minmax(0, 1fr);
+}
+
+li.section-li > .section > .meta {
+  white-space: nowrap;
+  min-width: 10.5em;
+  flex-shrink: 0;
+}

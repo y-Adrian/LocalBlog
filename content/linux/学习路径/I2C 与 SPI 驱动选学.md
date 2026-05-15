@@ -2,7 +2,6 @@
 tags:
   - Linux
   - 嵌入式
-  - 学习路径
 title: I2C 与 SPI 驱动选学
 description: 按硬件选学——总线模型、设备树、内核 API 与用户态调试
 ---

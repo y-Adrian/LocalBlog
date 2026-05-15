@@ -33,13 +33,37 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
         segments.push(<Date date={getDate(cfg, fileData)!} locale={cfg.locale} />)
       }
 
+      const showPageViews = cfg.analytics?.provider === "goatcounter"
+      const pageViewsTemplate = showPageViews
+        ? i18n(cfg.locale).components.contentMeta.pageViews({ count: "{count}" })
+        : null
+
       // Display reading time if enabled
       if (options.showReadingTime) {
         const { minutes, words: _words } = readingTime(text)
         const displayedTime = i18n(cfg.locale).components.contentMeta.readingTime({
           minutes: Math.ceil(minutes),
         })
-        segments.push(<span>{displayedTime}</span>)
+        segments.push(
+          <span>
+            {displayedTime}
+            {showPageViews && (
+              <span
+                class="content-meta-views"
+                data-template={pageViewsTemplate!}
+                aria-hidden="true"
+              />
+            )}
+          </span>,
+        )
+      } else if (showPageViews) {
+        segments.push(
+          <span
+            class="content-meta-views content-meta-views--standalone"
+            data-template={pageViewsTemplate!}
+            aria-hidden="true"
+          />,
+        )
       }
 
       return (

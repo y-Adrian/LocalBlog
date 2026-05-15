@@ -5,6 +5,8 @@ import { QuartzEmitterPlugin } from "../types"
 import spaRouterScript from "../../components/scripts/spa.inline"
 // @ts-ignore
 import popoverScript from "../../components/scripts/popover.inline"
+// @ts-ignore
+import pageViewsScript from "../../components/scripts/pageViews.inline"
 import styles from "../../styles/custom.scss"
 import popoverStyle from "../../components/styles/popover.scss"
 import { BuildCtx } from "../../util/ctx"
@@ -134,6 +136,12 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
       document.head.appendChild(umamiScript);
     `)
   } else if (cfg.analytics?.provider === "goatcounter") {
+    const gcHost = cfg.analytics.host ?? "goatcounter.com"
+    const gcSite = cfg.analytics.websiteId
+    componentResources.afterDOMLoaded.push(`
+      window.__gcViewsBase = "https://${gcSite}.${gcHost}";
+    `)
+    componentResources.afterDOMLoaded.push(pageViewsScript)
     componentResources.afterDOMLoaded.push(`
       const goatcounterScriptPre = document.createElement('script');
       goatcounterScriptPre.textContent = \`
@@ -141,7 +149,7 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
       \`;
       document.head.appendChild(goatcounterScriptPre);
 
-      const endpoint = "https://${cfg.analytics.websiteId}.${cfg.analytics.host ?? "goatcounter.com"}/count";
+      const endpoint = "https://${gcSite}.${gcHost}/count";
       const goatcounterScript = document.createElement('script');
       goatcounterScript.src = "${cfg.analytics.scriptSrc ?? "https://gc.zgo.at/count.js"}";
       goatcounterScript.defer = true;

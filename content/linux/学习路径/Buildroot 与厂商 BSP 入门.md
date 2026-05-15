@@ -2,7 +2,6 @@
 tags:
   - Linux
   - 嵌入式
-  - 学习路径
 title: Buildroot 与厂商 BSP 入门
 description: 串口 shell、bootargs、替换 dtb 验证——跑通第一块能启动的板子
 ---

@@ -2,7 +2,6 @@
 tags:
   - Linux
   - 嵌入式
-  - 学习路径
 title: Yocto 与内核子系统深入
 description: 发行版工程化与按职业方向分叉——网络、存储、调度
 ---
