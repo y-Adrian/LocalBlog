@@ -1,3 +1,9 @@
+---
+tags:
+  - prompt
+  - AI工具
+---
+
 # 1 如何撰写高效的 Prompt
 
 > 掌握 Prompt Engineering，让 AI 真正理解你的意图

@@ -1,3 +1,8 @@
+---
+tags:
+  - DPDK
+---
+
 # 1 DPDK 教程（一）：Hugepage、绑核、`dpdk-devbind` 与跑通 `testpmd`
 
 本文对应学习路径的第一步：**把运行环境搭到能稳定跑 `testpmd`**。完成后你应能解释：大页为何需要、CPU 隔离与亲和在 DPDK 里的意义、网卡如何从内核驱动解绑并交给 VFIO、以及 `testpmd` 交互的基本用途。

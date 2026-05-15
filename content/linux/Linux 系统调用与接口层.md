@@ -1,3 +1,9 @@
+---
+tags:
+  - Linux
+  - syscall
+---
+
 # 1 Linux 系统调用与接口层
 
   

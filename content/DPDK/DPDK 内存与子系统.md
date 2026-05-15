@@ -1,3 +1,9 @@
+---
+tags:
+- DPDK
+---
+
+
 # 1 DPDK 内存与子系统深度说明（场景 · 原理 · 实现 · 源码线索）
 
 本文聚焦 **DPDK 数据面内存体系**：从 **EAL 内存初始化**、**大页与 memseg**、**堆与 `rte_malloc`**、**memzone**、**外部内存与 DMA 映射**、到 **`rte_mempool`/`rte_mbuf`**。写作目标是：**每个机制对应“解决什么问题 / 何时用 / 核心不变量是什么 / 实现大致怎么走 / 到源码哪里读”**。
@@ -268,3 +274,5 @@ rg -n "rte_memseg_list|rte_mempool_get_bulk|rte_mem_virt2iova" lib/eal lib/mempo
 ---
 
 *本文强调机制与读源码路径；具体结构体字段与 API 以你使用的 DPDK release 头文件与 Release Notes 为最终依据。*
+
+[^1]: 
