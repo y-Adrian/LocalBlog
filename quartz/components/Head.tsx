@@ -48,6 +48,12 @@ export default (() => {
             {cfg.theme.typography.title && (
               <link rel="stylesheet" href={googleFontSubsetHref(cfg.theme, cfg.pageTitle)} />
             )}
+            {fileData.slug === "index" && (
+              <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap"
+              />
+            )}
           </>
         )}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />

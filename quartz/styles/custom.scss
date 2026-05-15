@@ -27,6 +27,9 @@ html {
   --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.08);
   --radius-sm: 8px;
   --radius-md: 12px;
+  /* 首页金句：书法风格（Google Fonts + 本机楷体回退） */
+  --epigraphFont: "Ma Shan Zheng", "KaiTi", "Kaiti SC", "STKaiti", "FangSong", "仿宋", "Songti SC",
+    serif;
 }
 
 body {
@@ -404,11 +407,22 @@ body[data-slug="index"] .sidebar.left > .flex {
 
 body[data-slug="index"] .center article > p:first-of-type {
   margin-top: 0.35rem;
-  font-size: 1.08rem;
-  line-height: 1.75;
+  font-family: var(--epigraphFont);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  /* 顶栏 SiteTagline 为 clamp(1.35rem, 3.2vw, 2rem)，金句整体略小一档 */
+  font-size: clamp(1.12rem, 2.2vw, 1.65rem);
+  line-height: 1.65;
   color: var(--gray);
+  /* 与正文主栏同宽：分割线横跨该宽度，文字左对齐 */
+  width: 100%;
   max-width: 42rem;
-  margin-bottom: 1.25rem;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.1rem;
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 88%, transparent);
 }
 
 /* 首页「金句」blockquote */

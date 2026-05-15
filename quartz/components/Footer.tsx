@@ -1,7 +1,5 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import style from "./styles/footer.scss"
-import { version } from "../../package.json"
-import { i18n } from "../i18n"
 import { SocialIcon, SocialIconName } from "./SocialIcon"
 
 export interface SocialLink {
@@ -30,8 +28,7 @@ export default ((opts?: Options) => {
     return (
       <footer class={`${displayClass ?? ""}`}>
         <p>
-          {i18n(cfg.locale).components.footer.createdWith}{" "}
-          <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a> © {year}
+          Created by Adrian Tobar. © {year}
         </p>
         {socialLinks.length > 0 && (
           <ul class="social-links">
