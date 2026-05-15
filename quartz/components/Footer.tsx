@@ -35,20 +35,24 @@ export default ((opts?: Options) => {
         </p>
         {socialLinks.length > 0 && (
           <ul class="social-links">
-            {socialLinks.map(({ name, url, icon }) => (
-              <li>
-                <a
-                  class={`social-link social-link--${icon}`}
-                  href={url}
-                  aria-label={name}
-                  title={name}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <SocialIcon name={icon} />
-                </a>
-              </li>
-            ))}
+            {socialLinks.map(({ name, url, icon }) => {
+              const isMail = url.startsWith("mailto:")
+              return (
+                <li>
+                  <a
+                    class={`social-link social-link--${icon}`}
+                    href={url}
+                    aria-label={name}
+                    title={name}
+                    {...(isMail
+                      ? {}
+                      : { target: "_blank", rel: "noopener noreferrer" })}
+                  >
+                    <SocialIcon name={icon} />
+                  </a>
+                </li>
+              )
+            })}
           </ul>
         )}
       </footer>

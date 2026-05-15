@@ -12,6 +12,7 @@ export const sharedPageComponents: SharedLayout = {
       { name: "CSDN", url: "https://blog.csdn.net/", icon: "csdn" },
       { name: "小红书", url: "https://www.xiaohongshu.com/", icon: "xiaohongshu" },
       { name: "X", url: "https://x.com/", icon: "x" },
+      { name: "Gmail", url: "mailto:storyvs7263@gmail.com", icon: "gmail" },
     ],
   }),
 }

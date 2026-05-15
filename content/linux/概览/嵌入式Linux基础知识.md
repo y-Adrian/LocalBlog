@@ -250,15 +250,15 @@ date: 2026/05/16
 
 ## 1.16 自检清单（初/中级常见要求）
 
-- [ ] 说清从上电到 **shell 提示符** 的大致软件阶段。
-- [ ] 解释 **DT `compatible` 与驱动 `probe`** 如何对应。
-- [ ] 说明 **中断上下文与进程上下文** 各能/不能做什么。
-- [ ] 配置并成功使用 **串口内核日志 + rootfs 挂载**。
-- [ ] 独立完成 **交叉编译** 并在目标板运行，解决常见 **动态库缺失**。
-- [ ] 使用 **Buildroot 或 Yocto** 之一生成过可启动镜像。
-- [ ] 编写或修改过 **简单内核模块**，理解 **许可证与导出符号**。
-- [ ] 区分 **NAND+UBI** 与 **eMMC+ext4** 在一致性与工具链上的差异。
-- [ ] （选做）了解 **PREEMPT_RT** 与延迟测量的基本概念。
+- [ ] 说清从上电到 **shell 提示符** 的大致软件阶段。[^chk-boot]
+- [ ] 解释 **DT `compatible` 与驱动 `probe`** 如何对应。[^chk-dt]
+- [ ] 说明 **中断上下文与进程上下文** 各能/不能做什么。[^chk-ctx]
+- [ ] 配置并成功使用 **串口内核日志 + rootfs 挂载**。[^chk-console]
+- [ ] 独立完成 **交叉编译** 并在目标板运行，解决常见 **动态库缺失**。[^chk-xc]
+- [ ] 使用 **Buildroot 或 Yocto** 之一生成过可启动镜像。[^chk-bs]
+- [ ] 编写或修改过 **简单内核模块**，理解 **许可证与导出符号**。[^chk-mod]
+- [ ] 区分 **NAND+UBI** 与 **eMMC+ext4** 在一致性与工具链上的差异。[^chk-fs]
+- [ ] （选做）了解 **PREEMPT_RT** 与延迟测量的基本概念。[^chk-rt]
 
 ---
 
@@ -272,3 +272,21 @@ date: 2026/05/16
 ---
 
 *硬件与 BSP 差异远大于抽象总结；具体寄存器、时钟与启动介质以 SoC **TRM** 与厂商 BSP 为准。本文标题不叠数字编号，便于配合 Markdown 自动编号插件使用。*
+
+[^chk-boot]: **上电 → shell 的软件阶段（典型）**：SoC 上电后 **BootROM** 从 SPI NOR / eMMC / UART 等介质加载 **SPL/FSBL**（若有）；SPL 完成最小 DDR 等初始化后加载 **U-Boot/Barebox**；Bootloader 按环境变量或脚本加载 **内核镜像 + `.dtb`**（可选 **initramfs**），把 **bootargs** 传给内核；Linux 完成子系统初始化后执行 **PID 1（init）**，挂载 **rootfs**，再启动 **getty/login**，最终出现 **shell 提示符**。能按顺序说出各阶段职责与常见排障点（串口无输出、kernel panic、rootfs mount fail）即达标。
+
+[^chk-dt]: **`compatible` 与 `probe` 的对应**：设备树里节点的 **`compatible`** 是字符串列表（如 `"vendor,model","generic,fallback"`）。内核 **OF（Open Firmware）** 子系统在注册 **platform_device**（或 I2C/SPI 等总线上的设备）时，会拿该字符串与已注册的 **`of_device_id` / `platform_driver`（或对应总线 driver）** 的匹配表比对；**第一个匹配成功**的驱动被绑定，随后内核调用该驱动的 **`probe()`**，传入 **`struct platform_device *`（或对应设备指针）**，驱动在此解析 **DT 属性**（`reg`、`interrupts`、`clocks` 等）并完成硬件初始化。**无匹配**则设备存在但无驱动，`probe` 不会执行。
+
+[^chk-ctx]: **中断上下文 vs 进程上下文**：**硬中断上下文**（ISR 顶半部）要求极短、**不可睡眠**（不能调用可能调度的 API，如 `mutex_lock` 可能睡眠的路径、`kmalloc(GFP_KERNEL)` 在内存紧张时也可能阻塞）；不能做耗时工作与大量分配。**进程上下文**（系统调用、内核线程、`probe` 里大部分路径）**可以睡眠**，可用 **`mutex`**、**`kmalloc(GFP_KERNEL)`**、**`copy_to/from_user`** 等。**软中断/tasklet** 仍不可睡眠；耗时与可阻塞工作常下放到 **workqueue** 在进程上下文执行。
+
+[^chk-console]: **串口内核日志 + rootfs 挂载**：在 **bootargs** 中配置 **`console=ttySx,115200n8`**（或 `ttyAMA0`、`ttyS0` 等，以硬件 DTS 与驱动为准）使 **`printk` 与用户态早期输出** 出现在串口；同时配置 **`root=/dev/mmcblk0p2`**（或 `LABEL=`、`PARTUUID=`、`ubi0:rootfs` 等）与 **`rootfstype=ext4`** / **`rootfstype=ubifs`**，必要时加 **`rootwait`** 等待块设备就绪。验证：**上电后串口可见内核滚动日志**，随后 **init 挂载 rootfs 成功** 并进入 shell；若卡在 `Waiting for root device`，多为 **设备名/Driver/分区表** 与 **bootargs** 不一致。
+
+[^chk-xc]: **交叉编译与动态库缺失**：在宿主机用 **目标 triplet** 前缀的编译器（如 `aarch64-linux-gnu-gcc`）与 **`-sysroot`** 指向目标 rootfs，保证 **ABI（hf/ilp32 等）** 与板端一致。常见错误：**链接期**缺 `-lfoo` 或 `.pc` 路径不对；**运行期** `error while loading shared libraries` 多为 rootfs 中缺 **`libfoo.so`** 或 **`ld-linux-*.so`** 解释器路径不对。用 **`readelf -d`** 看 `NEEDED`，在目标机用 **`ldd`** 核对；必要时 **`rpath`** 或把 `.so` 安装到 **`/usr/lib`** 并 `ldconfig`（若镜像支持）。
+
+[^chk-bs]: **Buildroot / Yocto 可启动镜像**：**Buildroot** 通过 `make menuconfig` 选板型/内核/包，产出 **kernel + dtb + rootfs 镜像**（如 `sdcard.img` 或分离的 `Image`/`rootfs.ext4`），能 **烧录或 SD 启动** 到 shell。**Yocto** 通过 `machine`、`image` recipe 生成 **wic/hddimg** 等，强调 **layer、recipe、可复现构建**。自检点：你能说清 **镜像里各分区内容从哪个 recipe/defconfig 来**，并能做一次 **干净重编** 仍得到可启动结果。
+
+[^chk-mod]: **简单内核模块与许可证/导出符号**：模块需声明 **`MODULE_LICENSE("GPL")`** 等，与 **是否链接到仅 GPL 导出符号** 相关；**`EXPORT_SYMBOL`** 与 **`EXPORT_SYMBOL_GPL`** 区分「任意模块可用」与 **「仅 GPL 兼容模块可用」**，`modpost` 会校验。模块必须与 **运行内核同版本配置** 编译（**VERMAGIC** 匹配），用 **`insmod`/`dmesg`/`rmmod`** 闭环；理解 **insmod 在进程上下文**、模块内 **`init`/`exit`** 与 **`probe` 驱动** 不是同一概念但都要遵守 **睡眠规则**。
+
+[^chk-fs]: **NAND+UBI vs eMMC+ext4**：**Raw NAND** 无块语义，需 **FTL 或 UBI 卷管理**；**UBI+UBIFS** 在闪存上提供磨损均衡与坏块管理，工具链常见 **`ubiformat`/`ubinize`**，掉电需关注 **UBI 卷原子更新** 与挂载参数。**eMMC** 内置 **FTL**，对上呈现 **块设备**，多用 **ext4**；工具 **`mkfs.ext4`**、`tune2fs`，一致性依赖 **日志、barrier、fsync** 与分区只读策略。二者 **不可混用经验**：例如不能把 UBI 映像直接当裸块 `dd` 到无 FTL 的 NAND 上而不走 UBI 流程（具体以硬件与 BSP 为准）。
+
+[^chk-rt]: **PREEMPT_RT 与延迟测量（选做）**：**PREEMPT_RT** 通过可抢占临界区、线程化中断等降低 **最坏情况延迟**，但 **不保证**「每个周期都硬实时」；需 **打开对应内核配置** 并用 **`cyclictest`**、**ftrace**、**histogram** 等 **实测** 延迟分布。产品常见分工：**硬实时闭环** 放 MCU/RTOS，Linux 侧做 **尽力低延迟** 与 **隔离 CPU**（`isolcpus`）等组合策略。

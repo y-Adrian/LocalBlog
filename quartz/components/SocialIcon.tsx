@@ -1,6 +1,6 @@
 import { JSX } from "preact"
 
-export type SocialIconName = "github" | "csdn" | "xiaohongshu" | "x"
+export type SocialIconName = "github" | "csdn" | "xiaohongshu" | "x" | "gmail"
 
 /** 品牌 SVG 路径来自 Simple Icons (https://simpleicons.org/) */
 const icons: Record<SocialIconName, JSX.Element> = {
@@ -33,6 +33,15 @@ const icons: Record<SocialIconName, JSX.Element> = {
       <path
         fill="currentColor"
         d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+      />
+    </svg>
+  ),
+  /** Gmail 官方标识的简化单色版（信封轮廓） */
+  gmail: (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        fill="currentColor"
+        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
       />
     </svg>
   ),
