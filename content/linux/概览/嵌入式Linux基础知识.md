@@ -235,14 +235,16 @@ date: 2026/05/16
 
 ## 1.15 推荐学习路径（可执行顺序）
 
-- Shell、Makefile、Git：能在命令行完成编辑、编译、追溯。
-- 体系结构入门：MMU、异常、中断、Cache 与 DMA 直觉。
-- **应用交叉编译**：hello world 动态/静态各一次，`readelf` 看懂 **Machine / ABI**。
-- **Buildroot 或厂商 BSP**：串口进 shell，会改 `bootargs`、替换 dtb 验证。
-- **设备树**：对照原理图改 **GPIO/LED** 节点并 `probe` 成功。
-- **字符设备驱动**：模块 + sysfs/ioctl 与用户态通信。
-- **I2C/SPI** 类驱动（按硬件选学）。
-- **Yocto** 或更深子系统（网络、存储、调度）：按职业方向分叉。
+分阶段文档见 [[linux/学习路径/index|学习路径索引]]。
+
+- [[工程基础/Shell Makefile Git 命令行基础|Shell、Makefile、Git]]：能在命令行完成编辑、编译、追溯。
+- [[linux/学习路径/嵌入式体系结构入门|体系结构入门]]：MMU、异常、中断、Cache 与 DMA 直觉。
+- [[linux/学习路径/应用交叉编译实战指南|应用交叉编译]]：hello world 动态/静态各一次，`readelf` 看懂 **Machine / ABI**。
+- [[linux/学习路径/Buildroot 与厂商 BSP 入门|Buildroot 或厂商 BSP]]：串口进 shell，会改 `bootargs`、替换 dtb 验证。
+- [[linux/学习路径/设备树实战指南|设备树]]：对照原理图改 **GPIO/LED** 节点并 `probe` 成功。
+- [[linux/学习路径/字符设备驱动入门|字符设备驱动]]：模块 + sysfs/ioctl 与用户态通信。
+- [[linux/学习路径/I2C 与 SPI 驱动选学|I2C/SPI]] 类驱动（按硬件选学）。
+- [[linux/学习路径/Yocto 与内核子系统深入|Yocto 或更深子系统]]（网络、存储、调度）：按职业方向分叉。
 
 ---
 

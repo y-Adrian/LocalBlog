@@ -108,7 +108,7 @@ bitbake core-image-minimal -c populate_sdk
 **应掌握**
 
 - **VFS → 具体 FS（ext4/f2fs）→ 块层 → 驱动**；
-- **MTD/UBI/UBIFS** vs **eMMC + ext4**（见本站 **存储与 IO**）；
+- **MTD/UBI/UBIFS** vs **eMMC + ext4**（见 [[linux/内核机制/存储与IO子系统|存储与 IO 子系统]]）；
 - **Direct IO、缓存、fsync** 语义；**分区与 GPT**。
 
 **阅读入口**
@@ -181,7 +181,7 @@ bitbake core-image-minimal -c populate_sdk
 
 - **Yocto Project Documentation**（Mega-Manual）
 - **OpenEmbedded Layer Index**
-- 本站：**存储与 IO**、**DPDK 系列**、**cgroup**、**上下文切换** 等专题文
+- 相关专题：[[linux/内核机制/存储与IO子系统|存储与 IO]]、[[网络与DPDK/index|DPDK]]、[[linux/内核机制/cgroup 使用指南|cgroup]]、[[linux/内核机制/深入了解上下文切换|上下文切换]]
 
 ---
 
