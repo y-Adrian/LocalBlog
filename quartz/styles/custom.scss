@@ -1,3 +1,287 @@
 @use "./base.scss";
+@use "./variables.scss" as *;
 
-// put your custom CSS here!
+/* --------------------------------------------------------------------------
+   Theme: 个人站风格 — 暖纸底、墨字、琥珀强调；玻璃顶栏；正文滚动显现
+   参考 y-adrian.github.io/blog 的版式气质（文案与分区感），适配 Quartz 结构
+   -------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 英文/Latin → Fira Mono（本机已装则优先 FiraMono for Powerline）
+   中文/CJK → 思源宋体（Noto Serif SC / Source Han Serif SC） */
+:root {
+  --titleFont: "Noto Serif SC", "Source Han Serif SC", "Source Han Serif CN", "思源宋体 SC",
+    "思源宋体", serif;
+  --headerFont: "Fira Mono", "FiraMono for Powerline", "Fira Mono for Powerline", "Noto Serif SC",
+    "Source Han Serif SC", "Source Han Serif CN", "思源宋体 SC", "思源宋体", ui-monospace, serif;
+  --bodyFont: "Fira Mono", "FiraMono for Powerline", "Fira Mono for Powerline", "Noto Serif SC",
+    "Source Han Serif SC", "Source Han Serif CN", "思源宋体 SC", "思源宋体", ui-monospace, serif;
+  --codeFont: "Fira Mono", "FiraMono for Powerline", "Fira Mono for Powerline", ui-monospace,
+    monospace;
+}
+
+body {
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 顶栏：轻微玻璃 + 粘顶（内页） */
+.page-header {
+  z-index: 20;
+  margin: 0 -1.5rem 1.75rem;
+  padding: 0.85rem 1.5rem 1.15rem;
+  border-radius: 0 0 12px 12px;
+  background: color-mix(in srgb, var(--light) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 90%, transparent);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  transition:
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+body:not([data-slug="index"]) #quartz-body .page-header {
+  position: sticky;
+  top: 0;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  padding: 0.4rem 1.5rem 0.55rem;
+}
+
+/* 阅读页顶栏：紧凑布局，标签紧跟标题 */
+body:not([data-slug="index"]) .page-header .popover-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.55rem;
+}
+
+body:not([data-slug="index"]) .page-header .breadcrumb-container {
+  flex: 1 0 100%;
+  margin-top: 0;
+  gap: 0.35rem;
+}
+
+body:not([data-slug="index"]) .page-header .article-title {
+  margin: 0.15rem 0 0;
+  font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+  line-height: 1.25;
+}
+
+body:not([data-slug="index"]) .page-header .tags {
+  margin: 0.15rem 0 0;
+  padding-left: 0;
+  gap: 0.3rem;
+}
+
+body:not([data-slug="index"]) .page-header .content-meta {
+  flex: 1 0 100%;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+:root[saved-theme="dark"] .page-header {
+  background: color-mix(in srgb, var(--light) 75%, transparent);
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* 搜索弹层：输入框垂直居中 */
+.search > .search-container.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.search > .search-container > .search-space {
+  margin-top: 0;
+}
+
+.search > .search-container > .search-space > .search-layout > div {
+  height: min(50vh, calc(75vh - 12vh));
+  max-height: 50vh;
+}
+
+/* 首页：紧凑顶区，标题与搜索分区、避免重叠 */
+body[data-slug="index"] #quartz-body .page-header {
+  position: relative;
+  top: auto;
+  margin: 0 -1.5rem 1rem;
+  padding: 1.25rem 1.5rem 0.75rem;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+body[data-slug="index"] .sidebar.left {
+  height: auto;
+  position: sticky;
+  padding-top: 1.25rem;
+  gap: 1rem;
+}
+
+body[data-slug="index"] .sidebar.left .page-title {
+  margin-bottom: 0.15rem;
+}
+
+body[data-slug="index"] .sidebar.left > .flex {
+  width: 100%;
+}
+
+@media all and ($tablet) {
+  body[data-slug="index"] #quartz-body .page-header {
+    padding-top: 5rem;
+  }
+}
+
+@media all and ($desktop) {
+  body[data-slug="index"] #quartz-body .page-header {
+    padding-top: 5.25rem;
+  }
+}
+
+@media all and ($mobile) {
+  body[data-slug="index"] #quartz-body {
+    grid-template-areas:
+      "grid-header"
+      "grid-sidebar-left"
+      "grid-center"
+      "grid-sidebar-right"
+      "grid-footer";
+    row-gap: 0.75rem;
+  }
+
+  body[data-slug="index"] #quartz-body .page-header {
+    margin: 0;
+    padding: 1rem 0 0.5rem;
+  }
+
+  body[data-slug="index"] .sidebar.left {
+    position: initial;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    padding: 0;
+  }
+
+  body[data-slug="index"] .sidebar.left .page-title {
+    display: none;
+  }
+
+  body[data-slug="index"] .sidebar.left > .flex {
+    justify-content: stretch;
+    gap: 0.65rem;
+  }
+
+  body[data-slug="index"] .sidebar.left .search {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* 首页顶栏主标题由 SiteTagline 组件渲染，不再使用正文首段 h1 */
+
+body[data-slug="index"] .center article > p:first-of-type {
+  margin-top: 0.35rem;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--gray);
+  max-width: 42rem;
+  margin-bottom: 1.25rem;
+}
+
+/* 首页「金句」blockquote */
+body[data-slug="index"] .center article blockquote {
+  border-left: 3px solid color-mix(in srgb, var(--secondary) 65%, transparent);
+  background: color-mix(in srgb, var(--highlight) 55%, var(--light));
+  border-radius: 0 10px 10px 0;
+  padding: 0.85rem 1.1rem;
+  font-family: var(--headerFont);
+  font-style: normal;
+  color: var(--darkgray);
+}
+
+/* 首页导航表格 */
+body[data-slug="index"] .center article table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--lightgray);
+}
+
+body[data-slug="index"] .center article table thead {
+  background: color-mix(in srgb, var(--lightgray) 55%, var(--light));
+}
+
+body[data-slug="index"] .center article table tbody tr:hover td {
+  background: color-mix(in srgb, var(--highlight) 40%, var(--light));
+  transition: background 0.2s ease;
+}
+
+/* 正文滚动显现 */
+@media (prefers-reduced-motion: no-preference) {
+  .center article .q-reveal {
+    opacity: 0;
+    transform: translateY(1.1rem);
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .center article .q-reveal-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+a.internal {
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+a.internal:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.page-title-text {
+  font-family: var(--headerFont);
+}
+
+.center > hr {
+  border: none;
+  border-top: 1px solid var(--lightgray);
+  margin: 2rem 0 1.25rem;
+  opacity: 0.85;
+}
+
+pre {
+  border-radius: 10px;
+  border: 1px solid var(--lightgray);
+}
+
+/* 页脚：版权与社交图标同一行 */
+footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 0.85rem;
+
+  p {
+    margin: 0;
+  }
+
+  ul.social-links {
+    margin: 0;
+  }
+}
