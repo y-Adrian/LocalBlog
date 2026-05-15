@@ -46,8 +46,8 @@ body {
 
 body:not([data-slug="index"]) #quartz-body .page-header {
   position: sticky;
-  top: 0;
-  margin-top: 0;
+  top: 0.65rem;
+  margin-top: 0.65rem;
   margin-bottom: 0.75rem;
   padding: 0.4rem 1.5rem 0.55rem;
 }
