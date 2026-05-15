@@ -1,0 +1,172 @@
+/* 首页：Git 风格 content/ 提交热力图（配色贴近 GitHub，并适配深色） */
+.contrib-section {
+  margin: 1.25rem 0 1.75rem;
+  padding: 0;
+  max-width: 100%;
+}
+
+.contrib-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.65rem;
+}
+
+.contrib-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--darkgray);
+}
+
+.contrib-wrap {
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.contrib-matrix {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  align-items: flex-start;
+  min-width: min-content;
+}
+
+.contrib-gutter {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.contrib-gutter-spacer {
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.contrib-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.contrib-month-cap {
+  min-height: 18px;
+  line-height: 18px;
+  font-size: 0.68rem;
+  color: var(--gray);
+  align-self: flex-start;
+  white-space: nowrap;
+}
+
+.contrib-rows-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 6px 0 0;
+  margin-right: 0;
+  font-size: 0.65rem;
+  color: var(--gray);
+  line-height: 1;
+  flex-shrink: 0;
+  flex: 1;
+  min-height: calc(7 * 11px + 6 * 3px);
+}
+
+.contrib-rows-label span {
+  height: 11px;
+  display: flex;
+  align-items: center;
+}
+
+.contrib-week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.contrib-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  outline: none;
+}
+
+.contrib-cell[data-level="0"] {
+  background: color-mix(in srgb, var(--lightgray) 55%, var(--light));
+  outline: 1px solid color-mix(in srgb, var(--lightgray) 70%, transparent);
+}
+
+.contrib-cell[data-level="1"] {
+  background: color-mix(in srgb, var(--tertiary) 35%, var(--lightgray));
+}
+
+.contrib-cell[data-level="2"] {
+  background: color-mix(in srgb, var(--tertiary) 55%, var(--secondary));
+}
+
+.contrib-cell[data-level="3"] {
+  background: color-mix(in srgb, var(--secondary) 65%, var(--tertiary));
+}
+
+.contrib-cell[data-level="4"] {
+  background: color-mix(in srgb, var(--secondary) 88%, var(--dark));
+}
+
+:root[saved-theme="dark"] .contrib-cell[data-level="0"] {
+  background: color-mix(in srgb, var(--lightgray) 25%, var(--light));
+  outline: 1px solid color-mix(in srgb, var(--lightgray) 40%, transparent);
+}
+
+.contrib-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  color: var(--gray);
+}
+
+.contrib-legend-cells {
+  display: flex;
+  gap: 3px;
+}
+
+.contrib-activity {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--lightgray) 85%, transparent);
+}
+
+.contrib-activity h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--darkgray);
+}
+
+.contrib-activity-month {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--darkgray);
+}
+
+.contrib-activity ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--darkgray);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.contrib-empty {
+  font-size: 0.88rem;
+  color: var(--gray);
+  margin: 0.5rem 0 0;
+}
