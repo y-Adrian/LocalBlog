@@ -324,12 +324,12 @@ button.readermode:active {
   transform: translateY(0);
 }
 
-/* 首页：紧凑顶区，标题与搜索分区、避免重叠 */
+/* 首页：无顶栏主标题，顶区尽量紧凑 */
 body[data-slug="index"] #quartz-body .page-header {
   position: relative;
   top: auto;
-  margin: 0 -1.5rem 1rem;
-  padding: 1.25rem 1.5rem 0.75rem;
+  margin: 0 -1.5rem 0.35rem;
+  padding: 0.25rem 1.5rem 0;
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -354,13 +354,13 @@ body[data-slug="index"] .sidebar.left > .flex {
 
 @media all and ($tablet) {
   body[data-slug="index"] #quartz-body .page-header {
-    padding-top: 5rem;
+    padding-top: 0;
   }
 }
 
 @media all and ($desktop) {
   body[data-slug="index"] #quartz-body .page-header {
-    padding-top: 5.25rem;
+    padding-top: 0;
   }
 }
 
@@ -403,26 +403,50 @@ body[data-slug="index"] .sidebar.left > .flex {
   }
 }
 
-/* 首页顶栏主标题由 SiteTagline 组件渲染，不再使用正文首段 h1 */
+/* 首页金句（正文首段）：按主栏宽度放大，两端对齐铺满一行 */
+body[data-slug="index"] .center article {
+  container-type: inline-size;
+  container-name: index-article;
+  padding-top: 2.75rem;
+}
+
+@media all and ($desktop) {
+  body[data-slug="index"] .center article {
+    padding-top: 3.25rem;
+  }
+}
 
 body[data-slug="index"] .center article > p:first-of-type {
   margin-top: 0.35rem;
   font-family: var(--epigraphFont);
   font-weight: 400;
-  letter-spacing: 0.06em;
-  /* 顶栏 SiteTagline 为 clamp(1.35rem, 3.2vw, 2rem)，金句整体略小一档 */
-  font-size: clamp(1.12rem, 2.2vw, 1.65rem);
-  line-height: 1.65;
-  color: var(--gray);
-  /* 与正文主栏同宽：分割线横跨该宽度，文字左对齐 */
+  letter-spacing: 0;
+  /* 约 4.2cqi ≈ 主栏宽 / 24 字，使单行尽量铺满；窄屏下限防溢出 */
+  font-size: clamp(1rem, 4.2cqi, 2.5rem);
+  line-height: 1.35;
+  color: var(--darkgray);
+  display: block;
   width: 100%;
-  max-width: 42rem;
+  max-width: none;
   margin-left: 0;
   margin-right: 0;
   margin-bottom: 1.5rem;
   padding-bottom: 1.1rem;
-  text-align: left;
+  white-space: nowrap;
+  text-align: justify;
+  text-align-last: justify;
+  text-justify: inter-character;
   border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 88%, transparent);
+}
+
+@media all and ($mobile) {
+  body[data-slug="index"] .center article {
+    padding-top: 1.5rem;
+  }
+
+  body[data-slug="index"] .center article > p:first-of-type {
+    font-size: clamp(0.88rem, 3.65cqi, 1.65rem);
+  }
 }
 
 /* 首页「金句」blockquote */
