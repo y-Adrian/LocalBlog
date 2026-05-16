@@ -73,7 +73,7 @@ date: 2026/05/16
 - [x] **启动排障手册**：串口无输出 / kernel panic / rootfs 挂载失败 → [[linux/学习路径/启动排障手册]]
 - [ ] **最小可启动工程**：一份可复现的 Buildroot **或** Yocto 镜像 + 文档
 - [ ] **设备树 + platform 驱动**：完整 repo（reg/interrupt/clock + probe）
-- [ ] **中断与下半部**：硬中断 / tasklet / workqueue 选用表 + 示例
+- [x] **中断与下半部**：硬中断 / tasklet / workqueue 选用表 + 示例 → [[linux/学习路径/中断与下半部机制]]
 - [ ] **DMA 驱动基础**：`dma_map_*`、Cache 一致性、与 DT 配合
 
 **优先级：中**
@@ -123,7 +123,7 @@ date: 2026/05/16
 
 - [x] **进程调度**：CFS、nice、`SCHED_FIFO`；与 DPDK 绑核 / `isolcpus` 对照 → [[linux/内核机制/进程调度与绑核]]
 - [x] **内核同步总表**：spinlock / mutex / rwlock / RCU；`lockdep` 入门 → [[linux/内核机制/内核同步机制总览]]
-- [ ] **Linux 内核网络栈**：socket → 协议栈 → 驱动（与 DPDK 对比一篇）
+- [x] **Linux 内核网络栈**：socket → 协议栈 → 驱动（与 DPDK 对比一篇）→ [[linux/内核机制/Linux 内核网络栈与 DPDK 适用边界]]
 
 **优先级：中**
 
