@@ -16,6 +16,14 @@ const DAY_MS = 24 * 60 * 60 * 1000
 
 export type ActivityRow = { date: string; label: string }
 
+/** 解析/去重阶段的内部结构（不写入缓存） */
+export type ActivityEvent = ActivityRow & {
+  kind: "add" | "modify" | "delete" | "rename"
+  path?: string
+  fromPath?: string
+  toPath?: string
+}
+
 export type BlogActivityCache = {
   version: 1
   /** 生成缓存时的 ISO 时间（仅供排查） */
@@ -135,15 +143,52 @@ export function resolveRepoAndContentPrefix(contentRoot: string): { repoRoot: st
   return { repoRoot, pathPrefix }
 }
 
-function readMarkdownTitle(repoRoot: string, relPosix: string): string {
-  const abs = path.join(repoRoot, ...relPosix.split("/"))
-  let raw: string
-  try {
-    raw = fs.readFileSync(abs, "utf8")
-  } catch {
-    return stemTitle(relPosix)
+export function unquoteGitPath(p: string): string {
+  const s = p.trim()
+  if (s.length < 2 || s[0] !== '"' || s[s.length - 1] !== '"') return s
+  let out = ""
+  for (let i = 1; i < s.length - 1; i++) {
+    const c = s[i]
+    if (c === "\\" && i + 1 < s.length - 1) {
+      const esc = s[++i]
+      if (esc === "n") out += "\n"
+      else if (esc === "t") out += "\t"
+      else if (esc === "r") out += "\r"
+      else if (esc === "b") out += "\b"
+      else if (esc === "f") out += "\f"
+      else if (esc === "\\" || esc === '"') out += esc
+      else out += esc
+    } else {
+      out += c
+    }
   }
+  return out
+}
 
+/** 将 git name-status 行拆成 status 与路径（rename 仅在前两个制表符处分割） */
+export function splitNameStatusLine(row: string): { status: string; paths: string[] } | null {
+  const tab1 = row.indexOf("\t")
+  if (tab1 < 0) return null
+  const status = row.slice(0, tab1).trim()
+  const rest = row.slice(tab1 + 1)
+  const kind = status.charAt(0)
+  if (kind === "R" || kind === "C") {
+    const tab2 = rest.indexOf("\t")
+    if (tab2 < 0) return null
+    return {
+      status,
+      paths: [unquoteGitPath(rest.slice(0, tab2)), unquoteGitPath(rest.slice(tab2 + 1))],
+    }
+  }
+  return { status, paths: [unquoteGitPath(rest)] }
+}
+
+export function stemTitle(relPosix: string): string {
+  const base = path.posix.basename(relPosix, ".md")
+  return base || relPosix
+}
+
+export function titleFromMarkdown(raw: string, relPosix: string): string {
   const fm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (fm) {
     for (const line of fm[1].split(/\r?\n/)) {
@@ -162,78 +207,179 @@ function readMarkdownTitle(repoRoot: string, relPosix: string): string {
   return stemTitle(relPosix)
 }
 
-function stemTitle(relPosix: string): string {
-  const base = path.posix.basename(relPosix, ".md")
-  return base || relPosix
+function readMarkdownTitleAtCommit(repoRoot: string, commit: string, relPosix: string): string {
+  const raw = runGit(repoRoot, ["show", `${commit}:${relPosix}`])
+  if (!raw) return stemTitle(relPosix)
+  return titleFromMarkdown(raw, relPosix)
 }
 
-function parseNameStatusBlogLog(
+function readMarkdownTitle(repoRoot: string, relPosix: string): string {
+  const abs = path.join(repoRoot, ...relPosix.split("/"))
+  let raw: string
+  try {
+    raw = fs.readFileSync(abs, "utf8")
+  } catch {
+    return stemTitle(relPosix)
+  }
+  return titleFromMarkdown(raw, relPosix)
+}
+
+function resolveTitle(
+  repoRoot: string,
+  commit: string | null,
+  relPosix: string,
+  useStemFallback: boolean,
+): string {
+  if (commit) {
+    const atCommit = readMarkdownTitleAtCommit(repoRoot, commit, relPosix)
+    if (atCommit !== stemTitle(relPosix) || useStemFallback) return atCommit
+  }
+  return readMarkdownTitle(repoRoot, relPosix)
+}
+
+function normalizeTitleKey(title: string): string {
+  return title
+    .replace(/^`+|`+$/g, "")
+    .replace(/^\d+[\s.)]+/, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase()
+}
+
+function isSlugLikeStem(stem: string): boolean {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)+\.md$/i.test(`${stem}.md`) || /^dpdk-tutorial-\d+/i.test(stem)
+}
+
+function isCosmeticRename(tFrom: string, tTo: string): boolean {
+  const a = normalizeTitleKey(tFrom)
+  const b = normalizeTitleKey(tTo)
+  if (!a || !b) return false
+  if (a === b) return true
+  if (tTo.trim() === `1 ${tFrom.trim()}`) return true
+  if (tFrom.trim() === `1 ${tTo.trim()}`) return true
+  return false
+}
+
+/** 去掉会被后续重命名抵消的「新增」、无意义的重命名等 */
+export function refineBlogActivity(events: ActivityEvent[]): ActivityEvent[] {
+  const renamedFrom = new Set<string>()
+  for (const e of events) {
+    if (e.kind === "rename" && e.fromPath) renamedFrom.add(toPosix(e.fromPath))
+  }
+
+  const kept: ActivityEvent[] = []
+  for (const e of events) {
+    if (e.kind === "add" && e.path && renamedFrom.has(toPosix(e.path))) continue
+
+    if (e.kind === "rename" && e.fromPath && e.toPath) {
+      const tFrom = e.label.match(/重命名《([^》]*)》/)?.[1] ?? ""
+      const tTo = e.label.match(/→《([^》]*)》/)?.[1] ?? ""
+      if (isCosmeticRename(tFrom, tTo)) continue
+
+      if (isSlugLikeStem(stemTitle(e.fromPath))) {
+        kept.push({
+          date: e.date,
+          kind: "add",
+          path: e.toPath,
+          label: `新增《${tTo}》`,
+        })
+        continue
+      }
+    }
+
+    kept.push(e)
+  }
+
+  return kept
+}
+
+function rebuildCounts(events: ActivityEvent[]): Map<string, number> {
+  const counts = new Map<string, number>()
+  for (const e of events) {
+    counts.set(e.date, (counts.get(e.date) ?? 0) + 1)
+  }
+  return counts
+}
+
+export function parseNameStatusBlogLog(
   out: string,
   repoRoot: string,
   pathPrefix: string,
-): { counts: Map<string, number>; activity: ActivityRow[] } {
-  const counts = new Map<string, number>()
-  const activity: ActivityRow[] = []
-
-  const bump = (date: string, n: number) => {
-    counts.set(date, (counts.get(date) ?? 0) + n)
-  }
+): { counts: Map<string, number>; activity: ActivityEvent[] } {
+  const activity: ActivityEvent[] = []
 
   let curDate: string | null = null
+  let curCommit: string | null = null
+
+  const push = (row: ActivityEvent) => {
+    activity.push(row)
+  }
 
   const handlePathLine = (line: string) => {
     if (!curDate) return
     const row = line.trim()
     if (!row) return
-    const parts = row.split("\t")
-    if (parts.length < 2) return
+    const parsed = splitNameStatusLine(row)
+    if (!parsed) return
 
-    const statusRaw = parts[0].trim()
+    const statusRaw = parsed.status
     const kind = statusRaw.charAt(0)
     if (!"AMDRC".includes(kind)) return
 
     if (kind === "R" || kind === "C") {
-      if (parts.length < 3) return
-      const from = toPosix(parts[1])
-      const to = toPosix(parts[2])
-      if (isUnderLeetcode(from, pathPrefix) || isUnderLeetcode(to, pathPrefix)) return
-      const fromOk = isBlogMarkdown(from, pathPrefix)
-      const toOk = isBlogMarkdown(to, pathPrefix)
+      const [from, to] = parsed.paths
+      if (!from || !to) return
+      const fromPosix = toPosix(from)
+      const toPosixPath = toPosix(to)
+      if (isUnderLeetcode(fromPosix, pathPrefix) || isUnderLeetcode(toPosixPath, pathPrefix)) return
+      const fromOk = isBlogMarkdown(fromPosix, pathPrefix)
+      const toOk = isBlogMarkdown(toPosixPath, pathPrefix)
       if (!fromOk && !toOk) return
-      const tFrom = fromOk ? readMarkdownTitle(repoRoot, from) : stemTitle(from)
-      const tTo = toOk ? readMarkdownTitle(repoRoot, to) : stemTitle(to)
-      activity.push({
+      const tFrom = fromOk
+        ? resolveTitle(repoRoot, curCommit, fromPosix, false)
+        : stemTitle(fromPosix)
+      const tTo = toOk ? resolveTitle(repoRoot, curCommit, toPosixPath, true) : stemTitle(toPosixPath)
+      push({
         date: curDate,
+        kind: "rename",
+        fromPath: fromPosix,
+        toPath: toPosixPath,
         label: `重命名《${tFrom}》→《${tTo}》`,
       })
-      bump(curDate, 1)
       return
     }
 
-    const p = toPosix(parts[1])
+    const p = toPosix(parsed.paths[0])
     if (!isBlogMarkdown(p, pathPrefix)) return
 
-    const title = readMarkdownTitle(repoRoot, p)
+    const title = resolveTitle(repoRoot, curCommit, p, true)
     if (kind === "A") {
-      activity.push({ date: curDate, label: `新增《${title}》` })
+      push({ date: curDate, kind: "add", path: p, label: `新增《${title}》` })
     } else if (kind === "M") {
-      activity.push({ date: curDate, label: `更新《${title}》` })
+      push({ date: curDate, kind: "modify", path: p, label: `更新《${title}》` })
     } else if (kind === "D") {
-      activity.push({ date: curDate, label: `删除《${stemTitle(p)}》` })
+      push({ date: curDate, kind: "delete", path: p, label: `删除《${stemTitle(p)}》` })
     }
-    bump(curDate, 1)
   }
 
   for (const line of out.split("\n")) {
     if (line.startsWith("COMMIT ")) {
-      curDate = line.slice("COMMIT ".length).trim()
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(curDate)) curDate = null
+      const rest = line.slice("COMMIT ".length).trim()
+      const sp = rest.indexOf(" ")
+      if (sp > 0) {
+        curCommit = rest.slice(0, sp)
+        curDate = rest.slice(sp + 1).trim()
+      } else {
+        curCommit = null
+        curDate = rest
+      }
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(curDate ?? "")) curDate = null
       continue
     }
     handlePathLine(line)
   }
 
-  return { counts, activity }
+  return { counts: rebuildCounts(activity), activity }
 }
 
 /** 从 Git 历史收集博客 Markdown 增删改（构建缓存或本地回退） */
@@ -248,27 +394,38 @@ export function collectBlogActivityFromGit(contentRoot: string, end: Date = new 
   const logOut = runGit(repoRoot, [
     "log",
     "--no-merges",
+    "--reverse",
     `--since=${sinceYmd}`,
     "--date=short",
     "--name-status",
-    "--pretty=format:COMMIT %ad",
+    "--pretty=format:COMMIT %H %ad",
     "--",
     pathPrefix,
   ])
 
-  const { counts, activity } = parseNameStatusBlogLog(logOut, repoRoot, pathPrefix)
+  const { activity: raw } = parseNameStatusBlogLog(logOut, repoRoot, pathPrefix)
+  const refined = refineBlogActivity(raw)
 
+  const sorted = [...refined].sort((a, b) => {
+    const byDate = b.date.localeCompare(a.date)
+    if (byDate !== 0) return byDate
+    return b.label.localeCompare(a.label)
+  })
+
+  const counts = rebuildCounts(refined)
   const countsObj: Record<string, number> = {}
   for (const [k, v] of counts) {
     countsObj[k] = v
   }
+
+  const publicActivity = sorted.slice(0, MAX_ACTIVITY_LINES).map(({ date, label }) => ({ date, label }))
 
   return {
     version: 1,
     generatedAt: new Date().toISOString(),
     displayMonths: DISPLAY_MONTHS,
     counts: countsObj,
-    activity: activity.slice(0, MAX_ACTIVITY_LINES),
+    activity: publicActivity,
   }
 }
 
