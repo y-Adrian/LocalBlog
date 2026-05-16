@@ -1,0 +1,109 @@
+/* 全站：十字准星光标 + 仅粒子点击特效（脚本见 clickEffects.inline.ts） */
+
+#click-fx-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* 默认光标：十字准星 + 暖色中心点 */
+html.click-fx-enabled,
+html.click-fx-enabled * {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cline x1='10' y1='3' x2='10' y2='17' stroke='%233d3a36' stroke-opacity='0.55' stroke-width='1.5'/%3E%3Cline x1='3' y1='10' x2='17' y2='10' stroke='%233d3a36' stroke-opacity='0.55' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%23b45309' fill-opacity='0.9'/%3E%3C/svg%3E")
+      10 10,
+    auto;
+}
+
+html.click-fx-enabled a,
+html.click-fx-enabled button,
+html.click-fx-enabled summary,
+html.click-fx-enabled label[for],
+html.click-fx-enabled input[type="checkbox"],
+html.click-fx-enabled input[type="submit"],
+html.click-fx-enabled input[type="button"],
+html.click-fx-enabled .explorer-toggle,
+html.click-fx-enabled .search-button,
+html.click-fx-enabled .darkmode,
+html.click-fx-enabled .readermode,
+html.click-fx-enabled .global-graph-icon,
+html.click-fx-enabled [role="button"] {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cline x1='10' y1='3' x2='10' y2='17' stroke='%233d3a36' stroke-opacity='0.55' stroke-width='1.5'/%3E%3Cline x1='3' y1='10' x2='17' y2='10' stroke='%233d3a36' stroke-opacity='0.55' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%230f766e' fill-opacity='0.95'/%3E%3C/svg%3E")
+      10 10,
+    pointer;
+}
+
+:root[saved-theme="dark"].click-fx-enabled,
+:root[saved-theme="dark"].click-fx-enabled * {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cline x1='10' y1='3' x2='10' y2='17' stroke='%23e8e4dc' stroke-opacity='0.45' stroke-width='1.5'/%3E%3Cline x1='3' y1='10' x2='17' y2='10' stroke='%23e8e4dc' stroke-opacity='0.45' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%23fbbf24' fill-opacity='0.95'/%3E%3C/svg%3E")
+      10 10,
+    auto;
+}
+
+:root[saved-theme="dark"].click-fx-enabled a,
+:root[saved-theme="dark"].click-fx-enabled button,
+:root[saved-theme="dark"].click-fx-enabled summary,
+:root[saved-theme="dark"].click-fx-enabled label[for],
+:root[saved-theme="dark"].click-fx-enabled input[type="checkbox"],
+:root[saved-theme="dark"].click-fx-enabled input[type="submit"],
+:root[saved-theme="dark"].click-fx-enabled input[type="button"],
+:root[saved-theme="dark"].click-fx-enabled .explorer-toggle,
+:root[saved-theme="dark"].click-fx-enabled .search-button,
+:root[saved-theme="dark"].click-fx-enabled .darkmode,
+:root[saved-theme="dark"].click-fx-enabled .readermode,
+:root[saved-theme="dark"].click-fx-enabled .global-graph-icon,
+:root[saved-theme="dark"].click-fx-enabled [role="button"] {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cline x1='10' y1='3' x2='10' y2='17' stroke='%23e8e4dc' stroke-opacity='0.45' stroke-width='1.5'/%3E%3Cline x1='3' y1='10' x2='17' y2='10' stroke='%23e8e4dc' stroke-opacity='0.45' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%235eead4' fill-opacity='0.95'/%3E%3C/svg%3E")
+      10 10,
+    pointer;
+}
+
+html.click-fx-enabled input,
+html.click-fx-enabled textarea,
+html.click-fx-enabled select,
+html.click-fx-enabled [contenteditable="true"] {
+  cursor: text;
+}
+
+.click-fx-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  margin-top: -2.5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--secondary) 80%, var(--tertiary));
+  box-shadow: 0 0 6px color-mix(in srgb, var(--secondary) 35%, transparent);
+  animation: click-fx-particle 0.5s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+}
+
+.click-fx-particle:nth-child(3n) {
+  background: color-mix(in srgb, var(--tertiary) 75%, var(--secondary));
+}
+
+@keyframes click-fx-particle {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0.15);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.click-fx-enabled,
+  html.click-fx-enabled * {
+    cursor: auto;
+  }
+
+  #click-fx-layer {
+    display: none;
+  }
+}
