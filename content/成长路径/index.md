@@ -44,7 +44,7 @@ date: 2026/05/16
 
 **优先级：中**
 
-- [ ] **CMake / Meson**：库工程、交叉编译 toolchain 文件
+- [x] **CMake / Meson**：库工程、交叉编译 toolchain 文件 → [[工程基础/CMake 与交叉编译入门]]
 - [ ] **静态分析**：`clang-tidy`、`cppcheck`；内核侧了解 `sparse` / `coccinelle`
 - [ ] **CI 基础**：GitHub Actions 构建 + 制品（固件/镜像可选）
 - [ ] **代码评审清单**：嵌入式常见坑（对齐、volatile 误用、中断上下文）
@@ -101,7 +101,7 @@ date: 2026/05/16
 **优先级：中**
 
 - [ ] **日志与持久化**：`journal`、barrier、`sync` 对嵌入式影响
-- [ ] **挂载参数与启动**：`rootwait`、`PARTUUID`、initramfs 场景
+- [x] **挂载参数与启动**：`rootwait`、`PARTUUID`、initramfs 场景 → [[linux/文件系统/挂载参数与启动场景]]
 
 ---
 
@@ -176,7 +176,7 @@ date: 2026/05/16
 **优先级：中**
 
 - [ ] **AF_XDP**：何时用、与完整 DPDK 分工
-- [ ] **与内核共存**：路由、netfilter、管理口与数据口分离
+- [x] **与内核共存**：路由、netfilter、管理口与数据口分离 → [[网络与DPDK/实践/与内核网络栈共存]]
 - [ ] **SR-IOV / VF**（云或虚拟化场景）
 - [ ] **了解 VPP / OVS 定位**（不必深钻除非工作涉及）
 
@@ -276,7 +276,7 @@ date: 2026/05/16
 
 **优先级：高**
 
-- [ ] **A/B 分区** 与回滚策略
+- [x] **A/B 分区** 与回滚策略 → [[linux/OTA/A-B 分区与回滚策略]]
 - [ ] **swupdate** 或 **Mender** 之一实操
 - [ ] **远程日志与指标**：最小可观测方案（按产品）
 
