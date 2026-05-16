@@ -26,8 +26,8 @@ date: 2026/05/16
 - [x] 能描述嵌入式 Linux 从 **上电到 shell** 的软件阶段（见 [[linux/概览/嵌入式Linux基础知识]]）
 - [x] 能独立完成 **交叉编译** 并在目标板运行用户态程序
 - [ ] 能独立 bring-up 一块新板：**Bootloader + 内核 + DT + rootfs**（高）
-- [ ] 能说明 **内核网络栈** 与 **DPDK 旁路** 的适用边界（高）
-- [ ] 具备 **生产级排障** 流程：日志 → perf/ftrace → 反汇编（高）
+- [x] 能说明 **内核网络栈** 与 **DPDK 旁路** 的适用边界（高）→ [[linux/内核机制/Linux 内核网络栈与 DPDK 适用边界]]
+- [x] 具备 **生产级排障** 流程：日志 → perf/ftrace → 反汇编（高）→ [[系统调试/排障 SOP：日志、perf 与反汇编]]
 
 ---
 
@@ -71,7 +71,7 @@ date: 2026/05/16
 
 - [x] **U-Boot 实操**：环境变量、`bootcmd`、加载 kernel/dtb/initramfs → [[linux/学习路径/U-Boot 实操指南]]
 - [x] **启动排障手册**：串口无输出 / kernel panic / rootfs 挂载失败 → [[linux/学习路径/启动排障手册]]
-- [ ] **最小可启动工程**：一份可复现的 Buildroot **或** Yocto 镜像 + 文档
+- [x] **最小可启动工程**：一份可复现的 Buildroot **或** Yocto 镜像 + 文档 → [[linux/学习路径/最小可启动工程指南]]
 - [x] **设备树 + platform 驱动**：完整 repo（reg/interrupt/clock + probe）→ [[linux/驱动与模块/platform 驱动完整案例]]
 - [x] **中断与下半部**：硬中断 / tasklet / workqueue 选用表 + 示例 → [[linux/学习路径/中断与下半部机制]]
 - [x] **DMA 驱动基础**：`dma_map_*`、Cache 一致性、与 DT 配合 → [[linux/内核机制/DMA 与 Cache 一致性入门]]
@@ -145,7 +145,7 @@ date: 2026/05/16
 
 **优先级：高**
 
-- [ ] **sysfs / proc 接口**：模块参数、调试节点
+- [x] **sysfs / proc 接口**：模块参数、调试节点 → [[linux/驱动与模块/sysfs 与 proc 调试接口]]
 - [x] **platform 总线完整案例**：`compatible` 匹配 → `probe` → 资源释放 → [[linux/驱动与模块/platform 驱动完整案例]]
 - [ ] **块设备或网络驱动**：按目标硬件选一条线深入
 
@@ -169,9 +169,9 @@ date: 2026/05/16
 
 **优先级：高**
 
-- [ ] **最小数据面项目**：转发或 echo + 统计 + 配置（可写项目总结）
-- [ ] **多 worker 与 mempool 并发假设**：与 [[编程语言/C++/无锁编程]] 对照
-- [ ] **性能剖析闭环**：`perf` + 绑核 + 缓存行 / false sharing  checklist
+- [x] **最小数据面项目**：转发或 echo + 统计 + 配置（可写项目总结）→ [[网络与DPDK/实践/最小数据面项目设计]]
+- [x] **多 worker 与 mempool 并发假设**：与 [[编程语言/C++/无锁编程]] 对照 → [[网络与DPDK/实践/多 worker 与 mempool 并发假设]]
+- [x] **性能剖析闭环**：`perf` + 绑核 + 缓存行 / false sharing  checklist → [[网络与DPDK/实践/DPDK 性能剖析与绑核 checklist]]
 
 **优先级：中**
 
@@ -240,9 +240,9 @@ date: 2026/05/16
 
 **优先级：高**
 
-- [ ] **工具链一张图**：gdb、strace、`perf`、`ftrace`、`bpftrace`、`addr2line`
-- [ ] **排障 SOP**：先日志 → 再 perf → 再反汇编（一篇流程文）
-- [ ] **内核卡死类**：soft lockup、RCU stall、hung task
+- [x] **工具链一张图**：gdb、strace、`perf`、`ftrace`、`bpftrace`、`addr2line` → [[系统调试/排障工具链一张图]]
+- [x] **排障 SOP**：先日志 → 再 perf → 再反汇编（一篇流程文）→ [[系统调试/排障 SOP：日志、perf 与反汇编]]
+- [x] **内核卡死类**：soft lockup、RCU stall、hung task → [[系统调试/内核卡死与 hung task 入门]]
 
 **优先级：中**
 
@@ -309,20 +309,20 @@ date: 2026/05/16
 ### 第 1 季度 · 嵌入式闭环
 
 - [x] U-Boot + 启动排障 → [[linux/学习路径/U-Boot 实操指南]]、[[linux/学习路径/启动排障手册]]
-- [ ] DT + platform 驱动完整工程
-- [ ] Buildroot **或** Yocto 可重复出镜像
-- [ ] eMMC **或** UBI 文件系统实操
+- [x] DT + platform 驱动完整工程 → [[linux/驱动与模块/platform 驱动完整案例]]
+- [x] Buildroot **或** Yocto 可重复出镜像 → [[linux/学习路径/最小可启动工程指南]]
+- [x] eMMC **或** UBI 文件系统实操 → [[linux/文件系统/index]]
 
 ### 第 2 季度 · 可观测与内核网络
 
 - [ ] perf / ftrace 入门 + 一次真实卡顿案例
-- [ ] 内核网络栈 vs DPDK 对比文
-- [ ] 排障 SOP 定稿
+- [x] 内核网络栈 vs DPDK 对比文 → [[linux/内核机制/Linux 内核网络栈与 DPDK 适用边界]]
+- [x] 排障 SOP 定稿 → [[系统调试/排障 SOP：日志、perf 与反汇编]]
 
 ### 第 3 季度 · 数据面项目化
 
-- [ ] DPDK 小项目（多 worker + 统计）
-- [ ] 性能剖析与绑核 checklist 实践
+- [x] DPDK 小项目（多 worker + 统计）→ [[网络与DPDK/实践/最小数据面项目设计]]
+- [x] 性能剖析与绑核 checklist 实践 → [[网络与DPDK/实践/DPDK 性能剖析与绑核 checklist]]
 
 ### 第 4 季度 · 产品化（二选一深入）
 
@@ -339,7 +339,7 @@ date: 2026/05/16
 | 文件系统 / 存储 | `linux/文件系统/` |
 | 驱动案例 | `linux/驱动与模块/` |
 | 内核调度 / 网络栈 / eBPF | `linux/内核机制/` |
-| DPDK 项目 / AF_XDP | `网络与DPDK/教程/` 或新建 `网络与DPDK/实践/` |
+| DPDK 项目 / AF_XDP | `网络与DPDK/教程/` 或 [[网络与DPDK/实践/index]] |
 | perf / 排障 SOP | `系统调试/` |
 | C++ 与 DPDK 结合 | `编程语言/C++/` |
 | 清单本身 | `成长路径/`（本页） |
