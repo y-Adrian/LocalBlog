@@ -19,7 +19,7 @@ const config: QuartzConfig = {
     },
     locale: "zh-CN",
     baseUrl: "y-Adrian.github.io/LocalBlog",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    ignorePatterns: ["private", "templates", ".obsidian", "leetcode/**"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",

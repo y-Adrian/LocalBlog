@@ -1,6 +1,11 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
+/** 侧栏目录：不展示 tags、leetcode（leetcode 亦在 quartz.config ignorePatterns 中排除构建） */
+const explorer = Component.Explorer({
+  filterFn: (node) => node.slugSegment !== "tags" && node.slugSegment !== "leetcode",
+})
+
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
@@ -55,7 +60,7 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    explorer,
   ],
   right: [
     Component.Graph(),
@@ -79,7 +84,7 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    explorer,
   ],
   right: [],
 }

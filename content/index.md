@@ -20,8 +20,6 @@ description: Linux 系统编程、嵌入式、网络与 DPDK 学习笔记
 | [系统调试](系统调试/index) | 反汇编、并发与排障 |
 | [AI 工具](AI/index) | 本地模型、Prompt |
 
-> 刷题打卡在 `leetcode` 目录，为个人记录，未列入上方导航。
-
 ## 推荐阅读顺序（嵌入式 Linux）
 
 1. [嵌入式 Linux 基础知识](linux/概览/嵌入式Linux基础知识)
