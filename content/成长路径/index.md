@@ -95,8 +95,8 @@ date: 2026/05/16
 **优先级：高**
 
 - [x] **eMMC + ext4**：分区、`mkfs`、只读根文件系统、`fsck` 策略 → [[linux/文件系统/eMMC 与 ext4 根文件系统]]
-- [ ] **Raw NAND + UBI + UBIFS**：`ubiformat` / `ubinize`、掉电与升级注意点
-- [ ] **NAND 与 eMMC 选型对照**：一张表 + 板级实测结论
+- [x] **Raw NAND + UBI + UBIFS**：`ubiformat` / `ubinize`、掉电与升级注意点 → [[linux/文件系统/Raw NAND 与 UBI UBIFS 入门]]
+- [x] **NAND 与 eMMC 选型对照**：一张表 + 板级实测结论 → [[linux/文件系统/NAND 与 eMMC 选型对照]]
 
 **优先级：中**
 
