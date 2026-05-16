@@ -14,6 +14,10 @@ description: 底层分析与并发排障
 - [[排障工具链一张图]]
 - [[排障 SOP：日志、perf 与反汇编]]
 - [[内核卡死与 hung task 入门]]
+- [[perf 与火焰图读 C++ 热点]]
+- [[perf 与 ftrace 实战案例模板]]
+- [[coredump 分析基础]]
+- [[ASan 与 Valgrind 桌面验证]]
 
 ## 相关
 

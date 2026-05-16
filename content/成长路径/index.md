@@ -25,7 +25,7 @@ date: 2026/05/16
 
 - [x] 能描述嵌入式 Linux 从 **上电到 shell** 的软件阶段（见 [[linux/概览/嵌入式Linux基础知识]]）
 - [x] 能独立完成 **交叉编译** 并在目标板运行用户态程序
-- [ ] 能独立 bring-up 一块新板：**Bootloader + 内核 + DT + rootfs**（高）
+- [x] 能独立 bring-up 一块新板：**Bootloader + 内核 + DT + rootfs**（高）→ [[linux/学习路径/新板 Bring-up 检查清单]]
 - [x] 能说明 **内核网络栈** 与 **DPDK 旁路** 的适用边界（高）→ [[linux/内核机制/Linux 内核网络栈与 DPDK 适用边界]]
 - [x] 具备 **生产级排障** 流程：日志 → perf/ftrace → 反汇编（高）→ [[系统调试/排障 SOP：日志、perf 与反汇编]]
 
@@ -45,9 +45,9 @@ date: 2026/05/16
 **优先级：中**
 
 - [x] **CMake / Meson**：库工程、交叉编译 toolchain 文件 → [[工程基础/CMake 与交叉编译入门]]
-- [ ] **静态分析**：`clang-tidy`、`cppcheck`；内核侧了解 `sparse` / `coccinelle`
-- [ ] **CI 基础**：GitHub Actions 构建 + 制品（固件/镜像可选）
-- [ ] **代码评审清单**：嵌入式常见坑（对齐、volatile 误用、中断上下文）
+- [x] **静态分析**：`clang-tidy`、`cppcheck`；内核侧了解 `sparse` / `coccinelle` → [[工程基础/静态分析入门]]
+- [x] **CI 基础**：GitHub Actions 构建 + 制品（固件/镜像可选）→ [[工程基础/GitHub Actions 与嵌入式 CI 入门]]
+- [x] **代码评审清单**：嵌入式常见坑（对齐、volatile 误用、中断上下文）→ [[工程基础/嵌入式代码评审清单]]
 
 ---
 
@@ -78,9 +78,9 @@ date: 2026/05/16
 
 **优先级：中**
 
-- [ ] **MMU / IOMMU**：与 [[linux/内核机制/如何通过虚拟地址查找物理地址]] 串联成案例
-- [ ] **TrustZone / 安全启动**：概念 + 与 BSP 责任边界（按项目）
-- [ ] **电源管理**：`runtime_pm`、休眠唤醒（按硬件）
+- [x] **MMU / IOMMU**：与 [[linux/内核机制/如何通过虚拟地址查找物理地址]] 串联成案例 → [[linux/内核机制/MMU 与 IOMMU 案例串联]]
+- [x] **TrustZone / 安全启动**：概念 + 与 BSP 责任边界（按项目）→ [[linux/平台与构建/TrustZone 与安全启动概念]]
+- [x] **电源管理**：`runtime_pm`、休眠唤醒（按硬件）→ [[linux/驱动与模块/Runtime PM 与休眠唤醒入门]]
 
 ---
 
@@ -100,7 +100,7 @@ date: 2026/05/16
 
 **优先级：中**
 
-- [ ] **日志与持久化**：`journal`、barrier、`sync` 对嵌入式影响
+- [x] **日志与持久化**：`journal`、barrier、`sync` 对嵌入式影响 → [[linux/文件系统/日志持久化与 barrier]]
 - [x] **挂载参数与启动**：`rootwait`、`PARTUUID`、initramfs 场景 → [[linux/文件系统/挂载参数与启动场景]]
 
 ---
@@ -127,9 +127,9 @@ date: 2026/05/16
 
 **优先级：中**
 
-- [ ] **PREEMPT_RT**：`cyclictest`、最坏延迟测量（选做）
-- [ ] **内存压测与 OOM**：小内存板上的行为记录
-- [ ] **eBPF 入门**：`bpftrace` 跟踪延迟、丢包、栈
+- [x] **PREEMPT_RT**：`cyclictest`、最坏延迟测量（选做）→ [[linux/内核机制/PREEMPT_RT 与 cyclictest 入门]]
+- [x] **内存压测与 OOM**：小内存板上的行为记录 → [[linux/内核机制/小内存板 OOM 行为]]
+- [x] **eBPF 入门**：`bpftrace` 跟踪延迟、丢包、栈 → [[linux/内核机制/eBPF 与 bpftrace 入门]]
 
 ---
 
@@ -147,11 +147,11 @@ date: 2026/05/16
 
 - [x] **sysfs / proc 接口**：模块参数、调试节点 → [[linux/驱动与模块/sysfs 与 proc 调试接口]]
 - [x] **platform 总线完整案例**：`compatible` 匹配 → `probe` → 资源释放 → [[linux/驱动与模块/platform 驱动完整案例]]
-- [ ] **块设备或网络驱动**：按目标硬件选一条线深入
+- [x] **块设备或网络驱动**：按目标硬件选一条线深入 → [[linux/驱动与模块/块设备与网络驱动选型指南]]
 
 **优先级：低**
 
-- [ ] **Input / RTC / Watchdog** 等常见子系统驱动（按产品）
+- [x] **Input / RTC / Watchdog** 等常见子系统驱动（按产品）→ [[linux/驱动与模块/Input RTC Watchdog 子系统速览]]
 
 ---
 
@@ -175,10 +175,10 @@ date: 2026/05/16
 
 **优先级：中**
 
-- [ ] **AF_XDP**：何时用、与完整 DPDK 分工
+- [x] **AF_XDP**：何时用、与完整 DPDK 分工 → [[网络与DPDK/实践/AF_XDP 适用场景]]
 - [x] **与内核共存**：路由、netfilter、管理口与数据口分离 → [[网络与DPDK/实践/与内核网络栈共存]]
 - [ ] **SR-IOV / VF**（云或虚拟化场景）
-- [ ] **了解 VPP / OVS 定位**（不必深钻除非工作涉及）
+- [x] **了解 VPP / OVS 定位**（不必深钻除非工作涉及）→ [[网络与DPDK/实践/VPP 与 OVS 定位速览]]
 
 **优先级：低**
 
@@ -204,9 +204,9 @@ date: 2026/05/16
 
 **优先级：中**
 
-- [ ] **嵌入式 C++ 约束**：异常、`RTTI`、`-fno-exceptions`、静态链接体积
-- [ ] **C++ 封装 DPDK**：对象池、`rte_ring`、零拷贝接口设计
-- [ ] **perf + 火焰图** 读 C++ 热点（可放在 [[系统调试/index|系统调试]]）
+- [x] **嵌入式 C++ 约束**：异常、`RTTI`、`-fno-exceptions`、静态链接体积 → [[编程语言/C++/嵌入式 C++ 编译约束]]
+- [x] **C++ 封装 DPDK**：对象池、`rte_ring`、零拷贝接口设计 → [[编程语言/C++/C++ 封装 DPDK 数据面]]
+- [x] **perf + 火焰图** 读 C++ 热点（可放在 [[系统调试/index|系统调试]]）→ [[系统调试/perf 与火焰图读 C++ 热点]]
 
 **优先级：低**
 
@@ -224,7 +224,7 @@ date: 2026/05/16
 
 **优先级：低**
 
-- [ ] **goroutine / channel** 并发模型
+- [x] **goroutine / channel** 并发模型 → [[编程语言/Go/goroutine 与 channel 并发模型]]
 - [ ] **cgo 与交叉编译**（若做云管或工具链）
 
 ---
@@ -246,8 +246,8 @@ date: 2026/05/16
 
 **优先级：中**
 
-- [ ] **用户态内存**：ASan / Valgrind（桌面验证算法）
-- [ ] **coredump** 分析基础
+- [x] **用户态内存**：ASan / Valgrind（桌面验证算法）→ [[系统调试/ASan 与 Valgrind 桌面验证]]
+- [x] **coredump** 分析基础 → [[系统调试/coredump 分析基础]]
 
 ---
 
@@ -261,7 +261,7 @@ date: 2026/05/16
 
 **优先级：低**
 
-- [ ] **SQLite**：嵌入式配置库场景
+- [x] **SQLite**：嵌入式配置库场景 → [[数据库/SQLite 嵌入式配置库]]
 - [ ] **时序库 / 边缘存储**（按产品选型）
 
 ---
@@ -277,12 +277,13 @@ date: 2026/05/16
 **优先级：高**
 
 - [x] **A/B 分区** 与回滚策略 → [[linux/OTA/A-B 分区与回滚策略]]
-- [ ] **swupdate** 或 **Mender** 之一实操
-- [ ] **远程日志与指标**：最小可观测方案（按产品）
+- [x] **swupdate** 或 **Mender** 之一实操 → [[linux/OTA/swupdate 入门]]
+- [ ] **Mender** 实操（可选，与 swupdate 二选一深化）
+- [x] **远程日志与指标**：最小可观测方案（按产品）→ [[linux/OTA/远程日志与最小可观测]]
 
 **优先级：中**
 
-- [ ] **许可证与 SBOM**：GPL 模块、第三方库合规扫描
+- [x] **许可证与 SBOM**：GPL 模块、第三方库合规扫描 → [[工程基础/许可证与 SBOM 入门]]
 
 ---
 
@@ -315,7 +316,7 @@ date: 2026/05/16
 
 ### 第 2 季度 · 可观测与内核网络
 
-- [ ] perf / ftrace 入门 + 一次真实卡顿案例
+- [x] perf / ftrace 入门 + 一次真实卡顿案例（模板）→ [[系统调试/perf 与 ftrace 实战案例模板]]
 - [x] 内核网络栈 vs DPDK 对比文 → [[linux/内核机制/Linux 内核网络栈与 DPDK 适用边界]]
 - [x] 排障 SOP 定稿 → [[系统调试/排障 SOP：日志、perf 与反汇编]]
 
@@ -326,7 +327,7 @@ date: 2026/05/16
 
 ### 第 4 季度 · 产品化（二选一深入）
 
-- [ ] **OTA** 方案落地 **或** **AF_XDP** 专题
+- [x] **OTA** 方案落地 **或** **AF_XDP** 专题 → [[linux/OTA/index]]、[[网络与DPDK/实践/AF_XDP 适用场景]]
 - [ ] 安全启动 / 合规（按工作需求）
 
 ---

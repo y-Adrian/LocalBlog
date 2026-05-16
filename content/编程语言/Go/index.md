@@ -8,3 +8,4 @@ description: Go 语言基础笔记
 ## 文档
 
 - [[Go语言基础]]
+- [[goroutine 与 channel 并发模型]]

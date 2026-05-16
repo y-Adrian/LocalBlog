@@ -13,3 +13,5 @@ description: 项目化总结、性能 checklist 与并发模型
 | [[DPDK 性能剖析与绑核 checklist]] | perf、绑核、false sharing |
 | [[多 worker 与 mempool 并发假设]] | 与无锁编程对照 |
 | [[与内核网络栈共存]] | 管理口与数据口分离 |
+| [[AF_XDP 适用场景]] | 与完整 DPDK 分工 |
+| [[VPP 与 OVS 定位速览]] | 生态定位 |

@@ -23,6 +23,10 @@ description: 系统调用、内存、调度、存储 IO 与 cgroup
 ## 网络
 
 - [[Linux 内核网络栈与 DPDK 适用边界]]
+- [[MMU 与 IOMMU 案例串联]]
+- [[eBPF 与 bpftrace 入门]]
+- [[PREEMPT_RT 与 cyclictest 入门]]
+- [[小内存板 OOM 行为]]
 
 ## 资源与 IO
 
