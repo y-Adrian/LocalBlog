@@ -1,0 +1,13 @@
+#!/bin/sh
+# 每次本地 commit 后刷新博客活动缓存（需将生成的 blog-activity.cache.json 一并 push）
+set -e
+cd "$(git rev-parse --show-toplevel)"
+npm run activity:update --silent 2>/dev/null || node --experimental-strip-types scripts/update-blog-activity-cache.ts
+if git diff --quiet -- blog-activity.cache.json 2>/dev/null; then
+  exit 0
+fi
+git add blog-activity.cache.json
+echo ""
+echo "→ 已更新 blog-activity.cache.json 并加入暂存区。"
+echo "  请执行: git commit -m \"chore: update blog activity cache\"  （或与下次改动一起提交）"
+echo ""
