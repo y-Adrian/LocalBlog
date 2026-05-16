@@ -121,8 +121,8 @@ date: 2026/05/16
 
 **优先级：高**
 
-- [ ] **进程调度**：CFS、nice、`SCHED_FIFO`；与 DPDK 绑核 / `isolcpus` 对照
-- [ ] **内核同步总表**：spinlock / mutex / rwlock / RCU；`lockdep` 入门
+- [x] **进程调度**：CFS、nice、`SCHED_FIFO`；与 DPDK 绑核 / `isolcpus` 对照 → [[linux/内核机制/进程调度与绑核]]
+- [x] **内核同步总表**：spinlock / mutex / rwlock / RCU；`lockdep` 入门 → [[linux/内核机制/内核同步机制总览]]
 - [ ] **Linux 内核网络栈**：socket → 协议栈 → 驱动（与 DPDK 对比一篇）
 
 **优先级：中**
