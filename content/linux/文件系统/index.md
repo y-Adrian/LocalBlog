@@ -12,3 +12,4 @@ description: 嵌入式块设备、Flash 与根文件系统实践
 | eMMC / ext4 | [[eMMC 与 ext4 根文件系统]] |
 | Raw NAND / UBI | [[Raw NAND 与 UBI UBIFS 入门]] |
 | 选型 | [[NAND 与 eMMC 选型对照]] |
+| 启动挂载 | [[挂载参数与启动场景]] |
