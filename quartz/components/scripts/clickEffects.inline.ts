@@ -1,4 +1,4 @@
-/** 全站点击特效：仅粒子；十字准星光标由 clickEffects.scss 提供 */
+/** 全站点击特效：仅粒子（非线性 ease-out）；不覆盖系统光标 */
 const PARTICLE_COUNT = 10
 const SKIP_SELECTOR =
   "input, textarea, select, option, [contenteditable='true'], .mermaid-container, pre, code"
@@ -52,14 +52,6 @@ function onPointerDown(ev: PointerEvent) {
   spawnParticles(ev.clientX, ev.clientY)
 }
 
-function enableCursorClass() {
-  if (prefersReducedMotion()) {
-    document.documentElement.classList.remove("click-fx-enabled")
-    return
-  }
-  document.documentElement.classList.add("click-fx-enabled")
-}
-
 function attachListeners() {
   if (listenersAttached) return
   listenersAttached = true
@@ -69,12 +61,10 @@ function attachListeners() {
     listenersAttached = false
     layer?.remove()
     layer = null
-    document.documentElement.classList.remove("click-fx-enabled")
   })
 }
 
 function setup() {
-  enableCursorClass()
   if (prefersReducedMotion()) {
     layer?.remove()
     layer = null
