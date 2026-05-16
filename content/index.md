@@ -19,6 +19,7 @@ description: Linux 系统编程、嵌入式、网络与 DPDK 学习笔记
 | [数据库](数据库/index) | PostgreSQL 等 |
 | [系统调试](系统调试/index) | 反汇编、并发与排障 |
 | [AI 工具](AI/index) | 本地模型、Prompt |
+| [成长路径](成长路径/index) | 知识储备与待补清单（查漏补缺） |
 
 ## 推荐阅读顺序（嵌入式 Linux）
 
