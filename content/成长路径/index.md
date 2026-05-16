@@ -72,7 +72,7 @@ date: 2026/05/16
 - [x] **U-Boot 实操**：环境变量、`bootcmd`、加载 kernel/dtb/initramfs → [[linux/学习路径/U-Boot 实操指南]]
 - [x] **启动排障手册**：串口无输出 / kernel panic / rootfs 挂载失败 → [[linux/学习路径/启动排障手册]]
 - [ ] **最小可启动工程**：一份可复现的 Buildroot **或** Yocto 镜像 + 文档
-- [ ] **设备树 + platform 驱动**：完整 repo（reg/interrupt/clock + probe）
+- [x] **设备树 + platform 驱动**：完整 repo（reg/interrupt/clock + probe）→ [[linux/驱动与模块/platform 驱动完整案例]]
 - [x] **中断与下半部**：硬中断 / tasklet / workqueue 选用表 + 示例 → [[linux/学习路径/中断与下半部机制]]
 - [x] **DMA 驱动基础**：`dma_map_*`、Cache 一致性、与 DT 配合 → [[linux/内核机制/DMA 与 Cache 一致性入门]]
 
@@ -146,7 +146,7 @@ date: 2026/05/16
 **优先级：高**
 
 - [ ] **sysfs / proc 接口**：模块参数、调试节点
-- [ ] **platform 总线完整案例**：`compatible` 匹配 → `probe` → 资源释放
+- [x] **platform 总线完整案例**：`compatible` 匹配 → `probe` → 资源释放 → [[linux/驱动与模块/platform 驱动完整案例]]
 - [ ] **块设备或网络驱动**：按目标硬件选一条线深入
 
 **优先级：低**
