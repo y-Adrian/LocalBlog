@@ -74,7 +74,7 @@ date: 2026/05/16
 - [ ] **最小可启动工程**：一份可复现的 Buildroot **或** Yocto 镜像 + 文档
 - [ ] **设备树 + platform 驱动**：完整 repo（reg/interrupt/clock + probe）
 - [x] **中断与下半部**：硬中断 / tasklet / workqueue 选用表 + 示例 → [[linux/学习路径/中断与下半部机制]]
-- [ ] **DMA 驱动基础**：`dma_map_*`、Cache 一致性、与 DT 配合
+- [x] **DMA 驱动基础**：`dma_map_*`、Cache 一致性、与 DT 配合 → [[linux/内核机制/DMA 与 Cache 一致性入门]]
 
 **优先级：中**
 
