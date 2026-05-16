@@ -110,7 +110,7 @@ export type DayCell = {
 
 function runGit(cwd: string, args: string[]): string {
   try {
-    return execFileSync("git", args, {
+    return execFileSync("git", ["-c", "core.quotepath=false", ...args], {
       cwd,
       encoding: "utf8",
       maxBuffer: 32 * 1024 * 1024,
@@ -143,26 +143,59 @@ export function resolveRepoAndContentPrefix(contentRoot: string): { repoRoot: st
   return { repoRoot, pathPrefix }
 }
 
-export function unquoteGitPath(p: string): string {
-  const s = p.trim()
-  if (s.length < 2 || s[0] !== '"' || s[s.length - 1] !== '"') return s
-  let out = ""
-  for (let i = 1; i < s.length - 1; i++) {
-    const c = s[i]
-    if (c === "\\" && i + 1 < s.length - 1) {
-      const esc = s[++i]
-      if (esc === "n") out += "\n"
-      else if (esc === "t") out += "\t"
-      else if (esc === "r") out += "\r"
-      else if (esc === "b") out += "\b"
-      else if (esc === "f") out += "\f"
-      else if (esc === "\\" || esc === '"') out += esc
-      else out += esc
+/** 解码 Git quotepath 八进制转义（Linux CI 默认 core.quotepath=true 时会出现） */
+export function decodeGitQuotepath(p: string): string {
+  if (!p.includes("\\")) return p
+  const bytes: number[] = []
+  for (let i = 0; i < p.length; i++) {
+    const c = p[i]
+    if (c === "\\" && i + 1 < p.length && /[0-7]/.test(p[i + 1])) {
+      let oct = ""
+      let j = i + 1
+      while (j < p.length && j < i + 4 && /[0-7]/.test(p[j])) oct += p[j++]
+      bytes.push(parseInt(oct, 8))
+      i = j - 1
     } else {
-      out += c
+      const code = p.charCodeAt(i)
+      if (code > 0xff) return p
+      bytes.push(code)
     }
   }
-  return out
+  try {
+    return Buffer.from(bytes).toString("utf8")
+  } catch {
+    return p
+  }
+}
+
+export function unquoteGitPath(p: string): string {
+  let s = p.trim()
+  if (s.length >= 2 && s[0] === '"' && s[s.length - 1] === '"') {
+    let out = ""
+    for (let i = 1; i < s.length - 1; i++) {
+      const c = s[i]
+      if (c === "\\" && i + 1 < s.length - 1) {
+        const esc = s[++i]
+        if (esc === "n") out += "\n"
+        else if (esc === "t") out += "\t"
+        else if (esc === "r") out += "\r"
+        else if (esc === "b") out += "\b"
+        else if (esc === "f") out += "\f"
+        else if (esc === "\\" || esc === '"') out += esc
+        else if (/[0-7]/.test(esc)) {
+          let oct = esc
+          let j = i + 1
+          while (j < s.length - 1 && j < i + 3 && /[0-7]/.test(s[j])) oct += s[j++]
+          out += String.fromCharCode(parseInt(oct, 8))
+          i = j - 1
+        } else out += esc
+      } else {
+        out += c
+      }
+    }
+    s = out
+  }
+  return decodeGitQuotepath(s)
 }
 
 /** 将 git name-status 行拆成 status 与路径（rename 仅在前两个制表符处分割） */
@@ -184,8 +217,9 @@ export function splitNameStatusLine(row: string): { status: string; paths: strin
 }
 
 export function stemTitle(relPosix: string): string {
-  const base = path.posix.basename(relPosix, ".md")
-  return base || relPosix
+  const decoded = decodeGitQuotepath(relPosix)
+  const base = path.posix.basename(decoded, ".md")
+  return base || decoded
 }
 
 export function titleFromMarkdown(raw: string, relPosix: string): string {

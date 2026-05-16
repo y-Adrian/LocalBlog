@@ -1,11 +1,30 @@
 import { describe, it } from "node:test"
 import assert from "node:assert/strict"
 import {
+  decodeGitQuotepath,
   parseNameStatusBlogLog,
   refineBlogActivity,
+  stemTitle,
   titleFromMarkdown,
   unquoteGitPath,
 } from "./blogActivity.ts"
+
+describe("decodeGitQuotepath", () => {
+  it("decodes octal sequences from Linux git quotepath", () => {
+    const encoded = "content/\\345\\267\\245\\347\\250\\213\\345\\237\\272\\347\\241\\200/Yocto \\344\\270\\216\\345\\206\\205\\346\\240\\270\\345\\255\\220\\347\\263\\273\\347\\273\\237\\346\\267\\261\\345\\205\\245.md"
+    assert.equal(
+      stemTitle(encoded),
+      "Yocto 与内核子系统深入",
+    )
+  })
+
+  it("decodes partial title segments used in index updates", () => {
+    assert.equal(
+      decodeGitQuotepath("Yocto \\344\\270\\216\\345\\206\\205\\346\\240\\270"),
+      "Yocto 与内核",
+    )
+  })
+})
 
 describe("unquoteGitPath", () => {
   it("leaves unquoted paths unchanged", () => {
@@ -32,6 +51,18 @@ describe("titleFromMarkdown", () => {
 describe("parseNameStatusBlogLog", () => {
   const repoRoot = process.cwd()
   const pathPrefix = "content/"
+
+  it("decodes quotepath-encoded modify lines", () => {
+    const out = [
+      "COMMIT deadbeef2026051612345678901234567890abcd 2026-05-16",
+      "M\tcontent/\\345\\267\\245\\347\\250\\213\\345\\237\\272\\347\\241\\200/Yocto \\344\\270\\216\\345\\206\\205\\346\\240\\270\\345\\255\\220\\347\\263\\273\\347\\273\\237\\346\\267\\261\\345\\205\\245.md",
+    ].join("\n")
+
+    const { activity } = parseNameStatusBlogLog(out, repoRoot, pathPrefix)
+    assert.equal(activity.length, 1)
+    assert.match(activity[0].label, /Yocto 与内核子系统深入/)
+    assert.doesNotMatch(activity[0].label, /344\d+/)
+  })
 
   it("splits rename lines on the first two tabs only", () => {
     const out = [
