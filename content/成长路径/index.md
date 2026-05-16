@@ -70,7 +70,7 @@ date: 2026/05/16
 **优先级：高**
 
 - [x] **U-Boot 实操**：环境变量、`bootcmd`、加载 kernel/dtb/initramfs → [[linux/学习路径/U-Boot 实操指南]]
-- [ ] **启动排障手册**：串口无输出 / kernel panic / rootfs 挂载失败
+- [x] **启动排障手册**：串口无输出 / kernel panic / rootfs 挂载失败 → [[linux/学习路径/启动排障手册]]
 - [ ] **最小可启动工程**：一份可复现的 Buildroot **或** Yocto 镜像 + 文档
 - [ ] **设备树 + platform 驱动**：完整 repo（reg/interrupt/clock + probe）
 - [ ] **中断与下半部**：硬中断 / tasklet / workqueue 选用表 + 示例
@@ -308,7 +308,7 @@ date: 2026/05/16
 
 ### 第 1 季度 · 嵌入式闭环
 
-- [ ] U-Boot + 启动排障
+- [x] U-Boot + 启动排障 → [[linux/学习路径/U-Boot 实操指南]]、[[linux/学习路径/启动排障手册]]
 - [ ] DT + platform 驱动完整工程
 - [ ] Buildroot **或** Yocto 可重复出镜像
 - [ ] eMMC **或** UBI 文件系统实操
