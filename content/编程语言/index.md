@@ -13,3 +13,4 @@ description: C++ 与 Go 语言笔记
 |------|------|
 | [[编程语言/C++/index|C++]] | 标准演进、STL、并发与内存模型 |
 | [[编程语言/Go/index|Go]] | Go 语言基础 |
+| [[编程语言/Rust/index|Rust]] | 选修：是否纳入主线 |
