@@ -12,3 +12,4 @@ description: 项目化总结、性能 checklist 与并发模型
 | [[最小数据面项目设计]] | echo/转发 + 统计 + 配置 |
 | [[DPDK 性能剖析与绑核 checklist]] | perf、绑核、false sharing |
 | [[多 worker 与 mempool 并发假设]] | 与无锁编程对照 |
+| [[与内核网络栈共存]] | 管理口与数据口分离 |
