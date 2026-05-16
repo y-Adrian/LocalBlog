@@ -15,3 +15,6 @@ description: 项目化总结、性能 checklist 与并发模型
 | [[与内核网络栈共存]] | 管理口与数据口分离 |
 | [[AF_XDP 适用场景]] | 与完整 DPDK 分工 |
 | [[VPP 与 OVS 定位速览]] | 生态定位 |
+| [[SR-IOV 与 VF 入门]] | 虚拟化 VF 直通 |
+| [[RDMA 适用场景速览]] | 与以太网 DPDK 区分 |
+| [[DPDK LTS 版本跟进笔记]] | LTS 迁移检查 |
