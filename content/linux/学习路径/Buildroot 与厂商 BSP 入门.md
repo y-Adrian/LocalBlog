@@ -28,8 +28,8 @@ description: 串口 shell、bootargs、替换 dtb 验证——跑通第一块能
 |------|----------|----------|
 | BootROM/SPL | 无任何串口输出 | JTAG、GPIO 点灯、示波器 SPI 时钟 |
 | U-Boot | `U-Boot>` 或厂商 logo 后停 | `printenv`、`bootcmd`、存储介质 |
-| Kernel | `Starting kernel ...` 后静默 | **`earlyprintk`**、**`console=tty*` 波特率** |
-| rootfs | `Kernel panic - not syncing: VFS` | **`root=`** 设备名、驱动、文件系统类型 |
+| Kernel | `Starting kernel ...` 后静默 | `earlyprintk`、**`console=tty*` 波特率** |
+| rootfs | `Kernel panic - not syncing: VFS` | `root=` 设备名、驱动、文件系统类型 |
 | init | 反复重启 / login | **init 脚本**、getty 配置 |
 
 **第一技能**：确认 **串口线、电平（3.3V TTL）、波特率、设备树里 stdout 路径** 一致。
@@ -53,9 +53,9 @@ picocom -b 115200 /dev/ttyUSB0
 console=ttyS0,115200n8 earlyprintk root=/dev/mmcblk0p2 rootwait rw
 ```
 
-- **`console=`**：内核 printk 与用户 login 常共用（依配置）；**tty 名必须与硬件一致**（`ttyS0` vs `ttyAMA0` vs `ttymxc0`）。
-- **`earlyprintk`**：极早期日志（架构/配置相关）。
-- **`rootwait`**：块设备未就绪时等待（SD/eMMC 常见）。
+- `console=`：内核 printk 与用户 login 常共用（依配置）；**tty 名必须与硬件一致**（`ttyS0` vs `ttyAMA0` vs `ttymxc0`）。
+- `earlyprintk`：极早期日志（架构/配置相关）。
+- `rootwait`：块设备未就绪时等待（SD/eMMC 常见）。
 
 ### U-Boot 修改 bootargs
 
@@ -74,7 +74,7 @@ boot
 ### 为何先会换 dtb
 
 - **改设备树** 比 **改内核** 迭代快；验证 **GPIO/LED/串口** 节点是否被内核正确解析。
-- 板级 **`.dts`** 编译为 **`.dtb`**，由 bootloader 传给内核。
+- 板级 `.dts` 编译为 `.dtb`，由 bootloader 传给内核。
 
 ### U-Boot 手动加载（示例思路）
 
@@ -84,7 +84,7 @@ fatload mmc 0:1 ${fdt_addr_r} board.dtb
 booti ${kernel_addr_r} - ${fdt_addr_r}
 ```
 
-将 PC 上编译的 **`board.dtb`** 拷到 boot 分区替换，重启观察 **`/proc/device-tree`** 或驱动 **probe** 日志。
+将 PC 上编译的 `board.dtb` 拷到 boot 分区替换，重启观察 `/proc/device-tree` 或驱动 **probe** 日志。
 
 ### 内核侧确认
 
@@ -113,14 +113,14 @@ make -j"$(nproc)"
 
 ### 输出物（典型）
 
-- **`output/images/`**：`rootfs.ext4`、`zImage`/`Image`、**`*.dtb`**、`u-boot.bin`、**`sdcard.img`**（视配置）。
-- **`output/host/`**：宿主机工具；**`output/staging/`**：**sysroot**（与交叉编译阶段衔接）。
+- `output/images/`：`rootfs.ext4`、`zImage`/`Image`、`*.dtb`、`u-boot.bin`、`sdcard.img`（视配置）。
+- `output/host/`：宿主机工具；`output/staging/`：**sysroot**（与交叉编译阶段衔接）。
 
 ### 常用后处理
 
-- **`BR2_ROOTFS_OVERLAY`**：追加文件到 rootfs。
-- **`post-build.sh`**：自定义打包。
-- **`BR2_PACKAGE_*`**：选 openssh、iperf3 等。
+- `BR2_ROOTFS_OVERLAY`：追加文件到 rootfs。
+- `post-build.sh`：自定义打包。
+- `BR2_PACKAGE_*`：选 openssh、iperf3 等。
 
 ---
 
@@ -144,21 +144,21 @@ make -j"$(nproc)"
 
 | 日志关键词 | 可能原因 |
 |------------|----------|
-| `Unknown block device` | **`root=`** 错、驱动未进内核或未加载 |
+| `Unknown block device` | `root=` 错、驱动未进内核或未加载 |
 | `Cannot open root device` | 分区号错、GPT 与 `root=` 不一致 |
 | `VFS: Unable to mount root fs on unknown-block` | **rootfstype** 缺失、ext4 未编译进内核 |
-| `Waiting for root device` | 缺 **`rootwait`** 或设备初始化慢 |
+| `Waiting for root device` | 缺 `rootwait` 或设备初始化慢 |
 
-**实践**：U-Boot 里 **`ls mmc 0`** / **`part list`** 对照 **`root=/dev/mmcblk0pN`**。
+**实践**：U-Boot 里 `ls mmc 0` / `part list` 对照 `root=/dev/mmcblk0pN`。
 
 ---
 
 ## 实践练习
 
 - [ ] 用 **picocom** 抓完整启动 log 从 power-on 到 login。
-- [ ] 改 **`bootargs`** 故意写错 `root=`，再改对，理解 panic 信息。
-- [ ] 编译 **仅改 `model` 字符串** 的 dts，换 dtb 后在 **`/proc/device-tree/model`** 验证。
-- [ ] Buildroot 打开一个额外 package（如 **`htop`**），刷机后在板端运行。
+- [ ] 改 `bootargs` 故意写错 `root=`，再改对，理解 panic 信息。
+- [ ] 编译 **仅改 `model` 字符串** 的 dts，换 dtb 后在 `/proc/device-tree/model` 验证。
+- [ ] Buildroot 打开一个额外 package（如 `htop`），刷机后在板端运行。
 
 ---
 

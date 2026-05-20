@@ -37,7 +37,7 @@ pm_runtime_put(&pdev->dev);     /* 空闲 */
 | **mem** | 挂起到 RAM |
 | **disk** | 休眠到磁盘 |
 
-驱动实现 **`suspend` / `resume`** 或 **`suspend_noirq`** 等。
+驱动实现 **`suspend` / `resume`** 或 `suspend_noirq` 等。
 
 ---
 

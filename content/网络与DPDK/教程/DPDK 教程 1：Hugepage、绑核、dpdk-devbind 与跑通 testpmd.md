@@ -12,7 +12,7 @@ tags:
 
 ## 1.1 本文目标与验收标准
 
-- **目标**：在 Linux 上完成 **大页预留**、**CPU 绑核/隔离（可选但强烈建议）**、**PCI 网卡绑定到 `vfio-pci`**，并成功启动 **`testpmd`** 进入交互提示符。
+- **目标**：在 Linux 上完成 **大页预留**、**CPU 绑核/隔离（可选但强烈建议）**、**PCI 网卡绑定到 `vfio-pci`**，并成功启动 `testpmd` 进入交互提示符。
 - **验收**：能执行 `show config fwd`、`show port info all`、简单 `start` / `stop`，且 `dmesg` 无 IOMMU/VFIO 致命错误；你知道如何用 `quit` 干净退出。
 
 ---
@@ -69,7 +69,7 @@ sudo mount -t hugetlbfs nodev /mnt/huge
 
 ### 1.3.5 EAL 侧常见参数（理解即可，第二步会反复用）
 
-- **`--socket-mem`**：每个 socket 预分配内存（格式随版本文档）。
+- `--socket-mem`：每个 socket 预分配内存（格式随版本文档）。
 - **`-l` / `-c`**：逻辑核掩码（与绑核强相关）。
 
 ---
@@ -126,7 +126,7 @@ sudo usertools/dpdk-devbind.py -b vfio-pci 0000:03:00.0
 
 ### 1.5.4 常见问题
 
-- **`VFIO: No IOMMU groups found`**：IOMMU 未启用或固件/BIOS 关闭。
+- `VFIO: No IOMMU groups found`：IOMMU 未启用或固件/BIOS 关闭。
 - **绑定后 `ip link` 看不到接口**：正常现象；要回到内核栈需 **解绑回内核驱动**。
 - **容器内绑卡**：通常需要 **privileged**、设备直通、以及 hugepage 挂载策略；第一步建议先在 **bare metal 或 VM 直通** 上闭环。
 
@@ -152,10 +152,10 @@ sudo dpdk-testpmd \
 
 参数说明（概念层）：
 
-- **`-l`**：允许使用的 lcore 列表。
-- **`-n`**：memory channel 提示（与部分平台内存控制器提示相关；以文档为准）。
-- **`--socket-mem`**：每 NUMA socket 预分配内存（示例数值仅演示）。
-- **`-a`**：allowlist PCI 设备（旧版本可能用 `-w`；以 `-h` 为准）。
+- `-l`：允许使用的 lcore 列表。
+- `-n`：memory channel 提示（与部分平台内存控制器提示相关；以文档为准）。
+- `--socket-mem`：每 NUMA socket 预分配内存（示例数值仅演示）。
+- `-a`：allowlist PCI 设备（旧版本可能用 `-w`；以 `-h` 为准）。
 - **`--` 之后**：`testpmd` 自有参数；**`-i` 交互模式**。
 
 ### 1.6.3 交互里建议立刻运行的命令

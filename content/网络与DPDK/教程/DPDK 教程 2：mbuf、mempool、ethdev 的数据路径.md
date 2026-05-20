@@ -52,7 +52,7 @@ TX 路径上还有 **offload 分段/校验和** 等分支，本文先给主干�
 
 ### 1.2.6 常见误区
 
-- **把 mempool 当成通用堆**：不规则大小对象请走 **`rte_malloc`** 或自建 allocator；mempool 是 **固定大小** 高速池。
+- **把 mempool 当成通用堆**：不规则大小对象请走 `rte_malloc` 或自建 allocator；mempool 是 **固定大小** 高速池。
 - **池太小导致 RX 丢包**：RX burst 取不到 mbuf 时只能丢或统计 `rx_nombuf`（具体统计项以 PMD/版本为准）。
 
 ---
@@ -73,7 +73,7 @@ TX 路径上还有 **offload 分段/校验和** 等分支，本文先给主干�
 
 ### 1.3.3 mbuf 与 mempool 的关系
 
-- mbuf **对象本体**通常来自 **`rte_pktmbuf_pool_create()`** 创建的 **mempool of mbufs**。
+- mbuf **对象本体**通常来自 `rte_pktmbuf_pool_create()` 创建的 **mempool of mbufs**。
 - mbuf 指向的数据 buffer 可能：
   - **内嵌在 mbuf 对象布局中**（常见小 mbuf），或
   - **独立 buffer 区**（取决于 pool 配置与实现；以 `rte_mbuf.h` 与 mbuf pool 创建参数为准）。
@@ -131,7 +131,7 @@ TX 路径上还有 **offload 分段/校验和** 等分支，本文先给主干�
 
 ### 1.4.7 与 mempool/mbuf 的耦合点
 
-- **`rx_queue_setup`** 必须传入 **mbuf pool**：PMD 在 RX 上填充 mbuf 并设置 `port`、`hash` 等字段。
+- `rx_queue_setup` 必须传入 **mbuf pool**：PMD 在 RX 上填充 mbuf 并设置 `port`、`hash` 等字段。
 - **TX offload** 可能要求 mbuf 元数据满足特定 `ol_flags` 组合（否则硬件行为未定义或静默错误）。
 
 ---

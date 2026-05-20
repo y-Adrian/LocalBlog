@@ -1,6 +1,6 @@
 # 1 `kmalloc` 与 `vmalloc`：区别、为何并存与使用场景
 
-本文面向 **Linux 内核** 内存分配接口，说明 **`kmalloc`** 与 **`vmalloc`** 在 **物理连续性、地址空间位置、大小上限、性能与 DMA 语义** 上的差异，并解释 **为何需要两套机制** 以及各自典型用法。具体常量与实现细节随内核版本略有变化，以你目标树中的 **`include/linux/slab.h`**、**`include/linux/vmalloc.h`** 与 **`mm/slab.c` / `mm/vmalloc.c`** 为准。
+本文面向 **Linux 内核** 内存分配接口，说明 `kmalloc` 与 `vmalloc` 在 **物理连续性、地址空间位置、大小上限、性能与 DMA 语义** 上的差异，并解释 **为何需要两套机制** 以及各自典型用法。具体常量与实现细节随内核版本略有变化，以你目标树中的 `include/linux/slab.h`、`include/linux/vmalloc.h` 与 **`mm/slab.c` / `mm/vmalloc.c`** 为准。
 
 ---
 
@@ -10,8 +10,8 @@
 |------|-----------|-----------|
 | **物理内存** | 通常保证 **物理连续**（在可分配范围内） | **不要求**物理连续；由离散物理页拼成 |
 | **虚拟地址** | 落在 **直接映射（linear map）** 区域（典型） | 落在 **`vmalloc` 专用虚拟区间** |
-| **典型大小** | 小到中等；受 **`KMALLOC_MAX_SIZE`** 一类上限约束 | 可分配 **更大** 的连续**虚拟**区间 |
-| **`virt_to_phys`** | 对 **直接映射且合法** 的 `kmalloc` 地址常可用 | **不可**对 `vmalloc` 地址直接 `virt_to_phys` |
+| **典型大小** | 小到中等；受 `KMALLOC_MAX_SIZE` 一类上限约束 | 可分配 **更大** 的连续**虚拟**区间 |
+| `virt_to_phys` | 对 **直接映射且合法** 的 `kmalloc` 地址常可用 | **不可**对 `vmalloc` 地址直接 `virt_to_phys` |
 | **释放** | `kfree(ptr)` | `vfree(ptr)` |
 | **典型开销** | 热路径友好（slab 快速路径） | 建立/拆除页表映射，**TLB 压力**相对更高 |
 
@@ -21,7 +21,7 @@
 
 ### 1.2.1 机制（心智模型）
 
-- **`kmalloc(size, gfp)`** 基于 **slab/slob/slub** 等分配器，从 **物理页** 上切出对象；小对象走 **per-cpu cache / slab 快速路径**。
+- `kmalloc(size, gfp)` 基于 **slab/slob/slub** 等分配器，从 **物理页** 上切出对象；小对象走 **per-cpu cache / slab 快速路径**。
 - 在常见架构上，`kmalloc` 返回的地址位于内核 **直接映射区**：内核虚拟地址与物理地址之间是 **近似线性偏移** 的关系（用于简单 `virt_to_phys` 的前提之一）。
 
 ### 1.2.2 为何需要它
@@ -36,9 +36,9 @@
 
 ### 1.2.4 限制与注意
 
-- **大小上限**：极大 `kmalloc` 会失败；超大应改用 **`vmalloc`** 或 **多页 `__get_free_pages`** 等路径。
-- **`GFP_` 标志**：`GFP_KERNEL` 可睡眠；中断上下文须 **`GFP_ATOMIC`** 等；错误使用会导致 **睡眠点在中断里** 的严重 bug。
-- **`krealloc`**：扩展时可能搬迁对象，注意 **并发与指针失效**。
+- **大小上限**：极大 `kmalloc` 会失败；超大应改用 `vmalloc` 或 **多页 `__get_free_pages`** 等路径。
+- **`GFP_` 标志**：`GFP_KERNEL` 可睡眠；中断上下文须 `GFP_ATOMIC` 等；错误使用会导致 **睡眠点在中断里** 的严重 bug。
+- `krealloc`：扩展时可能搬迁对象，注意 **并发与指针失效**。
 
 ---
 
@@ -46,8 +46,8 @@
 
 ### 1.3.1 机制（心智模型）
 
-- **`vmalloc(size)`** 在内核虚拟地址空间申请一段 **连续虚拟** 区间，底层向伙伴系统逐页申请 **物理页**，这些页 **不必相邻**；内核通过 **页表** 把它们映射到连续虚拟区间。
-- 释放 **`vfree`** 会拆除映射并归还物理页。
+- `vmalloc(size)` 在内核虚拟地址空间申请一段 **连续虚拟** 区间，底层向伙伴系统逐页申请 **物理页**，这些页 **不必相邻**；内核通过 **页表** 把它们映射到连续虚拟区间。
+- 释放 `vfree` 会拆除映射并归还物理页。
 
 ### 1.3.2 为何需要它（与 `kmalloc` 并存的根本原因）
 
@@ -62,7 +62,7 @@
 
 ### 1.3.4 限制与注意
 
-- **不能**假设 `virt_to_phys(vmalloc_addr)` 有意义；需要 **`vmalloc_to_page`** / **`vmalloc_to_pfn`** 等按页处理，或走 DMA API。
+- **不能**假设 `virt_to_phys(vmalloc_addr)` 有意义；需要 `vmalloc_to_page` / `vmalloc_to_pfn` 等按页处理，或走 DMA API。
 - **性能**：建立映射与访问时 **TLB miss** 可能更多；不适合 **极高频极小分配**。
 - **对齐**：`vmalloc` 保证页对齐级别的语义；细粒度对齐需求读文档。
 
@@ -79,31 +79,31 @@
 
 ## 1.5 DMA 与调试时的硬规则
 
-- **永远不要**对 **`vmalloc` 返回的指针** 使用 **`virt_to_phys`** 去喂设备寄存器。
-- **DMA**：统一使用 **`dma_alloc_coherent`**、**`dma_map_page` / `dma_map_single`** 等；让内核与 IOMMU 建立正确映射。
+- **永远不要**对 **`vmalloc` 返回的指针** 使用 `virt_to_phys` 去喂设备寄存器。
+- **DMA**：统一使用 `dma_alloc_coherent`、**`dma_map_page` / `dma_map_single`** 等；让内核与 IOMMU 建立正确映射。
 - **把 `kmalloc` 当「一定物理连续」也要加条件**：极大分配可能走不同路径；以 **`virt_to_phys` 文档与架构说明** 为准。
 
 ---
 
 ## 1.6 选型决策树（实用）
 
-- **小块、频繁、可能在中断/原子上下文**（在允许的前提下）→ 优先 **`kmalloc`** + 合适 `GFP_*`。
-- **大块、只要虚拟连续、不用于「裸物理连续 DMA」** → **`vmalloc`**。
+- **小块、频繁、可能在中断/原子上下文**（在允许的前提下）→ 优先 `kmalloc` + 合适 `GFP_*`。
+- **大块、只要虚拟连续、不用于「裸物理连续 DMA」** → `vmalloc`。
 - **设备 DMA buffer** → **DMA API**；不要手写「`kmalloc` + `virt_to_phys`」替代 `dma_map_*`（IOMMU 下尤其错误）。
-- **需要 **几乎任意物理页** 映射到连续内核虚拟地址** → **`vmap`**（与 `vmalloc` 同族问题）。
+- **需要 **几乎任意物理页** 映射到连续内核虚拟地址** → `vmap`（与 `vmalloc` 同族问题）。
 
 ---
 
 ## 1.7 与 `kvmalloc`（若你的内核提供）
 
-部分内核提供 **`kvmalloc`**：小尺寸走 `kmalloc` 路径，大尺寸自动回落 **`vmalloc`**；**释放用 `kvfree`**。适合「大小跨度大、希望自动折中」的代码路径，但仍要理解 **底层语义差异**（尤其 DMA 与 `virt_to_phys`）。
+部分内核提供 `kvmalloc`：小尺寸走 `kmalloc` 路径，大尺寸自动回落 `vmalloc`；**释放用 `kvfree`**。适合「大小跨度大、希望自动折中」的代码路径，但仍要理解 **底层语义差异**（尤其 DMA 与 `virt_to_phys`）。
 
 ---
 
 ## 1.8 延伸阅读（源码入口）
 
 - **`mm/slab.h` / `slab.c`（或 slub）**：`kmalloc` 实现。
-- **`mm/vmalloc.c`**：`vmalloc`、`vmap`、`vmalloc_user` 等。
+- `mm/vmalloc.c`：`vmalloc`、`vmap`、`vmalloc_user` 等。
 - **Documentation/core-api/memory-allocation.rst**（名称随版本调整）：官方叙述。
 
 ---

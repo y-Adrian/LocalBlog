@@ -36,8 +36,8 @@ date: 2026/05/16
 
 生成思路：
 
-- Buildroot **`make legal-info`**
-- Yocto **`SPDX`** 类任务
+- Buildroot `make legal-info`
+- Yocto `SPDX` 类任务
 - 应用侧 **`cargo tree` / `npm sbom`** 等
 
 交付物附在 **发布说明** 或 **客户审计包**。

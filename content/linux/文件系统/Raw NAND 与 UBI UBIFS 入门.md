@@ -18,8 +18,8 @@ date: 2026/05/16
 ## 学习目标
 
 - 区分 **MTD 原始设备** 与 **UBI 卷**、**UBIFS** 挂载层。
-- 使用 **`ubiformat`**、**`ubinize`** 初始化 flash 并创建卷。
-- 能 **`ubiattach`**、**`mount -t ubifs`** 挂载根文件系统。
+- 使用 `ubiformat`、`ubinize` 初始化 flash 并创建卷。
+- 能 `ubiattach`、`mount -t ubifs` 挂载根文件系统。
 - 了解 OTA 时 **整卷更新** 与 **双卷** 策略要点。
 
 ---
@@ -65,7 +65,7 @@ ubinize -o /tmp/ubi.img -m 2048 -p 128KiB -s 512 ubinize.cfg
 ubiupdatevol /dev/ubi0 -t 0 -f /tmp/ubi.img   # 具体命令依镜像类型调整
 ```
 
-典型 **`ubinize.cfg`** 片段：
+典型 `ubinize.cfg` 片段：
 
 ```ini
 [ubifs]
@@ -78,7 +78,7 @@ vol_name=rootfs
 vol_alignment=1
 ```
 
-**`vol_size`** 需小于分区容量并预留 **坏块与元数据**。
+`vol_size` 需小于分区容量并预留 **坏块与元数据**。
 
 ---
 

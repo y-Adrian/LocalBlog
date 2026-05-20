@@ -46,7 +46,7 @@ software = {
 ## 与 A/B
 
 - 写入 **非活动 slot** 分区。
-- **`bootloader`** 脚本切换 `bootslot`。
+- `bootloader` 脚本切换 `bootslot`。
 - 见 [[linux/OTA/A-B 分区与回滚策略]]。
 
 ---

@@ -28,8 +28,8 @@ description: 按硬件选学——总线模型、设备树、内核 API 与用�
 |---|---------|---------|
 | 拓扑 | 多设备 **共享** SDA/SCL，**7/10 位地址** | 每设备通常 **独立 CS**，SCK/MOSI/MISO 共享 |
 | 速度 | 标准/快速/高速模式 | 由控制器与外设决定，常更高 |
-| DT 关键 | **`reg = <0x48>`** 从地址 | **`reg = <0>`** 常表示 chip select 索引 |
-| 用户态 | **`/dev/i2c-N`**、`i2c-tools` | **`/dev/spidevX.Y`**（spidev） |
+| DT 关键 | `reg = <0x48>` 从地址 | `reg = <0>` 常表示 chip select 索引 |
+| 用户态 | `/dev/i2c-N`、`i2c-tools` | `/dev/spidevX.Y`（spidev） |
 
 ---
 
@@ -98,9 +98,9 @@ static struct i2c_driver tmp123_driver = {
 
 ### SPI 驱动
 
-- **`struct spi_driver`** + **`spi_device`**；
-- **`spi_setup`** 配置 **mode、bits_per_word、max_speed_hz**；
-- 传输：**`spi_write_then_read`**、**`spi_sync` + `spi_transfer`**。
+- `struct spi_driver` + `spi_device`；
+- `spi_setup` 配置 **mode、bits_per_word、max_speed_hz**；
+- 传输：`spi_write_then_read`、**`spi_sync` + `spi_transfer`**。
 
 ### regmap（推荐）
 
@@ -137,7 +137,7 @@ static struct i2c_driver tmp123_driver = {
 
 ## 与字符设备的关系
 
-- **总线驱动** 不直接等于 `/dev/xxx`；**hwmon** 导出 **`/sys/class/hwmon/`**，**iio** 导出 **`/sys/bus/iio/`**。
+- **总线驱动** 不直接等于 `/dev/xxx`；**hwmon** 导出 `/sys/class/hwmon/`，**iio** 导出 `/sys/bus/iio/`。
 - **misc/spidev** 把 **SPI 总线暴露给用户态**——快速原型可用，**产品化** 常收回内核驱动以保证 **并发与权限**。
 
 ---
@@ -153,8 +153,8 @@ static struct i2c_driver tmp123_driver = {
 
 ## 实践练习（有硬件时）
 
-- [ ] **`i2cdetect`** 看到设备地址，与 dts **`reg`** 一致。
-- [ ] 加载 **mainline 或 vendor 驱动**，**`/sys/class/hwmon`** 出现 **`temp1_input`** 等。
+- [ ] `i2cdetect` 看到设备地址，与 dts `reg` 一致。
+- [ ] 加载 **mainline 或 vendor 驱动**，`/sys/class/hwmon` 出现 `temp1_input` 等。
 - [ ] 读 **数据手册** 一个 **WHO_AM_I** 寄存器，用 **i2cget** 验证。
 - [ ] （选做）写 **最小 probe** 只 **dev_info 打印 chip id**。
 
@@ -177,8 +177,8 @@ static struct i2c_driver tmp123_driver = {
 
 ## 参考
 
-- **`Documentation/i2c/`**、**`Documentation/spi/`**
-- **`Documentation/devicetree/bindings/i2c/`**、**`.../spi/`**
+- `Documentation/i2c/`、`Documentation/spi/`
+- `Documentation/devicetree/bindings/i2c/`、`.../spi/`
 - *Linux Device Drivers* 相关章节
 
 ---

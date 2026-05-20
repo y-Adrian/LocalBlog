@@ -10,7 +10,7 @@ date: 2026/05/16
 
 # DMA 与 Cache 一致性入门
 
-本文对应 [[成长路径/index|成长路径]] **高优先级**：理解 **CPU Cache** 与 **DMA** 的一致性，正确使用 **`dma_map_*`** 并在设备树中声明 **`dma-coherent`**（若硬件支持）。
+本文对应 [[成长路径/index|成长路径]] **高优先级**：理解 **CPU Cache** 与 **DMA** 的一致性，正确使用 `dma_map_*` 并在设备树中声明 `dma-coherent`（若硬件支持）。
 
 ---
 
@@ -18,7 +18,7 @@ date: 2026/05/16
 
 - 区分 **一致性映射** 与 **流式映射（streaming）**。
 - 在驱动中完成 **map → 设备访问 → unmap/sync** 闭环。
-- 对照设备树 **`dma-coherent`**、**`dma-ranges`** 属性。
+- 对照设备树 `dma-coherent`、`dma-ranges` 属性。
 
 ---
 
@@ -83,7 +83,7 @@ my_device@0 {
 };
 ```
 
-**`dma-ranges`** 描述 **子地址空间到父总线** 的映射，PCIe/某些 SoC 必需。
+`dma-ranges` 描述 **子地址空间到父总线** 的映射，PCIe/某些 SoC 必需。
 
 ---
 

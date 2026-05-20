@@ -49,9 +49,9 @@ tags:
     sort = -committerdate
 ```
 
-- **`fetch.prune`**：远端已删分支本地同步清理，避免「幽灵分支」干扰。
-- **`push.autoSetupRemote`**：首次 `push -u` 后减少重复指定 upstream。
-- **`rerere.enabled`**：记录冲突解决，重复冲突时自动复用（见后文）。
+- `fetch.prune`：远端已删分支本地同步清理，避免「幽灵分支」干扰。
+- `push.autoSetupRemote`：首次 `push -u` 后减少重复指定 upstream。
+- `rerere.enabled`：记录冲突解决，重复冲突时自动复用（见后文）。
 
 ### 1.2.2 条件包含（多身份 / 多公司）
 
@@ -253,7 +253,7 @@ git config --global rerere.enabled true
 git merge --no-ff feature/x -m "Merge feature x"
 ```
 
-- **`--no-ff`**：保留合并节点，便于在 `log --first-parent` 上看「功能粒度」。
+- `--no-ff`：保留合并节点，便于在 `log --first-parent` 上看「功能粒度」。
 - **默认 fast-forward**：历史线性，但丢失「这是一次功能合并」的元信息。
 
 **选择**：开源/大团队常混合；内部若强依赖 release 分支审计，可适当保留 merge 节点。

@@ -57,7 +57,7 @@ flowchart LR
 
 与之相对，**不睡眠** 的同步包括：`spin_lock_irqsave()`、`local_irq_disable()`、原子操作等——忙等或关中断，**当前 CPU 一直占着这条执行流**。
 
-内核用 **`might_sleep()`**、**`CONFIG_DEBUG_ATOMIC_SLEEP`** 在开发阶段检测：**在原子上下文里调用了可能睡眠的 API**。
+内核用 `might_sleep()`、`CONFIG_DEBUG_ATOMIC_SLEEP` 在开发阶段检测：**在原子上下文里调用了可能睡眠的 API**。
 
 ---
 

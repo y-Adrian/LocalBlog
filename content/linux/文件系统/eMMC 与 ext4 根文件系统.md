@@ -17,8 +17,8 @@ date: 2026/05/16
 ## 学习目标
 
 - 为 eMMC 划分 **boot / root / data** 等分区并写入镜像。
-- 使用 **ext4** 作为可读写根文件系统，配置 **`root=`** 与 **`PARTUUID`**。
-- 了解 **只读根**（overlay / remount ro）与 **`fsck`** 策略。
+- 使用 **ext4** 作为可读写根文件系统，配置 `root=` 与 `PARTUUID`。
+- 了解 **只读根**（overlay / remount ro）与 `fsck` 策略。
 
 ---
 
@@ -49,7 +49,7 @@ cat /proc/partitions
 | p2 | 1 GiB+ | rootfs | ext4 |
 | p3 | 剩余 | 数据、日志 | ext4 |
 
-使用 **GPT** 便于 `PARTUUID=`；与 U-Boot **`distro_bootpart`** 对齐。
+使用 **GPT** 便于 `PARTUUID=`；与 U-Boot `distro_bootpart` 对齐。
 
 ```bash
 # 在 PC 或 initramfs 中对块设备操作（示例 /dev/sdX）
@@ -70,7 +70,7 @@ sudo tar -C /path/to/rootfs-staging -cf - . | sudo tar -C /mnt/rootfs -xf -
 sudo umount /mnt/rootfs
 ```
 
-Buildroot / Yocto 产物通常是 **rootfs.tar** 或 **ext4 镜像**，按 BSP 文档 **`dd`** 或 **`bmaptool`** 烧录。
+Buildroot / Yocto 产物通常是 **rootfs.tar** 或 **ext4 镜像**，按 BSP 文档 `dd` 或 `bmaptool` 烧录。
 
 ---
 
@@ -86,7 +86,7 @@ root=/dev/mmcblk0p2 rootwait rw
 root=PARTUUID=xxxx-xxxx rootwait rw
 ```
 
-`rootwait` 等待设备就绪，避免 **`Waiting for root device`**。
+`rootwait` 等待设备就绪，避免 `Waiting for root device`。
 
 ---
 

@@ -24,15 +24,15 @@ tags:
 
 - **Kbuild/Makefile** 如何调用内核构建系统产出 `.ko`。
 
-- **`insmod` / `rmmod` / `modinfo` / `lsmod`** 与 **`dmesg`** 的配合。
+- **`insmod` / `rmmod` / `modinfo` / `lsmod`** 与 `dmesg` 的配合。
 
 - **模块元数据**：`MODULE_LICENSE`、`MODULE_DESCRIPTION` 等；**符号导出**与许可证的关系。
 
 - **日志**：`printk` 级别、`pr_*` 辅助宏、**速率限制**日志。
 
-- **返回值约定**：成功 `0`，失败负的 **`errno`**（如 `-ENOMEM`）。
+- **返回值约定**：成功 `0`，失败负的 `errno`（如 `-ENOMEM`）。
 
-- **动态内存**：`kmalloc` / `kfree` 与 **`GFP_*`** 标志的直觉。
+- **动态内存**：`kmalloc` / `kfree` 与 `GFP_*` 标志的直觉。
 
 - **sysfs**：`kobject` + `kobj_attribute` + `sysfs_create_group`，用户态用 `echo`/`cat` 与内核交互。
 
@@ -80,13 +80,13 @@ tags:
 
   
 
-- **`module_init(fn)`**：加载时调用 `fn`；返回 `0` 成功，返回负数失败并**不**注册模块（内核会清理）。
+- `module_init(fn)`：加载时调用 `fn`；返回 `0` 成功，返回负数失败并**不**注册模块（内核会清理）。
 
-- **`module_exit(fn)`**：卸载时调用；必须能释放 `init` 里申请的一切资源。
+- `module_exit(fn)`：卸载时调用；必须能释放 `init` 里申请的一切资源。
 
-- **`__init`**：初始化函数可放在「初始化内存段」，初始化结束后内核可丢弃该段代码（对模块仍要逻辑正确）。
+- `__init`：初始化函数可放在「初始化内存段」，初始化结束后内核可丢弃该段代码（对模块仍要逻辑正确）。
 
-- **`__exit`**：若内核配置为「不可卸载模块」，该段可能被丢弃；习惯上卸载路径仍写 `__exit`。
+- `__exit`：若内核配置为「不可卸载模块」，该段可能被丢弃；习惯上卸载路径仍写 `__exit`。
 
   
 
@@ -150,7 +150,7 @@ MODULE_AUTHOR("You");
 
 - 内核把许可证字符串用于**是否允许链接到仅导出给 GPL 的符号**等策略。
 
-- 随意写 `"Proprietary"` 可能导致无法使用部分内核 API；学习阶段用 **`GPL`** 最省事。
+- 随意写 `"Proprietary"` 可能导致无法使用部分内核 API；学习阶段用 `GPL` 最省事。
 
   
 
@@ -182,9 +182,9 @@ $(MAKE) -C $(KDIR) M=$(PWD) clean
 
   
 
-- **`obj-m`**：告诉内核构建系统「生成名为 `hello.ko` 的可加载模块」。
+- `obj-m`：告诉内核构建系统「生成名为 `hello.ko` 的可加载模块」。
 
-- **`M=$(PWD)`**：在外部目录编译（**out-of-tree**）。
+- `M=$(PWD)`：在外部目录编译（**out-of-tree**）。
 
   
 
@@ -280,7 +280,7 @@ return 0;
 
   
 
-- 权限 **`0644`**：在 sysfs 的 `/sys/module/<name>/parameters/` 下可能以 root 可写方式暴露（取决于内核版本与安全策略）；**不要在生产里把敏感参数随便写成 world-writable**。
+- 权限 `0644`：在 sysfs 的 `/sys/module/<name>/parameters/` 下可能以 root 可写方式暴露（取决于内核版本与安全策略）；**不要在生产里把敏感参数随便写成 world-writable**。
 
   
 
@@ -296,9 +296,9 @@ return 0;
 
   
 
-- **`kmalloc(size, flags)`**：从物理近似连续、大小有上限的 slab 池取内存；失败返回 `NULL`。
+- `kmalloc(size, flags)`：从物理近似连续、大小有上限的 slab 池取内存；失败返回 `NULL`。
 
-- **`GFP_KERNEL`**：可能睡眠；**不可**在中断上下文或持有自旋锁时使用（需 `GFP_ATOMIC` 等，代价不同）。
+- `GFP_KERNEL`：可能睡眠；**不可**在中断上下文或持有自旋锁时使用（需 `GFP_ATOMIC` 等，代价不同）。
 
 - **配对**：每条成功 `kmalloc` 路径必须在 `module_exit` 或失败分支 `kfree`。
 
@@ -376,9 +376,9 @@ buf = NULL;
 
   
 
-- **`struct kobject`**：内核对象模型里用于引用计数与 sysfs 挂载点。
+- `struct kobject`：内核对象模型里用于引用计数与 sysfs 挂载点。
 
-- **`struct kobj_attribute`**：把 `show`/`store` 回调挂到 sysfs 文件上。
+- `struct kobj_attribute`：把 `show`/`store` 回调挂到 sysfs 文件上。
 
 - **`sysfs_create_group` / `sysfs_remove_group`**：成组创建/删除；**卸载模块前必须删除 sysfs**，否则残留 kobject 会导致卸载失败或不稳定。
 
@@ -388,9 +388,9 @@ buf = NULL;
 
   
 
-- **`show`**：用户 `cat` 时调用；用 `sprintf`/`scnprintf` 写入 `buf`，返回**写入的字节数**。
+- `show`：用户 `cat` 时调用；用 `sprintf`/`scnprintf` 写入 `buf`，返回**写入的字节数**。
 
-- **`store`**：用户 `echo xxx >` 时调用；注意 `count` 可能含换行；返回**实际消耗的字节数**或错误码（负 errno）。
+- `store`：用户 `echo xxx >` 时调用；注意 `count` 可能含换行；返回**实际消耗的字节数**或错误码（负 errno）。
 
   
 
@@ -632,7 +632,7 @@ $(MAKE) -C $(KDIR) M=$(PWD) clean
 
   
 
-- 保留完整 `dmesg`；若有 vmlinux 与地址，可用 **`addr2line`** 把 PC 映射到源码行（进阶；先养成保存现场的习惯）。
+- 保留完整 `dmesg`；若有 vmlinux 与地址，可用 `addr2line` 把 PC 映射到源码行（进阶；先养成保存现场的习惯）。
 
   
 
@@ -640,7 +640,7 @@ $(MAKE) -C $(KDIR) M=$(PWD) clean
 
   
 
-- 热路径里狂打日志会拖垮系统；可用 **`pr_info_ratelimited`** 等宏（头文件 `linux/printk.h`）。
+- 热路径里狂打日志会拖垮系统；可用 `pr_info_ratelimited` 等宏（头文件 `linux/printk.h`）。
 
   
 
@@ -668,7 +668,7 @@ $(MAKE) -C $(KDIR) M=$(PWD) clean
 
   
 
-- 字符设备、网络设备等结构里，常把 **`private_data`** 嵌在更大的 `struct my_drv` 里；通过 `container_of` 从子结构指针反推父结构。下一阶实战可写「最小 misc 字符设备」练习它。
+- 字符设备、网络设备等结构里，常把 `private_data` 嵌在更大的 `struct my_drv` 里；通过 `container_of` 从子结构指针反推父结构。下一阶实战可写「最小 misc 字符设备」练习它。
 
   
 

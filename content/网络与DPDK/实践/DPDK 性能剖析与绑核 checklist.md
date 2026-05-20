@@ -15,7 +15,7 @@ date: 2026/05/16
 
 ## 绑核与环境
 
-- [ ] `lcore` 掩码与 **`isolcpus`** 一致，管理面不在数据核
+- [ ] `lcore` 掩码与 `isolcpus` 一致，管理面不在数据核
 - [ ] **hugepage** 已挂载，`/dev/hugepages` 容量足够
 - [ ] 网卡 **RSS 队列数** = worker 数（或明确映射表）
 - [ ] **中断亲和** 指向非数据核：`/proc/irq/*/smp_affinity`
@@ -45,7 +45,7 @@ perf report
 
 ## 缓存与 false sharing
 
-- [ ] per-lcore 统计用 **`__rte_cache_aligned`**
+- [ ] per-lcore 统计用 `__rte_cache_aligned`
 - [ ] 多核写同一 cache line 的计数器 → 改为 **per-lcore 汇总**
 - [ ] mbuf 私有数据避免跨核释放到错误 pool
 

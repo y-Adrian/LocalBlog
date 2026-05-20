@@ -43,7 +43,7 @@ tags:
 
 ### 1.3.2 核心原理（不变量层面）
 
-- EAL 在启动时通过 **mmap hugetlbfs** 等方式把大页映射进进程地址空间，并把这些映射登记为 **`rte_memseg`** 列表元素：记录 **起始虚拟地址、长度、hugepage_sz、socket_id、IOVA 起点** 等元信息（字段名随版本演进，概念稳定）。
+- EAL 在启动时通过 **mmap hugetlbfs** 等方式把大页映射进进程地址空间，并把这些映射登记为 `rte_memseg` 列表元素：记录 **起始虚拟地址、长度、hugepage_sz、socket_id、IOVA 起点** 等元信息（字段名随版本演进，概念稳定）。
 - 后续 **`rte_mempool`/`rte_malloc`/ mbuf** 所依赖的“可 DMA、可共享”的内存，多数落在这套 **已登记 memseg** 体系上。
 
 ### 1.3.3 实现如何落地（读代码时的主线函数）
@@ -91,7 +91,7 @@ tags:
 ### 1.4.5 严谨表述（避免误解）
 
 - **“IOVA=物理地址”** 在 **IOMMU VA 模式**下一般不成立；应理解为 **设备 DMA 窗口中的地址**。
-- **`rte_mem_virt2iova()`** 能否成功，取决于该虚拟地址是否落在 **已登记且可翻译** 的 memseg/外部内存映射上；不是对任意 `malloc()` 指针都成立。
+- `rte_mem_virt2iova()` 能否成功，取决于该虚拟地址是否落在 **已登记且可翻译** 的 memseg/外部内存映射上；不是对任意 `malloc()` 指针都成立。
 
 ---
 
@@ -109,7 +109,7 @@ tags:
 
 ### 1.5.3 典型源码位置
 
-- 在 `lib/eal/` 下搜索 **`rte_extmem`**、**`dma_map`** 符号；常见落点仍在 `eal_common_memory.c` 与 Linux VFIO 实现文件中。
+- 在 `lib/eal/` 下搜索 `rte_extmem`、`dma_map` 符号；常见落点仍在 `eal_common_memory.c` 与 Linux VFIO 实现文件中。
 
 ---
 
@@ -134,7 +134,7 @@ tags:
 
 ### 1.6.5 何时不要用 memzone
 
-- 极高频、大小动态的对象分配：用 **`rte_mempool`** 或 **`rte_malloc`** 更合适；memzone 更适合 **少量、长寿命、需命名共享** 的结构。
+- 极高频、大小动态的对象分配：用 `rte_mempool` 或 `rte_malloc` 更合适；memzone 更适合 **少量、长寿命、需命名共享** 的结构。
 
 ---
 
@@ -165,8 +165,8 @@ tags:
 
 ### 1.7.5 与 mempool 的边界（常被问）
 
-- **`rte_malloc`**：通用堆，适合 **不规则大小/低频**。
-- **`rte_mempool`**：**固定元素大小**、极高频、为无锁/每核缓存优化；**数据面对象（尤其 mbuf）首选**。
+- `rte_malloc`：通用堆，适合 **不规则大小/低频**。
+- `rte_mempool`：**固定元素大小**、极高频、为无锁/每核缓存优化；**数据面对象（尤其 mbuf）首选**。
 
 ---
 
@@ -242,8 +242,8 @@ tags:
 
 ## 1.11 调试与自省：把“内存问题”变成可观测事实
 
-- **`rte_malloc_dump_stats()`**：堆使用概况（是否存在碎片/峰值）。
-- **`rte_memzone_dump()`**：memzone 列表。
+- `rte_malloc_dump_stats()`：堆使用概况（是否存在碎片/峰值）。
+- `rte_memzone_dump()`：memzone 列表。
 - **`rte_mempool_list_dump()` / `rte_mempool_ops_table_dump()`**（名称以版本为准）：池配置与 ops。
 - **Telemetry / TSL**（新版本）：运行时导出指标；以你版本文档为准。
 

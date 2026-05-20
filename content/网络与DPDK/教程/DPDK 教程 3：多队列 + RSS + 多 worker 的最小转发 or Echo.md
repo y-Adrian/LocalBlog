@@ -21,7 +21,7 @@ tags:
 
 ### 1.2.1 为什么分两步
 
-- **`testpmd`** 能快速验证 **RSS hash、队列数、reta（ redirection table ）** 与 PMD 能力矩阵，减少“自写程序配置错”的变量。
+- `testpmd` 能快速验证 **RSS hash、队列数、reta（ redirection table ）** 与 PMD 能力矩阵，减少“自写程序配置错”的变量。
 - **最小 C 程序**强迫你补齐 **EAL init、port configure、queue setup、lcore launch** 全链路。
 
 ---

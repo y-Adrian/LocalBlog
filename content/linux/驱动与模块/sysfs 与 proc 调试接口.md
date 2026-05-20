@@ -16,7 +16,7 @@ date: 2026/05/16
 
 ## 学习目标
 
-- 使用 **`module_param`** 在加载时调参。
+- 使用 `module_param` 在加载时调参。
 - 在 **sysfs** 或 **debugfs** 下创建 **属性文件**。
 - 理解 **show/store** 回调与 **缓冲区大小** 限制。
 
@@ -68,7 +68,7 @@ device_create_file(&pdev->dev, &dev_attr_reg);
 device_remove_file(&pdev->dev, &dev_attr_reg);
 ```
 
-或使用 **`devm_device_add_group`** + `attribute_group` 批量注册。
+或使用 `devm_device_add_group` + `attribute_group` 批量注册。
 
 ---
 
@@ -82,7 +82,7 @@ dent = debugfs_create_dir("mydev", NULL);
 debugfs_create_u32("stats", 0644, dent, &priv->stats);
 ```
 
-路径常为 **`/sys/kernel/debug/mydev/stats`**（需挂载 debugfs）。
+路径常为 `/sys/kernel/debug/mydev/stats`（需挂载 debugfs）。
 
 **生产镜像** 可关闭 `CONFIG_DEBUG_FS` 减小攻击面。
 
@@ -90,7 +90,7 @@ debugfs_create_u32("stats", 0644, dent, &priv->stats);
 
 ## procfs（旧接口）
 
-`/proc/mydev` 仍见于老驱动；新代码优先 **sysfs / debugfs**。只读信息可用 **`seq_file`** 简化。
+`/proc/mydev` 仍见于老驱动；新代码优先 **sysfs / debugfs**。只读信息可用 `seq_file` 简化。
 
 ---
 

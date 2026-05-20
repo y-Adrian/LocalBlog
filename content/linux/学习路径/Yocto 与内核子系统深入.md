@@ -41,7 +41,7 @@ description: 发行版工程化与按职业方向分叉——网络、存储、�
 
 ### 核心概念
 
-- **Layer**：配方与配置的集合；**`BBPATH`** 搜索路径。
+- **Layer**：配方与配置的集合；`BBPATH` 搜索路径。
 - **Recipe（`.bb`）**：描述如何 **fetch、patch、configure、compile、install、package**。
 - **bbappend（`.bbappend`）**：在不改上游 recipe 的情况下 **追加** 配置或补丁。
 - **Machine**：板级配置（内核 defconfig、dtb、 tune）。
@@ -71,12 +71,12 @@ bitbake core-image-minimal -c populate_sdk
 
 - [ ] 新建 **meta-custom** layer，**bbappend** 增加一个 **hello** 包到 image。
 - [ ] 给内核 **打 dtb 补丁** 通过 **bbappend** 而非手改 `tmp/`。
-- [ ] 生成 **SDK** 并用 **`environment-setup-*`** 交叉编译应用。
+- [ ] 生成 **SDK** 并用 `environment-setup-*` 交叉编译应用。
 
 ### 常见坑
 
-- 在 **`tmp/`** 手改文件 — **下次 bitbake 覆盖**；改 **recipe 或 bbappend**。
-- **`MACHINE`** 与 **`DISTRO`** 选错导致 **boot 失败**。
+- 在 `tmp/` 手改文件 — **下次 bitbake 覆盖**；改 **recipe 或 bbappend**。
+- `MACHINE` 与 `DISTRO` 选错导致 **boot 失败**。
 - **LICENSE 闭源包** 与 **GPL 传播** 合规未审查。
 
 ---
@@ -87,18 +87,18 @@ bitbake core-image-minimal -c populate_sdk
 
 **应掌握**
 
-- **`sk_buff`** 生命周期、**net_device**、**NAPI**。
+- `sk_buff` 生命周期、**net_device**、**NAPI**。
 - **socket 层** 到 **驱动** 路径；**ethtool**、**RSS**（与 DPDK 教程对照）。
 - **iptables/nftables**、**network namespace**（容器/虚拟化）。
 
 **阅读入口**
 
-- **`net/core/`**、**`net/ipv4/`**、驱动 **`drivers/net/`**
+- `net/core/`、`net/ipv4/`、驱动 `drivers/net/`
 - **Documentation/networking/**
 
 **实践**
 
-- **`tcpdump`**、**`ss`**、**`ip route`** 在板端排障；
+- `tcpdump`、`ss`、`ip route` 在板端排障；
 - 跟踪 **`ping` 一次** 的 kernel 路径（**ftrace**）。
 
 ---
@@ -113,13 +113,13 @@ bitbake core-image-minimal -c populate_sdk
 
 **阅读入口**
 
-- **`fs/ext4/`**、**`block/`**、**`drivers/mmc/`**
+- `fs/ext4/`、`block/`、`drivers/mmc/`
 - **Documentation/filesystems/**
 
 **实践**
 
 - 人为 **掉电测试** ext4 vs ubifs 行为差异（**实验环境**）；
-- **`iostat`**、**`/proc/diskstats`** 关联应用写入模式。
+- `iostat`、`/proc/diskstats` 关联应用写入模式。
 
 ---
 
@@ -133,7 +133,7 @@ bitbake core-image-minimal -c populate_sdk
 
 **阅读入口**
 
-- **`kernel/sched/`**
+- `kernel/sched/`
 - **Documentation/admin-guide/cgroup-v2.rst**
 
 **实践**

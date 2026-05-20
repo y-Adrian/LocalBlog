@@ -78,7 +78,7 @@ ethernet: mac@fe200000 {
 };
 ```
 
-- `interrupts` 单元格经 **`interrupt-parent`** 解析成控制器的 **hwirq** + 触发类型（电平/边沿）。  
+- `interrupts` 单元格经 `interrupt-parent` 解析成控制器的 **hwirq** + 触发类型（电平/边沿）。  
 - 内核再映射为全局 **`linux irq` 号**（`virq`），驱动 `request_irq(42, ...)` 用的是 **Linux IRQ 号**，不是 GIC 手册里的 SPI 编号（多数平台有 **irq_domain** 做映射）。
 
 ### 2.3 电平 vs 边沿

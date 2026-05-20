@@ -34,7 +34,7 @@ date: 2026/05/16
 ## STL 注意
 
 - `iostream` 体积大，日志用 **printf** 或轻量库。
-- 容器选型：固定容量 **`std::array`**、自定义 **arena allocator**。
+- 容器选型：固定容量 `std::array`、自定义 **arena allocator**。
 
 ---
 

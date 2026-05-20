@@ -45,7 +45,7 @@ VM 获得 VF 后，性能接近 **裸金属数据面**，绕过软件 vSwitch �
 
 ## 运维注意
 
-- BIOS 开启 **VT-d / IOMMU**，内核 **`intel_iommu=on`** 等。
+- BIOS 开启 **VT-d / IOMMU**，内核 `intel_iommu=on` 等。
 - VF 数量受 **网卡硬件** 限制；超分需规划。
 - **MAC/VLAN** 由云管或 SDN 分配。
 

@@ -129,7 +129,7 @@ setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, &on, sizeof(on));
 listen(fd, backlog);
 ```
 
-- `backlog` 与内核 **`somaxconn`**、`tcp_max_syn_backlog` 等共同限制 **已完成握手、待 accept** 的连接数。
+- `backlog` 与内核 `somaxconn`、`tcp_max_syn_backlog` 等共同限制 **已完成握手、待 accept** 的连接数。
 - 队列满时新 SYN 可能被丢弃或重传，表现为 **连接超时**。
 
 高并发服务需调大系统参数并配合 `SO_REUSEPORT` 多进程 accept。

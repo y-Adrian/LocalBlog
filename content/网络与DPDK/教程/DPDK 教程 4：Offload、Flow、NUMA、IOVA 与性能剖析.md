@@ -104,7 +104,7 @@ tags:
 
 ### 1.5.1 解决什么问题
 
-- 在 **IOMMU/VFIO** 场景下，设备 DMA 地址空间与 **主机物理页** 的映射关系更复杂；DPDK 需要一致策略生成 **`buf_iova`** 并管理映射。
+- 在 **IOMMU/VFIO** 场景下，设备 DMA 地址空间与 **主机物理页** 的映射关系更复杂；DPDK 需要一致策略生成 `buf_iova` 并管理映射。
 
 ### 1.5.2 常见模式（概念层）
 
@@ -114,7 +114,7 @@ tags:
 
 ### 1.5.3 你应该能回答的问题
 
-- 为什么 **同一段 mbuf**，CPU 用 `buf_addr` 访问，而 NIC descriptor 写 **`buf_iova`**？
+- 为什么 **同一段 mbuf**，CPU 用 `buf_addr` 访问，而 NIC descriptor 写 `buf_iova`？
 - 为什么 **外部内存**常需要 **显式 DMA map**（教程二/内存子系统文档衔接）？
 
 ### 1.5.4 源码/文档线索
@@ -142,7 +142,7 @@ tags:
 ### 1.6.3 DPDK 自带/生态工具（按环境选用）
 
 - **`testpmd` stats**：快速对照。
-- **`pktgen-dpdk`**：可控负载。
+- `pktgen-dpdk`：可控负载。
 - **Telemetry**（新版本）：运行时指标导出（以版本文档为准）。
 
 ---

@@ -115,7 +115,7 @@ static struct platform_driver mydev_driver = {
 | clock | `devm_clk_get` + `clk_disable_unprepare` 在 remove 前若未 devm |
 | DMA | `dma_free_coherent` |
 
-**避免** probe 失败路径泄漏：使用 **`devm_*`** 或 `goto err_free` 链。
+**避免** probe 失败路径泄漏：使用 `devm_*` 或 `goto err_free` 链。
 
 ---
 

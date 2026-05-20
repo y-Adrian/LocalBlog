@@ -36,7 +36,7 @@ sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS kv (k TEXT PRIMARY KEY, v TEXT);", 
 |----|------|
 | 存储 | 放 **可写 data 分区**，非只读 root |
 | WAL | `PRAGMA journal_mode=WAL` 改善并发读 |
-| 掉电 | 关键写后 **`fsync`** 或事务批量 |
+| 掉电 | 关键写后 `fsync` 或事务批量 |
 | 备份 | 定期复制 `.db` 文件 |
 
 ---

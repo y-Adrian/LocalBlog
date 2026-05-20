@@ -24,7 +24,7 @@ tags:
 
 ## 1.2 物理复制（Physical Replication）一般指什么
 
-在 PostgreSQL 社区语境里，**物理复制**几乎总是指：**备库按与主库相同的物理存储布局重放 WAL**，典型实现是 **流复制（streaming replication）**（持续把 WAL 段流式传给备库），辅以 **`pg_basebackup`** 等做初始基线。
+在 PostgreSQL 社区语境里，**物理复制**几乎总是指：**备库按与主库相同的物理存储布局重放 WAL**，典型实现是 **流复制（streaming replication）**（持续把 WAL 段流式传给备库），辅以 `pg_basebackup` 等做初始基线。
 
 ### 1.2.1 工作方式（心智模型）
 
@@ -45,7 +45,7 @@ tags:
 
 - **WAL sender / WAL receiver**：流式传输端与接收端进程。
 - **复制槽（replication slot）**：物理槽用于保留 WAL，防止主库过早回收导致备库追不上（需监控槽滞后与磁盘）。
-- **`pg_basebackup`**：获取基线数据目录 + 启动流或配合归档的初始同步。
+- `pg_basebackup`：获取基线数据目录 + 启动流或配合归档的初始同步。
 
 ---
 
@@ -119,7 +119,7 @@ tags:
 - **PostgreSQL 10**：逻辑复制进入内核主线的重要版本节点（此前更多依赖外部逻辑解码生态）。
 - **PostgreSQL 15+**：逻辑发布订阅能力持续增强（例如行过滤、列列表等方向——以你所用确切小版本的 **Release Notes / Current 文档** 为准，不在此绑定具体语法以免与你环境不一致）。
 
-**准确性原则**：涉及 **`CREATE SUBSCRIPTION ... WITH (...)`** 的参数默认值、并行应用 worker、两阶段提交与逻辑复制交互等，请以 **当前大版本官方文档** 为唯一权威。
+**准确性原则**：涉及 `CREATE SUBSCRIPTION ... WITH (...)` 的参数默认值、并行应用 worker、两阶段提交与逻辑复制交互等，请以 **当前大版本官方文档** 为唯一权威。
 
 ---
 
@@ -141,7 +141,7 @@ tags:
 
 ## 1.10 建议实验（加深理解）
 
-- 起两个本地实例（或同实例两库），建立 **publication/subscription**，观察 **`pg_replication_slots`** 与 **`pg_stat_replication`** / 订阅统计视图。
+- 起两个本地实例（或同实例两库），建立 **publication/subscription**，观察 `pg_replication_slots` 与 `pg_stat_replication` / 订阅统计视图。
 - 故意在订阅端制造主键冲突，观察应用错误与 WAL 滞留。
 - 对比 **`pg_basebackup` + 流复制** 初始搭建与 **逻辑订阅** 初始数据同步（`copy_data` 等选项以文档为准）在时间与锁上的差异。
 

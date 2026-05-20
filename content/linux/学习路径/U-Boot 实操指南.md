@@ -18,7 +18,7 @@ date: 2026/05/16
 
 - 理解 **U-Boot 在启动链** 中的位置：ROM → SPL（可选）→ U-Boot → Linux。
 - 能使用 **串口** 进入 U-Boot shell，查看/修改 **环境变量**。
-- 能编写 **`bootcmd`**，从 **MMC / TFTP / 内存** 加载 **Image、dtb、initramfs** 并 `booti` / `bootz`。
+- 能编写 `bootcmd`，从 **MMC / TFTP / 内存** 加载 **Image、dtb、initramfs** 并 `booti` / `bootz`。
 - 知道 **saveenv**、**defconfig** 与 **升级 U-Boot 本身** 的基本风险。
 
 ---
@@ -127,17 +127,17 @@ date: 2026/05/16
 
 更复杂场景可：
 
-- 使用 **`boot.scr`**（mkimage 生成的脚本镜像）+ `source`。
+- 使用 `boot.scr`（mkimage 生成的脚本镜像）+ `source`。
 - 在 **Kconfig** 中为板级设置默认 `CONFIG_BOOTCOMMAND`。
 
-修改后务必 **`saveenv`**，再 `reset` 验证自动启动。
+修改后务必 `saveenv`，再 `reset` 验证自动启动。
 
 ---
 
 ## 与设备树、rootfs 的衔接
 
 - **dtb**：由 U-Boot 传入内核；地址需落在内核可访问内存，且与 **内核解压后** 不冲突（参考 BSP `CONFIG_SYS_LOAD_ADDR` 等）。
-- **bootargs**：必须包含 **`console=`**；根设备 **`root=`** 与分区表一致；NFS 启动需 **`ip=`** / **`nfsroot=`**。
+- **bootargs**：必须包含 `console=`；根设备 `root=` 与分区表一致；NFS 启动需 `ip=` / `nfsroot=`。
 - 若内核 panic 于 **Unable to mount root**：先回到 U-Boot 核对 `bootargs` 与分区，见 [[linux/学习路径/启动排障手册]]。
 
 ---

@@ -195,19 +195,19 @@ git apply --check 0001-xxx.patch
 
 ### 1.4.4 分支策略（小团队实用）
 
-- **`main`**：可发布/可烧录镜像对应提交。
-- **`develop`** 或 **按板卡分支** `board/xxx`：集成中改动。
+- `main`：可发布/可烧录镜像对应提交。
+- `develop` 或 **按板卡分支** `board/xxx`：集成中改动。
 - **vendor 基线**：打 tag `vendor-bsp-v1.0`，本地改动在其上 commit，便于 **rebase 厂商更新**。
 
 ### 1.4.5 实践练习
 
 - 初始化仓库，至少 **10 次有意义 commit**（不要一次提交整个项目）。
-- 故意引入 bug commit，用 **`git bisect`** 定位（配合 `make test` 脚本）。
-- 从内核邮件列表下载 patch，用 **`git am`** 应用并解决冲突。
+- 故意引入 bug commit，用 `git bisect` 定位（配合 `make test` 脚本）。
+- 从内核邮件列表下载 patch，用 `git am` 应用并解决冲突。
 
 ### 1.4.6 常见坑
 
-- **提交大二进制**（镜像、.o）：用 **`.gitignore`** + **Git LFS** 或制品库。
+- **提交大二进制**（镜像、.o）：用 `.gitignore` + **Git LFS** 或制品库。
 - **子模块** `submodule` 未更新导致同事编不过：`git submodule update --init --recursive`。
 - 在 **内核树** 里 `git clean -fdx` 会删 build 产物也可能误删未跟踪配置——先 `git status`。
 
@@ -217,7 +217,7 @@ git apply --check 0001-xxx.patch
 
 - [ ] 不用 IDE 完成：改代码 → `make` → 运行 → `git diff` → `commit`。
 - [ ] 能解释 Makefile 中 `$@` `$<` 含义，并加 `-MMD` 依赖。
-- [ ] 能 **`git revert`** 一次错误合并并推送到远程（若用远程）。
+- [ ] 能 `git revert` 一次错误合并并推送到远程（若用远程）。
 - [ ] 能写 **20 行以内** Bash 脚本带 `set -euo pipefail` 调用交叉编译器。
 
 ---

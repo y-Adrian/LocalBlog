@@ -53,7 +53,7 @@ tags:
 
 - `fsync(2)` / `fdatasync(2)`：将「文件」层面的持久化要求向下传递，具体保证取决于文件系统实现与设备写缓存策略。
 
-- `open(2)` 标志 **`O_DIRECT`**：绕过页缓存的直访路径（有对齐等约束）。
+- `open(2)` 标志 `O_DIRECT`：绕过页缓存的直访路径（有对齐等约束）。
 
   
 
@@ -73,11 +73,11 @@ tags:
 
   
 
-- **`struct file`**：进程一次「打开」的实例，含当前偏移、`f_op`、路径指向的 dentry/inode 等。
+- `struct file`：进程一次「打开」的实例，含当前偏移、`f_op`、路径指向的 dentry/inode 等。
 
-- **`struct dentry`**：路径分量缓存；negative dentry 与查找性能、行为有关。
+- `struct dentry`：路径分量缓存；negative dentry 与查找性能、行为有关。
 
-- **`struct inode`**：文件在存储上的「逻辑元数据」（权限、大小、时间戳等）及具体文件系统的私有数据。
+- `struct inode`：文件在存储上的「逻辑元数据」（权限、大小、时间戳等）及具体文件系统的私有数据。
 
   
 
@@ -85,11 +85,11 @@ tags:
 
   
 
-- **`file_operations`**：open/read/write/mmap/poll/ioctl 等实例操作。
+- `file_operations`：open/read/write/mmap/poll/ioctl 等实例操作。
 
-- **`inode_operations`**：lookup、create、unlink、 setattr 等 inode 级操作。
+- `inode_operations`：lookup、create、unlink、 setattr 等 inode 级操作。
 
-- **`address_space_operations`**：页缓存与后备存储之间的桥梁（读页、写页、写回等），是理解 **缓冲 I/O** 的关键。
+- `address_space_operations`：页缓存与后备存储之间的桥梁（读页、写页、写回等），是理解 **缓冲 I/O** 的关键。
 
   
 
@@ -109,7 +109,7 @@ tags:
 
   
 
-**页缓存**将「文件数据」以页为单位缓存在内存中。每个 **inode** 关联一个 **`address_space`**（`include/linux/fs.h`），表示该文件在内存中的页集合及一套操作方法（`address_space_operations`）。
+**页缓存**将「文件数据」以页为单位缓存在内存中。每个 **inode** 关联一个 `address_space`（`include/linux/fs.h`），表示该文件在内存中的页集合及一套操作方法（`address_space_operations`）。
 
   
 
@@ -239,7 +239,7 @@ tags:
 
   
 
-**`struct bio`**（`include/linux/blk_types.h`）描述一次块 I/O：目标设备、方向、与一组 **bvec**（页、偏移、长度）的 scatter-gather 列表。它是通用块层向驱动表达工作的核心抽象之一。
+`struct bio`（`include/linux/blk_types.h`）描述一次块 I/O：目标设备、方向、与一组 **bvec**（页、偏移、长度）的 scatter-gather 列表。它是通用块层向驱动表达工作的核心抽象之一。
 
   
 
@@ -247,7 +247,7 @@ tags:
 
   
 
-文件系统通过块层提交 I/O → 形成 **`request`**（在 blk-mq 下与硬件队列 tag 等结合）→ 驱动 `queue_rq` 或等价入口取出执行。
+文件系统通过块层提交 I/O → 形成 `request`（在 blk-mq 下与硬件队列 tag 等结合）→ 驱动 `queue_rq` 或等价入口取出执行。
 
   
 
@@ -343,7 +343,7 @@ tags:
 
 - **文件系统层**：事务提交点、journal 提交策略。
 
-- **块设备层**：设备是否有易失写缓存；内核如何通过 **`REQ_PREFLUSH`**、**`REQ_FUA`** 等标志要求刷新或强制落盘（能力依设备与驱动而异）。
+- **块设备层**：设备是否有易失写缓存；内核如何通过 `REQ_PREFLUSH`、`REQ_FUA` 等标志要求刷新或强制落盘（能力依设备与驱动而异）。
 
   
 
@@ -363,9 +363,9 @@ tags:
 
   
 
-- **`iostat -xz 1`**：`%util`、`await`、`avgqu-sz`、每秒读写量；判断瓶颈在设备还是 CPU/锁。
+- `iostat -xz 1`：`%util`、`await`、`avgqu-sz`、每秒读写量；判断瓶颈在设备还是 CPU/锁。
 
-- **`vmstat 1`**：粗看内存与 I/O 等待。
+- `vmstat 1`：粗看内存与 I/O 等待。
 
 - **`/proc/meminfo`、`/proc/vmstat`**：dirty、writeback、回收相关。
 
@@ -375,9 +375,9 @@ tags:
 
   
 
-- **`pidstat -d 1`**：按进程看 I/O。
+- `pidstat -d 1`：按进程看 I/O。
 
-- **`/sys/block/<dev>/queue/*`**：队列与调度器参数（改前记录 baseline）。
+- `/sys/block/<dev>/queue/*`：队列与调度器参数（改前记录 baseline）。
 
   
 
@@ -395,7 +395,7 @@ tags:
 
   
 
-若卡顿与 **`kworker`** 写回并发**：结合 `vmstat`、`/proc/vmstat` 中 dirty 相关计数与业务写入模式对齐分析；避免一上来大面积 sysctl「调优」而无假设。
+若卡顿与 `kworker` 写回并发**：结合 `vmstat`、`/proc/vmstat` 中 dirty 相关计数与业务写入模式对齐分析；避免一上来大面积 sysctl「调优」而无假设。
 
   
 
