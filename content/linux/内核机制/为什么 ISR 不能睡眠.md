@@ -190,6 +190,7 @@ ISR：ack + 取数 + 调度下半部（spinlock 内极短）
 
 ## 延伸阅读
 
+- [[Linux 中断机制详解]] — 硬件路径、irq 子系统、**中断嵌套** 专题
 - [[linux/学习路径/中断与下半部机制]] — tasklet / workqueue / threaded IRQ 选用
 - [[linux/内核机制/内核同步机制总览]] — spinlock vs mutex 与上下文
 - [[linux/概览/嵌入式Linux基础知识]] — 脚注中的上下文对照

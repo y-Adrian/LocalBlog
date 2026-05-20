@@ -75,6 +75,7 @@ date: 2026/05/16
 - [x] **设备树 + platform 驱动**：完整 repo（reg/interrupt/clock + probe）→ [[linux/驱动与模块/platform 驱动完整案例]]
 - [x] **中断与下半部**：硬中断 / tasklet / workqueue 选用表 + 示例 → [[linux/学习路径/中断与下半部机制]]
 - [x] **为何 ISR 不能睡眠**（硬中断上下文与下半部分工）→ [[linux/内核机制/为什么 ISR 不能睡眠]]
+- [x] **Linux 中断机制详解**（GIC、irq 子系统、软中断、**中断嵌套**）→ [[linux/内核机制/Linux 中断机制详解]]
 - [x] **DMA 驱动基础**：`dma_map_*`、Cache 一致性、与 DT 配合 → [[linux/内核机制/DMA 与 Cache 一致性入门]]
 
 **优先级：中**
