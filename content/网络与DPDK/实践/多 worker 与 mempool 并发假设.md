@@ -51,7 +51,7 @@ ring = rte_ring_create(name, size, socket_id, RING_F_SP_ENQ | RING_F_SC_DEQ);
 
 | DPDK | 通用无锁 |
 |------|----------|
-| per-lcore 变量 | thread-local / 每核数组 |
+| per-lcore 变量 | thread-local / 每核数组（见 [[linux/内核机制/per-CPU 与 per-core 数据结构]]） |
 | rte_ring | SPSC/MPSC 队列 |
 | memory order 较少暴露 | `atomic` + memory_order |
 
