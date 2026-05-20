@@ -74,6 +74,7 @@ date: 2026/05/16
 - [x] **最小可启动工程**：一份可复现的 Buildroot **或** Yocto 镜像 + 文档 → [[linux/学习路径/最小可启动工程指南]]
 - [x] **设备树 + platform 驱动**：完整 repo（reg/interrupt/clock + probe）→ [[linux/驱动与模块/platform 驱动完整案例]]
 - [x] **中断与下半部**：硬中断 / tasklet / workqueue 选用表 + 示例 → [[linux/学习路径/中断与下半部机制]]
+- [x] **为何 ISR 不能睡眠**（硬中断上下文与下半部分工）→ [[linux/内核机制/为什么 ISR 不能睡眠]]
 - [x] **DMA 驱动基础**：`dma_map_*`、Cache 一致性、与 DT 配合 → [[linux/内核机制/DMA 与 Cache 一致性入门]]
 
 **优先级：中**
@@ -156,6 +157,15 @@ date: 2026/05/16
 ---
 
 ## 七、网络与 DPDK（数据面）
+
+### 7.0 用户态网络编程（✅）
+
+> 走 **内核协议栈** 的 Socket 编程，是 DPDK 旁路之前的通用基础。
+
+- [x] **Socket API**：TCP/UDP、`sockaddr`、字节序、最小 echo → [[网络与DPDK/网络编程/Socket 编程基础：TCP、UDP 与字节序]]
+- [x] **IO 多路复用**：select / poll / epoll、Reactor、写缓冲 → [[网络与DPDK/网络编程/IO 多路复用：select、poll、epoll 与并发模型]]
+- [x] **TCP 实战**：粘包、状态机、TIME_WAIT、调试 → [[网络与DPDK/网络编程/TCP 连接、粘包与常见陷阱]]
+- [x] **RPC 分层**（控制面常见）→ [[网络与DPDK/实践/RPC 技术与分层详解]]
 
 ### 7.1 已有（✅）
 

@@ -14,7 +14,7 @@ description: Linux 系统编程、嵌入式、网络与 DPDK 学习笔记
 |------|------|
 | [工程基础](工程基础/index) | Shell、Make、Git、数学与通用设计 |
 | [Linux](linux/index) | 嵌入式 Linux、内核机制、学习路径、驱动 |
-| [网络与 DPDK](网络与DPDK/index) | DPDK 教程与内存子系统 |
+| [网络与 DPDK](网络与DPDK/index) | Socket 网络编程、DPDK 教程与内存子系统 |
 | [编程语言](编程语言/index) | C++、Go |
 | [数据库](数据库/index) | PostgreSQL 等 |
 | [系统调试](系统调试/index) | 反汇编、并发与排障 |
