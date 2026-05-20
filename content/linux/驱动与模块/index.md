@@ -8,6 +8,7 @@ description: 可加载内核模块与驱动开发实战
 
 ## 文档
 
+- [[Linux 内核驱动面试知识点速览]] — 驱动岗面试考点与复习顺序
 - [[Linux 内核模块开发实战]] — 从 hello 到 sysfs 的完整演练
 - [[platform 驱动完整案例]]
 - [[sysfs 与 proc 调试接口]]
