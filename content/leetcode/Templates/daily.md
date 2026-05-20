@@ -1,4 +1,5 @@
 ---
+date: 2026/05/13
 session_date: "{{date:YYYY-MM-DD}}"
 plan_day:
 plan_week:

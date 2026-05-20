@@ -6,7 +6,7 @@ tags:
   - 驱动
 title: Linux 中断机制详解
 description: 从硬件 IRQ 到内核 irq 子系统、上下半部、软中断与中断嵌套的完整心智模型
-date: 2026/05/16
+date: 2026/05/21
 ---
 
 # Linux 中断机制详解

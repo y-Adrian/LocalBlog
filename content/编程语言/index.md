@@ -1,4 +1,5 @@
 ---
+date: 2026/05/11
 title: 编程语言
 description: C++ 与 Go 语言笔记
 ---

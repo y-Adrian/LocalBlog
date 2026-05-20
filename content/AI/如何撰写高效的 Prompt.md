@@ -1,4 +1,5 @@
 ---
+date: 2026/05/11
 tags:
   - prompt
   - AI工具

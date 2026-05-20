@@ -1,4 +1,5 @@
 ---
+date: 2026/05/15
 title: Linux 平台与构建
 description: 交叉编译与根文件系统构建相关
 ---

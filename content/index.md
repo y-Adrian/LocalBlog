@@ -1,6 +1,6 @@
 ---
 title: Adrian's Space
-date: 2026/05/16
+date: 2026/05/21
 description: Linux 系统编程、嵌入式、网络与 DPDK 学习笔记
 ---
 
@@ -20,6 +20,7 @@ description: Linux 系统编程、嵌入式、网络与 DPDK 学习笔记
 | [系统调试](系统调试/index) | 反汇编、并发与排障 |
 | [AI 工具](AI/index) | 本地模型、Prompt |
 | [成长路径](成长路径/index) | 知识储备与待补清单（查漏补缺） |
+| [学习疑问](学习疑问/index) | 学习中的问题账本，可跳转至对应解答文档 |
 
 ## 推荐阅读顺序（嵌入式 Linux）
 

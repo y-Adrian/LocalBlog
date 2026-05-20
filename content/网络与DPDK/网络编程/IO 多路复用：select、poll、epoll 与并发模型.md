@@ -5,7 +5,7 @@ tags:
   - 并发
 title: IO 多路复用：select、poll、epoll 与并发模型
 description: select poll epoll 差异、边缘触发、Reactor 与线程池服务器骨架
-date: 2026/05/16
+date: 2026/05/21
 ---
 
 # IO 多路复用：select、poll、epoll 与并发模型

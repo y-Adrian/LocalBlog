@@ -1,4 +1,5 @@
 ---
+date: 2026/05/15
 title: DPDK 教程
 description: 四步实战：从 testpmd 到多队列与性能剖析
 ---

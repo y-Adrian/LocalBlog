@@ -1,4 +1,5 @@
 ---
+date: 2026/05/15
 title: AI 工具
 description: 本地大模型与 Prompt 实践
 ---

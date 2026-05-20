@@ -1,4 +1,5 @@
 ---
+date: 2026/05/15
 title: 嵌入式 Linux 学习路径
 description: 分阶段教科书式教程，建议按顺序阅读
 ---

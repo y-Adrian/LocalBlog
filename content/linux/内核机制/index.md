@@ -1,4 +1,5 @@
 ---
+date: 2026/05/15
 title: Linux 内核机制
 description: 系统调用、内存、调度、存储 IO 与 cgroup
 ---

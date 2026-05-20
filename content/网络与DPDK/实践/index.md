@@ -1,4 +1,5 @@
 ---
+date: 2026/05/16
 title: DPDK 实践
 description: 项目化总结、性能 checklist 与并发模型
 ---

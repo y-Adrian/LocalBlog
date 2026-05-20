@@ -1,4 +1,5 @@
 ---
+date: 2026/05/15
 title: Go
 description: Go 语言基础笔记
 ---

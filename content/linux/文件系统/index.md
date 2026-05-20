@@ -1,4 +1,5 @@
 ---
+date: 2026/05/16
 title: 文件系统与存储
 description: 嵌入式块设备、Flash 与根文件系统实践
 ---

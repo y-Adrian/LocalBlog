@@ -1,4 +1,5 @@
 ---
+date: 2026/05/11
 title: Linux
 description: 嵌入式 Linux、内核机制、驱动与平台构建
 ---

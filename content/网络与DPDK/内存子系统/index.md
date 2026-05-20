@@ -1,4 +1,5 @@
 ---
+date: 2026/05/15
 title: DPDK 内存子系统
 description: 大页、memseg、IOVA、mempool 与 mbuf 机制
 ---
