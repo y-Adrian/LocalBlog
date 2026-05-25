@@ -17,6 +17,7 @@
     "check": "tsc --noEmit && npx prettier . --check",
     "format": "npx prettier . --write",
     "activity:update": "node --experimental-strip-types scripts/update-blog-activity-cache.ts",
+    "content:calibrate": "node scripts/calibrate-content.mjs",
     "hooks:install": "git config core.hooksPath .githooks",
     "test": "tsx --test",
     "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1"

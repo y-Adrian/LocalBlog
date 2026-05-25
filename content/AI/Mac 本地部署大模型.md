@@ -1,4 +1,5 @@
 ---
+title: Mac 本地部署大模型
 date: 2026/05/11
 tags:
   - AI工具

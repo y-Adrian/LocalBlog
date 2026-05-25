@@ -1,3 +1,7 @@
+---
+title: kmalloc 与 vmalloc：区别、为何并存与使用场景
+date: 2026/05/15
+---
 # 1 `kmalloc` 与 `vmalloc`：区别、为何并存与使用场景
 
 本文面向 **Linux 内核** 内存分配接口，说明 `kmalloc` 与 `vmalloc` 在 **物理连续性、地址空间位置、大小上限、性能与 DMA 语义** 上的差异，并解释 **为何需要两套机制** 以及各自典型用法。具体常量与实现细节随内核版本略有变化，以你目标树中的 `include/linux/slab.h`、`include/linux/vmalloc.h` 与 **`mm/slab.c` / `mm/vmalloc.c`** 为准。

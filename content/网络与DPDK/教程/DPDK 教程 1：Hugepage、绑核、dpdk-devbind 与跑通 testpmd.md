@@ -1,4 +1,5 @@
 ---
+title: DPDK 教程（一）：Hugepage、绑核、dpdk-devbind 与跑通 testpmd
 date: 2026/05/15
 tags:
   - DPDK

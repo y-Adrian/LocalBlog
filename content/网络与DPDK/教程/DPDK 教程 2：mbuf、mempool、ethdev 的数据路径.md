@@ -1,4 +1,5 @@
 ---
+title: DPDK 教程（二）：mbuf、mempool、ethdev 的数据路径
 date: 2026/05/15
 tags:
   - DPDK

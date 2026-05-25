@@ -1,4 +1,5 @@
 ---
+title: DPDK 教程（四）：Offload、Flow、NUMA、IOVA 与性能剖析
 date: 2026/05/15
 tags:
   - DPDK

@@ -1,4 +1,5 @@
 ---
+title: Linux cgroup 完全指南：从原理到实践
 date: 2026/05/13
 tags:
   - Linux

@@ -1,4 +1,5 @@
 ---
+title: DPDK 教程（三）：多队列 + RSS + 多 worker 的最小转发 / Echo
 date: 2026/05/15
 tags:
   - DPDK

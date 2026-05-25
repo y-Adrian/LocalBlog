@@ -1,4 +1,5 @@
 ---
+title: Linux系统调用：用户态陷入内核完整流程
 date: 2026/05/11
 tags:
   - Linux

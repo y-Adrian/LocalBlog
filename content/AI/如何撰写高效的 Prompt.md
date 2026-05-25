@@ -1,4 +1,5 @@
 ---
+title: 如何撰写高效的 Prompt
 date: 2026/05/11
 tags:
   - prompt
