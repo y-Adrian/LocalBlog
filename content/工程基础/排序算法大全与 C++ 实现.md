@@ -8,13 +8,13 @@ description: 比较排序与非比较排序的原理、复杂度、稳定性及�
 date: 2026/05/21
 ---
 
-# 排序算法大全与 C++ 实现
+# 1 排序算法大全与 C++ 实现
 
 **排序（sorting）** 是把序列按关键字 **非降序 / 非升序** 重排。本文覆盖常见 **比较排序（comparison sort）** 与 **非比较排序（non-comparison sort）**，每类给出 **C++ 实现** 与选型表；工程里优先用 **`std::sort` / `std::stable_sort`**，手写版本用于面试与理解底层。
 
 ---
 
-## 1. 读完能带走什么
+## 1.1 读完能带走什么
 
 - 知道各算法 **时间 / 空间 / 稳定性** 与 **适用场景**。  
 - 能手写 **快排、归并、堆排** 与 **计数 / 基数** 的典型实现。  
@@ -22,7 +22,7 @@ date: 2026/05/21
 
 ---
 
-## 2. 总览
+## 1.2 总览
 
 ```mermaid
 flowchart TB
@@ -56,13 +56,13 @@ flowchart TB
 | 基数 Radix | $O(d(n+k))$ | 同左 | $O(n+k)$ | 是 | 否 |
 | 桶 Bucket | $O(n)$ 期望 | $O(n^2)$ | $O(n)$ | 是 | 否 |
 
-\* Shell 最坏与增量序列有关；常用 Sedgewick 增量均摊接近 $O(n^{4/3})$。
+* Shell 最坏与增量序列有关；常用 Sedgewick 增量均摊接近 $O(n^{4/3})$。
 
 **比较排序下界**：仅通过 `<` 比较，最坏至少 $O(n \log n)$ 次比较（决策树高度）。
 
 ---
 
-## 3. 通用测试框架
+## 1.3 通用测试框架
 
 ```cpp
 #include <iostream>
@@ -83,7 +83,7 @@ void demo(const char* name, F sort_fn, std::vector<int> a) {
 
 ---
 
-## 4. 冒泡排序（Bubble Sort）
+## 1.4 冒泡排序（Bubble Sort）
 
 相邻比较交换，大元素像气泡上浮。
 
@@ -115,7 +115,7 @@ void bubble_sort(std::vector<int>& a) {
 
 ---
 
-## 5. 选择排序（Selection Sort）
+## 1.5 选择排序（Selection Sort）
 
 每轮在未排序段选最小，放到左端。
 
@@ -135,7 +135,7 @@ void selection_sort(std::vector<int>& a) {
 
 ---
 
-## 6. 插入排序（Insertion Sort）
+## 1.6 插入排序（Insertion Sort）
 
 维护左端有序，逐个插入新元素。
 
@@ -157,7 +157,7 @@ void insertion_sort(std::vector<int>& a) {
 
 ---
 
-## 7. 希尔排序（Shell Sort）
+## 1.7 希尔排序（Shell Sort）
 
 按 **gap（增量）** 做分组插入排序，gap 逐步缩小至 1。
 
@@ -180,7 +180,7 @@ void shell_sort(std::vector<int>& a) {
 
 ---
 
-## 8. 归并排序（Merge Sort）
+## 1.8 归并排序（Merge Sort）
 
 分治：两半分别排好，再 **合并（merge）** 两个有序数组。
 
@@ -224,7 +224,7 @@ void merge_sort(std::vector<int>& a) {
 
 ---
 
-## 9. 快速排序（Quick Sort）
+## 1.9 快速排序（Quick Sort）
 
 选 **基准 pivot**，分区使左 $\le$ pivot $\le$ 右，递归。
 
@@ -263,7 +263,7 @@ void quick_sort(std::vector<int>& a) {
 
 ---
 
-## 10. 堆排序（Heap Sort）
+## 1.10 堆排序（Heap Sort）
 
 建 **大根堆（max-heap）**，反复把堆顶（最大值）换到末尾并下沉。
 
@@ -294,7 +294,7 @@ void heap_sort(std::vector<int>& a) {
 
 ---
 
-## 11. 计数排序（Counting Sort）
+## 1.11 计数排序（Counting Sort）
 
 值域 $[0, k]$ 时统计频次再写回。
 
@@ -316,7 +316,7 @@ void counting_sort(std::vector<int>& a, int k_max) {
 
 ---
 
-## 12. 基数排序（Radix Sort）
+## 1.12 基数排序（Radix Sort）
 
 按位（或按进制 digit）从 **低位到高位** 多轮 **稳定** 计数排序。
 
@@ -345,7 +345,7 @@ void radix_sort(std::vector<int>& a) {
 
 ---
 
-## 13. 桶排序（Bucket Sort）
+## 1.13 桶排序（Bucket Sort）
 
 元素映射到若干 **桶（bucket）**，桶内再排序（常用插入）。
 
@@ -374,7 +374,7 @@ void bucket_sort(std::vector<int>& a, int bucket_count) {
 
 ---
 
-## 14. C++ 标准库（工程首选）
+## 1.14 C++ 标准库（工程首选）
 
 ```cpp
 #include <algorithm>
@@ -403,7 +403,7 @@ void sort_items(std::vector<Item>& v) {
 
 ---
 
-## 15. 如何选型
+## 1.15 如何选型
 
 ```mermaid
 flowchart TD
@@ -427,7 +427,7 @@ flowchart TD
 
 ---
 
-## 16. 完整 main 示例
+## 1.16 完整 main 示例
 
 ```cpp
 #include <iostream>
@@ -455,7 +455,7 @@ int main() {
 
 ---
 
-## 17. 检查清单
+## 1.17 检查清单
 
 - [ ] 能说出快排最坏与 IntroSort 对策  
 - [ ] 能区分稳定 / 不稳定对「相等元素原顺序」的影响  
@@ -464,7 +464,7 @@ int main() {
 
 ---
 
-## 延伸阅读
+## 1.18 延伸阅读
 
 - [[工程基础/编程中非常关键、非常常用的数学技巧#1.5 对数：复杂度、二分、树高]]
 - [[编程语言/C++/STL 容器算法手册]]
