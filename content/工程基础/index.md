@@ -18,6 +18,7 @@ description: 命令行、构建、版本管理与通用编程基础
 - [[CMake 与交叉编译入门]]
 - [[静态分析入门]]
 - [[嵌入式代码评审清单]]
+- [[MISRA C 与 CERT C 编码规范对照]]
 - [[GitHub Actions 与嵌入式 CI 入门]]
 - [[许可证与 SBOM 入门]]
 
