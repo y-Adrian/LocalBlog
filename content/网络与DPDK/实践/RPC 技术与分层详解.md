@@ -183,7 +183,7 @@ RPC 框架常 **不绑定** 单一传输：例如 gRPC 支持 `insecure` TCP、`
 
 再往下就是 **IP、路由、防火墙、TLS/mTLS、服务发现、负载均衡、可观测性**：
 
-- **服务发现**：Consul、etcd、Kubernetes DNS；
+- **服务发现**：Consul、etcd、Kubernetes DNS（共识与选主见 [[分布式系统/共识算法/分布式共识算法概览]]）；
 - **负载均衡**：客户端 LB（gRPC pick_first / round_robin）、L7 代理（Envoy）；
 - **安全**：TLS 加密、证书轮换、mTLS 双向认证；
 - **可观测**：trace id 注入（OpenTelemetry）、metrics、access log。

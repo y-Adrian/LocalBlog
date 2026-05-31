@@ -13,7 +13,7 @@ description: 用户态 Socket、TCP/UDP、IO 多路复用与并发服务器模�
 | 内核路径 | [[linux/内核机制/Linux 内核网络栈与 DPDK 适用边界]] | socket → 协议栈 → 驱动 |
 | **用户态 socket** | **本目录** | `socket` API、TCP/UDP、epoll |
 | 用户态旁路 | [[网络与DPDK/教程/index]] | mbuf、PMD、poll 模式 |
-| 分布式接口 | [[网络与DPDK/实践/RPC 技术与分层详解]] | gRPC、序列化、传输 |
+| 分布式接口 | [[网络与DPDK/实践/RPC 技术与分层详解]] | gRPC、序列化、传输；元数据见 [[分布式系统/共识算法/index]] |
 
 ## 学习顺序
 

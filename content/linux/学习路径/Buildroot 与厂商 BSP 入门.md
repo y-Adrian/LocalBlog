@@ -7,13 +7,13 @@ title: Buildroot 与厂商 BSP 入门
 description: 串口 shell、bootargs、替换 dtb 验证——跑通第一块能启动的板子
 ---
 
-# Buildroot 与厂商 BSP 入门
+# 1 Buildroot 与厂商 BSP 入门
 
 本文是 **嵌入式 Linux 学习路径** 第四阶段：用 **Buildroot** 或 **芯片厂商 BSP** 跑通 **上电 → 内核日志 → rootfs shell**。完成后你应能：**改 `bootargs`、换 `.dtb`、定位启动失败阶段**，并理解 **镜像里各组件从哪来**。
 
 ---
 
-## 学习目标
+## 1.1 学习目标
 
 - 区分 **BootROM → SPL → U-Boot → Kernel → init** 各阶段现象。
 - 配置 **串口 console** 与 **root 挂载**（`root=`、`rootfstype=`）。
@@ -22,7 +22,7 @@ description: 串口 shell、bootargs、替换 dtb 验证——跑通第一块能
 
 ---
 
-## 启动链与「黑屏」定位
+## 1.2 启动链与「黑屏」定位
 
 | 阶段 | 典型现象 | 排障手段 |
 |------|----------|----------|
@@ -36,16 +36,16 @@ description: 串口 shell、bootargs、替换 dtb 验证——跑通第一块能
 
 ---
 
-## 串口 console 实战
+## 1.3 串口 console 实战
 
-### 主机侧
+### 1.3.1 主机侧
 
 ```bash
 picocom -b 115200 /dev/ttyUSB0
 # 或 minicom -D /dev/ttyUSB0 -b 115200
 ```
 
-### 内核命令行（`bootargs`）
+### 1.3.2 内核命令行（`bootargs`）
 
 常见片段：
 
@@ -57,7 +57,7 @@ console=ttyS0,115200n8 earlyprintk root=/dev/mmcblk0p2 rootwait rw
 - `earlyprintk`：极早期日志（架构/配置相关）。
 - `rootwait`：块设备未就绪时等待（SD/eMMC 常见）。
 
-### U-Boot 修改 bootargs
+### 1.3.3 U-Boot 修改 bootargs
 
 ```text
 setenv bootargs 'console=ttyS0,115200 root=/dev/mmcblk0p2 rootwait rw'
@@ -69,14 +69,14 @@ boot
 
 ---
 
-## 替换 dtb 验证硬件描述
+## 1.4 替换 dtb 验证硬件描述
 
-### 为何先会换 dtb
+### 1.4.1 为何先会换 dtb
 
 - **改设备树** 比 **改内核** 迭代快；验证 **GPIO/LED/串口** 节点是否被内核正确解析。
 - 板级 `.dts` 编译为 `.dtb`，由 bootloader 传给内核。
 
-### U-Boot 手动加载（示例思路）
+### 1.4.2 U-Boot 手动加载（示例思路）
 
 ```text
 fatload mmc 0:1 ${kernel_addr_r} Image
@@ -86,7 +86,7 @@ booti ${kernel_addr_r} - ${fdt_addr_r}
 
 将 PC 上编译的 `board.dtb` 拷到 boot 分区替换，重启观察 `/proc/device-tree` 或驱动 **probe** 日志。
 
-### 内核侧确认
+### 1.4.3 内核侧确认
 
 ```bash
 ls /proc/device-tree/
@@ -96,9 +96,9 @@ dmesg | grep -i 'machine model'
 
 ---
 
-## Buildroot 最小路径
+## 1.5 Buildroot 最小路径
 
-### 获取与配置
+### 1.5.1 获取与配置
 
 ```bash
 git clone https://github.com/buildroot/buildroot.git
@@ -111,12 +111,12 @@ make menuconfig
 make -j"$(nproc)"
 ```
 
-### 输出物（典型）
+### 1.5.2 输出物（典型）
 
 - `output/images/`：`rootfs.ext4`、`zImage`/`Image`、`*.dtb`、`u-boot.bin`、`sdcard.img`（视配置）。
 - `output/host/`：宿主机工具；`output/staging/`：**sysroot**（与交叉编译阶段衔接）。
 
-### 常用后处理
+### 1.5.3 常用后处理
 
 - `BR2_ROOTFS_OVERLAY`：追加文件到 rootfs。
 - `post-build.sh`：自定义打包。
@@ -124,15 +124,15 @@ make -j"$(nproc)"
 
 ---
 
-## 厂商 BSP 路径
+## 1.6 厂商 BSP 路径
 
-### 典型交付物
+### 1.6.1 典型交付物
 
 - **预编译镜像** + **烧录工具**（SD、USB、JTAG flash）。
 - **内核/U-Boot 源码树** + **固定 toolchain** + **文档 PDF**。
 - **环境脚本** `source setup-env.sh`。
 
-### 建议工作流
+### 1.6.2 建议工作流
 
 - **先跑通官方镜像**，确认硬件 OK。
 - **再 git 化** 本地改动；厂商更新时 **tag 基线 + rebase/cherry-pick**。
@@ -140,7 +140,7 @@ make -j"$(nproc)"
 
 ---
 
-## rootfs 挂载失败专题
+## 1.7 rootfs 挂载失败专题
 
 | 日志关键词 | 可能原因 |
 |------------|----------|
@@ -153,7 +153,7 @@ make -j"$(nproc)"
 
 ---
 
-## 实践练习
+## 1.8 实践练习
 
 - [ ] 用 **picocom** 抓完整启动 log 从 power-on 到 login。
 - [ ] 改 `bootargs` 故意写错 `root=`，再改对，理解 panic 信息。
@@ -162,7 +162,7 @@ make -j"$(nproc)"
 
 ---
 
-## 阶段验收
+## 1.9 阶段验收
 
 - [ ] 独立画出 **存储布局**（boot 分区 / rootfs）与 **各镜像位置**。
 - [ ] 能在 **5 分钟内** 说清当前板子 **bootcmd 做了什么**。
@@ -170,14 +170,14 @@ make -j"$(nproc)"
 
 ---
 
-## 下一阶段衔接
+## 1.10 下一阶段衔接
 
 - **设备树**：在会 **换 dtb** 的基础上，**自己改 GPIO/LED 节点** 并写驱动匹配。
 - **字符设备**：在 shell 可用后 **insmod** 模块。
 
 ---
 
-## 参考
+## 1.11 参考
 
 - Buildroot **Manual**（https://buildroot.org/docs.html）
 - U-Boot **Documentation**（booti、FIT、DFU）

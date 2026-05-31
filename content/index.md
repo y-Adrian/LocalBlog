@@ -17,6 +17,7 @@ description: Linux 系统编程、嵌入式、网络与 DPDK 学习笔记
 | [网络与 DPDK](网络与DPDK/index) | Socket 网络编程、DPDK 教程与内存子系统 |
 | [编程语言](编程语言/index) | C / C++ 精通路径、Go |
 | [数据库](数据库/index) | PostgreSQL 等 |
+| [分布式系统](分布式系统/index) | 共识算法、复制日志与一致性（控制面） |
 | [系统调试](系统调试/index) | 反汇编、并发与排障 |
 | [AI 工具](AI/index) | 本地模型、Prompt |
 | [成长路径](成长路径/index) | 知识储备与待补清单（查漏补缺） |

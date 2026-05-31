@@ -15,7 +15,7 @@ description: 嵌入式 Linux、内核机制、驱动与平台构建
 | [[linux/概览/index|概览]] | 嵌入式 Linux 知识地图与总览 |
 | [[linux/学习路径/index|学习路径]] | 分阶段实战教程（建议按序阅读） |
 | [[linux/内核机制/index|内核机制]] | 系统调用、内存、调度、存储 IO、cgroup |
-| [[linux/驱动与模块/index|驱动与模块]] | 内核模块与驱动入门 |
+| [[linux/驱动与模块/index|驱动与模块]] | 内核模块与驱动入门；**RISC-V 板级开发日志**见 [[linux/驱动与模块/riscv-驱动开发日志/index]] |
 | [[linux/平台与构建/index|平台与构建]] | 交叉编译、Buildroot/Yocto 相关长文 |
 
 ## 1.2 快速入口
