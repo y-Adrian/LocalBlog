@@ -151,12 +151,16 @@ sudo mkdir /sys/fs/cgroup/my_task
 
 #### 1.4.1.2 步骤 2：启用你需要的控制器
 
-然后，你要告诉系统，这个分组要启用哪些控制器，比如我们要控制 CPU、内存、IO：
+在 cgroup v2 里，控制器要在**父 cgroup 的 `cgroup.subtree_control`** 里启用，才能在子组里使用。我们创建的 `my_task` 位于根 cgroup 下，所以要写**根**的 `subtree_control`：
 
 ```bash
 # + 表示启用，- 表示禁用
-sudo sh -c 'echo "+cpu +memory +io" > /sys/fs/cgroup/my_task/cgroup.subtree_control'
+# 注意：要写父 cgroup（这里是根 /sys/fs/cgroup）的 subtree_control
+# 这样才能在子组 my_task 里使用这些控制器
+sudo sh -c 'echo "+cpu +memory +io" > /sys/fs/cgroup/cgroup.subtree_control'
 ```
+
+> ⚠️ 常见错误：写成 `my_task/cgroup.subtree_control` 是给 `my_task` 的**子**分组启用控制器，而不是给 `my_task` 本身启用——这样会导致 `my_task` 里的 `cpu.max` 等文件不存在。
 
 #### 1.4.1.3 步骤 3：配置资源限制
 
@@ -167,11 +171,13 @@ sudo sh -c 'echo "+cpu +memory +io" > /sys/fs/cgroup/my_task/cgroup.subtree_cont
 我们想让这个组的任务，最多用 50% 的 CPU 核心：
 
 ```bash
-# cpu.max 的格式是 配额/周期，单位是微秒
+# cpu.max 的格式是 "配额 周期"，两个值，单位都是微秒（必须同时写）
 # 100000 微秒就是 100ms，是默认的周期
-# 所以 50000 就是，每 100ms 里，最多用 50ms 的 CPU，也就是 50% 的使用率
-sudo sh -c 'echo 50000 > /sys/fs/cgroup/my_task/cpu.max'
+# 50000/100000 = 50%，即每 100ms 里最多用 50ms 的 CPU
+sudo sh -c 'echo "50000 100000" > /sys/fs/cgroup/my_task/cpu.max'
 ```
+
+> ⚠️ 常见错误：只写 `echo 50000`，内核会报 `EINVAL`，因为 `cpu.max` 必须同时指定配额和周期两个字段。
 
 > 如果你有多个 CPU 核心，比如 4 核，你想让它最多用 2 个核心，那就是 `200000`，因为 2 * 100000 = 200000。
 
