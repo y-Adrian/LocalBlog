@@ -24,7 +24,7 @@ etcd 是目前工业界最广泛使用的分布式键值存储，也是 **Raft �
 ```mermaid
 flowchart LR
   subgraph etcd["etcd 集群（3 节点）"]
-    L[Leader\n处理所有写]
+    L[Leader<br/>处理所有写]
     F1[Follower 1]
     F2[Follower 2]
     L -->|Raft 日志复制| F1
@@ -139,12 +139,12 @@ EOF
 ```mermaid
 flowchart TB
   subgraph etcd["etcd 进程"]
-    API[gRPC API 层\n读写请求入口]
-    KV[KV 存储层\netcd 的业务逻辑]
-    RAFT[Raft 状态机\nraft 库（etcd/raft）]
-    WAL[WAL 日志\n持久化 Raft 日志]
-    SNAP[Snapshot\n定期压缩]
-    MVCC[MVCC 存储\nbolt/bbolt]
+    API[gRPC API 层<br/>读写请求入口]
+    KV[KV 存储层<br/>etcd 的业务逻辑]
+    RAFT[Raft 状态机<br/>raft 库（etcd/raft）]
+    WAL[WAL 日志<br/>持久化 Raft 日志]
+    SNAP[Snapshot<br/>定期压缩]
+    MVCC[MVCC 存储<br/>bolt/bbolt]
   end
   API --> KV
   KV --> RAFT
@@ -325,7 +325,7 @@ flowchart TB
     MGR3[管理进程 3]
   end
   subgraph storage["etcd 集群"]
-    KV_STORE[配置数据\n/config/device/...\n/leader/...\n/services/...]
+    KV_STORE[配置数据<br/>/config/device/...<br/>/leader/...<br/>/services/...]
   end
   MGR1 -->|竞争 /leader 租约| storage
   MGR2 -->|Watch /config/| storage

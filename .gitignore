@@ -9,3 +9,16 @@ tsconfig.tsbuildinfo
 private/
 .replit
 replit.nix
+
+# Quartz 活动缓存（本地 npm run activity:update 生成，可不提交）
+blog-activity.cache.json
+
+# labs/ 配套 C/C++ 实验：只保留源码，忽略编译产物
+labs/**/*.o
+labs/**/*.dSYM
+labs/**/*.dSYM/**
+labs/**/app
+labs/**/demo
+labs/**/vtable_demo
+labs/**/len_echo_client
+labs/**/len_echo_server

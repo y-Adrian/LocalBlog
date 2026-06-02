@@ -34,9 +34,9 @@ Paxos 把节点分成三种角色（一个节点可同时扮演多个角色）�
 ```mermaid
 flowchart LR
   subgraph roles["Paxos 角色"]
-    P[Proposer\n提议者\n发起提议，推动共识]
-    A[Acceptor\n接受者\n投票，持久化承诺]
-    L[Learner\n学习者\n得知最终选定值]
+    P[Proposer<br/>提议者<br/>发起提议，推动共识]
+    A[Acceptor<br/>接受者<br/>投票，持久化承诺]
+    L[Learner<br/>学习者<br/>得知最终选定值]
   end
   P -->|Prepare/Accept| A
   A -->|Promise/Accepted| P
@@ -167,17 +167,18 @@ Multi-Paxos：Leader 稳定时，每个值只需 1 轮（直接 Accept）
 ```mermaid
 flowchart TB
   subgraph leader["Leader（稳定 Proposer）"]
-    CMD[客户端命令: cmd1, cmd2, cmd3...]
-    LOG_L[本地日志: [cmd1][cmd2][cmd3]...]
+    CMD["客户端命令: cmd1, cmd2, cmd3 ..."]
+    LOG_L["本地日志: cmd1 | cmd2 | cmd3 ..."]
   end
   subgraph followers["Followers（Acceptors）"]
-    LOG_F1[副本1: [cmd1][cmd2][cmd3]...]
-    LOG_F2[副本2: [cmd1][cmd2]...]
+    LOG_F1["副本1: cmd1 | cmd2 | cmd3 ..."]
+    LOG_F2["副本2: cmd1 | cmd2 ..."]
   end
   CMD --> LOG_L
-  LOG_L -->|Accept 复制| LOG_F1
-  LOG_L -->|Accept 复制| LOG_F2
-  Note["多数派 Accepted → 提交"]
+  LOG_L -->|"Accept 复制"| LOG_F1
+  LOG_L -->|"Accept 复制"| LOG_F2
+  LOG_F1 --> COMMIT["多数派 Accepted → 提交"]
+  LOG_F2 --> COMMIT
 ```
 
 每个日志**槽位（slot）** 单独运行一次 Paxos 实例，各槽位独立但共用一个 Leader。

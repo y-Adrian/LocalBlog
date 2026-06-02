@@ -31,7 +31,7 @@ flowchart TB
   CTX --> USR[用户线程继续运行]
 
   subgraph problems["延迟来源"]
-    P1[关抢占/关中断的大临界区\n最坏可达数毫秒]
+    P1[关抢占/关中断的大临界区<br/>最坏可达数毫秒]
     P2[spinlock 持锁期间不可抢占]
     P3[softirq 长时间运行]
     P4[优先级反转无保护]

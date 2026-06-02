@@ -19,14 +19,14 @@ Raft 是 2014 年 Diego Ongaro 等人在 *"In Search of an Understandable Consen
 Raft 把时间划分成连续的**任期（Term）**，每个任期从一次选举开始：
 
 ```mermaid
-timeline
-  title Raft 任期
-  Term 1 : Leader A 正常运行
-  Term 2 : 选举（无 Leader）
-  Term 3 : Leader B 正常运行
-  Term 4 : 选举（B 宕机）
-  Term 5 : Leader C 正常运行
+flowchart LR
+  T1[Term 1<br/>Leader A 正常运行] --> T2[Term 2<br/>选举（无 Leader）]
+  T2 --> T3[Term 3<br/>Leader B 正常运行]
+  T3 --> T4[Term 4<br/>选举（B 宕机）]
+  T4 --> T5[Term 5<br/>Leader C 正常运行]
 ```
+
+> 每个任期最多一个 Leader；选举期可能没有 Leader（图中 Term 2、Term 4）。
 
 - 每个节点维护**当前任期号**（单调递增）
 - 任期号是 Raft 中的逻辑时钟——收到更高任期的消息时，立刻更新自己的任期，降级为 Follower

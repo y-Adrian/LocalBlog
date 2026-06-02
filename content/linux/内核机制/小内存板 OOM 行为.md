@@ -21,7 +21,7 @@ date: 2026/05/16
 flowchart TB
   ALLOC[进程申请内存] --> AVAIL{有空闲内存?}
   AVAIL -->|有| OK[分配成功]
-  AVAIL -->|没有| RECLAIM[尝试回收：\n回写脏页 / 换出 swap]
+  AVAIL -->|没有| RECLAIM[尝试回收：<br/>回写脏页 / 换出 swap]
   RECLAIM --> AGAIN{够了吗?}
   AGAIN -->|够了| OK
   AGAIN -->|还不够| OOM[触发 OOM killer]

@@ -44,13 +44,13 @@ MMU 给每个进程提供独立的**虚拟地址空间**，隔离问题全部解
 flowchart LR
   subgraph cpu["CPU"]
     INST[指令发出虚拟地址 VA]
-    TLB[TLB\n快速缓存最近翻译]
+    TLB[TLB<br/>快速缓存最近翻译]
   end
   subgraph mmu["MMU 硬件"]
-    PTW[页表遍历器\nPage Table Walker]
+    PTW[页表遍历器<br/>Page Table Walker]
   end
   subgraph mem["内存"]
-    PT[进程页表\nCR3/TTBR0 指向]
+    PT[进程页表<br/>CR3/TTBR0 指向]
     RAM[物理内存]
   end
 
@@ -110,13 +110,13 @@ flowchart TB
   end
   subgraph iommu["IOMMU 硬件"]
     IOTLB[IO-TLB]
-    IOTABLE[IO 页表\n每设备独立]
+    IOTABLE[IO 页表<br/>每设备独立]
   end
   subgraph mem["物理内存"]
     RAM[物理页面]
   end
   subgraph kernel["内核 DMA API"]
-    API[dma_map_single\ndma_alloc_coherent]
+    API[dma_map_single<br/>dma_alloc_coherent]
   end
 
   API -->|建立 IOVA→PA 映射| IOTABLE

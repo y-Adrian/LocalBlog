@@ -131,7 +131,7 @@ date: 2026/05/21
 
 | 考点 | 要点 | 站内 |
 |------|------|------|
-| `dmesg` / `dynamic_debug` | 驱动日志 | [[linux/驱动与模块/sysfs 与 proc 调试接口]] |
+| `dmesg` / `dynamic_debug` | 驱动日志、`pr_debug` 运行期开关 | [[linux/驱动与模块/sysfs 与 proc 调试接口#Dynamic Debug（dynamic_debug）]] |
 | `sysfs` / `debugfs` | 用户态调参 | 同上 |
 | 反汇编 / addr2line | 崩溃 PC 定位 | [[系统调试/反汇编在嵌入式问题定位中的应用：环境、工具与可读性]] |
 | 排障 SOP | 日志 → perf → 汇编 | [[系统调试/排障 SOP：日志、perf 与反汇编]] |

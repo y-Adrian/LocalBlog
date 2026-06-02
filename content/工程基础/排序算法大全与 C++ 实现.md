@@ -89,7 +89,7 @@ void demo(const char* name, F sort_fn, std::vector<int> a) {
 
 ```mermaid
 flowchart LR
-  A[比较 a[i] a[i+1]] --> B{逆序?}
+  A["比较 a[i] 与 a[i+1]"] --> B{逆序?}
   B -->|是| C[交换]
   B -->|否| D[下一对]
   C --> D

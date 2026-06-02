@@ -30,19 +30,19 @@ eBPF 是 Linux 内核里 **最强大的可观测性工具**：它允许你把一
 ```mermaid
 flowchart TB
   subgraph user["用户空间"]
-    SRC[eBPF 程序源码\nbpftrace / libbpf / BCC]
+    SRC[eBPF 程序源码<br/>bpftrace / libbpf / BCC]
     LOAD[加载工具 bpftool / libbpf]
   end
   subgraph kernel["内核空间"]
-    VER[Verifier 安全验证\n拒绝危险指令]
-    JIT[JIT 编译器\neBPF 字节码 → 原生指令]
-    MAP[eBPF Maps\n程序 ↔ 用户空间共享数据]
+    VER[Verifier 安全验证<br/>拒绝危险指令]
+    JIT[JIT 编译器<br/>eBPF 字节码 → 原生指令]
+    MAP[eBPF Maps<br/>程序 ↔ 用户空间共享数据]
     subgraph hooks["Hook 点"]
-      KC[kprobe/kretprobe\n任意内核函数]
-      TP[Tracepoint\n稳定事件]
-      UPR[uprobe/uretprobe\n用户态函数]
-      XDP[XDP / TC\n网卡/协议栈]
-      LSM[LSM hook\n安全策略]
+      KC[kprobe/kretprobe<br/>任意内核函数]
+      TP[Tracepoint<br/>稳定事件]
+      UPR[uprobe/uretprobe<br/>用户态函数]
+      XDP[XDP / TC<br/>网卡/协议栈]
+      LSM[LSM hook<br/>安全策略]
     end
   end
   SRC -->|编译| LOAD
@@ -288,9 +288,9 @@ sudo ./latency.bt
 ```mermaid
 flowchart LR
   subgraph frontend["前端工具（按易用程度）"]
-    BT[bpftrace\n一行脚本 ad-hoc 分析]
-    BCC[BCC 工具集\n60+ 现成 Python 脚本]
-    LIBBPF[libbpf + C\n自定义高性能程序]
+    BT[bpftrace<br/>一行脚本 ad-hoc 分析]
+    BCC[BCC 工具集<br/>60+ 现成 Python 脚本]
+    LIBBPF[libbpf + C<br/>自定义高性能程序]
   end
   subgraph backend["底层"]
     EBPF[eBPF 内核机制]
