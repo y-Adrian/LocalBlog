@@ -9,15 +9,16 @@ button.focusmode {
   z-index: 200;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0.85rem;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
   margin: 0;
-  border-radius: 999px;
+  border-radius: 50%;
   border: 1px solid var(--lightgray);
   background: var(--light);
   color: var(--darkgray);
   cursor: pointer;
-  font-family: inherit;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.08),
     0 6px 20px rgba(0, 0, 0, 0.1);
@@ -32,15 +33,8 @@ button.focusmode {
     flex-shrink: 0;
   }
 
-  & .focus-label {
-    font-size: 0.82rem;
-    line-height: 1;
-    white-space: nowrap;
-  }
-
-  // 默认（未聚焦）：显示"聚焦"入口，隐藏退出态
-  & .focus-exit,
-  & .focus-label-exit {
+  // 默认（未聚焦）：显示进入图标，隐藏退出图标
+  & .focus-exit {
     display: none;
   }
 
@@ -60,37 +54,21 @@ button.focusmode {
   @media all and (max-width: 800px) {
     right: 1rem;
     top: 1rem;
-    padding: 0.5rem 0.7rem;
-
-    & .focus-label {
-      display: none; // 移动端只留图标，避免遮挡正文
-    }
   }
 }
 
-// 聚焦开启时的按钮态：切换图标/文案，并高亮
+// 聚焦开启时：切换为退出图标并高亮
 :root[focus-mode="on"] button.focusmode {
   color: var(--secondary);
   border-color: var(--secondary);
   background: color-mix(in srgb, var(--secondary) 12%, var(--light));
 
-  & .focus-enter,
-  & .focus-label-enter {
+  & .focus-enter {
     display: none;
   }
 
   & .focus-exit {
     display: inline;
-  }
-
-  & .focus-label-exit {
-    display: inline;
-  }
-
-  @media all and (max-width: 800px) {
-    & .focus-label-exit {
-      display: none;
-    }
   }
 }
 
