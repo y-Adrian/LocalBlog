@@ -90,7 +90,7 @@ debugfs_create_u32("stats", 0644, dent, &priv->stats);
 
 ## 1.5 Dynamic Debug（dynamic_debug）
 
-**动态调试（dynamic debug）** 让你在 **不重新编译模块** 的前提下，按 **文件 / 函数 / 模块 / 行号** 开关内核里的 `pr_debug()`、`dev_dbg()` 输出。RISC-V 板级实操见 [[riscv-驱动开发日志/2026-05-31 — 创建字符设备文件#4. Dynamic Debug 实践（本篇重点）]]。
+**动态调试（dynamic debug）** 让你在 **不重新编译模块** 的前提下，按 **文件 / 函数 / 模块 / 行号** 开关内核里的 `pr_debug()`、`dev_dbg()` 输出。日志级别、环形缓冲区与 `console_loglevel` 等整体机制见 [[内核日志与 printk 机制]]；RISC-V 板级实操见 [[riscv-驱动开发日志/2026-05-31 — 创建字符设备文件#4. Dynamic Debug 实践（本篇重点）]]。
 
 ### 1.5.1 读完能带走什么
 
