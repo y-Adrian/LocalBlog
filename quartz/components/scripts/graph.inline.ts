@@ -279,7 +279,8 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     tweens.get("label")?.stop()
     const tweenGroup = new TweenGroup()
 
-    const defaultScale = 1 / scale
+    // 按当前缩放反向计算，保持标签恒定屏幕字号（与 zoom 处理保持一致）
+    const defaultScale = 1 / (scale * (currentTransform?.k ?? 1))
     const activeScale = defaultScale * 1.1
     for (const n of nodeRenderData) {
       const nodeId = n.simulationData.id
@@ -510,11 +511,15 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
           stage.position.set(transform.x, transform.y)
 
           // zoom adjusts opacity of labels too
-          const scale = transform.k * opacityScale
-          let scaleOpacity = Math.max((scale - 1) / 3.75, 0)
+          const zoomScale = transform.k * opacityScale
+          let scaleOpacity = Math.max((zoomScale - 1) / 3.75, 0)
           const activeNodes = nodeRenderData.filter((n) => n.active).flatMap((n) => n.label)
 
+          // 关键：整个舞台随 zoom 放大会让中文标签也跟着变大、彼此重叠。
+          // 这里给标签反向缩放，使其保持恒定屏幕字号——放大只把节点铺开，文字不变大。
+          const constLabelScale = 1 / (scale * transform.k)
           for (const label of labelsContainer.children) {
+            label.scale.set(constLabelScale)
             if (!activeNodes.includes(label)) {
               label.alpha = scaleOpacity
             }
