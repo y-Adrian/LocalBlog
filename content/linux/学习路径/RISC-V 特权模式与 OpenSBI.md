@@ -112,7 +112,7 @@ sequenceDiagram
 
 1. 触发源：系统调用 `ecall`、页故障、设备中断（经 **PLIC（Platform-Level Interrupt Controller）** 等）。  
 2. 硬件保存现场到 CSR，切换特权级到 S（若已委托）。  
-3. 从 `stvec` 进入 `arch/riscv/kernel/entry.S` 一类入口。  
+3. 从 `stvec` 进入 `arch/riscv/kernel/entry.S` 一类入口（精读：[[linux/学习路径/RISC-V 异常入口与 entry.S 精读]]）。  
 4. 处理完执行 `sret`，回到 `sepc`。
 
 与「ISR 里不能睡」同一套内核约束：你仍在 **原子/中断或内核路径** 上，见 [[linux/内核机制/为什么 ISR 不能睡眠]]、[[linux/学习路径/中断与下半部机制]]。
@@ -210,6 +210,7 @@ Duo S 实践日志里环境与模块加载见 [[linux/驱动与模块/riscv-驱�
 | 主题 | 文档 |
 |------|------|
 | 12 周路线 Phase 2–4 | [[linux/驱动与模块/riscv-驱动开发日志/学习路线]] |
+| 异常入口精读 | [[linux/学习路径/RISC-V 异常入口与 entry.S 精读]] |
 | 板级流水 | [[linux/驱动与模块/riscv-驱动开发日志/index]] |
 | 中断上下半部 | [[linux/学习路径/中断与下半部机制]] |
 | MMU / VA→PA | [[linux/内核机制/如何通过虚拟地址查找物理地址]] |

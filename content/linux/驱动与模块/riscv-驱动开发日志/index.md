@@ -89,6 +89,8 @@ flowchart LR
 | 交叉编译 | [[linux/学习路径/应用交叉编译实战指南]]、[[linux/平台与构建/嵌入式场景下的交叉编译]] |
 | RISC-V 体系（通用） | [[linux/学习路径/嵌入式体系结构入门]] |
 | RISC-V 特权级 / OpenSBI | [[linux/学习路径/RISC-V 特权模式与 OpenSBI]] |
+| RISC-V 异常入口 / entry.S | [[linux/学习路径/RISC-V 异常入口与 entry.S 精读]] |
+| Duo S OV5647 I2C | [[Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架]] |
 | 12 周路线 | [[学习路线]] |
 | 面试复习 | [[Linux 内核驱动面试知识点速览]] |
 

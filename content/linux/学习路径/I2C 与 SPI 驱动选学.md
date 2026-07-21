@@ -170,6 +170,7 @@ static struct i2c_driver tmp123_driver = {
 
 ## 下一阶段衔接
 
+- **板级摄像头实操（Duo S / OV5647）**：[[linux/驱动与模块/Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架]]
 - **Yocto/Buildroot**：把 **内核模块或设备树补丁** 打包进镜像。
 - **内核子系统深入**：**IIO 缓冲与 triggered 采样**（工业采集方向）。
 
