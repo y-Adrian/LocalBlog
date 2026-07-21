@@ -18,7 +18,7 @@ $desktop: "(min-width: #{map.get($breakpoints, desktop)})";
 
 $pageWidth: #{map.get($breakpoints, mobile)};
 $sidePanelWidth: 320px; //380px;
-$leftPanelWidth: 460px; // 左侧「探索」栏更宽，避免长中文标题折成多行
+$leftPanelWidth: 360px; // 左侧「探索」栏宽度（标题已精简，收窄以让正文更宽、布局更均衡）
 $topSpacing: 6rem;
 $boldWeight: 700;
 $semiBoldWeight: 600;
