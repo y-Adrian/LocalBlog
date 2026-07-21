@@ -1,8 +1,6 @@
 // @ts-ignore
 import clipboardScript from "./scripts/clipboard.inline"
 // @ts-ignore
-import revealScrollScript from "./scripts/revealScroll.inline"
-// @ts-ignore
 import pageHeaderScrollScript from "./scripts/pageHeaderScroll.inline"
 // @ts-ignore
 import clickEffectsScript from "./scripts/clickEffects.inline"
@@ -17,7 +15,6 @@ const Body: QuartzComponent = ({ children }: QuartzComponentProps) => {
 
 Body.afterDOMLoaded = concatenateResources(
   clipboardScript,
-  revealScrollScript,
   pageHeaderScrollScript,
   clickEffectsScript,
 )

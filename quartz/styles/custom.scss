@@ -490,22 +490,6 @@ body[data-slug="index"] .center article table tbody tr:hover td {
   transition: background 0.2s ease;
 }
 
-/* 正文滚动显现 */
-@media (prefers-reduced-motion: no-preference) {
-  .center article .q-reveal {
-    opacity: 0;
-    transform: translateY(1.1rem);
-    transition:
-      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .center article .q-reveal-visible {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 a.internal {
   border-radius: 4px;
   transition:
