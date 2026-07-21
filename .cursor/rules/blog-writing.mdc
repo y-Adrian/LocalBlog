@@ -48,8 +48,10 @@ alwaysApply: false
 
 - ✅ 远程过程调用（RPC，Remote Procedure Call）  
 - ✅ 多路复用（I/O multiplexing；实现如 `epoll`）  
+- ✅ 对照用的 **toy Raft**（保留英文，不写「玩具 Raft」）  
 - ❌ 中断（Interrupt）里不能睡眠（Interrupt）——不要重复括注  
-- ❌ 使用 `` `mutex_lock`（mutex lock）`` —— API 名不括英文
+- ❌ 使用 `` `mutex_lock`（mutex lock）`` —— API 名不括英文  
+- ❌ 「玩具 Raft」—— *toy* 的教学义被「玩具」带偏
 
 ## 数学公式（KaTeX）
 
