@@ -1,11 +1,11 @@
 ---
-title: DPDK 教程（二）：mbuf、mempool、ethdev 的数据路径
+title: DPDK 教程（二）：mbuf 与数据路径
 date: 2026/05/15
 tags:
   - DPDK
 ---
 
-# 1 DPDK 教程（二）：`mbuf`、`mempool`、`ethdev` 的数据路径
+# 1 DPDK 教程（二）：`mbuf` 与数据路径
 
 本文对应学习路径第二步：**把“包从网卡进来到被应用消费”的主链路读成一张图**。读完你应能口述：**描述符环 → PMD RX → mbuf 与 mempool → 用户处理 → TX burst → 描述符回收**，并知道关键结构体字段的语义与常见误用。
 

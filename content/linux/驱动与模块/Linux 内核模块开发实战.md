@@ -1,12 +1,12 @@
 ---
-title: Linux 内核模块开发实战：从零到 sysfs
+title: Linux 内核模块开发实战
 date: 2026/05/13
 tags:
   - Linux
   - kernel
 ---
 
-# 1 Linux 内核模块开发实战：从零到 sysfs
+# 1 Linux 内核模块开发实战
 
   
 
