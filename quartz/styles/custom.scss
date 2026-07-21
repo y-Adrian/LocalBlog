@@ -577,6 +577,23 @@ li.section-li > .section .desc h3 a:hover {
   transition: background-color 0.18s ease, color 0.18s ease;
 }
 
+/* 左侧栏目录：整体字号调小 */
+.explorer-content {
+  font-size: 0.8rem;
+
+  & ul li > a {
+    font-size: 0.8rem;
+  }
+}
+
+.folder-container {
+  & div > a,
+  & div > button span {
+    font-size: 0.85rem;
+    line-height: 1.35rem;
+  }
+}
+
 /* 图谱入口按钮 */
 .graph .global-graph-icon {
   border-radius: var(--radius-sm);
