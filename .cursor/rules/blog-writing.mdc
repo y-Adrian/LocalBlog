@@ -29,7 +29,10 @@ alwaysApply: false
 - **推荐**：`中文术语（English）`  
 - **有常用缩写**：`中文（缩写，English 全称）` — 例：中断服务例程（ISR，Interrupt Service Routine）  
 - **API / 符号 / 命令**：保持 `` `epoll_wait` ``、`git log` 原文，**不必**再括英文；在旁用中文解释即可。  
-- **已纯英文且业界通用的**（TCP、HTTP、Git、Makefile）：首次可写 `TCP（Transmission Control Protocol）`，后文直接用缩写；不必每词都括。
+- **已纯英文且业界通用的**（TCP、HTTP、Git、Makefile）：首次可写 `TCP（Transmission Control Protocol）`，后文直接用缩写；不必每词都括。  
+- **不宜硬译的行话 / 固定短语**：不要为了「全中文」生造别扭译名；**直接保留英文**。  
+  - 例：`toy Raft`、`toy project`（勿写成「玩具 Raft」）；`lab` 作实验语境时可保留或写「实验」，勿强行意译成「玩具」。  
+  - 仍可用中文写周围句子，只把该专名留英文：`写一个 toy Raft 做协议级对照`。
 
 ### 范围
 
