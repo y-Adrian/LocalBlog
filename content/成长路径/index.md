@@ -119,6 +119,11 @@ date: 2026/05/16
 - [x] [[linux/内核机制/深入了解上下文切换|上下文切换]]
 - [x] [[linux/内核机制/cgroup 使用指南|cgroup 使用指南]]
 - [x] [[linux/内核机制/存储与IO子系统|存储与 IO 子系统]]
+- [x] [[linux/内核机制/设备树内核 API（OF API）|设备树内核 API（OF API）]]（属性读取、GPIO/Clock/IRQ 获取）
+- [x] [[linux/内核机制/Clock 与 Pinctrl 子系统|Clock 与 Pinctrl 子系统]]（时钟树、consumer API、引脚复用）
+- [x] [[linux/内核机制/GPIO 与 gpiod 子系统|GPIO 与 gpiod 子系统]]（descriptor API、GPIO 中断、调试）
+- [x] [[linux/内核机制/内核定时器与时间管理|内核定时器与时间管理]]（jiffies/HZ、timer_list、hrtimer、delayed_work）
+- [x] [[linux/内核机制/内核链表与常用数据结构|内核链表与常用数据结构]]（list_head、container_of、hlist、rbtree、IDR）
 
 ### 5.2 待补（⬜）
 

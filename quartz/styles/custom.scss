@@ -693,3 +693,20 @@ li.section-li > .section > .meta {
   min-width: 10.5em;
   flex-shrink: 0;
 }
+
+/* --------------------------------------------------------------------------
+   左侧「探索」栏加宽：默认 320px 太窄，长中文标题易折成多行。
+   仅加宽左栏，右栏与正文比例基本不变；并收紧左栏右内边距，给标题更多横向空间。
+   -------------------------------------------------------------------------- */
+/* 左栏宽度在 variables.scss 的 $leftPanelWidth 处调整（网格源头）。
+   这里只做左栏内边距与行距微调，进一步减少折行。 */
+@media all and not ($mobile) {
+  body > #quartz-body .sidebar.left {
+    padding-right: 1rem;
+  }
+
+  /* 探索栏文件项：过长换行时行距更紧凑 */
+  .sidebar.left .explorer li > a {
+    line-height: 1.3;
+  }
+}
