@@ -403,7 +403,7 @@ body[data-slug="index"] .sidebar.left > .flex {
   }
 }
 
-/* 首页金句（正文首段）：按主栏宽度放大，两端对齐铺满一行 */
+/* 首页金句（正文首段）：书法体，字号与字距略收，居中不撑满 */
 body[data-slug="index"] .center article {
   container-type: inline-size;
   container-name: index-article;
@@ -420,10 +420,10 @@ body[data-slug="index"] .center article > p:first-of-type {
   margin-top: 0.35rem;
   font-family: var(--epigraphFont);
   font-weight: 400;
-  letter-spacing: 0;
-  /* 约 4.2cqi ≈ 主栏宽 / 24 字，使单行尽量铺满；窄屏下限防溢出 */
-  font-size: clamp(1rem, 4.2cqi, 2.5rem);
-  line-height: 1.35;
+  /* 略收字距；避免 justify 把字拉开 */
+  letter-spacing: 0.04em;
+  font-size: clamp(0.92rem, 3.15cqi, 1.7rem);
+  line-height: 1.4;
   color: var(--darkgray);
   display: block;
   width: 100%;
@@ -433,9 +433,7 @@ body[data-slug="index"] .center article > p:first-of-type {
   margin-bottom: 1.5rem;
   padding-bottom: 1.1rem;
   white-space: nowrap;
-  text-align: justify;
-  text-align-last: justify;
-  text-justify: inter-character;
+  text-align: center;
   border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 88%, transparent);
 }
 
@@ -445,7 +443,8 @@ body[data-slug="index"] .center article > p:first-of-type {
   }
 
   body[data-slug="index"] .center article > p:first-of-type {
-    font-size: clamp(0.88rem, 3.65cqi, 1.65rem);
+    font-size: clamp(0.8rem, 2.85cqi, 1.25rem);
+    letter-spacing: 0.02em;
   }
 }
 
