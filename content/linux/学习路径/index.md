@@ -25,3 +25,5 @@ description: 分阶段教科书式教程，建议按顺序阅读
 
 - 交叉编译概念：[[linux/平台与构建/嵌入式场景下的交叉编译]]
 - 模块实战：[[linux/驱动与模块/Linux 内核模块开发实战]]
+- RISC-V 特权级 / OpenSBI：[[RISC-V 特权模式与 OpenSBI]]
+- RISC-V 板级日志：[[linux/驱动与模块/riscv-驱动开发日志/index]]

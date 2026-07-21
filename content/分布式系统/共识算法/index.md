@@ -31,7 +31,8 @@ flowchart LR
   P[Paxos 直觉]
   R[Raft 工程]
   E[etcd 与边界]
-  O --> P --> R --> E
+  T[玩具 Raft lab]
+  O --> P --> R --> E --> T
 ```
 
 | # | 文档 | 状态 |
@@ -41,6 +42,7 @@ flowchart LR
 | 2 | [[Raft 原理与工程实现]] | ✅ |
 | 3 | [[共识与复制边界]]（对照 PostgreSQL / WAL） | ✅ |
 | 4 | [[etcd 与 Raft 案例]]（控制面元数据） | ✅ |
+| 5 | [[玩具 Raft 三节点实验]]（`labs/raft-toy/`） | ✅ |
 
 ---
 
@@ -55,12 +57,12 @@ flowchart LR
 
 ---
 
-## 4. 实践与源码（后续）
+## 4. 实践与源码
 
 | 方向 | 说明 |
 |------|------|
 | **etcd / raft** | 读 `etcdserver` 与 `raft` 库日志状态机 → [[etcd 与 Raft 案例]] |
-| **玩具 Raft** | 单进程或 3 节点 lab（待补实践文） |
+| **玩具 Raft** | 单进程 3 节点 lab → [[玩具 Raft 三节点实验]]（`labs/raft-toy/`） |
 | **嵌入式** | 多数场景 **消费** 共识服务，而非自研；选型见概览 §5 |
 
 可视化辅助理解：[Raft 动画](https://raft.github.io)、[The Secret Lives of Data](https://thesecretlivesofdata.com/raft/)。

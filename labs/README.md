@@ -5,6 +5,7 @@
 | 子目录 | 对应博文 |
 |--------|----------|
 | `c-cpp-mastery/` | 博文 `content/编程语言/C/C-C++ 主线实践验收.md` |
+| `raft-toy/` | 博文 `content/分布式系统/共识算法/玩具 Raft 三节点实验.md` |
 
 ## 编译
 
@@ -12,6 +13,7 @@
 
 ```bash
 cd c-cpp-mastery/stage1-len-echo && make && make clean
+cd ../../raft-toy && python3 raft.py
 ```
 
 ## 与 Obsidian 的关系
