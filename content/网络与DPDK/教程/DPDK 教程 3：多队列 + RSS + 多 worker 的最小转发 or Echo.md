@@ -1,11 +1,11 @@
 ---
-title: DPDK 教程（三）：多队列 + RSS + 多 worker 的最小转发 / Echo
+title: DPDK 教程（三）：多队列与多 worker 转发
 date: 2026/05/15
 tags:
   - DPDK
 ---
 
-# 1 DPDK 教程（三）：多队列 + RSS + 多 worker 的最小转发 / Echo
+# 1 DPDK 教程（三）：多队列与多 worker 转发
 
 本文对应学习路径第三步：在理解 **ethdev/mbuf/mempool** 后，做一个**最小可运行**的转发或 echo 原型，刻意使用 **多 RX 队列 + RSS** 把流量分散到 **多个 worker lcore**。目标是建立 **“队列—核—数据面线程模型”** 的设计直觉，而不是追求功能最全的 L3 转发器。
 

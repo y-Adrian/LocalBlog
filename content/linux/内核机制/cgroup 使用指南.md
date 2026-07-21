@@ -1,11 +1,11 @@
 ---
-title: Linux cgroup 完全指南：从原理到实践
+title: Linux cgroup 完全指南
 date: 2026/05/13
 tags:
   - Linux
 ---
 
-# 1 Linux cgroup 完全指南：从原理到实践
+# 1 Linux cgroup 完全指南
 
 在 Linux 系统中，我们经常会遇到这样的问题：
 

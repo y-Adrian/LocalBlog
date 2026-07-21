@@ -3,12 +3,12 @@ tags:
   - 网络编程
   - epoll
   - 并发
-title: IO 多路复用：select、poll、epoll 与并发模型
+title: IO 多路复用：select/poll/epoll
 description: select poll epoll 差异、边缘触发、Reactor 与线程池服务器骨架
 date: 2026/05/21
 ---
 
-# IO 多路复用：select、poll、epoll 与并发模型
+# IO 多路复用：select/poll/epoll
 
 本文是 [[网络与DPDK/网络编程/index|Linux 网络编程]] 第二篇：在 **单线程或少量线程** 内同时监视 **多个 socket** 是否可读/可写，从而支撑 **C10K** 级别的并发连接（仍走内核协议栈）。
 

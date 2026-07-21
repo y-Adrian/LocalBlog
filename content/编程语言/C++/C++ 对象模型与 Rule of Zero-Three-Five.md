@@ -3,12 +3,12 @@ tags:
   - C++
   - RAII
   - 对象模型
-title: C++ 对象模型与 Rule of Zero-Three-Five
+title: C++ 对象模型与 Rule of 0/3/5
 description: 特殊成员、值类别、资源管理与 RAII 深化
 date: 2026/05/21
 ---
 
-# C++ 对象模型与 Rule of Zero-Three-Five
+# C++ 对象模型与 Rule of 0/3/5
 
 [[RAII]] 是原则；本篇讲 **对象在内存里是什么、编译器默认生成什么、何时手写/禁用什么**。与 [[C 内存模型与未定义行为]] 对照：C++ 用 **析构 + 移动** 把资源生命周期绑进类型系统。
 

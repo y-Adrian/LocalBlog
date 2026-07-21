@@ -1,5 +1,5 @@
 ---
-title: PostgreSQL 中的物理复制与逻辑复制：机制、差异与选型
+title: PostgreSQL 物理复制与逻辑复制
 date: 2026/05/15
 tags:
   - 数据库
@@ -8,7 +8,7 @@ tags:
   - 逻辑复制
 ---
 
-# 1 PostgreSQL 中的物理复制与逻辑复制：机制、差异与选型
+# 1 PostgreSQL 物理复制与逻辑复制
 
 本文从 **WAL（预写式日志）** 出发，说明 **物理复制（通常即流复制 / streaming replication）** 与 **逻辑复制（logical replication）** 各自如何产生、传输与应用变更，并标出常见误区与版本相关行为。阅读后你应能回答：**谁在解码 WAL、副本上跑的是什么、能过滤什么、DDL 与冲突怎么处理**。
 
