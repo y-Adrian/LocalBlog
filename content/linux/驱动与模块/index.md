@@ -15,6 +15,7 @@ description: 可加载内核模块与驱动开发实战
 - [[块设备与网络驱动选型指南]]
 - [[Runtime PM 与休眠唤醒入门]]
 - [[Input RTC Watchdog 子系统速览]]
+- [[Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架]] — 接开发日志的 OV5647 bring-up
 
 ## RISC-V 开发日志
 

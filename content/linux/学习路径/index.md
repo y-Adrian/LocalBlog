@@ -25,3 +25,7 @@ description: 分阶段教科书式教程，建议按顺序阅读
 
 - 交叉编译概念：[[linux/平台与构建/嵌入式场景下的交叉编译]]
 - 模块实战：[[linux/驱动与模块/Linux 内核模块开发实战]]
+- RISC-V 特权级 / OpenSBI：[[RISC-V 特权模式与 OpenSBI]]
+- RISC-V 异常入口 / entry.S：[[RISC-V 异常入口与 entry.S 精读]]
+- RISC-V 板级日志：[[linux/驱动与模块/riscv-驱动开发日志/index]]
+- Duo S OV5647 I2C：[[linux/驱动与模块/Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架]]
