@@ -28,7 +28,3 @@ description: Linux 系统编程、嵌入式、网络与 DPDK 学习笔记
 1. [嵌入式 Linux 基础知识](linux/概览/嵌入式Linux基础知识)
 2. [嵌入式 Linux 学习路径](linux/学习路径/index)（分阶段文档）
 3. 按需进入 [内核机制](linux/内核机制/index) 或 [DPDK](网络与DPDK/index)
-
-## 精通 C/C++
-
-系统向 C/C++ 主线（12+ 篇）：[精通 C/C++ 学习路径](编程语言/精通 C-C++ 学习路径)
