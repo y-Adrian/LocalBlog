@@ -83,6 +83,7 @@ date: 2026/05/16
 
 - [x] **MMU / IOMMU**：与 [[linux/内核机制/如何通过虚拟地址查找物理地址]] 串联成案例 → [[linux/内核机制/MMU 与 IOMMU 案例串联]]
 - [x] **TrustZone / 安全启动**：概念 + 与 BSP 责任边界（按项目）→ [[linux/平台与构建/TrustZone 与安全启动概念]]
+- [x] **内核模块签名**：`MODULE_SIG` / FORCE、哈希验签（非 CRC）→ [[linux/平台与构建/内核模块签名机制]]
 - [x] **电源管理**：`runtime_pm`、休眠唤醒（按硬件）→ [[linux/驱动与模块/Runtime PM 与休眠唤醒入门]]
 
 ---

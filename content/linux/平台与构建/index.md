@@ -10,6 +10,7 @@ description: 交叉编译与根文件系统构建相关
 
 - [[嵌入式场景下的交叉编译]] — 工具链、sysroot、CMake/Meson 工程化
 - [[TrustZone 与安全启动概念]]
+- [[内核模块签名机制]] — module signing、与 CRC/Secure Boot 边界
 - [[安全启动与合规实践]]
 
 ## 学习路径衔接
