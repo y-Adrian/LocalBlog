@@ -5,9 +5,8 @@ tags:
   - 调试
 title: C++ ABI 深读
 description: vtable、Itanium ABI、name mangling 与 coredump 对照
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # C++ ABI 深读
 
 **ABI（Application Binary Interface）** 规定 **对象在内存中的布局、符号名、调用约定**。读 [[系统调试/coredump 分析基础]]、混用 [[C 与 C++ 混用]] 时，必须能看懂 **vtable（虚函数表）** 与 **mangled 符号**。
@@ -34,7 +33,7 @@ nm -C app          # demangle
 c++filt _Z3fooi
 ```
 
-**`extern "C"`** 强制 C 链接，见 [[C 编译链接与 ABI]]。
+`extern "C"` 强制 C 链接，见 [[C 编译链接与 ABI]]。
 
 ---
 
@@ -105,7 +104,7 @@ struct Derived : Base {
 | `typeid` | `-frtti` | typeinfo 数据 |
 | `dynamic_cast` | 多态类 + RTTI | 运行期查表 |
 
-嵌入式常 **`-fno-rtti`**，见 [[嵌入式 C++ 编译约束]]。
+嵌入式常 `-fno-rtti`，见 [[嵌入式 C++ 编译约束]]。
 
 ---
 
@@ -154,7 +153,7 @@ gdb ./app core
 
 ## 11. 检查清单
 
-- [ ] 公共导出 API 用 **`extern "C"`** 或 stable C 布局  
+- [ ] 公共导出 API 用 `extern "C"` 或 stable C 布局  
 - [ ] 基类指针释放派生对象 → **虚析构**  
 - [ ] 用 `nm -C` 确认链接的是预期符号  
 - [ ] 嵌入式是否 **关闭 RTTI** 与代码一致  

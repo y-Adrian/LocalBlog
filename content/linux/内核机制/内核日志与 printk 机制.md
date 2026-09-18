@@ -122,7 +122,7 @@ dmesg --clear         # 清空缓冲区（root）
 
 ## 5. 控制台门限：console_loglevel
 
-「哪些级别会打到串口/控制台」由 **`console_loglevel`** 控制。规则：**消息级别数值 < `console_loglevel` 才输出到控制台**。
+「哪些级别会打到串口/控制台」由 `console_loglevel` 控制。规则：**消息级别数值 < `console_loglevel` 才输出到控制台**。
 
 查看与设置（`/proc/sys/kernel/printk` 是四元组）：
 

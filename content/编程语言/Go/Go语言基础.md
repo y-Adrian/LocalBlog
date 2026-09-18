@@ -976,13 +976,15 @@ func sumDurations(results []Result) time.Duration {
 
 **陷阱1：goroutine 闭包捕获循环变量**
 
+Go 1.22 起，`for` 循环变量的捕获语义已经修正为每轮迭代独立变量；但旧版本、旧模块语义、以及手动复用外部变量时仍会踩坑。面试和读老代码时仍要认识这个模式。
+
 ```go
-// ❌ 错误：所有 goroutine 捕获同一个 i
+// Go 1.21 及更早版本的经典坑：所有 goroutine 可能捕获同一个 i
 for i := 0; i < 5; i++ {
-    go func() { fmt.Println(i) }()  // 可能全部打印 5
+    go func() { fmt.Println(i) }()
 }
 
-// ✅ 正确：传参或创建新变量
+// 跨版本都清晰：传参或创建新变量
 for i := 0; i < 5; i++ {
     go func(i int) { fmt.Println(i) }(i)
 }

@@ -434,7 +434,7 @@ std::list<int> lst = {1, 2, 3, 4, 5};
 // 插入删除（在已有迭代器处 O(1)）
 auto it = std::find(lst.begin(), lst.end(), 3);
 lst.insert(it, 99);     // 在3前面插入99
-lst.erase(it);          // 删除3（it 仍有效，指向下一个元素）
+lst.erase(it);
 
 // list 专有操作（vector/deque 没有）
 lst.splice(it, other_lst);           // 把 other_lst 整体接到 it 前

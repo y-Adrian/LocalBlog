@@ -5,9 +5,8 @@ tags:
   - UB
 title: C 内存模型与未定义行为
 description: 栈堆静态区、指针、生命周期与常见 UB 清单
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # C 内存模型与未定义行为
 
 **C 内存模型** 描述对象放在哪、活多久、如何通过指针访问。**UB（Undefined Behavior，未定义行为）** 是违反语言规则后编译器 **不再保证任何结果**——优化可能让 bug 「消失」或变得更怪。精通 C 的第一关：写代码时 **默认假设 UB 等于定时炸弹**。
@@ -62,8 +61,8 @@ flowchart LR
 | 规则 | 说明 |
 |------|------|
 | 只解引用 **有效对象** | 悬空指针、越界 → UB |
-| **类型** 决定步长与别名 | `(char*)` 与 `(int*)` 混用需 `memcpy` / `char*` 字节视图 |
-| **`void*`** | 可存任意对象地址；解引用前须转回正确类型 |
+| **类型** 决定步长与别名 | 需要看对象表示时用 `unsigned char*` / `memcpy`，不要把任意对象强转成不相容类型读写 |
+| `void*` | 可存任意对象地址；解引用前须转回正确类型 |
 | **函数指针** | 回调、驱动 ops；签名必须完全匹配 |
 
 ### 3.1 常见合法 idiom
@@ -92,7 +91,7 @@ sequenceDiagram
   S->>U: 定义 / malloc
   U->>U: 读写
   U->>E: 离开作用域 / free
-  Note over U,E: free 后再用 = UAF（未定义或实现定义）
+  Note over U,E: free 后再用 = UAF（未定义行为）
 ```
 
 | 错误 | 名称 | 后果 |
@@ -140,7 +139,7 @@ int i;
 memcpy(&i, &f, sizeof i);
 ```
 
-驱动里读 **MMIO 寄存器** 常用 `volatile` + 正确宽度类型，见 [[linux/内核机制/DMA 与 Cache 一致性入门]]。
+驱动里读 **MMIO 寄存器** 时，用户态直觉里的普通指针访问并不够；Linux 内核通常走 `ioremap` + `readl` / `writel` 这类访问器，由访问器处理宽度、顺序和架构差异。单纯给指针加 `volatile` 只能限制编译器优化，不能替代内存屏障、字节序和 I/O 映射语义，见 [[linux/内核机制/DMA 与 Cache 一致性入门]]。
 
 ---
 
@@ -195,7 +194,7 @@ memcpy(&i, &f, sizeof i);
 - [ ] 无 `strcpy` 类无边界 API（或已证明安全）  
 - [ ] 有符号运算考虑溢出  
 - [ ] 多线程共享数据有 **锁或 _Atomic**  
-- [ ] MMIO / DMA 用 **volatile + 正确映射**，不靠 C 别名 hack  
+- [ ] MMIO 用内核 I/O 访问器，DMA 用 DMA API；不靠 `volatile`、`virt_to_phys` 或 C 别名 hack  
 
 ---
 

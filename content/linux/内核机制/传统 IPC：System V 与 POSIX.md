@@ -5,9 +5,8 @@ tags:
   - 进程
 title: 传统 IPC：System V 与 POSIX
 description: 管道、消息队列、信号量、共享内存；两套 API 对比与选型
-date: 2026/05/21
+date: 2026/05/26
 ---
-
 # 传统 IPC：System V 与 POSIX
 
 **IPC（Inter-Process Communication，进程间通信）** 让 **独立地址空间** 的进程交换数据、同步。Linux 上除 **Socket** 外，「传统 IPC」主要指 **管道** 以及 **System V IPC**、**POSIX IPC** 两套内核接口。
@@ -114,7 +113,7 @@ if (fork() == 0) {
 
 ## 5. System V IPC
 
-System V IPC 用 **`key_t`（键）** 标识对象，常由 **`ftok(path, id)`** 从路径生成；通过 **`msgget` / `semget` / `shmget`** 创建或打开，用 **`ipcs` / `ipcrm`** 管理。
+System V IPC 用 **`key_t`（键）** 标识对象，常由 `ftok(path, id)` 从路径生成；通过 **`msgget` / `semget` / `shmget`** 创建或打开，用 **`ipcs` / `ipcrm`** 管理。
 
 ```mermaid
 flowchart LR
@@ -191,9 +190,9 @@ POSIX IPC 用 **名字**（类似路径，消息队列挂载在 `/dev/mqueue/`�
 
 | System V | POSIX | 打开 | 删除 |
 |----------|-------|------|------|
-| `msgget` | **`mq_open`** | 名字 + `O_CREAT` | `mq_unlink` |
-| `semget` + `semop` | **`sem_open`** + `sem_wait`/`sem_post` | 名字 | `sem_unlink` |
-| `shmget` + `shmat` | **`shm_open`** + **`mmap`** | 名字 | `shm_unlink` |
+| `msgget` | `mq_open` | 名字 + `O_CREAT` | `mq_unlink` |
+| `semget` + `semop` | `sem_open` + `sem_wait`/`sem_post` | 名字 | `sem_unlink` |
+| `shmget` + `shmat` | `shm_open` + `mmap` | 名字 | `shm_unlink` |
 
 ### 6.1 POSIX 消息队列
 
@@ -280,7 +279,7 @@ ipcs -m -s -q
 ls /dev/shm   # POSIX 共享内存常见挂载
 ```
 
-权限、**RLIMIT**、**`/proc/sys/kernel`** 下部分参数会影响队列长度、shm 上限。
+权限、**RLIMIT**、`/proc/sys/kernel` 下部分参数会影响队列长度、shm 上限。
 
 ---
 

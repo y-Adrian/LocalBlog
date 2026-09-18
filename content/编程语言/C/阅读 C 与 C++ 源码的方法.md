@@ -6,9 +6,8 @@ tags:
   - 调试
 title: 阅读 C 与 C++ 源码的方法
 description: glibc、Linux 内核与 DPDK 代码的阅读顺序、工具与心智模型
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # 阅读 C 与 C++ 源码的方法
 
 「精通」离不开 **读别人的代码**。本篇给出 **glibc / musl、Linux 内核、DPDK** 三类源码怎么切入、用什么工具、如何与 [[C 内存模型与未定义行为]]、[[C++ ABI 深读]] 对照。
@@ -80,7 +79,7 @@ apt source libc6
 |------|------|
 | [elixir.bootlin.com](https://elixir.bootlin.com) | 按版本浏览、交叉引用 |
 | 本地内核树 | 与 **运行中 `uname -r`** 版本尽量一致 |
-| **`scripts/tags`** / cscope | 生成索引 |
+| `scripts/tags` / cscope | 生成索引 |
 
 ### 4.2 示例：`list_head` 双向链表
 

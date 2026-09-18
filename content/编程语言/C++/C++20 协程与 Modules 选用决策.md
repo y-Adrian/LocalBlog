@@ -6,9 +6,8 @@ tags:
   - DPDK
 title: C++20 协程与 Modules 选用决策
 description: 嵌入式 Linux 与 DPDK 数据面是否引入 coroutine/modules
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # C++20 协程与 Modules 选用决策
 
 [[C++20]] 已介绍 **coroutine（协程）** 与 **modules（模块）** 语法；本篇回答：**在嵌入式 Linux 与 DPDK 项目里要不要用、用在哪一层**。结论先行：**控制面可评估，数据面默认不用**。
@@ -91,7 +90,7 @@ stateDiagram-v2
 
 ### 4.1 是什么
 
-用 **`import`** 替代 `#include` 文本展开，**编译期模块边界**。见 [[C++20#4 modules 替代头文件]]。
+用 `import` 替代 `#include` 文本展开，**编译期模块边界**。见 [[C++20#4 modules 替代头文件]]。
 
 ### 4.2 优势
 

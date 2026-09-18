@@ -5,9 +5,8 @@ tags:
   - DPDK
 title: PMR 与自定义分配器
 description: std::pmr、arena 池化与 DPDK mempool 对照
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # PMR 与自定义分配器
 
 热路径上 **频繁 `malloc/free`** 是性能与碎片来源。**C++17 PMR（polymorphic memory resource，多态内存资源）** 提供标准层 **池化 / arena**；**DPDK `rte_mempool`** 是数据面极致方案。本篇对照 **何时用哪一层**。
@@ -17,7 +16,7 @@ date: 2026/05/21
 ## 1. 读完能带走什么
 
 - 理解 **分配器作为策略注入**。  
-- 会用 **`std::pmr::monotonic_buffer_resource`** 做栈旁 arena。  
+- 会用 `std::pmr::monotonic_buffer_resource` 做栈旁 arena。  
 - 能对照 **PMR vs rte_mempool** 的边界与所有权。
 
 ---
@@ -51,7 +50,7 @@ flowchart TB
 |------|------|
 | C++98 | `allocator<T>`、`std::vector` 默认 |
 | C++11 | `allocator_traits` |
-| C++17 | **`std::pmr::*`** 类型擦除 resource |
+| C++17 | `std::pmr::*` 类型擦除 resource |
 
 **Rule of 0** 容器已带 allocator；**换 allocator 不换容器 API**（pmr 版本）。
 
@@ -146,7 +145,7 @@ C++17 起 **优先 PMR**，少写新 template allocator。
 ## 8. 异常与嵌入式
 
 - PMR 耗尽 → `bad_alloc`（若未设 null resource）。  
-- **`-fno-exceptions`** 时需保证 pool 足够大或自定义 resource。见 [[嵌入式 C++ 编译约束]]。
+- `-fno-exceptions` 时需保证 pool 足够大或自定义 resource。见 [[嵌入式 C++ 编译约束]]。
 
 ---
 

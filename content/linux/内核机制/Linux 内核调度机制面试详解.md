@@ -6,9 +6,8 @@ tags:
   - 面试
 title: Linux 内核调度机制面试详解
 description: CFS、实时类、runqueue、负载均衡与高频面试题速答（含命令与踩坑）
-date: 2026/05/21
+date: 2026/05/31
 ---
-
 # Linux 内核调度机制面试详解
 
 面试官问「Linux 调度」时，往往不是在背 **nice 范围**，而是看你能否串起：**进程状态 → 调度类 → CFS 账本 → 多核负载均衡 → 实时与反转 → 工程手段（绑核、cgroup）**。本篇按这条链展开；与 DPDK 绑核对照见 [[进程调度与绑核]]；切换成本见 [[深入了解上下文切换]]。
@@ -47,7 +46,7 @@ flowchart TB
 
 ## 3. 进程状态与 task（面试必背）
 
-Linux 用 **`task_struct`** 表示 **调度实体**；用户态 **线程** 与内核 **task** 基本 **1:1**（NPTL）。
+Linux 用 `task_struct` 表示 **调度实体**；用户态 **线程** 与内核 **task** 基本 **1:1**（NPTL）。
 
 | 状态（示意） | 含义 | 面试一句话 |
 |--------------|------|------------|
@@ -277,7 +276,7 @@ flowchart TB
 | **`sched_setaffinity` / `taskset`** | 限制任务能在哪些 CPU 上跑 |
 | **cgroup cpuset** |  cgroup 级 CPU/内存节点集合 |
 | **`isolcpus=` 启动参数** | 将 CPU 从 **通用 CFS 负载均衡** 中隔离，专供指定任务 |
-| **`nohz_full`** | 空闲核减少 tick 中断（低抖动） |
+| `nohz_full` | 空闲核减少 tick 中断（低抖动） |
 
 实践命令见 [[进程调度与绑核#绑核与隔离]]。
 
@@ -372,7 +371,7 @@ cat /sys/kernel/debug/sched/domains/cpu*/domain*/flags
 | nice 作用？ | 改 **权重**，不是固定时间片 |
 | 进程和线程调度区别？ | Linux **调度 task**；线程是共享地址空间的 task |
 | 用户态如何影响调度？ | `nice`/`renice`、`chrt`、`sched_setaffinity`、`sched_yield` |
-| 上下文切换谁做？ | `schedule()` 选 next → **`context_switch`** 保存/恢复寄存器与必要时换地址空间 |
+| 上下文切换谁做？ | `schedule()` 选 next → `context_switch` 保存/恢复寄存器与必要时换地址空间 |
 
 ### 14.2 对比类
 

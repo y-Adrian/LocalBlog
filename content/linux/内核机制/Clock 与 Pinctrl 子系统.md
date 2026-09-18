@@ -5,9 +5,8 @@ tags:
   - 驱动
 title: Clock 与 Pinctrl 子系统
 description: 时钟树与 CCF、clk 消费者 API、Pinctrl 引脚复用、与设备树的配合
-date: 2026/06/06
+date: 2026/07/01
 ---
-
 # Clock 与 Pinctrl 子系统
 
 几乎每个外设驱动都会用到这两个子系统：**Clock（时钟）** 控制外设的工作频率，**Pinctrl（引脚控制）** 配置引脚的复用功能。两者都通过设备树描述、通过 API 使用，是驱动开发的基础设施。

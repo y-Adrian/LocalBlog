@@ -6,9 +6,8 @@ tags:
   - 实践
 title: C/C++ 主线实践验收
 description: 四阶段自测：长度前缀 echo、readelf、extern C、Rule-of-5 fd、ASan、perf
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # C/C++ 主线实践验收
 
 [[精通 C-C++ 学习路径#4. 实践验收（自测）]] 里列了四组 **小练习**；本篇给出 **可编译、可验收** 的最小实现与命令。每阶段 **做一遍即可**，不必求全。
@@ -22,7 +21,7 @@ date: 2026/05/21
 ## 1. 读完能带走什么
 
 - 阶段 1：能写 **读满/写满** 循环 + **长度前缀** echo，并用 `readelf` 读交叉编译 ELF。  
-- 阶段 2：能用 **`extern "C"`** 包 C API；能对照 MISRA 子集 **Review 自己代码**。  
+- 阶段 2：能用 `extern "C"` 包 C API；能对照 MISRA 子集 **Review 自己代码**。  
 - 阶段 3：能实现 **Rule-of-5 的 fd RAII**；会用 `nm -C` 看 **虚表符号**。  
 - 阶段 4：能 **ASan + GoogleTest** 跑通；会用 `perf record` 出 **火焰图**。
 
