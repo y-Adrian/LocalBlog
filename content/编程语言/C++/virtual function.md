@@ -1,3 +1,7 @@
+---
+title: Questions at beginning
+date: 2026/09/18
+---
 # 1 Questions at beginning
 
 + How is virtual function implemented?

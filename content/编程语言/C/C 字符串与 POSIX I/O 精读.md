@@ -5,9 +5,8 @@ tags:
   - I/O
 title: C 字符串与 POSIX I/O 精读
 description: read/write、mmap、fcntl、缓冲区安全与长度前缀协议
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # C 字符串与 POSIX I/O 精读
 
 用户态 C 程序与内核的常规交界是 **文件描述符（file descriptor，fd）** 上的 **POSIX I/O**。本篇把 **字符串安全** 与 **`read`/`write`/`mmap`/`fcntl`** 串成一条线，并对接 [[网络与DPDK/网络编程/TCP 连接、粘包与常见陷阱]] 里的 **长度前缀 / 粘包** 问题。

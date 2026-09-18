@@ -5,9 +5,8 @@ tags:
   - 互操作
 title: C 与 C++ 混用
 description: extern C、链接符号、内存所有权与 DPDK/内核边界
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # C 与 C++ 混用
 
 生产代码常见 **C 内核/DPDK + C++ 业务封装**。混用失败点集中在：**链接名不一致、ABI 不匹配、谁 malloc 谁 free、异常穿过 C 边界**。本篇给出可执行的边界规则。
@@ -16,7 +15,7 @@ date: 2026/05/21
 
 ## 1. 读完能带走什么
 
-- 会写 **`extern "C"`** 头文件与回调。  
+- 会写 `extern "C"` 头文件与回调。  
 - 能说明 **C++ 异常 / RTTI / mangling** 对 C 调用方的影响。  
 - 能在 **DPDK / 驱动** 项目里划清 C API 层与 C++ 层。
 
@@ -33,7 +32,7 @@ flowchart LR
   M -.->|链接失败| S
 ```
 
-**`extern "C"`** 告诉 C++ 编译器：该声明用 **C 链接**，符号与 C 一致。
+`extern "C"` 告诉 C++ 编译器：该声明用 **C 链接**，符号与 C 一致。
 
 ```cpp
 #ifdef __cplusplus
@@ -98,7 +97,7 @@ extern "C" void process_packet(struct rte_mbuf *m)
 }
 ```
 
-嵌入式常 **`-fno-exceptions`**，见 [[编程语言/C++/嵌入式 C++ 编译约束]]。
+嵌入式常 `-fno-exceptions`，见 [[编程语言/C++/嵌入式 C++ 编译约束]]。
 
 ---
 

@@ -1,3 +1,7 @@
+---
+title: Pointer and reference
+date: 2026/09/18
+---
 *A **pointer** is a variable that stores the memory address of another object, while a **reference** is a alias(an alternative name) for an exist object*.
 
 | Feature           | Pointer(T*)                                       | Reference(T&)                                                             |

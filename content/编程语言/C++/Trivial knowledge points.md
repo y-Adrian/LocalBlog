@@ -1,3 +1,7 @@
+---
+title: Trivial knowledge points
+date: 2026/09/18
+---
 ## 0.1 private constructor
 A private constructor prevents code without private access from directly constructing the class. Objects can still be created by member functions or friends, so private constructors are commonly used for factory patterns, singletons, and controlled object creation.
 	构造函数私有能够防止没有私有函数访问权限的代码直接构造对象。对象依然可以通过成员函数或友元函数创建，因此私有构造函数通常用于工厂模式，单例以及控制对象创建。

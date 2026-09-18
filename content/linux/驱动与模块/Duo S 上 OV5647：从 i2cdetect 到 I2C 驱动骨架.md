@@ -12,7 +12,7 @@ date: 2026/07/21
 
 # Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架
 
-[[linux/驱动与模块/riscv-驱动开发日志/2026-06-05|2026-06-05 日志]] 已在 Milk-V Duo S 的 **i2c-2** 上扫到地址 **`0x36`**，并用 `i2ctransfer` 读出 Chip ID **`0x5647`**——这是 **OV5647** 的典型指纹。本文把流水账收成 **可复现的 bring-up + 最小 `i2c_driver`**，对应学习路线 **项目 B（I²C 设备驱动）** 的前半段：先证明「总线通、ID 对、probe 能绑」，再谈 MIPI / V4L2 出图。
+[[linux/驱动与模块/riscv-驱动开发日志/2026-06-05|2026-06-05 日志]] 已在 Milk-V Duo S 的 **i2c-2** 上扫到地址 `0x36`，并用 `i2ctransfer` 读出 Chip ID `0x5647`——这是 **OV5647** 的典型指纹。本文把流水账收成 **可复现的 bring-up + 最小 `i2c_driver`**，对应学习路线 **项目 B（I²C 设备驱动）** 的前半段：先证明「总线通、ID 对、probe 能绑」，再谈 MIPI / V4L2 出图。
 
 总线模型总览仍见 [[linux/学习路径/I2C 与 SPI 驱动选学]]；特权级背景见 [[linux/学习路径/RISC-V 特权模式与 OpenSBI]]。
 
@@ -57,8 +57,8 @@ flowchart TB
 
 | 概念 | 本场景落点 |
 |------|------------|
-| **I2C 从地址** | OV5647 常见 **`0x36`**（7-bit）；`i2cdetect` 表上显示的就是它 |
-| **16-bit 寄存器地址** | Chip ID 在 **`0x300A`（高）**、**`0x300B`（低）**；合起来期望 **`0x5647`** |
+| **I2C 从地址** | OV5647 常见 `0x36`（7-bit）；`i2cdetect` 表上显示的就是它 |
+| **16-bit 寄存器地址** | Chip ID 在 **`0x300A`（高）**、**`0x300B`（低）**；合起来期望 `0x5647` |
 | **Adapter vs Client** | Duo 的 DesignWare adapter 已在 BSP；你写的是 **client 驱动** |
 | **占用（UU）** | 内核驱动已 bind 该地址时，`i2cdetect` 常显示 `UU`，用户态再开 `/dev/i2c-N` 可能失败 |
 | **Sensor vs Pipeline** | I2C 只配 sensor；像素走 **MIPI / VI**，厂商侧常见 `cvi_mipi_rx` + `sample_vio` |
@@ -67,7 +67,7 @@ flowchart TB
 
 ## 4. 用户态确认（先于写驱动）
 
-环境以日志为准：内核 **`5.10.4-tag-`**、板卡 **milkv-duo**、总线 **`i2c-2`**。
+环境以日志为准：内核 `5.10.4-tag-`、板卡 **milkv-duo**、总线 `i2c-2`。
 
 ### 4.1 扫总线
 
@@ -148,7 +148,7 @@ sequenceDiagram
 
 - `compatible` 必须与驱动 `of_match_table` **字符串一致**。  
 - `reg` 是 **7-bit 从地址**。  
-- 若 BSP 已有 `sensor@36` / `snsr` 节点，先 **`status = "disabled"`** 再启用你的节点，避免双 bind。
+- 若 BSP 已有 `sensor@36` / `snsr` 节点，先 `status = "disabled"` 再启用你的节点，避免双 bind。
 
 编译 DTB、替换、重启后的排障习惯见 [[linux/学习路径/设备树实战指南]]、[[linux/学习路径/启动排障手册]]。
 

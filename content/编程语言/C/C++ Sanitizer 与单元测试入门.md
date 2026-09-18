@@ -6,9 +6,8 @@ tags:
   - Sanitizer
 title: C/C++ Sanitizer 与单元测试入门
 description: ASan/UBSan/TSan 与 GoogleTest 最小闭环
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # C/C++ Sanitizer 与单元测试入门
 
 **Sanitizer** 在编译期插桩，运行期抓 **内存与并发错误**；**单元测试** 把 [[C 内存模型与未定义行为]] 里的规则变成 **可回归的断言**。二者合起来，是从「能编译」到 **「写对」** 的最低工程闭环。

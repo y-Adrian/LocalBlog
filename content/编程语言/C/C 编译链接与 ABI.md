@@ -5,9 +5,8 @@ tags:
   - ABI
 title: C 编译链接与 ABI
 description: 翻译单元、符号、静态/动态链接与交叉编译 ABI 核对
-date: 2026/05/21
+date: 2026/05/28
 ---
-
 # C 编译链接与 ABI
 
 **编译（compile）** 把 `.c` 变成 **目标文件（object file）**；**链接（link）** 把多个目标与库拼成可执行文件或 `.so`。**ABI（Application Binary Interface，应用二进制接口）** 规定 **调用约定、类型大小、符号命名**，跨模块必须一致。本篇把 [[linux/学习路径/应用交叉编译实战指南]] 里的碎片收成 **C 程序员视角** 的完整图。
@@ -122,7 +121,7 @@ nm -C a.out | head                   # 符号表
 |------|------|
 | **头文件** | 声明、内联短函数、`static inline` |
 | **源文件** | 定义、全局对象唯一定义 |
-| **`#pragma once`** | 非标准但广泛支持 |
+| `#pragma once` | 非标准但广泛支持 |
 
 避免在头文件定义 **非 static 全局变量**（除非 `inline` C17 变量）。
 

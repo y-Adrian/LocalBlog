@@ -5,9 +5,8 @@ tags:
   - GPIO
 title: GPIO 与 gpiod 子系统
 description: gpiod descriptor API、设备树 GPIO 属性、GPIO 中断、调试工具与常见陷阱
-date: 2026/06/06
+date: 2026/07/01
 ---
-
 # GPIO 与 gpiod 子系统
 
 GPIO 是嵌入式驱动里使用最频繁的资源之一——复位引脚、片选、中断信号、电源使能都离不开它。Linux 内核经历了从旧整数 API 到现代 **descriptor（描述符）API** 的演进，新代码应该使用描述符 API。

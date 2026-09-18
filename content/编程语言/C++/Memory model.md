@@ -1,3 +1,7 @@
+---
+title: Questions at first
+date: 2026/09/18
+---
 # 1 Questions at first
 
 + **For shared memory, if different processes mapped one shared memory, and they manipulate one data with atomic operation, will the atomic operation work correctly to solve the problem of data races?** 

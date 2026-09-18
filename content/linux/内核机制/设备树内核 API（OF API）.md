@@ -5,9 +5,8 @@ tags:
   - 设备树
 title: 设备树内核 API（OF API）
 description: 驱动侧读取设备树属性的完整 API——of_property_read_*、GPIO/IRQ/Clock 获取、节点遍历与 devm 封装
-date: 2026/06/06
+date: 2026/07/01
 ---
-
 # 设备树内核 API（OF API）
 
 [[linux/学习路径/设备树实战指南]] 讲了**怎么写 DTS**；本文讲**驱动怎么读**——即内核 `of_*` 函数族的完整用法。掌握这套 API 后，你能在 `probe` 函数里从设备树取出任何资源。
