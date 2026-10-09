@@ -37,8 +37,6 @@ void add()
 
 如果只是 `count++`，优先考虑 `std::atomic<int>`。
 
-如果要同时修改 `balance` 和 `total`，并且要求它们作为一个整体保持一致，通常应该用 `std::mutex`。
-
 ## 0.3 `atomic` 只能用于基础类型吗
 
 不是。
