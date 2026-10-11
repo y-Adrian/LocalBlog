@@ -1,5 +1,5 @@
 ---
-title: 文章
+title: Articles
 hideTitle: true
 description: 技术文章与工程实践总结
 cssclasses:

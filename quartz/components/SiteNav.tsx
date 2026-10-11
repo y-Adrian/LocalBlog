@@ -8,7 +8,7 @@ const links: Array<{ label: string; slug: FullSlug }> = [
   { label: "Hire Me", slug: "hire-me/index" as FullSlug },
   { label: "Articles", slug: "articles/index" as FullSlug },
   { label: "Knowledge", slug: "knowledge/index" as FullSlug },
-  { label: "SupportMe", slug: "support-the-blog/index" as FullSlug },
+  { label: "Support Me", slug: "support-the-blog/index" as FullSlug },
 ]
 
 const SiteNav: QuartzComponent = ({ fileData }: QuartzComponentProps) => {

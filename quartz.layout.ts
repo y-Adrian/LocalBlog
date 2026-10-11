@@ -20,6 +20,13 @@ export const sharedPageComponents: SharedLayout = {
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
+      component: Component.Breadcrumbs({ showCurrentPage: false }),
+      condition: (page) =>
+        isWrittenArticle(page.fileData) ||
+        page.fileData.frontmatter?.contentType === "knowledge" ||
+        page.fileData.slug?.startsWith("knowledge"),
+    }),
+    Component.ConditionalRender({
       component: Component.ArticleTitle(),
       condition: (page) =>
         isWrittenArticle(page.fileData) && page.fileData.frontmatter?.hideTitle !== true,
@@ -50,6 +57,12 @@ export const defaultContentPageLayout: PageLayout = {
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
   beforeBody: [
+    Component.ConditionalRender({
+      component: Component.Breadcrumbs({ showCurrentPage: false }),
+      condition: (page) =>
+        page.fileData.frontmatter?.contentType === "knowledge" ||
+        page.fileData.slug?.startsWith("knowledge"),
+    }),
     Component.ConditionalRender({
       component: Component.ArticleTitle(),
       condition: (page) => page.fileData.frontmatter?.hideTitle !== true,

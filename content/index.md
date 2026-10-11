@@ -14,14 +14,6 @@ cssclasses:
 
 Stay curious. Keep building.
 
-## Articles
+# Blogs
 
-分享技术文章与工程实践总结。新的文章会集中收录在独立栏目中，持续维护的概念、专题与学习资料归入 Knowledge。
-
-[Browse articles →](articles/index)
-
-## Knowledge Base
-
-按领域、专题和概念逐层整理的知识资产，覆盖 Linux 内核、嵌入式开发、共享内存 IPC 与 RISC-V。
-
-[Explore the knowledge base →](knowledge/index)
+<div class="recent-articles-slot"></div>

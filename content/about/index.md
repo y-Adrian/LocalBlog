@@ -8,9 +8,9 @@ cssclasses:
 ---
 ## About
 
-My name is Adrian, and this blog is my professional blog. Here I write about programming, software development as I learn.
+My name is Adrian, and this is my professional blog. I write about programming, software development here while learning.
 
-I live in Hangzhou, ZheJiang, China. I Enjoy hiking, traveling and cooking.
+I live in Hangzhou, Zhejiang, China. I enjoy hiking, traveling and cooking.
 
 ---
 
@@ -22,8 +22,8 @@ I live in Hangzhou, ZheJiang, China. I Enjoy hiking, traveling and cooking.
 
 ## Professional Experience
 
-+ 2021.7 - 2022.6 | [VastData](https://www.vastdata.com.cn/), Database Kernel Engineer
-+ 2023.4 - 2026.3 | [FESCO Adecco](https://www.fescoadecco.com/), Software Engineer
++ 2021.7 - 2022.6 | VastData, Database Kernel Engineer
++ 2023.4 - 2026.3 | FESCO Adecco, Software Engineer
 
 ---
 

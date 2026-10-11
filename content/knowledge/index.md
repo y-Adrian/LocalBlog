@@ -1,5 +1,5 @@
 ---
-title: 知识库
+title: Knowledge
 hideTitle: true
 description: Adrian 的技术笔记、专题资料与学习路径
 cssclasses:
