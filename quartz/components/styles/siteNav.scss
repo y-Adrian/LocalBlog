@@ -1,0 +1,38 @@
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2.25rem);
+  padding: 0.9rem 0 1.25rem;
+  margin: 0 0 1.5rem;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+.site-nav-link {
+  color: var(--darkgray);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.site-nav-link:hover,
+.site-nav-link.active {
+  color: var(--secondary);
+}
+
+.site-nav-link.active {
+  font-weight: 700;
+}
+
+@media all and (max-width: 600px) {
+  .site-nav {
+    justify-content: flex-start;
+    gap: 1.2rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+
+  .site-nav-link {
+    white-space: nowrap;
+  }
+}

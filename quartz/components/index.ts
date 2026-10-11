@@ -26,6 +26,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import SiteTagline from "./SiteTagline"
 import Contributions from "./Contributions"
+import SiteNav from "./SiteNav"
 
 export {
   ArticleTitle,
@@ -56,4 +57,5 @@ export {
   ConditionalRender,
   SiteTagline,
   Contributions,
+  SiteNav,
 }

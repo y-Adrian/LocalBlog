@@ -407,13 +407,7 @@ body[data-slug="index"] .sidebar.left > .flex {
 body[data-slug="index"] .center article {
   container-type: inline-size;
   container-name: index-article;
-  padding-top: 2.75rem;
-}
-
-@media all and ($desktop) {
-  body[data-slug="index"] .center article {
-    padding-top: 3.25rem;
-  }
+  padding-top: 0;
 }
 
 body[data-slug="index"] .center article > p:first-of-type {
@@ -692,4 +686,134 @@ li.section-li > .section > .meta {
   .sidebar.left .explorer li > a {
     line-height: 1.3;
   }
+}
+
+
+/* 个人主页：弱化知识库文档感，突出个人介绍与栏目入口 */
+body[data-slug="index"] .home-page h1:first-of-type {
+  margin-top: 0.5rem;
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+body[data-slug="index"] .home-page > p:first-of-type {
+  color: var(--secondary);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+body[data-slug="index"] .home-page > p:nth-of-type(2) {
+  max-width: 42rem;
+  font-size: 1.08rem;
+  line-height: 1.9;
+}
+
+body[data-slug="index"] .home-page a {
+  text-underline-offset: 0.2em;
+}
+
+
+/* Landing pages use a full-width editorial layout; note tools stay on detail pages. */
+body[data-slug="index"] #quartz-body,
+body[data-slug="articles/index"] #quartz-body,
+body[data-slug="knowledge-base/index"] #quartz-body,
+body[data-slug="about/index"] #quartz-body {
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-areas: none !important;
+  grid-auto-flow: row;
+}
+
+body[data-slug="index"] #quartz-body > .sidebar,
+body[data-slug="articles/index"] #quartz-body > .sidebar,
+body[data-slug="knowledge-base/index"] #quartz-body > .sidebar,
+body[data-slug="about/index"] #quartz-body > .sidebar {
+  display: none !important;
+}
+
+body[data-slug="index"] #quartz-body > .center,
+body[data-slug="articles/index"] #quartz-body > .center,
+body[data-slug="knowledge-base/index"] #quartz-body > .center,
+body[data-slug="about/index"] #quartz-body > .center,
+body[data-slug="index"] #quartz-body > footer,
+body[data-slug="articles/index"] #quartz-body > footer,
+body[data-slug="knowledge-base/index"] #quartz-body > footer,
+body[data-slug="about/index"] #quartz-body > footer {
+  grid-column: 1 / -1;
+}
+
+.articles-landing .page-listing,
+.knowledge-landing .page-listing,
+.about-landing .page-listing {
+  margin-top: 1.5rem;
+}
+
+.knowledge-landing > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.knowledge-landing > ul > li {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--lightgray);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--light) 84%, transparent);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.knowledge-landing > ul > li:hover {
+  border-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.about-landing > ul {
+  padding-left: 1.25rem;
+}
+
+/* Keep the public-facing pages at a readable, centered measure. */
+body[data-slug="index"] #quartz-body > .center,
+body[data-slug="articles/index"] #quartz-body > .center,
+body[data-slug="knowledge-base/index"] #quartz-body > .center,
+body[data-slug="about/index"] #quartz-body > .center,
+body[data-slug="index"] #quartz-body > footer,
+body[data-slug="articles/index"] #quartz-body > footer,
+body[data-slug="knowledge-base/index"] #quartz-body > footer,
+body[data-slug="about/index"] #quartz-body > footer {
+  box-sizing: border-box;
+  width: min(100%, 46rem);
+  min-width: 0;
+  max-width: 46rem;
+  margin-inline: auto;
+  justify-self: center;
+}
+
+/* Center the copyright and social links together inside that same content width. */
+body[data-slug="index"] #quartz-body > footer,
+body[data-slug="articles/index"] #quartz-body > footer,
+body[data-slug="knowledge-base/index"] #quartz-body > footer,
+body[data-slug="about/index"] #quartz-body > footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+/* Remove inherited header and hero spacing that left a large gap on the homepage. */
+body[data-slug="index"] .page-header > header {
+  margin: 0;
+}
+
+body[data-slug="index"] .page-header .site-nav {
+  margin-bottom: 0;
+  padding-top: 0.35rem;
+  padding-bottom: 0.55rem;
+}
+
+body[data-slug="index"] .center article {
+  padding-top: 0;
 }
