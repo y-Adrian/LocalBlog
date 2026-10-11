@@ -202,6 +202,14 @@ async function setupSearch(searchElement: Element, currentSlug: FullSlug, data: 
   const searchLayout = searchElement.querySelector(".search-layout") as HTMLElement
   if (!searchLayout) return
 
+  // Keep the fixed search overlay outside the transformed/sticky navigation header so it is
+  // positioned against the viewport rather than the header's containing block.
+  const searchPortal = document.createElement("div")
+  searchPortal.className = "search search-modal-portal"
+  searchPortal.appendChild(container)
+  document.body.appendChild(searchPortal)
+  window.addCleanup(() => searchPortal.remove())
+
   const idDataMap = Object.keys(data) as FullSlug[]
   const appendLayout = (el: HTMLElement) => {
     searchLayout.appendChild(el)

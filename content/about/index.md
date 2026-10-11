@@ -1,5 +1,7 @@
 ---
 title: About Adrian
+hideTitle: true
+hideReadingTime: true
 description: Adrian 的技术兴趣、写作方向与联系方式
 cssclasses:
   - about-landing
@@ -18,6 +20,4 @@ I live in Hangzhou, ZheJiang, China. I Enjoy hiking, traveling.
 
 ## Contact me
 
-- [GitHub](https://github.com/y-Adrian)
-- [Email](mailto:storyvs7263@gmail.com)
-- [x](https://x.com/story95080)
+[GitHub	](https://github.com/y-Adrian)[Email	](mailto:storyvs7263@gmail.com)[x](https://x.com/story95080)

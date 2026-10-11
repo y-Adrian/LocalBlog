@@ -267,18 +267,22 @@ export function renderPage(
           <Body {...componentData}>
             {LeftComponent}
             <div class="center">
-              <div class="page-header">
+              <div class="site-header">
                 <Header {...componentData}>
                   {header.map((HeaderComponent) => (
                     <HeaderComponent {...componentData} />
                   ))}
                 </Header>
-                <div class="popover-hint">
-                  {beforeBody.map((BodyComponent) => (
-                    <BodyComponent {...componentData} />
-                  ))}
-                </div>
               </div>
+              {componentData.fileData.frontmatter?.hideTitle === true ? null : (
+                <div class="page-header">
+                  <div class="popover-hint">
+                    {beforeBody.map((BodyComponent) => (
+                      <BodyComponent {...componentData} />
+                    ))}
+                  </div>
+                </div>
+              )}
               <Content {...componentData} />
               <hr />
               <div class="page-footer">

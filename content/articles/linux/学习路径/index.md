@@ -1,0 +1,34 @@
+---
+date: 2026/05/15
+title: 嵌入式 Linux 学习路径
+description: 分阶段教科书式教程，建议按顺序阅读
+aliases:
+  - "linux/学习路径/index"
+contentType: knowledge
+---
+
+# 1 嵌入式 Linux 学习路径
+
+对应《嵌入式 Linux 基础知识》文末路径；**第 1 阶段**在 [[工程基础/Shell Makefile Git 命令行基础|工程基础]] 目录。
+
+## 1.1 阶段列表
+
+| 阶段 | 文档 |
+|------|------|
+| 2 | [[嵌入式体系结构入门]] |
+| 3 | [[应用交叉编译实战指南]] |
+| 4 | [[Buildroot 与厂商 BSP 入门]] |
+| 5 | [[设备树实战指南]] |
+| 6 | [[字符设备驱动入门]] |
+| 7 | [[I2C 与 SPI 驱动选学]]（按硬件选学） |
+| 8 | [[Yocto 与内核子系统深入]] |
+| 启动 | [[U-Boot 实操指南]] · [[启动排障手册]] · [[中断与下半部机制]] · [[最小可启动工程指南]] · [[新板 Bring-up 检查清单]] |
+
+## 1.2 补充长文
+
+- 交叉编译概念：[[linux/平台与构建/嵌入式场景下的交叉编译]]
+- 模块实战：[[linux/驱动与模块/Linux 内核模块开发实战]]
+- RISC-V 特权级 / OpenSBI：[[RISC-V 特权模式与 OpenSBI]]
+- RISC-V 异常入口 / entry.S：[[RISC-V 异常入口与 entry.S 精读]]
+- RISC-V 板级日志：[[linux/驱动与模块/riscv-驱动开发日志/index]]
+- Duo S OV5647 I2C：[[linux/驱动与模块/Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架]]

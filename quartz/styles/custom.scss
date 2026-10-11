@@ -42,6 +42,27 @@ body {
 body > .page {
   position: relative;
   z-index: 1;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Give short pages enough height for their footer to sit at the viewport bottom. */
+body > .page > #quartz-body {
+  min-height: 100vh;
+  min-height: 100svh;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+@media all and ($tablet) {
+  body > .page > #quartz-body {
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+  }
+}
+
+@media all and ($mobile) {
+  body > .page > #quartz-body {
+    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  }
 }
 
 /* 页面底衬：暖琥珀 + 青绿两团柔光极缓慢漂移，不抢正文 */
@@ -149,11 +170,13 @@ button:focus:not(:focus-visible) {
   outline: none;
 }
 
-/* 顶栏：轻微玻璃 + 粘顶（内页） */
-.page-header {
-  z-index: 20;
-  margin: 0 -1.5rem 1.75rem;
-  padding: 0.85rem 1.5rem 1.15rem;
+/* 独立固定的站点导航栏 */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  margin: 0 -1.5rem 0.65rem;
+  padding: 0.4rem 1.5rem 0.55rem;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: color-mix(in srgb, var(--light) 82%, transparent);
   backdrop-filter: blur(14px);
@@ -164,6 +187,25 @@ button:focus:not(:focus-visible) {
     box-shadow 0.35s var(--ease-out),
     background 0.35s var(--ease-out),
     border-color 0.25s ease;
+}
+
+/* 页面标题与元信息保留原有卡片样式，但随正文正常滚动 */
+.page-header {
+  z-index: 20;
+  box-sizing: border-box;
+  margin: 0 -1.5rem 0.75rem;
+  padding: 0.85rem 1.5rem 1.15rem;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: color-mix(in srgb, var(--light) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 90%, transparent);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* Empty beforeBody wrappers should not reserve the page-header min-height. */
+.page-header:has(> .popover-hint:empty) {
+  display: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -184,9 +226,7 @@ button:focus:not(:focus-visible) {
 }
 
 body:not([data-slug="index"]) #quartz-body .page-header {
-  position: sticky;
-  top: 0.65rem;
-  margin-top: 0.65rem;
+  margin-top: 0;
   margin-bottom: 0.75rem;
   padding: 0.4rem 1.5rem 0.55rem;
 }
@@ -199,6 +239,7 @@ body:not([data-slug="index"]) .page-header {
   transition:
     opacity 0.42s var(--ease-out),
     transform 0.42s var(--ease-out),
+    min-height 0.5s var(--ease-out),
     max-height 0.5s var(--ease-out),
     margin-top 0.5s var(--ease-out),
     margin-bottom 0.5s var(--ease-out),
@@ -214,6 +255,7 @@ body:not([data-slug="index"]) .page-header {
 body:not([data-slug="index"]) .page-header.page-header--scroll-hidden {
   opacity: 0;
   transform: translateY(-0.4rem);
+  min-height: 0 !important;
   max-height: 0;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -261,6 +303,11 @@ body:not([data-slug="index"]) .page-header .content-meta {
 }
 
 :root[saved-theme="dark"] .page-header {
+  background: color-mix(in srgb, var(--light) 75%, transparent);
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.35);
+}
+
+:root[saved-theme="dark"] .site-header {
   background: color-mix(in srgb, var(--light) 75%, transparent);
   box-shadow: 0 4px 28px rgba(0, 0, 0, 0.35);
 }
@@ -328,7 +375,7 @@ button.readermode:active {
 body[data-slug="index"] #quartz-body .page-header {
   position: relative;
   top: auto;
-  margin: 0 -1.5rem 0.35rem;
+  margin: 0 -1.5rem 0.75rem;
   padding: 0.25rem 1.5rem 0;
   background: transparent;
   backdrop-filter: none;
@@ -376,7 +423,7 @@ body[data-slug="index"] .sidebar.left > .flex {
   }
 
   body[data-slug="index"] #quartz-body .page-header {
-    margin: 0;
+    margin: 0 0 0.75rem;
     padding: 1rem 0 0.5rem;
   }
 
@@ -718,27 +765,34 @@ body[data-slug="index"] .home-page a {
 body[data-slug="index"] #quartz-body,
 body[data-slug="articles/index"] #quartz-body,
 body[data-slug="knowledge-base/index"] #quartz-body,
-body[data-slug="about/index"] #quartz-body {
-  grid-template-columns: minmax(0, 1fr) !important;
-  grid-template-areas: none !important;
-  grid-auto-flow: row;
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body,
+body[data-slug="hire-me/index"] #quartz-body,
+body[data-slug="support-the-blog/index"] #quartz-body {
+  display: flex;
+  flex-direction: column;
 }
 
 body[data-slug="index"] #quartz-body > .sidebar,
 body[data-slug="articles/index"] #quartz-body > .sidebar,
 body[data-slug="knowledge-base/index"] #quartz-body > .sidebar,
-body[data-slug="about/index"] #quartz-body > .sidebar {
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .sidebar,
+body[data-slug="hire-me/index"] #quartz-body > .sidebar,
+body[data-slug="support-the-blog/index"] #quartz-body > .sidebar {
   display: none !important;
 }
 
 body[data-slug="index"] #quartz-body > .center,
 body[data-slug="articles/index"] #quartz-body > .center,
 body[data-slug="knowledge-base/index"] #quartz-body > .center,
-body[data-slug="about/index"] #quartz-body > .center,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .center,
+body[data-slug="hire-me/index"] #quartz-body > .center,
+body[data-slug="support-the-blog/index"] #quartz-body > .center,
 body[data-slug="index"] #quartz-body > footer,
 body[data-slug="articles/index"] #quartz-body > footer,
 body[data-slug="knowledge-base/index"] #quartz-body > footer,
-body[data-slug="about/index"] #quartz-body > footer {
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > footer,
+body[data-slug="hire-me/index"] #quartz-body > footer,
+body[data-slug="support-the-blog/index"] #quartz-body > footer {
   grid-column: 1 / -1;
 }
 
@@ -777,11 +831,15 @@ body[data-slug="about/index"] #quartz-body > footer {
 body[data-slug="index"] #quartz-body > .center,
 body[data-slug="articles/index"] #quartz-body > .center,
 body[data-slug="knowledge-base/index"] #quartz-body > .center,
-body[data-slug="about/index"] #quartz-body > .center,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .center,
+body[data-slug="hire-me/index"] #quartz-body > .center,
+body[data-slug="support-the-blog/index"] #quartz-body > .center,
 body[data-slug="index"] #quartz-body > footer,
 body[data-slug="articles/index"] #quartz-body > footer,
 body[data-slug="knowledge-base/index"] #quartz-body > footer,
-body[data-slug="about/index"] #quartz-body > footer {
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > footer,
+body[data-slug="hire-me/index"] #quartz-body > footer,
+body[data-slug="support-the-blog/index"] #quartz-body > footer {
   box-sizing: border-box;
   width: min(100%, 46rem);
   min-width: 0;
@@ -790,11 +848,23 @@ body[data-slug="about/index"] #quartz-body > footer {
   justify-self: center;
 }
 
+/* On single-column landing pages, let the content column take the spare height. */
+body[data-slug="index"] #quartz-body > .center,
+body[data-slug="articles/index"] #quartz-body > .center,
+body[data-slug="knowledge-base/index"] #quartz-body > .center,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .center,
+body[data-slug="hire-me/index"] #quartz-body > .center,
+body[data-slug="support-the-blog/index"] #quartz-body > .center {
+  flex: 1 0 auto;
+}
+
 /* Center the copyright and social links together inside that same content width. */
 body[data-slug="index"] #quartz-body > footer,
 body[data-slug="articles/index"] #quartz-body > footer,
 body[data-slug="knowledge-base/index"] #quartz-body > footer,
-body[data-slug="about/index"] #quartz-body > footer {
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > footer,
+body[data-slug="hire-me/index"] #quartz-body > footer,
+body[data-slug="support-the-blog/index"] #quartz-body > footer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -802,16 +872,8 @@ body[data-slug="about/index"] #quartz-body > footer {
   text-align: center;
 }
 
-
-/* Remove inherited header and hero spacing that left a large gap on the homepage. */
-body[data-slug="index"] .page-header > header {
-  margin: 0;
-}
-
-body[data-slug="index"] .page-header .site-nav {
-  margin-bottom: 0;
-  padding-top: 0.35rem;
-  padding-bottom: 0.55rem;
+body > .page > #quartz-body > footer {
+  margin-bottom: 1.5rem;
 }
 
 body[data-slug="index"] .center article {

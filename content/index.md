@@ -1,5 +1,5 @@
 ---
-title: Adrian | Linux、嵌入式与系统软件
+title: Adrian Blog
 date: 2026/05/11
 description: Adrian 的个人主页，关注嵌入式 Linux、系统软件、网络与 C/C++。
 cssclasses:

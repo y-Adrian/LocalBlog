@@ -1,10 +1,11 @@
-import { Date, getDate } from "./Date"
+import { Date } from "./Date"
 import { QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import readingTime from "reading-time"
 import { classNames } from "../util/lang"
 import { i18n } from "../i18n"
 import { JSX } from "preact"
 import style from "./styles/contentMeta.scss"
+import { isWrittenArticle } from "../util/content"
 
 interface ContentMetaOptions {
   /**
@@ -25,12 +26,18 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
 
   function ContentMetadata({ cfg, fileData, displayClass }: QuartzComponentProps) {
     const text = fileData.text
+    const isArticle = isWrittenArticle(fileData)
+    const showReadingTime =
+      options.showReadingTime &&
+      isArticle &&
+      fileData.frontmatter?.hideReadingTime !== true
+    const showCreatedDate = isArticle && fileData.frontmatter?.hideCreatedDate !== true
 
     if (text) {
       const segments: (string | JSX.Element)[] = []
 
-      if (fileData.dates) {
-        segments.push(<Date date={getDate(cfg, fileData)!} locale={cfg.locale} />)
+      if (showCreatedDate && fileData.dates?.created) {
+        segments.push(<Date date={fileData.dates.created} locale={cfg.locale} />)
       }
 
       const showPageViews = cfg.analytics?.provider === "goatcounter"
@@ -39,7 +46,7 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
         : null
 
       // Display reading time if enabled
-      if (options.showReadingTime) {
+      if (showReadingTime) {
         const { minutes, words: _words } = readingTime(text)
         const displayedTime = i18n(cfg.locale).components.contentMeta.readingTime({
           minutes: Math.ceil(minutes),
@@ -64,6 +71,10 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
             aria-hidden="true"
           />,
         )
+      }
+
+      if (segments.length === 0) {
+        return null
       }
 
       return (

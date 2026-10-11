@@ -16,12 +16,12 @@ const knowledgeSections = [
 ]
 
 const links: Array<{ label: string; slug: FullSlug }> = [
-  { label: "Home", slug: "index" as FullSlug },
+  { label: "HomePage", slug: "index" as FullSlug },
   { label: "About", slug: "about/index" as FullSlug },
   { label: "Hire Me", slug: "hire-me/index" as FullSlug },
   { label: "Articles", slug: "articles/index" as FullSlug },
-  { label: "Knowledge Base", slug: "knowledge-base/index" as FullSlug },
-  { label: "Support the blog", slug: "support-the-blog/index" as FullSlug },
+  { label: "Knowledge", slug: "knowledge-base/index" as FullSlug },
+  { label: "SupportMe", slug: "support-the-blog/index" as FullSlug },
 ]
 
 const SiteNav: QuartzComponent = ({ fileData }: QuartzComponentProps) => {

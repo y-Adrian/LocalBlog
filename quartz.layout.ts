@@ -1,34 +1,11 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-
-/** 侧栏目录：不展示 tags、leetcode（leetcode 亦在 quartz.config ignorePatterns 中排除构建） */
-const explorer = Component.Explorer({
-  filterFn: (node) => node.slugSegment !== "tags" && node.slugSegment !== "leetcode",
-  mapFn: (node) => {
-    const labels: Record<string, string> = {
-      articles: "Articles",
-      "knowledge-base": "Knowledge Base",
-      about: "About",
-      工程基础: "Engineering Fundamentals",
-      linux: "Linux",
-      "网络与DPDK": "Networking & DPDK",
-      编程语言: "Programming Languages",
-      数据库: "Databases",
-      分布式系统: "Distributed Systems",
-      系统调试: "Systems Debugging",
-      AI: "AI Tools",
-      成长路径: "Learning Paths",
-      学习疑问: "Study Questions",
-    }
-    const label = labels[node.slugSegment]
-    if (label) node.displayName = label
-  },
-})
+import { isWrittenArticle } from "./quartz/util/content"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  header: [Component.SiteNav()],
+  header: [Component.SiteNav(), Component.Search(), Component.Darkmode()],
   afterBody: [],
   footer: Component.Footer({
     socialLinks: [
@@ -43,12 +20,9 @@ export const sharedPageComponents: SharedLayout = {
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
-      component: Component.FocusMode(),
-      condition: (page) => page.fileData.slug !== "index",
-    }),
-    Component.ConditionalRender({
       component: Component.ArticleTitle(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) =>
+        isWrittenArticle(page.fileData) && page.fileData.frontmatter?.hideTitle !== true,
     }),
     Component.ConditionalRender({
       component: Component.TagList(),
@@ -59,20 +33,13 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => page.fileData.slug !== "index",
     }),
   ],
-  left: [
-    Component.PageTitle(),
-    Component.MobileOnly(Component.Spacer()),
-    Component.Flex({
-      components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
-        { Component: Component.Darkmode() },
-      ],
+  afterBody: [
+    Component.ConditionalRender({
+      component: Component.FocusMode(),
+      condition: (page) => page.fileData.slug !== "index",
     }),
-    explorer,
   ],
+  left: [],
   right: [
     Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
@@ -82,20 +49,13 @@ export const defaultContentPageLayout: PageLayout = {
 
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.ArticleTitle(), Component.ContentMeta()],
-  left: [
-    Component.PageTitle(),
-    Component.MobileOnly(Component.Spacer()),
-    Component.Flex({
-      components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
-        { Component: Component.Darkmode() },
-      ],
+  beforeBody: [
+    Component.ConditionalRender({
+      component: Component.ArticleTitle(),
+      condition: (page) => page.fileData.frontmatter?.hideTitle !== true,
     }),
-    explorer,
+    Component.ContentMeta(),
   ],
+  left: [],
   right: [],
 }
