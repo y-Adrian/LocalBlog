@@ -2,25 +2,12 @@ import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } fro
 import { FullSlug, resolveRelative } from "../util/path"
 import style from "./styles/siteNav.scss"
 
-const knowledgeSections = [
-  "工程基础",
-  "linux",
-  "网络与DPDK",
-  "编程语言",
-  "数据库",
-  "分布式系统",
-  "系统调试",
-  "AI",
-  "成长路径",
-  "学习疑问",
-]
-
 const links: Array<{ label: string; slug: FullSlug }> = [
   { label: "HomePage", slug: "index" as FullSlug },
   { label: "About", slug: "about/index" as FullSlug },
   { label: "Hire Me", slug: "hire-me/index" as FullSlug },
   { label: "Articles", slug: "articles/index" as FullSlug },
-  { label: "Knowledge", slug: "knowledge-base/index" as FullSlug },
+  { label: "Knowledge", slug: "knowledge/index" as FullSlug },
   { label: "SupportMe", slug: "support-the-blog/index" as FullSlug },
 ]
 
@@ -32,8 +19,7 @@ const SiteNav: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
         const active =
           currentSlug === slug ||
           (slug === "articles/index" && currentSlug.startsWith("articles/")) ||
-          (slug === "knowledge-base/index" &&
-            knowledgeSections.some((section) => currentSlug.startsWith(`${section}/`))) ||
+          (slug === "knowledge/index" && currentSlug.startsWith("knowledge/")) ||
           (slug === "index" && currentSlug === "index")
         return (
           <a

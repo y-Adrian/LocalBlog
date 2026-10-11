@@ -5,18 +5,23 @@ description: Adrian 的个人主页，关注嵌入式 Linux、系统软件、网
 cssclasses:
   - home-page
 ---
-# Adrian(*zhaoxu*)
+<figure class="home-portrait">
+  <img src="images/home-portrait.png" alt="Adrian outdoors" />
+  <figcaption>“Consistency is key.”</figcaption>
+</figure>
 
-**Embeded Linux · System software· C/C++**
+# Adrian
+
+Stay curious. Keep building.
 
 ## Articles
 
-分享技术文章与工程实践总结。新的文章会集中收录在独立栏目中，学习笔记和专题资料继续归入知识库。
+分享技术文章与工程实践总结。新的文章会集中收录在独立栏目中，持续维护的概念、专题与学习资料归入 Knowledge。
 
 [Browse articles →](articles/index)
 
 ## Knowledge Base
 
-按主题整理的技术笔记与学习资料，保留原有分类和文章地址。
+按领域、专题和概念逐层整理的知识资产，覆盖 Linux 内核、嵌入式开发、共享内存 IPC 与 RISC-V。
 
-[Explore the knowledge base →](knowledge-base/index)
+[Explore the knowledge base →](knowledge/index)

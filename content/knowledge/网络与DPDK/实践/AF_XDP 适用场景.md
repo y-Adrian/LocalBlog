@@ -1,0 +1,63 @@
+---
+tags:
+  - DPDK
+  - Linux
+title: AF_XDP 适用场景
+description: 何时用 AF_XDP、与完整 DPDK 的分工
+date: 2026/05/16
+aliases:
+  - "网络与DPDK/实践/AF_XDP 适用场景"
+  - "articles/网络与DPDK/实践/AF_XDP 适用场景"
+contentType: knowledge
+---
+
+# AF_XDP 适用场景
+
+本文对应 [[knowledge/成长路径/index|成长路径]] **中优先级**：在 **保留内核驱动** 的前提下，把 **特定队列** 的流量送到用户态高速处理。
+
+---
+
+## 是什么
+
+- **AF_XDP** socket 绑定 **网卡 RX 队列**（XSK map + BPF 重定向）。
+- 报文进入 **UMEM** 环形缓冲，用户态读取；能否 **zero-copy** 取决于网卡驱动、队列配置与内核版本，不满足条件时会退化为 copy 模式。
+
+仍使用 **内核网卡驱动**，不是完整 **UIO/VFIO 接管网卡**。
+
+---
+
+## 与完整 DPDK 对比
+
+| 项 | AF_XDP | DPDK PMD |
+|----|--------|----------|
+| 接管网卡 | 否，共享驱动 | 是（bind 后内核不可见） |
+| 部署 | 需 XDP 支持驱动 | 需 hugepage、绑核 |
+| 协议栈 | 可同口其他队列走内核 | 数据口通常全在用户态 |
+| 内存模型 | UMEM + fill/completion ring | mempool + mbuf |
+| 典型场景 | **混合**、渐进迁移 | **线速专用** 数据面 |
+
+---
+
+## 何时考虑 AF_XDP
+
+- 需要 **内核栈**（SSH、路由）与 **高速处理** 共存。
+- 不想维护 **双口** 但驱动支持 **XDP**。
+- PPS 需求 **低于** 完整 DPDK 上限但仍要优化。
+- 流量可以按 **队列 / 五元组 / BPF 规则** 清晰切分；否则用户态和内核态之间的归属会变得难排查。
+
+---
+
+## 何时仍用 DPDK
+
+- 追求 **极致 PPS/延迟**，愿 **独占** 网卡。
+- 需 **rte_flow** 等完整 offload 生态。
+- 需要跨平台 PMD 能力、成熟的 mbuf/mempool 生态，或项目已经围绕 DPDK EAL 组织。
+
+见 [[knowledge/网络与DPDK/实践/与内核网络栈共存]]。
+
+---
+
+## 延伸阅读
+
+- [[knowledge/linux/内核机制/Linux 内核网络栈与 DPDK 适用边界]]
+- [[knowledge/网络与DPDK/教程/index]]

@@ -1,0 +1,30 @@
+---
+date: 2026/05/15
+title: 系统调试
+description: 底层分析与并发排障
+aliases:
+  - "系统调试/index"
+  - "articles/系统调试/index"
+contentType: knowledge
+---
+
+# 系统调试
+
+与 **现场定位**、**并发模型** 相关的笔记。
+
+## 文档
+
+- [[反汇编在嵌入式问题定位中的应用：环境、工具与可读性]]
+- [[线程池技术详解]]
+- [[排障工具链一张图]]
+- [[排障 SOP：日志、perf 与反汇编]]
+- [[内核卡死与 hung task 入门]]
+- [[perf 与火焰图读 C++ 热点]]
+- [[perf 与 ftrace 实战案例模板]]
+- [[coredump 分析基础]]
+- [[ASan 与 Valgrind 桌面验证]]
+
+## 相关
+
+- [[knowledge/linux/驱动与模块/index|内核模块与驱动]]
+- [[knowledge/linux/内核机制/深入了解上下文切换|上下文切换]]

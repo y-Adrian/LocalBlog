@@ -1,0 +1,52 @@
+---
+date: 2026/05/15
+title: C++
+description: C++11/17/20、STL、并发与模板
+aliases:
+  - "编程语言/C++/index"
+  - "articles/编程语言/C++/index"
+contentType: knowledge
+---
+
+# C++
+
+## 标准与总览
+
+- [[C++ 关键新特性]] — 入口，链到各版本专题
+- [[C++11]]
+- [[C++17]]
+- [[C++20]]
+
+## 语言机制
+
+- [[RAII]] — 原则；深化见 [[C++ 对象模型与 Rule of Zero-Three-Five]]
+- [[C++ 对象模型与 Rule of Zero-Three-Five]]
+- [[C++ ABI 深读]]
+- [[PMR 与自定义分配器]]
+- [[C++20 协程与 Modules 选用决策]]
+- [[模板元编程基础]]
+
+## 库与并发
+
+- [[STL 容器算法手册]]
+- [[C++多线程与多进程编程]]
+- [[内存模型]]
+- [[无锁编程]]
+- [[嵌入式 C++ 编译约束]]
+- [[C++ 封装 DPDK 数据面]]
+
+## 精通 C/C++（与 [[knowledge/编程语言/C/index|C 目录]] 联动）
+
+1. [[knowledge/编程语言/C/C 内存模型与未定义行为|C 内存与 UB]]
+2. [[knowledge/编程语言/C/C 编译链接与 ABI|C 编译链接与 ABI]]
+3. [[knowledge/编程语言/C/C 与 C++ 混用|C/C++ 混用]]
+4. [[C++ 对象模型与 Rule of Zero-Three-Five]]
+5. [[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门|Sanitizer 与单测]]
+6. [[knowledge/编程语言/C/C++ 性能优化方法论|性能优化]]
+7. [[knowledge/编程语言/C/C99-C11 实用特性|C99/C11 实用特性]]（C 侧）
+8. [[knowledge/编程语言/C++/C++ ABI 深读|C++ ABI]]
+9. [[knowledge/编程语言/C++/PMR 与自定义分配器|PMR / 分配器]]
+10. [[MISRA C 与 CERT C 编码规范对照|MISRA / CERT C]]（工程规范）
+11. [[C++20 协程与 Modules 选用决策|C++20 协程/Modules 决策]]
+12. [[阅读 C 与 C++ 源码的方法|读源码]]
+13. [[精通 C-C++ 学习路径|总索引]]

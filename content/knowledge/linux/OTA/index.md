@@ -1,0 +1,18 @@
+---
+date: 2026/05/16
+title: OTA 与升级
+description: 嵌入式固件在线升级与回滚
+aliases:
+  - "linux/OTA/index"
+  - "articles/linux/OTA/index"
+contentType: knowledge
+---
+
+# OTA 与升级
+
+| 文档 | 说明 |
+|------|------|
+| [[A-B 分区与回滚策略]] | 双系统分区与启动切换 |
+| [[swupdate 入门]] | 签名升级包与描述文件 |
+| [[远程日志与最小可观测]] | 日志、指标与健康检查 |
+| [[Mender 入门]] | 可选 OTA 平台 |

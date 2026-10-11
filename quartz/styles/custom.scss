@@ -474,7 +474,7 @@ body[data-slug="index"] .center article > p:first-of-type {
   margin-bottom: 1.5rem;
   padding-bottom: 1.1rem;
   white-space: nowrap;
-  text-align: center;
+  text-align: left;
   border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 88%, transparent);
 }
 
@@ -739,7 +739,7 @@ li.section-li > .section > .meta {
 /* 个人主页：弱化知识库文档感，突出个人介绍与栏目入口 */
 body[data-slug="index"] .home-page h1:first-of-type {
   margin-top: 0.5rem;
-  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-size: clamp(2rem, 6vw, 3rem);
   line-height: 1.05;
   letter-spacing: -0.04em;
 }
@@ -764,8 +764,8 @@ body[data-slug="index"] .home-page a {
 /* Landing pages use a full-width editorial layout; note tools stay on detail pages. */
 body[data-slug="index"] #quartz-body,
 body[data-slug="articles/index"] #quartz-body,
-body[data-slug="knowledge-base/index"] #quartz-body,
-:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body,
+body[data-slug="knowledge/index"] #quartz-body,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug^="knowledge/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body,
 body[data-slug="hire-me/index"] #quartz-body,
 body[data-slug="support-the-blog/index"] #quartz-body {
   display: flex;
@@ -774,8 +774,8 @@ body[data-slug="support-the-blog/index"] #quartz-body {
 
 body[data-slug="index"] #quartz-body > .sidebar,
 body[data-slug="articles/index"] #quartz-body > .sidebar,
-body[data-slug="knowledge-base/index"] #quartz-body > .sidebar,
-:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .sidebar,
+body[data-slug="knowledge/index"] #quartz-body > .sidebar,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug^="knowledge/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .sidebar,
 body[data-slug="hire-me/index"] #quartz-body > .sidebar,
 body[data-slug="support-the-blog/index"] #quartz-body > .sidebar {
   display: none !important;
@@ -783,14 +783,14 @@ body[data-slug="support-the-blog/index"] #quartz-body > .sidebar {
 
 body[data-slug="index"] #quartz-body > .center,
 body[data-slug="articles/index"] #quartz-body > .center,
-body[data-slug="knowledge-base/index"] #quartz-body > .center,
-:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .center,
+body[data-slug="knowledge/index"] #quartz-body > .center,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug^="knowledge/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .center,
 body[data-slug="hire-me/index"] #quartz-body > .center,
 body[data-slug="support-the-blog/index"] #quartz-body > .center,
 body[data-slug="index"] #quartz-body > footer,
 body[data-slug="articles/index"] #quartz-body > footer,
-body[data-slug="knowledge-base/index"] #quartz-body > footer,
-:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > footer,
+body[data-slug="knowledge/index"] #quartz-body > footer,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug^="knowledge/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > footer,
 body[data-slug="hire-me/index"] #quartz-body > footer,
 body[data-slug="support-the-blog/index"] #quartz-body > footer {
   grid-column: 1 / -1;
@@ -830,14 +830,14 @@ body[data-slug="support-the-blog/index"] #quartz-body > footer {
 /* Keep the public-facing pages at a readable, centered measure. */
 body[data-slug="index"] #quartz-body > .center,
 body[data-slug="articles/index"] #quartz-body > .center,
-body[data-slug="knowledge-base/index"] #quartz-body > .center,
-:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .center,
+body[data-slug="knowledge/index"] #quartz-body > .center,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug^="knowledge/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .center,
 body[data-slug="hire-me/index"] #quartz-body > .center,
 body[data-slug="support-the-blog/index"] #quartz-body > .center,
 body[data-slug="index"] #quartz-body > footer,
 body[data-slug="articles/index"] #quartz-body > footer,
-body[data-slug="knowledge-base/index"] #quartz-body > footer,
-:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > footer,
+body[data-slug="knowledge/index"] #quartz-body > footer,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug^="knowledge/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > footer,
 body[data-slug="hire-me/index"] #quartz-body > footer,
 body[data-slug="support-the-blog/index"] #quartz-body > footer {
   box-sizing: border-box;
@@ -851,8 +851,8 @@ body[data-slug="support-the-blog/index"] #quartz-body > footer {
 /* On single-column landing pages, let the content column take the spare height. */
 body[data-slug="index"] #quartz-body > .center,
 body[data-slug="articles/index"] #quartz-body > .center,
-body[data-slug="knowledge-base/index"] #quartz-body > .center,
-:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .center,
+body[data-slug="knowledge/index"] #quartz-body > .center,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug^="knowledge/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > .center,
 body[data-slug="hire-me/index"] #quartz-body > .center,
 body[data-slug="support-the-blog/index"] #quartz-body > .center {
   flex: 1 0 auto;
@@ -861,8 +861,8 @@ body[data-slug="support-the-blog/index"] #quartz-body > .center {
 /* Center the copyright and social links together inside that same content width. */
 body[data-slug="index"] #quartz-body > footer,
 body[data-slug="articles/index"] #quartz-body > footer,
-body[data-slug="knowledge-base/index"] #quartz-body > footer,
-:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > footer,
+body[data-slug="knowledge/index"] #quartz-body > footer,
+:is(body[data-slug="about/index"], body[data-slug^="articles/"][data-slug$="/index"], body[data-slug^="knowledge/"][data-slug$="/index"], body[data-slug="工程基础/index"]) #quartz-body > footer,
 body[data-slug="hire-me/index"] #quartz-body > footer,
 body[data-slug="support-the-blog/index"] #quartz-body > footer {
   display: flex;
@@ -878,4 +878,46 @@ body > .page > #quartz-body > footer {
 
 body[data-slug="index"] .center article {
   padding-top: 0;
+}
+
+/* Keep the homepage content at its original width; place the portrait outside it. */
+body[data-slug="index"] .home-page > .home-portrait {
+  display: none;
+}
+
+@media (min-width: 1360px) {
+  body[data-slug="index"] .home-page {
+    position: relative;
+  }
+
+  body[data-slug="index"] .home-page > .home-portrait {
+    display: block;
+    position: absolute;
+    left: calc(100% + 2rem);
+    top: 0.5rem;
+    box-sizing: border-box;
+    width: 12rem;
+    margin: 0;
+  }
+
+  body[data-slug="index"] .home-page > .home-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid var(--lightgray);
+    border-radius: 1.2rem;
+  }
+
+  body[data-slug="index"] .home-page > .home-portrait figcaption {
+    margin-top: 0.65rem;
+    color: var(--secondary);
+    font-family: "Google Sans Code", monospace;
+    font-size: 0.88rem;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: center;
+  }
 }
