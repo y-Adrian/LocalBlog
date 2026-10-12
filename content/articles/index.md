@@ -1,16 +1,25 @@
 ---
 title: Articles
 hideTitle: true
-description: 技术文章与工程实践总结
+description: Personal technical interpretations and engineering practice
 cssclasses:
   - articles-landing
 contentType: page
+hideCreatedDate: true
+hideReadingTime: true
 ---
+# Articles
 
-这里收录具有时间线、实践经历或个人判断的博客文章。稳定的技术概念、操作指南和可复用资料统一放在 Knowledge。
+Here I share my own interpretations of technology, engineering decisions, and lessons from practice. Definitions and reusable reference material live in [[knowledge/index|Knowledge]].
 
-## 实践记录
+## Technical Interpretation
 
-- [[articles/riscv-driver-development-log/index|RISC-V Linux 驱动开发日志]]：按日期记录 Milk-V Duo S 上的驱动开发、问题定位与阶段性取舍。
+My perspective on technical ideas: what matters, where the trade-offs are, and why I reach a particular conclusion.
 
-独立文章使用 `contentType: article`；知识条目使用 `contentType: knowledge`。只有文章显示标题、创建时间和阅读时间。
+[[articles/technical-interpretation/index|Browse technical interpretations →]]
+
+## Practice
+
+Development journals and case studies: the problems I encountered, the choices I made, and what I learned along the way.
+
+[[articles/riscv-driver-development-log/index|RISC-V Linux driver development →]]
