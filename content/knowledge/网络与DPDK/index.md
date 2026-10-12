@@ -23,5 +23,5 @@ DPDK 相关文档按 **教程（循序渐进）**、**网络编程（Socket）**
 
 ## 与 Linux 笔记的关系
 
-- 内核网络栈与存储：[[../knowledge/linux/内核机制/存储与IO子系统]]
-- NUMA / 绑核：与 [[../knowledge/linux/内核机制/深入了解上下文切换]]、cgroup 等可对照阅读
+- 内核网络栈与存储：[[knowledge/linux/内核机制/存储与IO子系统]]
+- NUMA / 绑核：与 [[knowledge/linux/内核机制/深入了解上下文切换]]、cgroup 等可对照阅读

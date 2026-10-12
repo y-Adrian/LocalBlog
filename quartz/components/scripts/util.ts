@@ -42,5 +42,13 @@ export async function fetchCanonical(url: URL): Promise<Response> {
   // to allow the caller to read it if it's was not a redirect
   const text = await res.clone().text()
   const [_, redirect] = text.match(canonicalRegex) ?? []
-  return redirect ? fetch(`${new URL(redirect, url)}`) : res
+  return redirect ? fetch(`${new URL(redirect, res.url || url)}`) : res
+}
+
+// Use the fetched page address when resolving its relative links, including
+// GitHub Pages directory redirects and migrated-content aliases.
+export function resolveNavigationURL(requested: URL, response: Response): URL {
+  const destination = new URL(response.url || requested.href)
+  if (requested.hash) destination.hash = requested.hash
+  return destination
 }

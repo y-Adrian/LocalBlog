@@ -1,6 +1,6 @@
 import micromorph from "micromorph"
 import { FullSlug, RelativeURL, getFullSlug, normalizeRelativeURLs } from "../../util/path"
-import { fetchCanonical } from "./util"
+import { fetchCanonical, resolveNavigationURL } from "./util"
 
 // adapted from `micromorph`
 // https://github.com/natemoo-re/micromorph
@@ -66,6 +66,7 @@ async function _navigate(url: URL, isBack: boolean = false) {
     .then((res) => {
       const contentType = res.headers.get("content-type")
       if (contentType?.startsWith("text/html")) {
+        url = resolveNavigationURL(url, res)
         return res.text()
       } else {
         window.location.assign(url)
