@@ -3,7 +3,7 @@ import { FullSlug, resolveRelative } from "../util/path"
 import style from "./styles/siteNav.scss"
 
 const links: Array<{ label: string; slug: FullSlug }> = [
-  { label: "HomePage", slug: "index" as FullSlug },
+  { label: "Home", slug: "index" as FullSlug },
   { label: "About", slug: "about/index" as FullSlug },
   { label: "Hire Me", slug: "hire-me/index" as FullSlug },
   { label: "Articles", slug: "articles/index" as FullSlug },
