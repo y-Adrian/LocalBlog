@@ -28,6 +28,7 @@ contentType: knowledge
 - 已补文：[[knowledge/通信与IPC/SPSC 共享队列：发布、消费与槽位回收]] 与 [[knowledge/通信与IPC/共享队列通知：eventfd、futex 与防丢唤醒]]。
 - 已深化：[[knowledge/网络与DPDK/实践/多 worker 与 mempool 并发假设]]，区分对象所有权、跨核归还和池/队列的并发配置。
 - 已补源码与说明：[[knowledge/通信与IPC/共享内存双进程实践：握手、背压与退出]]，待 Linux 环境取得实际构建与运行记录。
+- 已补文：[[knowledge/通信与IPC/共享对象池与零拷贝：句柄、借用与回收]] 与 [[knowledge/通信与IPC/本机 RPC：超时、幂等与跨重启去重]]，对应配套实现和实验尚未完成。
 - 待深化：块设备与网络驱动实操、RISC-V 学习路线中的架构边界、日志持久化和部署运维条目。具体范围与状态见仓库 `docs/知识库内容优化清单.md`。
 
 ## 如何使用
