@@ -9,6 +9,7 @@ aliases:
   - "linux/内核机制/小内存板 OOM 行为"
   - "articles/linux/内核机制/小内存板 OOM 行为"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 小内存板 OOM 行为

@@ -10,6 +10,7 @@ aliases:
   - "编程语言/C/C 与 C++ 混用"
   - "articles/编程语言/C/C 与 C++ 混用"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C 与 C++ 混用
 

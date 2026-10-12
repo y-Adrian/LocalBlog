@@ -5,6 +5,7 @@ aliases:
   - "编程语言/C++/C++ 关键新特性"
   - "articles/编程语言/C++/C++ 关键新特性"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 C++ 关键新特性

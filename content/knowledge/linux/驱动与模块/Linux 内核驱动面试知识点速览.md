@@ -10,6 +10,7 @@ aliases:
   - "linux/驱动与模块/Linux 内核驱动面试知识点速览"
   - "articles/linux/驱动与模块/Linux 内核驱动面试知识点速览"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Linux 内核驱动面试知识点速览
@@ -135,7 +136,7 @@ contentType: knowledge
 
 | 考点 | 要点 | 站内 |
 |------|------|------|
-| `dmesg` / `dynamic_debug` | 驱动日志、`pr_debug` 运行期开关 | [[knowledge/linux/驱动与模块/sysfs 与 proc 调试接口#Dynamic Debug（dynamic_debug）]] |
+| `dmesg` / `dynamic_debug` | 驱动日志、`pr_debug` 运行期开关 | [[knowledge/linux/驱动与模块/sysfs 与 proc 调试接口#15-dynamic-debugdynamic_debug]] |
 | `sysfs` / `debugfs` | 用户态调参 | 同上 |
 | 反汇编 / addr2line | 崩溃 PC 定位 | [[knowledge/系统调试/反汇编在嵌入式问题定位中的应用：环境、工具与可读性]] |
 | 排障 SOP | 日志 → perf → 汇编 | [[knowledge/系统调试/排障 SOP：日志、perf 与反汇编]] |

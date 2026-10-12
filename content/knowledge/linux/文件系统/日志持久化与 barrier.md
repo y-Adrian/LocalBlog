@@ -10,6 +10,7 @@ aliases:
   - "linux/文件系统/日志持久化与 barrier"
   - "articles/linux/文件系统/日志持久化与 barrier"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 日志持久化与 barrier

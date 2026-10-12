@@ -10,6 +10,7 @@ aliases:
   - "linux/内核机制/DMA 与 Cache 一致性入门"
   - "articles/linux/内核机制/DMA 与 Cache 一致性入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # DMA 与 Cache 一致性入门

@@ -11,6 +11,7 @@ aliases:
   - "linux/学习路径/RISC-V 异常入口与 entry.S 精读"
   - "articles/linux/学习路径/RISC-V 异常入口与 entry.S 精读"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # RISC-V 异常入口与 entry.S 精读

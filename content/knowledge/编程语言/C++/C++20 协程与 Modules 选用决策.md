@@ -11,6 +11,7 @@ aliases:
   - "编程语言/C++/C++20 协程与 Modules 选用决策"
   - "articles/编程语言/C++/C++20 协程与 Modules 选用决策"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C++20 协程与 Modules 选用决策
 
@@ -179,7 +180,7 @@ flowchart TD
 - [ ] hot path 无 `co_await`、无 module 边界挡 DPDK 头  
 - [ ] 若用协程：promise 分配可测、异常策略文档化  
 - [ ] 若用 modules：交叉编译路径已验证  
-- [ ] 性能对比有 **baseline 数字** [[C/C++ 性能优化方法论]]  
+- [ ] 性能对比有 **baseline 数字** [[knowledge/编程语言/C/C++ 性能优化方法论]]
 
 ---
 

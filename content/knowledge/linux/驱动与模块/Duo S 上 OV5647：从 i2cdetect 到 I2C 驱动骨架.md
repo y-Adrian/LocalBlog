@@ -12,6 +12,7 @@ aliases:
   - "linux/驱动与模块/Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架"
   - "articles/linux/驱动与模块/Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架
@@ -297,4 +298,4 @@ dmesg | tail
 | [[knowledge/linux/驱动与模块/riscv-驱动开发日志/学习路线]] | Phase 5 项目 B |
 | upstream | [`drivers/media/i2c/ov5647.c`](https://github.com/torvalds/linux/blob/master/drivers/media/i2c/ov5647.c) |
 
-*实践进度勾选见 [[knowledge/成长路径/index#六、嵌入式 Linux · 驱动与模块]]；新板日志继续追加到 [[riscv-驱动开发日志/index]]。*
+*实践进度勾选见 [[knowledge/成长路径/index#六、嵌入式 Linux · 驱动与模块]]；新板日志继续追加到 [[articles/riscv-driver-development-log/index]]。*

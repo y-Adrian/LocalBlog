@@ -5,6 +5,7 @@ aliases:
   - "编程语言/C++/C++多线程与多进程编程"
   - "articles/编程语言/C++/C++多线程与多进程编程"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 1 C++多线程与多进程编程
 

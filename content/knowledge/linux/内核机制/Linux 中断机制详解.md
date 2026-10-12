@@ -11,6 +11,7 @@ aliases:
   - "linux/内核机制/Linux 中断机制详解"
   - "articles/linux/内核机制/Linux 中断机制详解"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Linux 中断机制详解

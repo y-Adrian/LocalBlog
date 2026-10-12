@@ -11,6 +11,7 @@ aliases:
   - "linux/内核机制/per-CPU 与 per-core 数据结构"
   - "articles/linux/内核机制/per-CPU 与 per-core 数据结构"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # per-CPU 与 per-core 数据结构

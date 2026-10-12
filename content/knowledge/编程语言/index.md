@@ -19,6 +19,6 @@ contentType: knowledge
 | [[knowledge/编程语言/C/index|C]] | 内存、UB、编译链接、与 C++ 混用；精通路径入口 |
 | [[knowledge/编程语言/C++/index|C++]] | 标准演进、STL、并发与内存模型 |
 | [[精通 C-C++ 学习路径]] | **12 篇主线顺序与阶段验收** |
-| [[C/C++ 主线实践验收]] | 四阶段动手实验（含 `labs/c-cpp-mastery/`） |
+| [[knowledge/编程语言/C/C-C++ 主线实践验收]] | 四阶段动手实验（含 `labs/c-cpp-mastery/`） |
 | [[knowledge/编程语言/Go/index|Go]] | Go 语言基础 |
 | [[knowledge/编程语言/Rust/index|Rust]] | 选修：是否纳入主线 |

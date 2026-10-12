@@ -9,6 +9,7 @@ aliases:
   - "工程基础/GitHub Actions 与嵌入式 CI 入门"
   - "articles/工程基础/GitHub Actions 与嵌入式 CI 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # GitHub Actions 与嵌入式 CI 入门

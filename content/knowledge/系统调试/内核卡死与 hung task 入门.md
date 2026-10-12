@@ -10,6 +10,7 @@ aliases:
   - "系统调试/内核卡死与 hung task 入门"
   - "articles/系统调试/内核卡死与 hung task 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 内核卡死与 hung task 入门

@@ -9,6 +9,7 @@ aliases:
   - "工程基础/许可证与 SBOM 入门"
   - "articles/工程基础/许可证与 SBOM 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 许可证与 SBOM 入门

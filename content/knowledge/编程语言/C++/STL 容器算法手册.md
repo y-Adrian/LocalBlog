@@ -5,6 +5,7 @@ aliases:
   - "编程语言/C++/STL 容器算法手册"
   - "articles/编程语言/C++/STL 容器算法手册"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 1 C++ STL 容器与算法手册
 

@@ -5,7 +5,7 @@ import { classNames } from "../util/lang"
 import { i18n } from "../i18n"
 import { JSX } from "preact"
 import style from "./styles/contentMeta.scss"
-import { isWrittenArticle } from "../util/content"
+import { shouldShowArticleMeta } from "../util/content"
 
 interface ContentMetaOptions {
   /**
@@ -26,12 +26,12 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
 
   function ContentMetadata({ cfg, fileData, displayClass }: QuartzComponentProps) {
     const text = fileData.text
-    const isArticle = isWrittenArticle(fileData)
+    const showArticleMeta = shouldShowArticleMeta(fileData)
     const showReadingTime =
       options.showReadingTime &&
-      isArticle &&
+      showArticleMeta &&
       fileData.frontmatter?.hideReadingTime !== true
-    const showCreatedDate = isArticle && fileData.frontmatter?.hideCreatedDate !== true
+    const showCreatedDate = showArticleMeta && fileData.frontmatter?.hideCreatedDate !== true
 
     if (text) {
       const segments: (string | JSX.Element)[] = []

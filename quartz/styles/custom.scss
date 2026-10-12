@@ -979,3 +979,75 @@ body[data-slug="index"] .home-page > .home-portrait {
     text-align: center;
   }
 }
+
+
+/* When page metadata supplies the Knowledge title, hide an identical body H1. */
+article.knowledge-title-duplicate > h1:first-child {
+  display: none;
+}
+
+/* Knowledge articles keep the main column centered independently of the right rail.
+   The graph and TOC float outside the content grid, so their width never shifts the article. */
+@media (min-width: 1360px) {
+  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body {
+    position: relative;
+    grid-template-columns: minmax(0, 46rem);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "grid-center"
+      "grid-footer";
+    justify-content: center;
+  }
+
+  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .sidebar.left {
+    display: none;
+  }
+
+  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .sidebar.right {
+    position: fixed;
+    top: 6rem;
+    left: calc(50% + 24rem);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 17rem;
+    height: calc(100vh - 7rem);
+    min-width: 0;
+    padding: 0 0.5rem 1rem 0;
+    overflow-y: auto;
+  }
+
+  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .center,
+  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > footer {
+    box-sizing: border-box;
+    width: min(100%, 46rem);
+    min-width: 0;
+    max-width: 46rem;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 1359px) {
+  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body {
+    grid-template-columns: minmax(0, 46rem);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "grid-center"
+      "grid-footer";
+    justify-content: center;
+    column-gap: 0;
+  }
+
+  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .sidebar {
+    display: none;
+  }
+
+  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .center,
+  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > footer {
+    box-sizing: border-box;
+    width: min(100%, 46rem);
+    min-width: 0;
+    max-width: 46rem;
+    margin-inline: auto;
+  }
+}

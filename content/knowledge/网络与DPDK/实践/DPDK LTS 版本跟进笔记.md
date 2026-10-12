@@ -8,6 +8,7 @@ aliases:
   - "网络与DPDK/实践/DPDK LTS 版本跟进笔记"
   - "articles/网络与DPDK/实践/DPDK LTS 版本跟进笔记"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # DPDK LTS 版本跟进笔记

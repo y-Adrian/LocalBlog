@@ -8,6 +8,7 @@ aliases:
   - "系统调试/perf 与 ftrace 实战案例模板"
   - "articles/系统调试/perf 与 ftrace 实战案例模板"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # perf 与 ftrace 实战案例模板

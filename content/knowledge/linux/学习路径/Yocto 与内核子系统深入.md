@@ -9,6 +9,7 @@ aliases:
   - "linux/学习路径/Yocto 与内核子系统深入"
   - "articles/linux/学习路径/Yocto 与内核子系统深入"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Yocto 与内核子系统深入

@@ -9,6 +9,7 @@ aliases:
   - "linux/学习路径/Buildroot 与厂商 BSP 入门"
   - "articles/linux/学习路径/Buildroot 与厂商 BSP 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 Buildroot 与厂商 BSP 入门

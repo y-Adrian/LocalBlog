@@ -10,6 +10,7 @@ aliases:
   - "编程语言/C/C 内存模型与未定义行为"
   - "articles/编程语言/C/C 内存模型与未定义行为"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C 内存模型与未定义行为
 
@@ -188,7 +189,7 @@ memcpy(&i, &f, sizeof i);
 | **ASan** | 越界、UAF | 
 | **Valgrind** | 堆错误 |
 
-见 [[C/C++ Sanitizer 与单元测试入门]]、[[knowledge/系统调试/ASan 与 Valgrind 桌面验证]]。
+见 [[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门]]、[[knowledge/系统调试/ASan 与 Valgrind 桌面验证]]。
 
 ---
 
@@ -206,7 +207,7 @@ memcpy(&i, &f, sizeof i);
 
 - [[knowledge/编程语言/C/index|C 语言目录]]
 - [[C 编译链接与 ABI]]
-- [[C 字符串与 POSIX I/O 精读]]
+- [[knowledge/编程语言/C/C 字符串与 POSIX I/O 精读]]
 - [[C99-C11 实用特性]]
 - [[knowledge/工程基础/编程中非常关键、非常常用的数学技巧#1.2 位运算与 2 的幂（最高频）]]
 - [[knowledge/linux/内核机制/如何通过虚拟地址查找物理地址]]

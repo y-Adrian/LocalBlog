@@ -10,6 +10,7 @@ aliases:
   - "数据库/PostgreSQL 中的物理复制与逻辑复制：机制、差异与选型"
   - "articles/数据库/PostgreSQL 中的物理复制与逻辑复制：机制、差异与选型"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 PostgreSQL 物理复制与逻辑复制

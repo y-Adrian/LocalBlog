@@ -8,6 +8,7 @@ aliases:
   - "linux/驱动与模块/Linux 内核模块开发实战"
   - "articles/linux/驱动与模块/Linux 内核模块开发实战"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 Linux 内核模块开发实战

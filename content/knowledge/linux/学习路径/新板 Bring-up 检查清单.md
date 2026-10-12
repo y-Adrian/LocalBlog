@@ -10,6 +10,7 @@ aliases:
   - "linux/学习路径/新板 Bring-up 检查清单"
   - "articles/linux/学习路径/新板 Bring-up 检查清单"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 新板 Bring-up 检查清单

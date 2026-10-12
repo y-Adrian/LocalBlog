@@ -8,6 +8,7 @@ aliases:
   - "linux/内核机制/Linux 系统调用与接口层"
   - "articles/linux/内核机制/Linux 系统调用与接口层"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 Linux 系统调用与接口层

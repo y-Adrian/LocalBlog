@@ -9,6 +9,7 @@ aliases:
   - "系统调试/排障 SOP：日志、perf 与反汇编"
   - "articles/系统调试/排障 SOP：日志、perf 与反汇编"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 排障 SOP：日志、perf 与反汇编

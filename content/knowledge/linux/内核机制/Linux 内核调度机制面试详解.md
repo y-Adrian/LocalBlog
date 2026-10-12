@@ -11,6 +11,7 @@ aliases:
   - "linux/内核机制/Linux 内核调度机制面试详解"
   - "articles/linux/内核机制/Linux 内核调度机制面试详解"
 contentType: knowledge
+showArticleMeta: true
 ---
 # Linux 内核调度机制面试详解
 

@@ -10,6 +10,7 @@ aliases:
   - "分布式系统/共识算法/Paxos 与 Multi-Paxos 速览"
   - "articles/分布式系统/共识算法/Paxos 与 Multi-Paxos 速览"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Paxos 与 Multi-Paxos 速览

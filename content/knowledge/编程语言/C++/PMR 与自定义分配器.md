@@ -10,6 +10,7 @@ aliases:
   - "编程语言/C++/PMR 与自定义分配器"
   - "articles/编程语言/C++/PMR 与自定义分配器"
 contentType: knowledge
+showArticleMeta: true
 ---
 # PMR 与自定义分配器
 
@@ -44,7 +45,7 @@ flowchart TB
 | 固定大小包 buffer | **mempool** |
 | 通用容器 | `std::pmr::vector` + 上游 resource |
 
-见 [[C/C++ 性能优化方法论]]、[[C 内存模型与未定义行为#4. 对象生命周期]]。
+见 [[knowledge/编程语言/C/C++ 性能优化方法论]]、[[C 内存模型与未定义行为#4. 对象生命周期]]。
 
 ---
 

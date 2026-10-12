@@ -6,6 +6,7 @@ aliases:
   - "编程语言/C++/RAII"
   - "articles/编程语言/C++/RAII"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # RAII

@@ -11,6 +11,7 @@ aliases:
   - "linux/学习路径/RISC-V 特权模式与 OpenSBI"
   - "articles/linux/学习路径/RISC-V 特权模式与 OpenSBI"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # RISC-V 特权模式与 OpenSBI

@@ -10,6 +10,7 @@ aliases:
   - "编程语言/C++/C++ ABI 深读"
   - "articles/编程语言/C++/C++ ABI 深读"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C++ ABI 深读
 

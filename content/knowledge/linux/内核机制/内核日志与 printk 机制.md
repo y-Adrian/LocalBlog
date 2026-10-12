@@ -11,6 +11,7 @@ aliases:
   - "linux/内核机制/内核日志与 printk 机制"
   - "articles/linux/内核机制/内核日志与 printk 机制"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 内核日志与 printk 机制

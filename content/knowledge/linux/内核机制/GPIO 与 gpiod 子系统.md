@@ -10,6 +10,7 @@ aliases:
   - "linux/内核机制/GPIO 与 gpiod 子系统"
   - "articles/linux/内核机制/GPIO 与 gpiod 子系统"
 contentType: knowledge
+showArticleMeta: true
 ---
 # GPIO 与 gpiod 子系统
 

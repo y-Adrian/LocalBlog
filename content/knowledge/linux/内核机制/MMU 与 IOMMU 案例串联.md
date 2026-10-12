@@ -10,6 +10,7 @@ aliases:
   - "linux/内核机制/MMU 与 IOMMU 案例串联"
   - "articles/linux/内核机制/MMU 与 IOMMU 案例串联"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # MMU 与 IOMMU 案例串联

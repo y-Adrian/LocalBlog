@@ -10,6 +10,7 @@ aliases:
   - "网络与DPDK/网络编程/IO 多路复用：select、poll、epoll 与并发模型"
   - "articles/网络与DPDK/网络编程/IO 多路复用：select、poll、epoll 与并发模型"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # IO 多路复用：select/poll/epoll

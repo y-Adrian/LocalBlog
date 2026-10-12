@@ -5,6 +5,7 @@ aliases:
   - "linux/内核机制/kmalloc 与 vmalloc"
   - "articles/linux/内核机制/kmalloc 与 vmalloc"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 1 `kmalloc` 与 `vmalloc` 对比
 

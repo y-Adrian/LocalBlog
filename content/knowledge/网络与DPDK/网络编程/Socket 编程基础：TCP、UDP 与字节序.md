@@ -11,6 +11,7 @@ aliases:
   - "网络与DPDK/网络编程/Socket 编程基础：TCP、UDP 与字节序"
   - "articles/网络与DPDK/网络编程/Socket 编程基础：TCP、UDP 与字节序"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Socket 编程基础：TCP、UDP 与字节序

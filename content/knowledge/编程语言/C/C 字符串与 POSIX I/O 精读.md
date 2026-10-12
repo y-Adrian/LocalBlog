@@ -10,6 +10,7 @@ aliases:
   - "编程语言/C/C 字符串与 POSIX I/O 精读"
   - "articles/编程语言/C/C 字符串与 POSIX I/O 精读"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C 字符串与 POSIX I/O 精读
 

@@ -10,6 +10,7 @@ aliases:
   - "linux/内核机制/传统 IPC：System V 与 POSIX"
   - "articles/linux/内核机制/传统 IPC：System V 与 POSIX"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 传统 IPC：System V 与 POSIX
 

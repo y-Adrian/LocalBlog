@@ -9,6 +9,7 @@ aliases:
   - "工程基础/Shell Makefile Git 命令行基础"
   - "articles/工程基础/Shell Makefile Git 命令行基础"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 Shell、Makefile、Git 命令行基础

@@ -9,6 +9,7 @@ aliases:
   - "编程语言/C++/嵌入式 C++ 编译约束"
   - "articles/编程语言/C++/嵌入式 C++ 编译约束"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 嵌入式 C++ 编译约束

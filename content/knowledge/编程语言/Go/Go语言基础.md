@@ -5,6 +5,7 @@ aliases:
   - "编程语言/Go/Go语言基础"
   - "articles/编程语言/Go/Go语言基础"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 1 Go 语言实战教程
 

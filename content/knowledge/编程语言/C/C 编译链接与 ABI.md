@@ -10,6 +10,7 @@ aliases:
   - "编程语言/C/C 编译链接与 ABI"
   - "articles/编程语言/C/C 编译链接与 ABI"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C 编译链接与 ABI
 

@@ -10,6 +10,7 @@ aliases:
   - "分布式系统/共识算法/Raft 原理与工程实现"
   - "articles/分布式系统/共识算法/Raft 原理与工程实现"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Raft 原理与工程实现

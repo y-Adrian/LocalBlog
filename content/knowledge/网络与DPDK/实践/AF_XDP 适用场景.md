@@ -9,6 +9,7 @@ aliases:
   - "网络与DPDK/实践/AF_XDP 适用场景"
   - "articles/网络与DPDK/实践/AF_XDP 适用场景"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # AF_XDP 适用场景

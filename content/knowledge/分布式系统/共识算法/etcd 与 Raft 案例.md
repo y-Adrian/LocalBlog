@@ -11,6 +11,7 @@ aliases:
   - "分布式系统/共识算法/etcd 与 Raft 案例"
   - "articles/分布式系统/共识算法/etcd 与 Raft 案例"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # etcd 与 Raft 案例

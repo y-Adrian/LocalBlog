@@ -9,6 +9,7 @@ aliases:
   - "linux/文件系统/NAND 与 eMMC 选型对照"
   - "articles/linux/文件系统/NAND 与 eMMC 选型对照"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # NAND 与 eMMC 选型对照

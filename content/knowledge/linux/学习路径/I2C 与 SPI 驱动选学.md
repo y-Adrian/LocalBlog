@@ -9,6 +9,7 @@ aliases:
   - "linux/学习路径/I2C 与 SPI 驱动选学"
   - "articles/linux/学习路径/I2C 与 SPI 驱动选学"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # I2C 与 SPI 驱动选学

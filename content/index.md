@@ -6,7 +6,7 @@ cssclasses:
   - home-page
 ---
 <figure class="home-portrait">
-  <img src="images/home-portrait.png" alt="Adrian outdoors" />
+  <img src="images/home-portrait-comic.png" alt="Adrian outdoors" />
   <figcaption>“Consistency is key.”</figcaption>
 </figure>
 

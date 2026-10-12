@@ -10,6 +10,7 @@ aliases:
   - "系统调试/perf 与火焰图读 C++ 热点"
   - "articles/系统调试/perf 与火焰图读 C++ 热点"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # perf 与火焰图读 C++ 热点

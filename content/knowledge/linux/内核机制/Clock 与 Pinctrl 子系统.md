@@ -10,6 +10,7 @@ aliases:
   - "linux/内核机制/Clock 与 Pinctrl 子系统"
   - "articles/linux/内核机制/Clock 与 Pinctrl 子系统"
 contentType: knowledge
+showArticleMeta: true
 ---
 # Clock 与 Pinctrl 子系统
 

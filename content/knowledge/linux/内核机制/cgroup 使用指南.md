@@ -7,6 +7,7 @@ aliases:
   - "linux/内核机制/cgroup 使用指南"
   - "articles/linux/内核机制/cgroup 使用指南"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 Linux cgroup 完全指南

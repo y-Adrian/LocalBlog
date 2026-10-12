@@ -10,6 +10,7 @@ aliases:
   - "linux/驱动与模块/sysfs 与 proc 调试接口"
   - "articles/linux/驱动与模块/sysfs 与 proc 调试接口"
 contentType: knowledge
+showArticleMeta: true
 ---
 %%  %%
 # 1 sysfs 与 proc 调试接口
@@ -94,7 +95,7 @@ debugfs_create_u32("stats", 0644, dent, &priv->stats);
 
 ## 1.5 Dynamic Debug（dynamic_debug）
 
-**动态调试（dynamic debug）** 让你在 **不重新编译模块** 的前提下，按 **文件 / 函数 / 模块 / 行号** 开关内核里的 `pr_debug()`、`dev_dbg()` 输出。日志级别、环形缓冲区与 `console_loglevel` 等整体机制见 [[内核日志与 printk 机制]]；RISC-V 板级实操见 [[riscv-驱动开发日志/2026-05-31 — 创建字符设备文件#4. Dynamic Debug 实践（本篇重点）]]。
+**动态调试（dynamic debug）** 让你在 **不重新编译模块** 的前提下，按 **文件 / 函数 / 模块 / 行号** 开关内核里的 `pr_debug()`、`dev_dbg()` 输出。日志级别、环形缓冲区与 `console_loglevel` 等整体机制见 [[内核日志与 printk 机制]]；RISC-V 板级实操见 [[articles/riscv-driver-development-log/2026-05-31 — 创建字符设备文件#14-dynamic-debug-实践本篇重点]]。
 
 ### 1.5.1 读完能带走什么
 
@@ -236,7 +237,7 @@ dev_dbg(dev, "probe ok, irq=%d\n", irq);
 
 - [ ] 为 demo 驱动增加 **只读版本号** 与 **可写复位** 属性
 - [ ] 用 `module_param` 控制日志级别
-- [ ] 用 **dynamic debug** 开关 `pr_debug`（见 [[riscv-驱动开发日志/2026-05-31 — 创建字符设备文件]]）
+- [ ] 用 **dynamic debug** 开关 `pr_debug`（见 [[articles/riscv-driver-development-log/2026-05-31 — 创建字符设备文件]]）
 - [ ] 确认 `rmmod` 后 sysfs 节点已删除
 
 ---

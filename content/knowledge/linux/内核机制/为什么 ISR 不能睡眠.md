@@ -11,6 +11,7 @@ aliases:
   - "linux/内核机制/为什么 ISR 不能睡眠"
   - "articles/linux/内核机制/为什么 ISR 不能睡眠"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 为什么 ISR 不能睡眠？

@@ -11,6 +11,7 @@ aliases:
   - "编程语言/C/C++ Sanitizer 与单元测试入门"
   - "articles/编程语言/C/C++ Sanitizer 与单元测试入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C/C++ Sanitizer 与单元测试入门
 
@@ -169,6 +170,6 @@ flowchart LR
 
 ## 延伸阅读
 
-- [[C/C++ 性能优化方法论]]
+- [[knowledge/编程语言/C/C++ 性能优化方法论]]
 - [[knowledge/系统调试/coredump 分析基础]]
 - [[C 内存模型与未定义行为]]

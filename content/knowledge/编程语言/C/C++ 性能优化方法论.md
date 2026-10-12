@@ -10,10 +10,11 @@ aliases:
   - "编程语言/C/C++ 性能优化方法论"
   - "articles/编程语言/C/C++ 性能优化方法论"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C/C++ 性能优化方法论
 
-**精通** 的最后一环：在 **正确**（[[C/C++ Sanitizer 与单元测试入门]]）之上 **写快**。原则：**先测量，再优化；先算法/布局，再微优化**。与 DPDK/嵌入式路径直接衔接。
+**精通** 的最后一环：在 **正确**（[[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门]]）之上 **写快**。原则：**先测量，再优化；先算法/布局，再微优化**。与 DPDK/嵌入式路径直接衔接。
 
 ---
 
@@ -164,6 +165,6 @@ objdump -d -C app | less
 
 ## 延伸阅读
 
-- [[knowledge/工程基础/排序算法大全与 C++ 实现#15. 如何选型]]
+- [[knowledge/工程基础/排序算法大全与 C++ 实现#115-如何选型]]
 - [[knowledge/网络与DPDK/实践/DPDK 性能剖析与绑核 checklist]]
 - [[knowledge/编程语言/C/index|C 精通路径]]

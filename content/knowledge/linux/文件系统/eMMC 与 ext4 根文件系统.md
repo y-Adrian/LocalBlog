@@ -10,6 +10,7 @@ aliases:
   - "linux/文件系统/eMMC 与 ext4 根文件系统"
   - "articles/linux/文件系统/eMMC 与 ext4 根文件系统"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # eMMC 与 ext4 根文件系统

@@ -9,6 +9,7 @@ aliases:
   - "网络与DPDK/实践/RDMA 适用场景速览"
   - "articles/网络与DPDK/实践/RDMA 适用场景速览"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # RDMA 适用场景速览

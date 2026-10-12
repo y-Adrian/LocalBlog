@@ -12,6 +12,7 @@ aliases:
   - "linux/驱动与模块/Input RTC Watchdog 子系统速览"
   - "articles/linux/驱动与模块/Input RTC Watchdog 子系统速览"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Input / RTC / Watchdog 子系统速览

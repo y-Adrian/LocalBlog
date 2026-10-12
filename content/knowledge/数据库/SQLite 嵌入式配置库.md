@@ -9,6 +9,7 @@ aliases:
   - "数据库/SQLite 嵌入式配置库"
   - "articles/数据库/SQLite 嵌入式配置库"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # SQLite 嵌入式配置库

@@ -9,6 +9,7 @@ aliases:
   - "编程语言/C++/C++ 封装 DPDK 数据面"
   - "articles/编程语言/C++/C++ 封装 DPDK 数据面"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # C++ 封装 DPDK 数据面

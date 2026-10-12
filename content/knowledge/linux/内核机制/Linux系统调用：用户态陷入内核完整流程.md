@@ -8,6 +8,7 @@ aliases:
   - "linux/内核机制/Linux系统调用：用户态陷入内核完整流程"
   - "articles/linux/内核机制/Linux系统调用：用户态陷入内核完整流程"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 Linux 系统调用完整流程

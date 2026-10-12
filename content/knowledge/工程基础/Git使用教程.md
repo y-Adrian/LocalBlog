@@ -7,6 +7,7 @@ aliases:
   - "工程基础/Git使用教程"
   - "articles/工程基础/Git使用教程"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 Git 深度使用教程

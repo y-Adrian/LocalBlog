@@ -7,6 +7,7 @@ aliases:
   - "网络与DPDK/内存子系统/DPDK 内存与子系统"
   - "articles/网络与DPDK/内存子系统/DPDK 内存与子系统"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 

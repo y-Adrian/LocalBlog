@@ -11,6 +11,6 @@ contentType: page
 
 ## 实践记录
 
-- [RISC-V Linux 驱动开发日志](riscv-driver-development-log/index)：按日期记录 Milk-V Duo S 上的驱动开发、问题定位与阶段性取舍。
+- [[articles/riscv-driver-development-log/index|RISC-V Linux 驱动开发日志]]：按日期记录 Milk-V Duo S 上的驱动开发、问题定位与阶段性取舍。
 
 独立文章使用 `contentType: article`；知识条目使用 `contentType: knowledge`。只有文章显示标题、创建时间和阅读时间。

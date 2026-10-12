@@ -9,6 +9,7 @@ aliases:
   - "网络与DPDK/网络编程/TCP 连接、粘包与常见陷阱"
   - "articles/网络与DPDK/网络编程/TCP 连接、粘包与常见陷阱"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # TCP 连接、粘包与常见陷阱

@@ -10,6 +10,7 @@ aliases:
   - "linux/OTA/swupdate 入门"
   - "articles/linux/OTA/swupdate 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # swupdate 入门

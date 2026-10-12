@@ -7,6 +7,7 @@ aliases:
   - "linux/内核机制/存储与IO子系统"
   - "articles/linux/内核机制/存储与IO子系统"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 Linux 存储与 I/O 子系统

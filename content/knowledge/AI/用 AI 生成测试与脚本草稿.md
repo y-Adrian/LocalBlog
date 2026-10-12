@@ -8,6 +8,7 @@ aliases:
   - "AI/用 AI 生成测试与脚本草稿"
   - "articles/AI/用 AI 生成测试与脚本草稿"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 用 AI 生成测试与脚本草稿

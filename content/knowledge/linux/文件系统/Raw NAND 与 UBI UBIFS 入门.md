@@ -11,6 +11,7 @@ aliases:
   - "linux/文件系统/Raw NAND 与 UBI UBIFS 入门"
   - "articles/linux/文件系统/Raw NAND 与 UBI UBIFS 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Raw NAND 与 UBI UBIFS 入门

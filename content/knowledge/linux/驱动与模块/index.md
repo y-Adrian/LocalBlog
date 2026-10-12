@@ -27,8 +27,8 @@ contentType: knowledge
 
 | 入口 | 说明 |
 |------|------|
-| [[riscv-驱动开发日志/index|RISC-V 驱动开发日志]] | 索引、命名约定、日志列表 |
-| [[riscv-驱动开发日志/日志模板|日志模板]] | 复制后新建每一篇 |
+| [[knowledge/linux/驱动与模块/riscv-驱动开发日志/index|RISC-V 驱动开发日志]] | 索引、命名约定、日志列表 |
+| [[knowledge/linux/驱动与模块/riscv-驱动开发日志/日志模板|日志模板]] | 复制后新建每一篇 |
 
 ## 学习路径衔接
 

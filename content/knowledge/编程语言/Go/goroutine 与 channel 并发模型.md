@@ -8,6 +8,7 @@ aliases:
   - "编程语言/Go/goroutine 与 channel 并发模型"
   - "articles/编程语言/Go/goroutine 与 channel 并发模型"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # goroutine 与 channel 并发模型

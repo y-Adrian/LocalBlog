@@ -7,6 +7,7 @@ aliases:
   - "网络与DPDK/教程/DPDK 教程 1：Hugepage、绑核、dpdk-devbind 与跑通 testpmd"
   - "articles/网络与DPDK/教程/DPDK 教程 1：Hugepage、绑核、dpdk-devbind 与跑通 testpmd"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 DPDK 教程（一）：环境搭建与 `testpmd`

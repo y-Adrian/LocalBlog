@@ -8,6 +8,7 @@ aliases:
   - "AI/如何撰写高效的 Prompt"
   - "articles/AI/如何撰写高效的 Prompt"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 如何撰写高效的 Prompt

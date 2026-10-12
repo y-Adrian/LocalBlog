@@ -9,6 +9,7 @@ aliases:
   - "linux/概览/嵌入式Linux基础知识"
   - "articles/linux/概览/嵌入式Linux基础知识"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 嵌入式 Linux 基础知识

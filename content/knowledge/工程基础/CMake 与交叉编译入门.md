@@ -9,6 +9,7 @@ aliases:
   - "工程基础/CMake 与交叉编译入门"
   - "articles/工程基础/CMake 与交叉编译入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # CMake 与交叉编译入门

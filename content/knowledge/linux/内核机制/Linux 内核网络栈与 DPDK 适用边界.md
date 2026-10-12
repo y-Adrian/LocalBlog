@@ -10,6 +10,7 @@ aliases:
   - "linux/内核机制/Linux 内核网络栈与 DPDK 适用边界"
   - "articles/linux/内核机制/Linux 内核网络栈与 DPDK 适用边界"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Linux 内核网络栈与 DPDK 适用边界

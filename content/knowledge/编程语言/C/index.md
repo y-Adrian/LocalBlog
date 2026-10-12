@@ -17,13 +17,13 @@ contentType: knowledge
 2. [[C 编译链接与 ABI]]
 3. [[C 与 C++ 混用]]
 4. → [[knowledge/编程语言/C++/C++ 对象模型与 Rule of Zero-Three-Five|C++ 对象模型]]
-5. → [[C/C++ Sanitizer 与单元测试入门|Sanitizer 与单测]]
-6. → [[C/C++ 性能优化方法论|性能优化]]
-7. [[C 字符串与 POSIX I/O 精读]]
+5. → [[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门|Sanitizer 与单测]]
+6. → [[knowledge/编程语言/C/C++ 性能优化方法论|性能优化]]
+7. [[knowledge/编程语言/C/C 字符串与 POSIX I/O 精读]]
 8. [[C99-C11 实用特性]]
 9. [[knowledge/工程基础/MISRA C 与 CERT C 编码规范对照|MISRA / CERT C]]
 10. [[阅读 C 与 C++ 源码的方法|读源码方法]]
-11. [[C/C++ 主线实践验收|四阶段实践验收]]
+11. [[knowledge/编程语言/C/C-C++ 主线实践验收|四阶段实践验收]]
 
 ## 延伸阅读
 

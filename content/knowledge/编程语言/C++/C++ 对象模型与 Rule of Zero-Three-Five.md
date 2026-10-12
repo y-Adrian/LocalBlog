@@ -10,6 +10,7 @@ aliases:
   - "编程语言/C++/C++ 对象模型与 Rule of Zero-Three-Five"
   - "articles/编程语言/C++/C++ 对象模型与 Rule of Zero-Three-Five"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C++ 对象模型与 Rule of 0/3/5
 
@@ -190,4 +191,4 @@ Friend& operator=(Friend other) noexcept {
 - [[RAII]]
 - [[内存模型]]
 - [[STL 容器算法手册]]
-- [[C/C++ Sanitizer 与单元测试入门]]
+- [[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门]]

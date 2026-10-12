@@ -10,6 +10,7 @@ aliases:
   - "网络与DPDK/实践/RPC 技术与分层详解"
   - "articles/网络与DPDK/实践/RPC 技术与分层详解"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # RPC 技术与分层详解

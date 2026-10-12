@@ -5,6 +5,7 @@ aliases:
   - "编程语言/C++/Trivial knowledge points"
   - "articles/编程语言/C++/Trivial knowledge points"
 contentType: knowledge
+showArticleMeta: true
 ---
 ## 0.1 private constructor
 A private constructor prevents code without private access from directly constructing the class. Objects can still be created by member functions or friends, so private constructors are commonly used for factory patterns, singletons, and controlled object creation.

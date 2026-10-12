@@ -11,6 +11,7 @@ aliases:
   - "linux/驱动与模块/Runtime PM 与休眠唤醒入门"
   - "articles/linux/驱动与模块/Runtime PM 与休眠唤醒入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Runtime PM 与休眠唤醒入门

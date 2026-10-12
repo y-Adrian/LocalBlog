@@ -10,6 +10,7 @@ aliases:
   - "linux/驱动与模块/platform 驱动完整案例"
   - "articles/linux/驱动与模块/platform 驱动完整案例"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # platform 驱动完整案例

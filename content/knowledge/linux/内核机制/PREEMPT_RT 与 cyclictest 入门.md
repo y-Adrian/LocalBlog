@@ -9,6 +9,7 @@ aliases:
   - "linux/内核机制/PREEMPT_RT 与 cyclictest 入门"
   - "articles/linux/内核机制/PREEMPT_RT 与 cyclictest 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # PREEMPT_RT 与 cyclictest 入门

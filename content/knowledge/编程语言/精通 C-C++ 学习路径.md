@@ -10,6 +10,7 @@ aliases:
   - "编程语言/精通 C-C++ 学习路径"
   - "articles/编程语言/精通 C-C++ 学习路径"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 精通 C/C++ 学习路径
 
@@ -45,7 +46,7 @@ flowchart LR
 |---|------|----------|
 | 1 | [[C 内存模型与未定义行为]] | 栈堆、指针、UB Top10 |
 | 2 | [[C 编译链接与 ABI]] | 符号、静态/动态链接、交叉编译 |
-| 3 | [[C 字符串与 POSIX I/O 精读]] | read/write、mmap、长度前缀 |
+| 3 | [[knowledge/编程语言/C/C 字符串与 POSIX I/O 精读]] | read/write、mmap、长度前缀 |
 | 4 | [[C99-C11 实用特性]] | 指定初始化、FAM、`_Generic` |
 | 5 | [[knowledge/linux/内核机制/传统 IPC：System V 与 POSIX|传统 IPC]] | 管道、msg/shm/sem |
 
@@ -70,8 +71,8 @@ flowchart LR
 
 | # | 文章 | 带走什么 |
 |---|------|----------|
-| — | [[C/C++ Sanitizer 与单元测试入门]] | ASan/UBSan、GoogleTest |
-| — | [[C/C++ 性能优化方法论]] | perf、cache、绑核 |
+| — | [[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门]] | ASan/UBSan、GoogleTest |
+| — | [[knowledge/编程语言/C/C++ 性能优化方法论]] | perf、cache、绑核 |
 
 **C++ 标准语法**：[[C++ 关键新特性]]（11/17/20）作 **词典**，不必线性读完。
 
@@ -103,10 +104,10 @@ flowchart TB
 
 | 阶段 | 练习 |
 |------|------|
-| 1 | 写 `read_full`/`write_full` + 长度前缀 echo；`readelf` 读交叉编译产物 → [[C/C++ 主线实践验收]] |
-| 2 | 用 `extern "C"` 包一层 DPDK init；Review 自己代码对照 MISRA 10 条 → [[C/C++ 主线实践验收#3. 阶段 2：C/C++ 边界 + 规范 Review]] |
-| 3 | 实现 Rule-of-5 的 fd RAII；`nm -C` 看虚类符号 → [[C/C++ 主线实践验收#4. 阶段 3：C++ 对象模型 + ABI 符号]] |
-| 4 | 开 ASan 跑单测；perf 火焰图找一热点 → [[C/C++ 主线实践验收#5. 阶段 4：测对 + 写快]] |
+| 1 | 写 `read_full`/`write_full` + 长度前缀 echo；`readelf` 读交叉编译产物 → [[knowledge/编程语言/C/C-C++ 主线实践验收]] |
+| 2 | 用 `extern "C"` 包一层 DPDK init；Review 自己代码对照 MISRA 10 条 → [[knowledge/编程语言/C/C-C++ 主线实践验收#3. 阶段 2：C/C++ 边界 + 规范 Review]] |
+| 3 | 实现 Rule-of-5 的 fd RAII；`nm -C` 看虚类符号 → [[knowledge/编程语言/C/C-C++ 主线实践验收#4. 阶段 3：C++ 对象模型 + ABI 符号]] |
+| 4 | 开 ASan 跑单测；perf 火焰图找一热点 → [[knowledge/编程语言/C/C-C++ 主线实践验收#5. 阶段 4：测对 + 写快]] |
 
 算法与数据结构：[[排序算法大全与 C++ 实现]]、本地 leetcode（不纳入本站）。
 

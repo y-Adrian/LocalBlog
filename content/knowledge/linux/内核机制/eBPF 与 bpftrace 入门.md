@@ -9,6 +9,7 @@ aliases:
   - "linux/内核机制/eBPF 与 bpftrace 入门"
   - "articles/linux/内核机制/eBPF 与 bpftrace 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # eBPF 与 bpftrace 入门

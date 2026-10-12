@@ -8,6 +8,7 @@ aliases:
   - "系统调试/coredump 分析基础"
   - "articles/系统调试/coredump 分析基础"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # coredump 分析基础

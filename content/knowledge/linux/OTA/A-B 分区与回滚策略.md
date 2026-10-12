@@ -9,6 +9,7 @@ aliases:
   - "linux/OTA/A-B 分区与回滚策略"
   - "articles/linux/OTA/A-B 分区与回滚策略"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # A/B 分区与回滚策略

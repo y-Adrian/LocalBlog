@@ -3,6 +3,7 @@ aliases:
   - "编程语言/C++/C++ atomic 学习笔记"
   - "articles/编程语言/C++/C++ atomic 学习笔记"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 ## 0.1 `atomic` 是什么

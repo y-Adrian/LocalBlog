@@ -8,6 +8,7 @@ aliases:
   - "AI/用 AI 读 TRM 与内核文档"
   - "articles/AI/用 AI 读 TRM 与内核文档"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 用 AI 读 TRM 与内核文档

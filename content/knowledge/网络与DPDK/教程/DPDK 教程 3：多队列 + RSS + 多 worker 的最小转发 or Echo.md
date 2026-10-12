@@ -7,6 +7,7 @@ aliases:
   - "网络与DPDK/教程/DPDK 教程 3：多队列 + RSS + 多 worker 的最小转发 or Echo"
   - "articles/网络与DPDK/教程/DPDK 教程 3：多队列 + RSS + 多 worker 的最小转发 or Echo"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 DPDK 教程（三）：多队列与多 worker 转发

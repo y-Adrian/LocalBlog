@@ -11,6 +11,7 @@ aliases:
   - "linux/内核机制/RCU 读拷贝更新机制详解"
   - "articles/linux/内核机制/RCU 读拷贝更新机制详解"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # RCU 读拷贝更新机制详解

@@ -9,6 +9,7 @@ aliases:
   - "网络与DPDK/实践/SR-IOV 与 VF 入门"
   - "articles/网络与DPDK/实践/SR-IOV 与 VF 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # SR-IOV 与 VF 入门

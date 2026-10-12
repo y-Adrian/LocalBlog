@@ -1,6 +1,6 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-import { isWrittenArticle } from "./quartz/util/content"
+import { isWrittenArticle, shouldShowArticleMeta } from "./quartz/util/content"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -29,7 +29,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ConditionalRender({
       component: Component.ArticleTitle(),
       condition: (page) =>
-        isWrittenArticle(page.fileData) && page.fileData.frontmatter?.hideTitle !== true,
+        shouldShowArticleMeta(page.fileData) && page.fileData.frontmatter?.hideTitle !== true,
     }),
     Component.ConditionalRender({
       component: Component.TagList(),

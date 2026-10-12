@@ -8,6 +8,7 @@ aliases:
   - "编程语言/Go/cgo 与交叉编译"
   - "articles/编程语言/Go/cgo 与交叉编译"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # cgo 与交叉编译

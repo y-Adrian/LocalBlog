@@ -11,6 +11,7 @@ aliases:
   - "编程语言/C/阅读 C 与 C++ 源码的方法"
   - "articles/编程语言/C/阅读 C 与 C++ 源码的方法"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 阅读 C 与 C++ 源码的方法
 
@@ -65,7 +66,7 @@ apt source libc6
 | 入口 | `read()` → `__libc_read` |
 | 内核 | `SYSCALL_DEFINE3(read, ...)` |
 
-对照 [[C 字符串与 POSIX I/O 精读]]：部分读写、EINTR 在 glibc 是否封装。
+对照 [[knowledge/编程语言/C/C 字符串与 POSIX I/O 精读]]：部分读写、EINTR 在 glibc 是否封装。
 
 ### 3.3 阅读技巧
 

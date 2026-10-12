@@ -24,6 +24,16 @@ function text(value: string): ElementContent {
   return { type: "text", value }
 }
 
+function nodeText(node: ElementContent): string {
+  if (node.type === "text") return node.value
+  if (node.type === "element") return node.children.map(nodeText).join("")
+  return ""
+}
+
+function normalizeHeading(value: string): string {
+  return value.trim().replace(/^\d+(?:[.)、]\s*|\s+)/, "").trim()
+}
+
 function formatPublishedDate(date: Date): string {
   return new Intl.DateTimeFormat("en-GB", {
     weekday: "long",
@@ -88,6 +98,16 @@ const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentP
 
   const content = htmlToJsx(fileData.filePath!, tree) as ComponentChildren
   const classes: string[] = fileData.frontmatter?.cssclasses ?? []
+  const firstElement = tree.children.find((node): node is Element => node.type === "element")
+  const title = fileData.frontmatter?.title?.trim()
+  const hasDuplicateKnowledgeTitle =
+    fileData.frontmatter?.contentType === "knowledge" &&
+    fileData.frontmatter?.showArticleMeta === true &&
+    firstElement?.tagName === "h1" &&
+    title !== undefined &&
+    normalizeHeading(nodeText(firstElement)).toLocaleLowerCase() ===
+      normalizeHeading(title).toLocaleLowerCase()
+  if (hasDuplicateKnowledgeTitle) classes.push("knowledge-title-duplicate")
   const classString = ["popover-hint", ...classes].join(" ")
   return <article class={classString}>{content}</article>
 }

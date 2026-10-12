@@ -9,6 +9,7 @@ aliases:
   - "网络与DPDK/实践/DPDK 性能剖析与绑核 checklist"
   - "articles/网络与DPDK/实践/DPDK 性能剖析与绑核 checklist"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # DPDK 性能剖析与绑核 checklist

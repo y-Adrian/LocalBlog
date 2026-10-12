@@ -11,6 +11,7 @@ aliases:
   - "编程语言/C/C-C++ 主线实践验收"
   - "articles/编程语言/C/C-C++ 主线实践验收"
 contentType: knowledge
+showArticleMeta: true
 ---
 # C/C++ 主线实践验收
 
@@ -45,7 +46,7 @@ sequenceDiagram
   S->>C: echo 同样帧
 ```
 
-与 [[C 字符串与 POSIX I/O 精读#6. 长度前缀协议（防粘包）]]、[[knowledge/网络与DPDK/网络编程/TCP 连接、粘包与常见陷阱]] 同一套 **帧格式**：`uint32_t len`（大端）+ payload，且 **len 设上限** 防 OOM。
+与 [[knowledge/编程语言/C/C 字符串与 POSIX I/O 精读#6. 长度前缀协议（防粘包）]]、[[knowledge/网络与DPDK/网络编程/TCP 连接、粘包与常见陷阱]] 同一套 **帧格式**：`uint32_t len`（大端）+ payload，且 **len 设上限** 防 OOM。
 
 ### 2.2 `read_full` / `write_full`
 
@@ -291,7 +292,7 @@ private:
 }   /* 作用域结束自动 close，无泄漏 */
 ```
 
-用 [[C/C++ Sanitizer 与单元测试入门]] 的 ASan 编译运行；`valgrind --leak-check=full` 亦可。
+用 [[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门]] 的 ASan 编译运行；`valgrind --leak-check=full` 亦可。
 
 ### 4.2 `nm -C` 看虚类
 
@@ -335,7 +336,7 @@ $CXX $SAN -std=c++17 fd_guard_test.cpp -lgtest -lgtest_main -pthread -o test
 ./test
 ```
 
-故意写错（移动后 double-close）应 **ASan 报错**。细节见 [[C/C++ Sanitizer 与单元测试入门]]、[[knowledge/系统调试/ASan 与 Valgrind 桌面验证]]。
+故意写错（移动后 double-close）应 **ASan 报错**。细节见 [[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门]]、[[knowledge/系统调试/ASan 与 Valgrind 桌面验证]]。
 
 ### 5.2 perf 火焰图（找一热点）
 
@@ -346,7 +347,7 @@ perf record -g --call-graph dwarf -F 997 ./sort_bench
 perf script | stackcollapse-perf.pl | flamegraph.pl > flame.svg
 ```
 
-读图方法：[[C/C++ 性能优化方法论]]、[[perf 与火焰图读 C++ 热点]]、[[排障 SOP：日志、perf 与反汇编]]。
+读图方法：[[knowledge/编程语言/C/C++ 性能优化方法论]]、[[perf 与火焰图读 C++ 热点]]、[[排障 SOP：日志、perf 与反汇编]]。
 
 **验收**：能指出 **最宽栈顶函数** 并说一句「下一步优化是否值得」（算法 vs 微优化）。
 
@@ -366,11 +367,11 @@ perf script | stackcollapse-perf.pl | flamegraph.pl > flame.svg
 ## 7. 相关链接
 
 - [[精通 C-C++ 学习路径]]
-- [[C 字符串与 POSIX I/O 精读]]
+- [[knowledge/编程语言/C/C 字符串与 POSIX I/O 精读]]
 - [[C 与 C++ 混用]]
 - [[C++ 对象模型与 Rule of Zero-Three-Five]]
-- [[C/C++ Sanitizer 与单元测试入门]]
-- [[C/C++ 性能优化方法论]]
+- [[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门]]
+- [[knowledge/编程语言/C/C++ 性能优化方法论]]
 
 ---
 

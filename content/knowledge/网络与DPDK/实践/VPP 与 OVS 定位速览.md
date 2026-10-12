@@ -9,6 +9,7 @@ aliases:
   - "网络与DPDK/实践/VPP 与 OVS 定位速览"
   - "articles/网络与DPDK/实践/VPP 与 OVS 定位速览"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # VPP 与 OVS 定位速览

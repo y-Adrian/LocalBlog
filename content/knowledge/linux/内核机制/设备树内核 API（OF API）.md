@@ -10,6 +10,7 @@ aliases:
   - "linux/内核机制/设备树内核 API（OF API）"
   - "articles/linux/内核机制/设备树内核 API（OF API）"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 设备树内核 API（OF API）
 

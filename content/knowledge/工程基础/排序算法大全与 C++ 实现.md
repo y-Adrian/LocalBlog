@@ -10,6 +10,7 @@ aliases:
   - "工程基础/排序算法大全与 C++ 实现"
   - "articles/工程基础/排序算法大全与 C++ 实现"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 1 排序算法大全与 C++ 实现
 
@@ -471,4 +472,4 @@ int main() {
 
 - [[knowledge/工程基础/编程中非常关键、非常常用的数学技巧#1.5 对数：复杂度、二分、树高]]
 - [[knowledge/编程语言/C++/STL 容器算法手册]]
-- [[leetcode/题目列表]] — 二分、区间扫描等「先排序」题型
+- `leetcode/题目列表.md`（本地记录，未发布） — 二分、区间扫描等「先排序」题型

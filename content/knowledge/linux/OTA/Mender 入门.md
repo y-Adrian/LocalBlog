@@ -9,6 +9,7 @@ aliases:
   - "linux/OTA/Mender 入门"
   - "articles/linux/OTA/Mender 入门"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # Mender 入门

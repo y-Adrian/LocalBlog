@@ -11,6 +11,7 @@ aliases:
   - "linux/平台与构建/TrustZone 与安全启动概念"
   - "articles/linux/平台与构建/TrustZone 与安全启动概念"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # TrustZone 与安全启动概念

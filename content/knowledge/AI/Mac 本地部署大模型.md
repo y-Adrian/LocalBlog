@@ -7,6 +7,7 @@ aliases:
   - "AI/Mac 本地部署大模型"
   - "articles/AI/Mac 本地部署大模型"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 Mac 本地部署大模型

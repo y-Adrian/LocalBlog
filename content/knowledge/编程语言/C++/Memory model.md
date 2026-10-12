@@ -5,6 +5,7 @@ aliases:
   - "编程语言/C++/Memory model"
   - "articles/编程语言/C++/Memory model"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 1 Questions at first
 

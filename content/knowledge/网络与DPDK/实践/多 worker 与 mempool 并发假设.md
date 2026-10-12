@@ -9,6 +9,7 @@ aliases:
   - "网络与DPDK/实践/多 worker 与 mempool 并发假设"
   - "articles/网络与DPDK/实践/多 worker 与 mempool 并发假设"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 多 worker 与 mempool 并发假设

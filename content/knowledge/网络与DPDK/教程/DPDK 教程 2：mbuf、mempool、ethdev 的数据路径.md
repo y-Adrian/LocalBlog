@@ -7,6 +7,7 @@ aliases:
   - "网络与DPDK/教程/DPDK 教程 2：mbuf、mempool、ethdev 的数据路径"
   - "articles/网络与DPDK/教程/DPDK 教程 2：mbuf、mempool、ethdev 的数据路径"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 DPDK 教程（二）：`mbuf` 与数据路径

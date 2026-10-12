@@ -11,6 +11,7 @@ aliases:
   - "工程基础/MISRA C 与 CERT C 编码规范对照"
   - "articles/工程基础/MISRA C 与 CERT C 编码规范对照"
 contentType: knowledge
+showArticleMeta: true
 ---
 # MISRA C 与 CERT C 编码规范对照
 
@@ -92,7 +93,7 @@ flowchart TB
 | **INT** 整数 | 溢出、截断、符号转换 | 协议长度、DMA 计数 |
 | **ARR** 数组 | 越界、长度 off-by-one | 缓冲区、FAM |
 | **MEM** 内存 | UAF、double-free、泄漏 | 驱动 probe/remove |
-| **STR** 字符串 | 无界拷贝 | 用 `snprintf` [[C 字符串与 POSIX I/O 精读]] |
+| **STR** 字符串 | 无界拷贝 | 用 `snprintf` [[knowledge/编程语言/C/C 字符串与 POSIX I/O 精读]] |
 | **CON** 并发 | 数据竞争 | mutex/atomic，非 volatile [[内核同步机制总览]] |
 | **FIO** 文件 I/O | 路径遍历、权限 | OTA、配置加载 |
 | **API** 误用 | 忽略返回值 | 检查 `read`/`malloc` 返回值 |
@@ -176,5 +177,5 @@ gcc -std=c11 -Wall -Wextra -Wconversion -Werror=implicit-function-declaration ..
 ## 延伸阅读
 
 - [[knowledge/工程基础/嵌入式代码评审清单]]
-- [[C/C++ Sanitizer 与单元测试入门]]
+- [[knowledge/编程语言/C/C++ Sanitizer 与单元测试入门]]
 - [[C 内存模型与未定义行为]]

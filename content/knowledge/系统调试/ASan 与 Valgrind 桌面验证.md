@@ -8,6 +8,7 @@ aliases:
   - "系统调试/ASan 与 Valgrind 桌面验证"
   - "articles/系统调试/ASan 与 Valgrind 桌面验证"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # ASan 与 Valgrind 桌面验证

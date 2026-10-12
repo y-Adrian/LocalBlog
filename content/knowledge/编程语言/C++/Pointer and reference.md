@@ -5,6 +5,7 @@ aliases:
   - "编程语言/C++/Pointer and reference"
   - "articles/编程语言/C++/Pointer and reference"
 contentType: knowledge
+showArticleMeta: true
 ---
 *A **pointer** is a variable that stores the memory address of another object, while a **reference** is a alias(an alternative name) for an exist object*.
 

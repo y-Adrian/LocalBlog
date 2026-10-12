@@ -7,6 +7,7 @@ aliases:
   - "网络与DPDK/教程/DPDK 教程 4：Offload、Flow、NUMA、IOVA 与性能剖析"
   - "articles/网络与DPDK/教程/DPDK 教程 4：Offload、Flow、NUMA、IOVA 与性能剖析"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # 1 DPDK 教程（四）：Offload 与性能剖析

@@ -10,6 +10,7 @@ aliases:
   - "linux/学习路径/U-Boot 实操指南"
   - "articles/linux/学习路径/U-Boot 实操指南"
 contentType: knowledge
+showArticleMeta: true
 ---
 
 # U-Boot 实操指南

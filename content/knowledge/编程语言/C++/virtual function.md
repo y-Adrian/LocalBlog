@@ -5,6 +5,7 @@ aliases:
   - "编程语言/C++/virtual function"
   - "articles/编程语言/C++/virtual function"
 contentType: knowledge
+showArticleMeta: true
 ---
 # 1 Questions at beginning
 
