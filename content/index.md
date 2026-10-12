@@ -7,7 +7,7 @@ cssclasses:
 ---
 <figure class="home-portrait">
   <img src="images/home-portrait-comic.png" alt="Adrian outdoors" />
-  <figcaption>“Consistency is key.”</figcaption>
+  <figcaption>“Consistency is the key.”</figcaption>
 </figure>
 
 # Adrian
