@@ -141,29 +141,38 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
     componentResources.afterDOMLoaded.push(`
       window.__gcViewsBase = "https://${gcSite}.${gcHost}";
     `)
-    componentResources.afterDOMLoaded.push(pageViewsScript)
     componentResources.afterDOMLoaded.push(`
-      const goatcounterScriptPre = document.createElement('script');
-      goatcounterScriptPre.textContent = \`
-        window.goatcounter = { no_onload: true };
-      \`;
-      document.head.appendChild(goatcounterScriptPre);
-
       const endpoint = "https://${gcSite}.${gcHost}/count";
+      window.__gcViewsReady = false;
+      window.goatcounter = { no_onload: true, endpoint };
+
+      function countCurrentPage() {
+        if (typeof window.goatcounter.count === 'function') {
+          window.goatcounter.count({ path: location.pathname });
+        }
+      }
+      document.addEventListener('nav', countCurrentPage);
+
+      function notifyCounterReady() {
+        window.__gcViewsReady = true;
+        document.dispatchEvent(new CustomEvent('goatcounter:ready'));
+      }
       const goatcounterScript = document.createElement('script');
       goatcounterScript.src = "${cfg.analytics.scriptSrc ?? "https://gc.zgo.at/count.js"}";
       goatcounterScript.defer = true;
       goatcounterScript.setAttribute('data-goatcounter', endpoint);
+      goatcounterScript.setAttribute('data-persist', 'true');
       goatcounterScript.onload = () => {
-        window.goatcounter.endpoint = endpoint;
-        goatcounter.count({ path: location.pathname });
-        document.addEventListener('nav', () => {
-          goatcounter.count({ path: location.pathname });
-        });
+        countCurrentPage();
+        notifyCounterReady();
       };
-
+      goatcounterScript.onerror = () => {
+        console.warn('GoatCounter tracking script failed to load.');
+        notifyCounterReady();
+      };
       document.head.appendChild(goatcounterScript);
     `)
+    componentResources.afterDOMLoaded.push(pageViewsScript)
   } else if (cfg.analytics?.provider === "posthog") {
     componentResources.afterDOMLoaded.push(`
       const posthogScript = document.createElement("script");
