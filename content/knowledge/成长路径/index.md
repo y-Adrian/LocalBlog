@@ -25,6 +25,8 @@ contentType: knowledge
 - 已修正：[[knowledge/linux/内核机制/传统 IPC：System V 与 POSIX]]，区分消息选择与优先级，修正接收缓冲区与生命周期说明。
 - 已补文：[[knowledge/linux/内核机制/POSIX 共享内存：初始化、同步与生命周期]]，覆盖初始化发布、共享锁、通知和异常退出。
 - 已补文：[[knowledge/通信与IPC/共享内存通信框架：协议、队列与故障恢复]]，覆盖消息协议、背压、超时、代际和资源归属。
+- 已补文：[[knowledge/通信与IPC/SPSC 共享队列：发布、消费与槽位回收]] 与 [[knowledge/通信与IPC/共享队列通知：eventfd、futex 与防丢唤醒]]。
+- 已深化：[[knowledge/网络与DPDK/实践/多 worker 与 mempool 并发假设]]，区分对象所有权、跨核归还和池/队列的并发配置。
 - 待深化：块设备与网络驱动实操、RISC-V 学习路线中的架构边界、日志持久化和部署运维条目。具体范围与状态见仓库 `docs/知识库内容优化清单.md`。
 
 ## 如何使用
