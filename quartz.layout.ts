@@ -12,6 +12,11 @@ export const sharedPageComponents: SharedLayout = {
       { name: "GitHub", url: "https://github.com/y-Adrian", icon: "github" },
       { name: "Gmail", url: "mailto:storyvs7263@gmail.com", icon: "gmail" },
       { name: "X", url: "https://x.com/story95080", icon: "x" },
+      {
+        name: "Stack Overflow",
+        url: "https://stackoverflow.com/users/15498117/adrian-charles",
+        icon: "stackoverflow",
+      },
     ],
   }),
 }

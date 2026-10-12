@@ -16,14 +16,14 @@ I live in Hangzhou, Zhejiang, China. I enjoy hiking, traveling and cooking.
 
 ## Education
 
-+ 2017.9~2021.6 <img alt="Beijing University of Posts and Telecommunications logo" src="about/images/bupt-emblem.webp" style="height: 1em; width: auto; vertical-align: -0.12em; margin: 0 0.25em;"> B.Eng in Information and Communication Engineering
++ ***2017.9~2021.6*** <img alt="Beijing University of Posts and Telecommunications logo" src="about/images/bupt-emblem.webp" style="height: 1em; width: auto; vertical-align: -0.12em; margin: 0 0.25em;"> B.Eng in Information and Communication Engineering
 
 ---
 
 ## Professional Experience
 
-+ 2021.7 - 2022.6 | VastData, Database Kernel Engineer
-+ 2023.4 - 2026.3 | FESCO Adecco, Software Engineer
++ ***2021.7 - 2022.6** *| VastData, Database Kernel Engineer
++ ***2023.4 - 2026.3*** | FESCO Adecco, Software Engineer
 
 ---
 
