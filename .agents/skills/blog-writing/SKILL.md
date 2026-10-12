@@ -1,12 +1,11 @@
 ---
-description: 站内博客正文——问题驱动结构；图文并茂见 blog-visual-diagrams.mdc
-globs: content/**/*.md
-alwaysApply: false
+name: blog-writing
+description: 撰写或改写本项目 content/ 下的技术博客与知识条目，应用问题驱动结构、术语、公式和内容分类约定；纯导航或样式修改不需要此技能。
 ---
 
 # 博客正文写作（`content/**`）
 
-当用户在本仓库**撰写或改写博客类 Markdown**时，在遵守 `.cursor/rules/reason-then-action.mdc`（先因果再步骤与示例）的前提下，额外遵守本节。
+当用户在本仓库**撰写或改写博客类 Markdown**时，先解释因果，再给步骤与示例，并遵守以下约定。
 
 ## 叙事结构（建议顺序）
 
@@ -62,8 +61,16 @@ alwaysApply: false
 
 ## 图文并茂
 
-**默认要画图**；配图类型、最低数量、Mermaid 模板与自检清单见 **`.cursor/rules/blog-visual-diagrams.mdc`**（与本节同时生效）。
+**默认要画图**；配图类型、最低数量、Mermaid 模板与自检清单见 **`../blog-diagrams/SKILL.md`**（与本节同时生效）。
 
 ## 篇幅与拆分
 
 - 单篇过长时：拆成系列篇，每篇仍保持「问题 → 图 → 文字解释 → 可操作步骤」闭环。
+
+## 内容归属与链接
+
+- `content/articles/` 放个人经历、时间线、观点、实践取舍，使用 `contentType: article`。
+- `content/knowledge/` 放持续修订、按主题检索的定义、结构与操作指南，使用 `contentType: knowledge`；具体知识文章需要元信息时设置 `showArticleMeta: true`。
+- 按更新意图、核心问题、叙事性、读者使用方式和内容粒度判断归属。边界模糊时，强个人判断归文章，中立可引用内容归知识库。
+- 链接从 `content/` 开始，如 `[[knowledge/linux/内核机制/存储与IO子系统]]`，不要把 `../` 与 `knowledge/` 根路径混用。
+- `#address-cells`、`<=>` 等技术符号放在行内代码中，避免被标签与箭头语法误解析。

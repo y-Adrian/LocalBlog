@@ -24,8 +24,6 @@ import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
-import SiteTagline from "./SiteTagline"
-import Contributions from "./Contributions"
 import SiteNav from "./SiteNav"
 
 export {
@@ -55,7 +53,5 @@ export {
   Comments,
   Flex,
   ConditionalRender,
-  SiteTagline,
-  Contributions,
   SiteNav,
 }

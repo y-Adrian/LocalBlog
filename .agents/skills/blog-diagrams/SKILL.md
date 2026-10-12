@@ -1,14 +1,13 @@
 ---
-description: 博客图文并茂——机制/数据流优先配图（Mermaid、ASCII、必要时静态图）
-globs: content/**/*.md
-alwaysApply: false
+name: blog-diagrams
+description: 为本项目的技术正文制作机制、数据流、时序和状态图，使用 Quartz 支持的 Mermaid 或静态图；纯链接或样式修改不需要此技能。
 ---
 
 # 图文并茂（`content/**`）
 
 撰写或改写博客正文时，**默认要画图**；文字解释「图里画不出的细节」，而不是用长段落代替图。
 
-与 `.cursor/rules/blog-writing.mdc`（结构、术语、公式）和 `reason-then-action.mdc`（先因果再步骤）一并遵守。
+同时遵守 `../blog-writing/SKILL.md` 的术语与格式约定，先用图解释因果，再给步骤。
 
 ## 最低配图量
 
@@ -66,7 +65,7 @@ sequenceDiagram
 
 ## 静态图片
 
-- 路径放在站点约定目录（如 `quartz/static/...`），正文：`![简短 alt](相对路径)`。  
+- 路径放在站点约定目录（正文图片在 `content/` 的对应文章资源目录，全站公共图片在 `quartz/static/`），正文：`![简短 alt](相对路径)`。  
 - alt 写清图意，便于无图环境与检索。  
 - 能用 Mermaid 表达的逻辑结构，**优先 Mermaid**（易改、可 diff）。
 
@@ -84,4 +83,4 @@ sequenceDiagram
 - [ ] 主要机制是否都有对应图？  
 - [ ] 时序/状态类内容是否用了 `sequenceDiagram` / `stateDiagram-v2`？  
 - [ ] 图是否能在 `npx quartz build` 后正常显示（若改过 Mermaid）？  
-- [ ] 术语首次出现是否仍遵守 `blog-writing.mdc` 的中英注解？
+- [ ] 术语首次出现是否仍遵守 `../blog-writing/SKILL.md` 的中英注解？

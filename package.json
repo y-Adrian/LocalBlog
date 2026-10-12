@@ -16,12 +16,11 @@
     "docs": "npx quartz build --serve -d docs",
     "check": "tsc --noEmit && npx prettier . --check",
     "format": "npx prettier . --write",
-    "activity:update": "node --experimental-strip-types scripts/update-blog-activity-cache.ts",
     "content:calibrate": "node scripts/calibrate-content.mjs",
     "content:fix-escapes": "node scripts/fix-prose-escapes.mjs --fix",
-    "hooks:install": "git config core.hooksPath .githooks",
     "test": "tsx --test",
-    "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1"
+    "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1",
+    "clean": "node scripts/clean.mjs"
   },
   "engines": {
     "npm": ">=10.9.2",

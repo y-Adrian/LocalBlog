@@ -1,12 +1,13 @@
-# 1 简介
-这里是 Adrian 的个人博客空间，我学习过程中记录下的一些笔记都会逐步记录在这里，持续更新中。
+# Adrian's Space
 
-欢迎大家直接访问[我的网页](https://y-adrian.github.io/LocalBlog)!
+Adrian 的个人博客与知识库，基于 Quartz v4。访问 [网站](https://y-adrian.github.io/LocalBlog/)。
 
-## 仓库怎么放文件
+- `content/articles/`：博客文章与实践记录。
+- `content/knowledge/`：持续维护的知识条目与学习路径。
+- `labs/`：文章配套实验源码。
+- `quartz/`、`scripts/`：站点工程与维护脚本。
+- `.agents/skills/`：技术写作和图解技能。
 
-- **博文**：只写在 `content/`（Obsidian 与 Quartz 共用）。
-- **配套代码实验**：`labs/`（本地 `make` 用，编译产物不进 Git）。
-- **站点工程**：`quartz/`、`scripts/`；构建输出在 `public/`（已忽略）。
+安装依赖使用 `npm ci`；构建使用 `npx quartz build`；本地预览使用 `npx quartz build --serve`；清理生成文件使用 `npm run clean`。
 
-维护者说明见 `docs/仓库目录说明.md`（`draft: true`，不发布到站点）。
+构建产物不提交。目录约定见 [维护说明](docs/仓库目录说明.md)，修改前阅读 `AGENTS.md`。
