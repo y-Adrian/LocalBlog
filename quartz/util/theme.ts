@@ -38,7 +38,7 @@ export interface Theme {
 export type ThemeKey = keyof Colors
 
 const DEFAULT_SANS_SERIF =
-  'system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+  '"Noto Sans SC", "Source Han Sans SC", "思源黑体", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
 const DEFAULT_MONO = "ui-monospace, SFMono-Regular, SF Mono, Menlo, monospace"
 
 export function getFontSpecificationName(spec: FontSpecification): string {

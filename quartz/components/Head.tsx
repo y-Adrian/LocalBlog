@@ -45,6 +45,14 @@ export default (() => {
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" />
             <link rel="stylesheet" href={googleFontHref(cfg.theme)} />
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+            />
+            <link
+              rel="stylesheet"
+              href="https://fontsapi.zeoseven.com/159/main/result.css"
+            />
             {cfg.theme.typography.title && (
               <link rel="stylesheet" href={googleFontSubsetHref(cfg.theme, cfg.pageTitle)} />
             )}

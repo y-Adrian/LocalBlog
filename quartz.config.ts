@@ -25,12 +25,13 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        /* 思源宋体（简体）= Noto Serif SC；与 custom.scss 中 local 名「思源宋体」配合 */
-        title: { name: "Noto Serif SC", weights: [400, 600, 700], includeItalic: false },
-        header: { name: "Noto Serif SC", weights: [400, 600, 700], includeItalic: false },
-        /* 英文正文/代码：Fira Mono（Powerline 变体见 custom.scss local()，需本机安装或自托管） */
-        body: { name: "Fira Mono", weights: [400, 500, 700], includeItalic: false },
-        code: { name: "Fira Mono", weights: [400, 500, 700], includeItalic: false },
+        /* Latin headings use Space Grotesk; Noto Sans SC is the CJK fallback. */
+        title: { name: "Space Grotesk", weights: [400, 500, 600, 700], includeItalic: false },
+        header: { name: "Space Grotesk", weights: [400, 500, 600, 700], includeItalic: false },
+        /* Readable Chinese/Latin prose and code typography. */
+        body: { name: "LXGW WenKai", weights: [400, 700], includeItalic: true },
+        /* JetBrains Mono is loaded as fallback; custom.scss prefers Sarasa Mono SC. */
+        code: { name: "JetBrains Mono", weights: [400, 500, 600, 700], includeItalic: true },
       },
       colors: {
         lightMode: {
