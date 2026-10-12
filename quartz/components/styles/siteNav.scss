@@ -29,14 +29,26 @@
   max-width: 8rem;
 }
 
-.site-header > header > .search,
-.site-header > header > .darkmode {
+.site-header > header > .search {
   position: relative;
   left: clamp(0.25rem, 1.5vw, 1.5rem);
 }
 
+.site-header > header > .darkmode {
+  position: relative;
+  // Leave a clear gap outside the navigation card without moving the main content.
+  left: calc(clamp(0.25rem, 1.5vw, 1.5rem) + 1.5rem);
+}
+
 .site-header > header {
   gap: 1rem;
+}
+
+@media all and (max-width: 1100px) {
+  .site-header > header > .search,
+  .site-header > header > .darkmode {
+    left: 0;
+  }
 }
 
 .site-nav-link {

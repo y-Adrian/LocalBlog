@@ -45,12 +45,7 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => page.fileData.slug !== "index",
     }),
   ],
-  afterBody: [
-    Component.ConditionalRender({
-      component: Component.FocusMode(),
-      condition: (page) => page.fileData.slug !== "index",
-    }),
-  ],
+  afterBody: [],
   left: [],
   right: [
     Component.Graph(),
