@@ -25,7 +25,11 @@ hideReadingTime: true
 - [[knowledge/通信与IPC/SPSC 共享队列：发布、消费与槽位回收|SPSC 的容量、发布与回收]]
 - [[knowledge/通信与IPC/共享队列通知：eventfd、futex 与防丢唤醒|条件变量、eventfd、futex 与防丢唤醒]]
 
-## 4. 并发与优化
+## 4. 配套实践
+
+- [[knowledge/通信与IPC/共享内存双进程实践：握手、背压与退出|Linux 双进程共享队列：握手、背压与退出]] — 源码在仓库 `labs/shared-memory-ipc/`，尚无 Linux 执行记录。
+
+## 5. 并发与优化
 
 - [[knowledge/编程语言/C++/Memory model|原子操作的进程共享边界]]
 - [[knowledge/编程语言/C++/内存模型|C++ 内存序]]
@@ -35,4 +39,4 @@ hideReadingTime: true
 
 ## 后续深化
 
-可复现的双进程通信实现、共享对象池与零拷贝回收、跨重启的请求去重。当前专题已补齐 SPSC 发布回收与休眠唤醒的设计说明；实际性能与故障注入结果需要另行记录。
+双进程源码的 Linux 运行与故障记录、共享对象池与零拷贝回收、跨重启的请求去重。当前专题已补齐 SPSC 发布回收与休眠唤醒的设计说明；实际性能与故障注入结果需要另行记录。

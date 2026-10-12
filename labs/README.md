@@ -4,11 +4,12 @@
 
 | 子目录 | 对应博文 |
 |--------|----------|
-| `c-cpp-mastery/` | 博文 `content/编程语言/C/C-C++ 主线实践验收.md` |
+| `c-cpp-mastery/` | 博文 `content/knowledge/编程语言/C/C-C++ 主线实践验收.md` |
+| `shared-memory-ipc/` | Linux 共享内存双进程实践；见该目录 README |
 
 ## 编译
 
-在各 `stage*/` 下执行 `make`；产物已在 `.gitignore` 中忽略，**不要提交** 可执行文件、`.o`、`.dSYM`。
+在各实验目录下执行 `make`，平台要求见对应 README；产物已在 `.gitignore` 中忽略，**不要提交** 可执行文件、`.o`、`.dSYM`。
 
 ```bash
 cd c-cpp-mastery/stage1-len-echo && make && make clean
