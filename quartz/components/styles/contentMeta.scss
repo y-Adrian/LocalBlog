@@ -12,3 +12,24 @@
     }
   }
 }
+
+
+.content-meta-views {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+  color: var(--gray);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+
+  & > svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}

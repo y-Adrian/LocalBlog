@@ -1,9 +1,11 @@
 function updatePageViewCount() {
-  const el = document.querySelector(".content-meta-views")
+  const el = document.querySelector<HTMLElement>(".content-meta-views")
   if (!el) return
 
   const template = el.getAttribute("data-template")
-  if (!template) return
+  const labelTemplate = el.getAttribute("data-label-template")
+  const countElement = el.querySelector<HTMLElement>(".content-meta-views-count")
+  if (!template || !labelTemplate || !countElement) return
 
   const base = (window as unknown as { __gcViewsBase?: string }).__gcViewsBase
   if (!base) return
@@ -12,15 +14,16 @@ function updatePageViewCount() {
   const url = `${base}/counter/${encodeURIComponent(path)}.json`
 
   fetch(url)
-    .then((res) => (res.ok ? res.json() : Promise.reject()))
+    .then((res) => {
+      if (res.status === 404) return { count: "0" }
+      if (!res.ok) return Promise.reject()
+      return res.json()
+    })
     .then((data: { count?: string }) => {
-      if (!data?.count) {
-        el.remove()
-        return
-      }
-
-      const prefix = el.classList.contains("content-meta-views--standalone") ? "" : "，"
-      el.textContent = `${prefix}${template.replace("{count}", data.count)}`
+      const count = data?.count ?? "0"
+      countElement.textContent = template.replace("{count}", count)
+      el.setAttribute("aria-label", labelTemplate.replace("{count}", count))
+      el.setAttribute("title", labelTemplate.replace("{count}", count))
       el.removeAttribute("aria-hidden")
       el.classList.add("content-meta-views--ready")
     })
@@ -29,5 +32,11 @@ function updatePageViewCount() {
     })
 }
 
-document.addEventListener("DOMContentLoaded", updatePageViewCount)
+// This bundle runs after DOMContentLoaded in Quartz; run immediately on first load,
+// then refresh after each SPA navigation.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", updatePageViewCount, { once: true })
+} else {
+  updatePageViewCount()
+}
 document.addEventListener("nav", updatePageViewCount)

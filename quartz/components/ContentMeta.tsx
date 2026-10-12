@@ -40,36 +40,37 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
         segments.push(<Date date={fileData.dates.created} locale={cfg.locale} />)
       }
 
-      const showPageViews = cfg.analytics?.provider === "goatcounter"
+      const showPageViews = showArticleMeta && cfg.analytics?.provider === "goatcounter"
       const pageViewsTemplate = showPageViews
         ? i18n(cfg.locale).components.contentMeta.pageViews({ count: "{count}" })
         : null
+      const pageViewsLabelTemplate = showPageViews
+        ? i18n(cfg.locale).components.contentMeta.pageViews({ count: "{count}" })
+        : null
 
-      // Display reading time if enabled
+      // Display reading time and page views as separate metadata items.
       if (showReadingTime) {
         const { minutes, words: _words } = readingTime(text)
         const displayedTime = i18n(cfg.locale).components.contentMeta.readingTime({
           minutes: Math.ceil(minutes),
         })
-        segments.push(
-          <span>
-            {displayedTime}
-            {showPageViews && (
-              <span
-                class="content-meta-views"
-                data-template={pageViewsTemplate!}
-                aria-hidden="true"
-              />
-            )}
-          </span>,
-        )
-      } else if (showPageViews) {
+        segments.push(<span>{displayedTime}</span>)
+      }
+
+      if (showPageViews) {
         segments.push(
           <span
-            class="content-meta-views content-meta-views--standalone"
+            class="content-meta-views"
             data-template={pageViewsTemplate!}
+            data-label-template={pageViewsLabelTemplate!}
             aria-hidden="true"
-          />,
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <span class="content-meta-views-count">…</span>
+          </span>,
         )
       }
 
