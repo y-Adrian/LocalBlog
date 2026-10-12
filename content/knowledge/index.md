@@ -12,6 +12,9 @@ hideCreatedDate: true
 ---
 ## 知识专区
 
+- [IPC & Communication Frameworks](通信与IPC/index)：共享内存、队列协议、通知与故障恢复
+- [Linux & Embedded Systems](linux/index)：内核机制、驱动、板级开发与构建
+
 - [Networking &amp; DPDK](网络与DPDK/index)：网络编程、数据面与性能实践
 - [Systems Debugging](系统调试/index)：调试工具、性能分析与故障定位
 - [Engineering Fundamentals](工程基础/index)：Shell、Git、构建、数学与设计模式

@@ -6,13 +6,13 @@ aliases:
   - "articles/编程语言/C++/Memory model"
 contentType: knowledge
 showArticleMeta: true
+modified: 2026-10-12
 ---
 # 1 Questions at first
 
 + **For shared memory, if different processes mapped one shared memory, and they manipulate one data with atomic operation, will the atomic operation work correctly to solve the problem of data races?** 
-	Lock-free atomic operations work correctly across processed that map the same shared memory region, and they can solve data races on individual variables(or small lock-free structures). 
-	Morden CPU implement atomic operations at the hardware level using the physical address of the memory location, not the virtual address.
-	Cache coherence protocols operate on physical addresses/cache lines. As long as multiple processes map the same physical pages, the hardware treats the accesses from different processes the same way it treats the accesses from different threads.
+	Hardware atomics can be useful for processes mapping the same shared pages, but this is not a blanket portability guarantee for arbitrary `std::atomic<T>`. Check the compiler/runtime contract, alignment, object initialization, shared layout and whether the exact operation is lock-free on the target. A non-lock-free implementation may call a runtime helper; it must not be assumed to provide process-shared synchronization. Even a lock-free counter does not make the surrounding queue or payload correct: publication, consumption and reclamation still need an explicit protocol.
+	See [GCC atomic builtins and runtime fallback](https://gcc.gnu.org/onlinedocs/gcc/_005f_005fatomic-Builtins.html), [[knowledge/linux/内核机制/POSIX 共享内存：初始化、同步与生命周期]] and [[knowledge/通信与IPC/共享内存通信框架：协议、队列与故障恢复]].
 + **What is the memory model difference between c and c++?**
 	For concurrent programming with atomics, mutexes, and memory ordering, the semantics you reason about are essentially the same. Code written against the common atomics model ports between C and C++ with only syntactic/library changes. Compilers implement the same underlying guarantees(and the same allowed reorderings/optimizations under the as-if rule).
 # 2 learn

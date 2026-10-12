@@ -11,6 +11,7 @@ aliases:
   - "articles/linux/内核机制/传统 IPC：System V 与 POSIX"
 contentType: knowledge
 showArticleMeta: true
+modified: 2026-10-12
 ---
 # 传统 IPC：System V 与 POSIX
 
@@ -22,7 +23,7 @@ showArticleMeta: true
 
 - 能画 **管道 → 消息队列 / 共享内存 + 信号量** 的分工。  
 - 区分 **System V**（`ftok` + `msgget`/`semget`/`shmget`）与 **POSIX**（`mq_open`/`sem_open`/`shm_open`）。  
-- 知道 **谁最快、谁最易用、谁该淘汰**。
+- 根据消息边界、同步方式、生命周期和部署限制选机制，不按“新旧”或单次延迟排名。
 
 ---
 
@@ -47,7 +48,7 @@ flowchart LR
 | 大块数据、低延迟 | **共享内存** + **信号量** |
 | 跨主机 / 通用 | **Socket**（见 [[knowledge/网络与DPDK/网络编程/Socket 编程基础：TCP、UDP 与字节序]]） |
 
-线程共享地址空间，用 mutex 即可；**进程必须 IPC**，见 [[knowledge/编程语言/C++/C++多线程与多进程编程]]。
+线程共享地址空间，但仍需根据共享数据访问方式选择互斥或原子协议；进程也可以映射共享内存，并使用明确配置的进程间同步对象。见 [[knowledge/编程语言/C++/C++多线程与多进程编程]]。
 
 ---
 
@@ -55,19 +56,13 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-  subgraph legacy["传统 / 半传统"]
-    PIPE[pipe / FIFO]
-    SV[System V: msg sem shm]
-    PX[POSIX: mq sem shm]
-    UDS[Unix Domain Socket]
-  end
-  subgraph modern["更现代"]
-    SK[网络 Socket]
-    EBPF[eBPF / 共享 ring 等]
-  end
-  PIPE --> SV
-  PIPE --> PX
-  SV --- PX
+  NEED[通信需求] --> STREAM[字节流]
+  NEED --> MESSAGE[消息边界]
+  NEED --> MEMORY[共享数据布局]
+  STREAM --> PIPE[pipe / FIFO / 流式 Socket]
+  MESSAGE --> QUEUE[消息队列 / 报文 Socket]
+  MEMORY --> SHM[共享内存]
+  SHM --> SYNC[同步 + 通知 + 生命周期协议]
 ```
 
 | 机制 | 数据形态 | 内核拷贝 | 典型同步 |
@@ -146,7 +141,7 @@ struct msgbuf msg = { .mtype = 1, .mtext = "hi" };
 msgsnd(msqid, &msg, strlen(msg.mtext) + 1, 0);
 ```
 
-**特点**：带边界的消息、可优先级（type）；**数据要拷贝进内核**。
+**特点**：带消息边界，`mtype` 用于接收选择，不等同于 POSIX 队列的数值优先级；**数据要拷贝进内核**。`msgsnd()` 的长度只包含正文，不包含 `long mtype`。
 
 ### 5.2 信号量（Semaphore）
 
@@ -160,7 +155,7 @@ msgsnd(msqid, &msg, strlen(msg.mtext) + 1, 0);
 union semun { int val; struct semid_ds *buf; unsigned short *array; };
 int semid = semget(key, 1, IPC_CREAT | 0666);
 union semun arg = { .val = 1 };
-semctl(semid, 0, SETVAL, arg);
+semctl(semid, 0, SETVAL, arg); /* 仅创建者初始化；使用者不能重复重置 */
 
 struct sembuf op = { 0, -1, 0 };  /* P */
 semop(semid, &op, 1);
@@ -169,11 +164,11 @@ op.sem_op = 1;                     /* V */
 semop(semid, &op, 1);
 ```
 
-常与 **共享内存** 配对：shm 负责数据，sem 负责「谁可以读/写」。
+常与共享内存配对：shm 负责数据，sem 负责同步。上面的代码是接口片段，不是多进程初始化协议；`SEM_UNDO` 也不修复已经写了一半的共享数据。
 
 ### 5.3 共享内存（Shared Memory）
 
-- **最快**：两进程 **映射同一物理页**，读写 **不经过额外拷贝**（仍可能有 cache 一致性开销）。  
+- 两进程映射共享对象的相同页面，可以避免每条消息经 IPC 系统调用复制载荷；实际延迟仍受同步、缓存一致性、缺页和通知方式影响，不能一概称为“最快”。
 - `shmget` → `shmat` 挂接 → 使用 → `shmdt` 分离 → `shmctl(IPC_RMID)` 删除段。
 
 ```c
@@ -191,7 +186,7 @@ shmdt(addr);
 
 ## 6. POSIX IPC
 
-POSIX IPC 用 **名字**（类似路径，消息队列挂载在 `/dev/mqueue/`，共享内存对象在 `/dev/shm/` 下）和 **文件描述符** 风格 API，接口更统一，**新项目更推荐**（在仍需传统 IPC 时）。
+POSIX IPC 用 **名字**（类似路径，消息队列挂载在 `/dev/mqueue/`，共享内存对象在 `/dev/shm/` 下）和 **文件描述符** 风格 API，接口按对象类型区分：`shm_open()` 返回 fd，`mq_open()` 返回 `mqd_t`，`sem_open()` 返回 `sem_t *`，不能全部当作普通 fd 操作。
 
 | System V | POSIX | 打开 | 删除 |
 |----------|-------|------|------|
@@ -201,17 +196,11 @@ POSIX IPC 用 **名字**（类似路径，消息队列挂载在 `/dev/mqueue/`�
 
 ### 6.1 POSIX 消息队列
 
-```c
-#include <mqueue.h>
+创建时明确设定 `mq_maxmsg` 与 `mq_msgsize`，并检查 `mq_open()` 是否返回 `(mqd_t)-1`。打开已存在的队列时，创建属性不会重新配置它，应调用 `mq_getattr()` 取得实际 `mq_msgsize`，分配不小于该值的接收缓冲区。
 
-mqd_t mq = mq_open("/my_mq", O_CREAT | O_RDWR, 0666, NULL);
-mq_send(mq, "hi", 3, 0);
-char buf[64];
-mq_receive(mq, buf, sizeof(buf), NULL);
-mq_close(mq);
-```
+即使实际消息只有 3 字节，64 字节的缓冲区也可能因队列的 `mq_msgsize` 大于 64 而得到 `EMSGSIZE`。返回长度是消息实际长度，不能假设结果自带字符串终止符。详见 [mq_receive 接收条件](https://man7.org/linux/man-pages/man3/mq_receive.3.html)。
 
-- 支持 **优先级**、**异步通知**（`mq_notify`）；比 System V 消息队列现代。
+- 支持 **优先级**、**异步通知**（`mq_notify`）。通知注册不是永久订阅，消费者要处理重新注册和队列排空之间的时序。见 [POSIX 消息队列总览](https://man7.org/linux/man-pages/man7/mq_overview.7.html)。
 
 ### 6.2 POSIX 信号量
 
@@ -225,24 +214,16 @@ sem_post(sem);
 sem_close(sem);
 ```
 
-- **无名信号量** `sem_init` 还可用于 **线程** 或 **共享内存内** 的进程间同步。
+- 无名信号量用于进程间同步时，必须放在共享映射内，并使用 `sem_init(sem, 非零pshared, 初值)`；放在私有堆或栈中不能让独立进程共享同一对象。
+- 信号量记录计数，不记录“谁持有锁”。进程等待成功后异常退出，不会自动归还计数；`sem_close()` 也不是 `sem_post()`。见 [POSIX 信号量生命周期](https://man7.org/linux/man-pages/man7/sem_overview.7.html)。
 
 ### 6.3 POSIX 共享内存
 
-```c
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+操作顺序是 `shm_open()` → 创建者 `ftruncate()` → `mmap(..., MAP_SHARED, ...)` → 初始化与同步 → `munmap()`；谁执行 `shm_unlink()` 由协议确定。每步都要检查失败，`mmap()` 的失败值是 `MAP_FAILED`，不是 `NULL`。
 
-int fd = shm_open("/myshm", O_CREAT | O_RDWR, 0666);
-ftruncate(fd, 4096);
-void *p = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-/* 使用 p */
-munmap(p, 4096);
-shm_unlink("/myshm");
-```
+`close(fd)` 不会撤销已建立的映射；`shm_unlink()` 删除名字，也不立即撤销其他进程持有的映射。独立进程初始化、布局设计与崩溃恢复见 [[knowledge/linux/内核机制/POSIX 共享内存：初始化、同步与生命周期]]。
 
-- 与 **mmap** 统一，更灵活（大小、`MAP_SHARED` 语义清晰）。
+- 新对象初始长度为 0；未完成扩容就让其他进程访问映射，可能触发 `SIGBUS`。不能把“名字已经存在”视为“数据结构已经就绪”。见 [shm_open](https://man7.org/linux/man-pages/man3/shm_open.3.html)。
 
 ---
 
@@ -255,7 +236,7 @@ shm_unlink("/myshm");
 | 共享内存 | `shmat` | `shm_open` + `mmap` |
 | 信号量 | 数组、`semop` 复杂 | `sem_wait/post` 直观 |
 | 可移植性 | Unix 常见 | POSIX 兼容系统 |
-| 建议 | **维护旧系统** | **新组件优先** |
+| 选型依据 | 遗留互操作、消息类型选择、多信号量原子操作 | 命名对象、优先级队列、共享映射配套 |
 
 **实践建议**：
 
@@ -263,7 +244,7 @@ shm_unlink("/myshm");
 - 无关进程、单向流 → **FIFO** 或 **Unix Domain Socket**。  
 - 大数据低延迟 → **POSIX shm + sem**（或 mmap 文件）。  
 - 跨机器 → **Socket**；高性能本机可考虑 **memfd + mmap**、**D-Bus**、**gRPC** 等。  
-- 避免在新代码里继续扩散 **System V msg/sem/shm**，除非对接遗留。
+- 先核对目标系统支持、进程关系和运维方式；需要 System V 特定语义时可以选它，不以接口年代判定可用性。
 
 ---
 
@@ -274,7 +255,8 @@ shm_unlink("/myshm");
 | pipe | 内核缓冲区 + vfs |
 | msgget | 消息链表 + 拷贝 |
 | shmget / shm_open | shmem / tmpfs 文件 + 页表映射 |
-| semget / sem_open | 内核计数器 + 等待队列 |
+| semget | System V 信号量集合与等待语义 |
+| sem_open | POSIX 信号量；Linux 实现结合共享状态与 futex 等待 |
 
 调试：
 
@@ -297,13 +279,13 @@ ls /dev/shm   # POSIX 共享内存常见挂载
 | pipe 写端未关导致 **EOF 不来** | 读端一直阻塞 |
 | `ftok` 碰撞 | 不同项目同 path+id 可能冲突 |
 | System V sem **不是** pthread mutex | API 与语义不同，勿混用 |
-| 大小 / 消息长度限制 | `msgsnd`、`mq_send` 可能 `EAGAIN` |
+| 队列容量与消息大小 | 非阻塞发送遇队列满通常为 `EAGAIN`；消息或接收缓冲区尺寸错误要区分 `EINVAL` / `EMSGSIZE` 等接口错误 |
 
 ---
 
 ## 10. 面试口述（30 秒）
 
-> Linux 传统 IPC 有管道、System V 和 POSIX 三套。管道适合字节流；消息队列传带类型消息；共享内存最快但要配信号量。System V 用 key 和 msgget/shmget/semget；POSIX 用名字和 mq_open/shm_open/sem_open，接口更现代。新代码优先 POSIX 或 Socket，System V 多用于兼容旧系统。
+> Linux 传统 IPC 有管道、System V 和 POSIX 三套。管道适合字节流；消息队列传带类型消息；共享内存减少载荷复制，但必须另外设计同步和通知。System V 用 key 和 msgget/shmget/semget；POSIX 用名字和 mq_open/shm_open/sem_open，接口更现代。选型要看数据形态、等待方式、生命周期和目标平台，而不是只看 API 年代。
 
 ---
 

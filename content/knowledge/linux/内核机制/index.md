@@ -25,6 +25,7 @@ contentType: knowledge
 - [[Linux 内核调度机制面试详解]] — **CFS / 实时类 / 面试题**
 - [[进程调度与绑核]] — vruntime、反转、绑核与 DPDK
 - [[传统 IPC：System V 与 POSIX]]
+- [[POSIX 共享内存：初始化、同步与生命周期]] — 初始化发布、共享 mutex、通知与崩溃恢复
 - [[内核同步机制总览]]
 - [[RCU 读拷贝更新机制详解]]
 - [[per-CPU 与 per-core 数据结构]]
