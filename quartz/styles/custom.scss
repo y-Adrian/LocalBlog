@@ -2,7 +2,7 @@
 @use "./variables.scss" as *;
 
 /* --------------------------------------------------------------------------
-   Theme: 个人站风格 — 暖纸底、墨字、琥珀强调；玻璃顶栏；正文滚动显现
+   Theme: 个人站风格 — 暖纸底、墨字、琥珀强调；稳定顶栏
    参考 y-adrian.github.io/blog 的版式气质（文案与分区感），适配 Quartz 结构
    -------------------------------------------------------------------------- */
 
@@ -61,7 +61,7 @@ body > .page > #quartz-body {
   }
 }
 
-/* 页面底衬：暖琥珀 + 青绿两团柔光极缓慢漂移，不抢正文 */
+/* 静态柔光背景，避免滚动和切换页面时持续重绘。 */
 body::before {
   content: "";
   position: fixed;
@@ -103,38 +103,6 @@ body::before {
   transition: opacity 0.35s ease;
 }
 
-@keyframes bg-mesh-drift {
-  0% {
-    transform: translate(0, 0) scale(1);
-    background-position:
-      0% 0%,
-      100% 0%,
-      50% 100%;
-  }
-
-  50% {
-    transform: translate(-1.2%, 0.8%) scale(1.02);
-    background-position:
-      8% 6%,
-      92% 4%,
-      48% 94%;
-  }
-
-  100% {
-    transform: translate(0.6%, -0.5%) scale(1);
-    background-position:
-      4% 4%,
-      96% 8%,
-      52% 96%;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  body::before {
-    animation: bg-mesh-drift 32s ease-in-out infinite alternate;
-  }
-}
-
 @media print {
   body::before {
     display: none;
@@ -174,9 +142,9 @@ button:focus:not(:focus-visible) {
   margin: 0 -1.5rem 0.65rem;
   padding: 0.4rem 1.5rem 0.55rem;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
-  background: color-mix(in srgb, var(--light) 82%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: var(--light);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 90%, transparent);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
   transition:
@@ -192,9 +160,9 @@ button:focus:not(:focus-visible) {
   margin: 0 -1.5rem 0.75rem;
   padding: 0.85rem 1.5rem 1.15rem;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
-  background: color-mix(in srgb, var(--light) 82%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: var(--light);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 90%, transparent);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
@@ -204,22 +172,7 @@ button:focus:not(:focus-visible) {
   display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  body:not([data-slug="index"]) .page-header {
-    animation: header-enter 0.55s var(--ease-out) both;
-  }
-
-  @keyframes header-enter {
-    from {
-      opacity: 0;
-      transform: translateY(-6px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
+/* Keep the title card visible when SPA navigation changes pages. */
 
 body:not([data-slug="index"]) #quartz-body .page-header {
   margin-top: 0;
@@ -227,43 +180,7 @@ body:not([data-slug="index"]) #quartz-body .page-header {
   padding: 0.4rem 1.5rem 0.55rem;
 }
 
-/* 阅读页顶栏：可折叠高度 + 渐隐（由 pageHeaderScroll.inline 在可滚动页切换类名）
-   禁用 scroll anchoring，减轻收起/展开时 scrollY 被浏览器强行修正导致的误判抖动 */
-body:not([data-slug="index"]) .page-header {
-  overflow-anchor: none;
-  max-height: 20rem;
-  transition:
-    opacity 0.42s var(--ease-out),
-    transform 0.42s var(--ease-out),
-    min-height 0.5s var(--ease-out),
-    max-height 0.5s var(--ease-out),
-    margin-top 0.5s var(--ease-out),
-    margin-bottom 0.5s var(--ease-out),
-    padding-top 0.5s var(--ease-out),
-    padding-bottom 0.5s var(--ease-out),
-    box-shadow 0.35s var(--ease-out),
-    background 0.35s var(--ease-out),
-    border-color 0.25s ease,
-    backdrop-filter 0.45s ease,
-    -webkit-backdrop-filter 0.45s ease;
-}
-
-body:not([data-slug="index"]) .page-header.page-header--scroll-hidden {
-  opacity: 0;
-  transform: translateY(-0.4rem);
-  min-height: 0 !important;
-  max-height: 0;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  overflow: hidden;
-  pointer-events: none;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-bottom-color: transparent;
-}
+/* Title metadata stays in normal flow without scroll-driven height changes. */
 
 /* 阅读页顶栏：紧凑布局，标签紧跟标题 */
 body:not([data-slug="index"]) .page-header .popover-hint {
@@ -299,12 +216,12 @@ body:not([data-slug="index"]) .page-header .content-meta {
 }
 
 :root[saved-theme="dark"] .page-header {
-  background: color-mix(in srgb, var(--light) 75%, transparent);
+  background: var(--light);
   box-shadow: 0 4px 28px rgba(0, 0, 0, 0.35);
 }
 
 :root[saved-theme="dark"] .site-header {
-  background: color-mix(in srgb, var(--light) 75%, transparent);
+  background: var(--light);
   box-shadow: 0 4px 28px rgba(0, 0, 0, 0.35);
 }
 

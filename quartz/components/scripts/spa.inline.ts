@@ -120,6 +120,22 @@ async function _navigate(url: URL, isBack: boolean = false) {
   const elementsToAdd = html.head.querySelectorAll(":not([data-persist])")
   elementsToAdd.forEach((el) => document.head.appendChild(el))
 
+  // Keep loaded fonts during navigation, and load page-specific persistent
+  // styles once when first entering a page that needs them (e.g. the homepage).
+  const loadedStylesheets = new Set(
+    Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')).map(
+      (link) => link.href,
+    ),
+  )
+  html.head
+    .querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][data-persist]')
+    .forEach((link) => {
+      if (!loadedStylesheets.has(link.href)) {
+        document.head.appendChild(link)
+        loadedStylesheets.add(link.href)
+      }
+    })
+
   // delay setting the url until now
   // at this point everything is loaded so changing the url should resolve to the correct addresses
   if (!isBack) {
