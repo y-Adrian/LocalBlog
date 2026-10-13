@@ -20,10 +20,12 @@ Here are some of my [[articles/thoughts/index|thoughts]].
 
 My perspective on technical ideas: what matters, where the trade-offs are, and why I reach a particular conclusion.
 
-[[articles/technical-interpretation/index|Technical interpretations →]]
+[[articles/technical-interpretation/index|Technical interpretations]]
 
 ## Practice
 
 Development journals and case studies: the problems I encountered, the choices I made, and what I learned along the way.
 
-[[articles/riscv-driver-development-log/index|RISC-V Linux driver development →]]
+[[articles/riscv-driver-development-log/index|RISC-V Linux driver development]]
+
+---

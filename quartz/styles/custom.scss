@@ -2,7 +2,7 @@
 @use "./variables.scss" as *;
 
 /* --------------------------------------------------------------------------
-   Theme: 个人站风格 — 暖纸底、墨字、琥珀强调；稳定顶栏
+   Theme: 个人站风格 — 淡紫底、墨字、紫色强调；稳定顶栏
    参考 y-adrian.github.io/blog 的版式气质（文案与分区感），适配 Quartz 结构
    -------------------------------------------------------------------------- */
 
@@ -10,12 +10,12 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Typography: Space Grotesk + Noto Sans SC headings, LXGW WenKai prose,
+/* Typography: Space Grotesk + Noto Sans SC headings, Go Mono for Powerline prose with LXGW WenKai CJK fallback,
    and Fira Code with Sarasa Mono SC fallback for code. */
 :root {
   --titleFont: "Space Grotesk", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
   --headerFont: "Space Grotesk", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
-  --bodyFont: "LXGW WenKai", "霞鹜文楷", "Kaiti SC", "STKaiti", serif;
+  --bodyFont: "Go Mono for Powerline", "LXGW WenKai", "霞鹜文楷", "Kaiti SC", "STKaiti", serif;
   --codeFont: "Fira Code", "Sarasa Mono SC", ui-monospace, SFMono-Regular, monospace;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
@@ -443,18 +443,25 @@ body[data-slug="index"] .center article table tbody tr:hover td {
   transition: background 0.2s ease;
 }
 
+/* Text links use underlines instead of highlighted backgrounds. */
 a.internal {
-  border-radius: 4px;
-  transition:
-    background-color 0.22s var(--ease-out),
-    transform 0.22s var(--ease-out),
-    box-shadow 0.22s var(--ease-out),
-    color 0.2s ease;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  transition: color 0.2s ease;
 }
 
-a.internal:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+article a.internal:not(.tag-link):not(:has(> img)),
+article a.external:not(:has(> img)) {
+  text-decoration-line: underline;
+  text-decoration-color: var(--secondary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-skip-ink: auto;
+
+  &:hover {
+    text-decoration-color: var(--tertiary);
+  }
 }
 
 a.external {
@@ -998,7 +1005,9 @@ article.knowledge-title-duplicate > h1:first-child {
 }
 
 
-/* Prefer Fira Code; keep the existing Sarasa Mono SC fallback for CJK code. */
+/* Quartz appends theme variables after custom styles. Keep these font overrides
+   more specific so the locally hosted body font and CJK fallbacks survive. */
 :root:root {
+  --bodyFont: "Go Mono for Powerline", "LXGW WenKai", "霞鹜文楷", "Kaiti SC", "STKaiti", serif;
   --codeFont: "Fira Code", "Sarasa Mono SC", ui-monospace, SFMono-Regular, monospace;
 }

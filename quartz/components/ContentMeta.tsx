@@ -37,7 +37,7 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
       const segments: (string | JSX.Element)[] = []
 
       if (showCreatedDate && fileData.dates?.created) {
-        segments.push(<Date date={fileData.dates.created} locale={cfg.locale} />)
+        segments.push(<Date date={fileData.dates.created} locale="en-GB" />)
       }
 
       const showPageViews = showArticleMeta && cfg.analytics?.provider === "goatcounter"
