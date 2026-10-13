@@ -10,7 +10,11 @@ hideReadingTime: true
 ---
 # Articles
 
-Here I share my own interpretations of technology, engineering decisions, and lessons from practice. Definitions and reusable reference material live in [[knowledge/index|Knowledge]].
+Here I share my own thoughts, my own interpretations of technology, engineering decisions, and lessons from practice. Definitions and reusable reference material live in [[knowledge/index|Knowledge]].
+
+## Just my thoughts
+
+Here are some of my [[articles/thoughts/index|thoughts]].
 
 ## Technical Interpretation
 
