@@ -813,6 +813,28 @@ body[data-slug="support-the-blog/index"] #quartz-body > footer {
   margin-top: 1.5rem;
 }
 
+.home-page #projects + ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.home-page #projects + ul > li {
+  min-width: 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--lightgray);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--light) 84%, transparent);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.home-page #projects + ul > li:hover {
+  border-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
 .knowledge-landing > ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));

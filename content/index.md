@@ -15,7 +15,8 @@ cssclasses:
 Stay curious. Keep building.
 
 # Projects
-
++ project
++ project
 
 # Blogs
 
