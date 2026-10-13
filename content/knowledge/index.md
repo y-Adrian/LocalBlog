@@ -11,7 +11,7 @@ hideReadingTime: true
 hideCreatedDate: true
 ---
 
-This section holds professional knowledge; my personal blog and my thoughts are [here](articles/index)
+This section holds professional knowledge; my personal blog and my thoughts are [here](articles/index).
 
 ## KnowledgeZone
 
