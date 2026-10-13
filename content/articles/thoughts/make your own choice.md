@@ -11,7 +11,7 @@ hideReadingTime: false
 
 ## Decision
 
-About decision, I have made many wrong decisions before. Like playing video games day by day in university, so I wasted the most precious time. Like escaping from the true self, pretending to be okay.
+About decision, I have made many wrong decisions before. Like playing video games day by day in university, so I wasted the most precious time. Like escaping from my true self and pretending to be okay.
 
 Today is 10.14, 2026. I have been out of work for seven months. Actually, I don't know what to do. Since I came into the university, I hardly spent any time thinking. I have to think through a lot of thing right now, but it doesn't feel like the right time. No job, no paycheck, and overthinking just makes me anxious.
 
