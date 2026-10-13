@@ -16,7 +16,7 @@ I live in Hangzhou, Zhejiang, China. I enjoy hiking, traveling and cooking.
 
 ## Education
 
-+ **2017.9~2021.6** <img alt="Beijing University of Posts and Telecommunications logo" src="about/images/bupt-emblem.webp" style="height: 1em; width: auto; vertical-align: -0.12em; margin: 0 0.25em;"> B.Eng in Information and Communication Engineering
++ **2017.9~2021.6** <img alt="Beijing University of Posts and Telecommunications logo" src="about/images/bupt-emblem.webp" style="height: 1em; width: auto; vertical-align: -0.12em; margin: 0 0.25em;"> B.Eng in Communication Engineering
 
 ---
 
