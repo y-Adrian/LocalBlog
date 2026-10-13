@@ -16,7 +16,7 @@ Here I share my own interpretations of technology, engineering decisions, and le
 
 My perspective on technical ideas: what matters, where the trade-offs are, and why I reach a particular conclusion.
 
-[[articles/technical-interpretation/index|Browse technical interpretations →]]
+[[articles/technical-interpretation/index|Technical interpretations →]]
 
 ## Practice
 
