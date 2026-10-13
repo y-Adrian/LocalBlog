@@ -60,7 +60,7 @@ sudo tcpdump -i lo0 -nn -S 'tcp port 8000'
 ```
 
 + `-i lo0`: listen on the loopback interface
-+ `-nn`: don't resolve hostnames or port names
++ `-nn`: do not resolve hostnames or port names
 + `-S`: show absolute sequence numbers(the default is relative; absolute values are easier to follow when checking the theory)
 
 
