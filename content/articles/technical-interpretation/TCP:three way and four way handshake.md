@@ -9,7 +9,6 @@ hideCreatedDate: false
 hideReadingTime: false
 ---
 
-# TCP:three and four way handshake on Mac
 ## First we go back to this knwoledge
 
 ```bash

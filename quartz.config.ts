@@ -30,8 +30,8 @@ const config: QuartzConfig = {
         header: { name: "Space Grotesk", weights: [400, 500, 600, 700], includeItalic: false },
         /* Readable Chinese/Latin prose and code typography. */
         body: { name: "LXGW WenKai", weights: [400, 700], includeItalic: true },
-        /* JetBrains Mono is loaded as fallback; custom.scss prefers Sarasa Mono SC. */
-        code: { name: "JetBrains Mono", weights: [400, 500, 600, 700], includeItalic: true },
+        /* Fira Code for code; Sarasa Mono SC remains the CJK fallback. */
+        code: { name: "Fira Code", weights: [400, 500, 600, 700], includeItalic: false },
       },
       colors: {
         lightMode: {
