@@ -14,6 +14,9 @@ cssclasses:
 
 Stay curious. Keep building.
 
+# Projects
+
+
 # Blogs
 
 <div class="recent-articles-slot"></div>

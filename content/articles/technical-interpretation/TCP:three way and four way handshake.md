@@ -12,8 +12,8 @@ hideReadingTime: false
 ## First we go back to this knwoledge
 
 ```bash
-  # Three way handshake
-  client    SYN, seq=x ----------->            server
+# Three way handshake
+	client    SYN, seq=x ----------->            server
 	client    <----------- SYN, seq=y, ack=x+1   server
 	client    ack=y+1    ----------->            server
 
