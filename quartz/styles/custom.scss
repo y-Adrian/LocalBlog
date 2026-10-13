@@ -758,7 +758,8 @@ body[data-slug="index"] .home-recent-article-date {
   white-space: nowrap;
 }
 
-body[data-slug="index"] .home-recent-articles-more > summary {
+body[data-slug="index"] .home-recent-articles-more > a,
+body[data-slug="index"] .home-recent-articles-more > a.internal {
   width: fit-content;
   color: var(--secondary);
   cursor: pointer;
@@ -766,8 +767,8 @@ body[data-slug="index"] .home-recent-articles-more > summary {
   text-transform: lowercase;
 }
 
-body[data-slug="index"] .home-recent-articles-more > ul {
-  margin-top: 0.55rem;
+body[data-slug="index"] .home-recent-articles-more {
+  margin: 0.55rem 0 0;
 }
 
 

@@ -81,15 +81,15 @@ const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentP
         return
       }
 
-      const visible = articles.slice(0, 10)
-      const remaining = articles.slice(10)
-      node.children = [renderList(visible)]
+      node.children = [renderList(articles.slice(0, 5))]
 
-      if (remaining.length > 0) {
+      if (articles.length > 5) {
         node.children.push(
-          element("details", "home-recent-articles-more", [
-            element("summary", undefined, [text("more")]),
-            renderList(remaining),
+          element("p", "home-recent-articles-more", [
+            element("a", undefined, [text("see more ->")], {
+              href: resolveRelative(fileData.slug!, "articles/index"),
+              className: ["internal"],
+            }),
           ]),
         )
       }
