@@ -97,7 +97,7 @@ const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentP
             label: "Stars",
             color: "ffffff",
             labelColor: "ffffff",
-            cacheSeconds: "600",
+            cacheSeconds: "300",
           }).toString()
 
           badgeContainer.children.push(text(" "))

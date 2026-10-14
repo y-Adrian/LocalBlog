@@ -59,14 +59,11 @@
     }
 
     & > .search-space {
-      width: 65%;
+      width: min(46rem, calc(100vw - 2rem));
+      max-width: 46rem;
       margin-top: 12vh;
       margin-left: auto;
       margin-right: auto;
-
-      @media all and not ($desktop) {
-        width: 90%;
-      }
 
       & > * {
         width: 100%;

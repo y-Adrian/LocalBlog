@@ -15,7 +15,7 @@ cssclasses:
 Stay curious. Keep building.
 
 # Projects
-+ [forknote](https://github.com/y-Adrian/pocket.git)
++ [forknote](https://github.com/y-Adrian/forknote)
 + [pocket](https://github.com/y-Adrian/pocket)
 
 # Blogs
