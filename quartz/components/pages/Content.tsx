@@ -43,8 +43,83 @@ function formatPublishedDate(date: Date): string {
   }).format(date)
 }
 
+function githubRepository(href: unknown): { url: string; owner: string; repo: string } | undefined {
+  if (typeof href !== "string") return undefined
+
+  try {
+    const url = new URL(href)
+    if (url.hostname !== "github.com") return undefined
+
+    const [owner, rawRepo] = url.pathname.split("/").filter(Boolean)
+    const repo = rawRepo?.replace(/\.git$/u, "")
+    if (!owner || !repo) return undefined
+
+    return { url: `https://github.com/${owner}/${repo}`, owner, repo }
+  } catch {
+    return undefined
+  }
+}
+
 const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentProps) => {
   if (fileData.slug === "index") {
+    let followsProjectsHeading = false
+    visit(tree, "element", (node) => {
+      if (node.tagName === "h1" || node.tagName === "h2" || node.tagName === "h3") {
+        followsProjectsHeading = node.properties.id === "projects"
+        return
+      }
+      if (node.tagName !== "ul" || !followsProjectsHeading) return
+      followsProjectsHeading = false
+
+      for (const item of node.children) {
+        if (item.type !== "element" || item.tagName !== "li") continue
+
+        const paragraph = item.children.find(
+          (child): child is Element => child.type === "element" && child.tagName === "p",
+        )
+        const badgeContainer = paragraph ?? item
+
+        const repositories: { url: string; owner: string; repo: string }[] = []
+        visit(item, "element", (child) => {
+          if (child.tagName !== "a") return
+          const repository = githubRepository(child.properties.href)
+          if (repository) repositories.push(repository)
+        })
+
+        for (const repository of repositories) {
+          const badgeUrl = new URL(
+            `https://img.shields.io/github/stars/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.repo)}`,
+          )
+          badgeUrl.search = new URLSearchParams({
+            style: "flat",
+            logo: "github",
+            logoColor: "181717",
+            label: "Stars",
+            color: "ffffff",
+            labelColor: "ffffff",
+            cacheSeconds: "600",
+          }).toString()
+
+          badgeContainer.children.push(text(" "))
+          badgeContainer.children.push(
+            element("a", "home-project-stars", [
+              element("img", undefined, [], {
+                src: badgeUrl.toString(),
+                alt: "GitHub Stars",
+                loading: "lazy",
+                decoding: "async",
+              }),
+            ], {
+              href: repository.url,
+              target: "_blank",
+              rel: "noopener noreferrer",
+              "aria-label": `GitHub stars for ${repository.owner}/${repository.repo}`,
+            }),
+          )
+        }
+      }
+    })
+
     const articles = allFiles
       .filter((page) => isWrittenArticle(page) && page.slug?.startsWith("articles/"))
       .filter((page) => page.dates?.published)
