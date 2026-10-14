@@ -73,7 +73,7 @@ export default {
     },
     folderContent: {
       folder: "文件夹",
-      itemsUnderFolder: ({ count }) => `Here are ${count} notes.`,
+      itemsUnderFolder: ({ count }) => `This folder contains ${count} note${count === 1 ? "" : "s"}.`,
     },
     tagContent: {
       tag: "标签",
