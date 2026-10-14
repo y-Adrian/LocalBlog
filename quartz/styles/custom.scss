@@ -826,7 +826,11 @@ body[data-slug="support-the-blog/index"] #quartz-body > footer {
   padding: 1rem 1.1rem;
   border: 1px solid var(--lightgray);
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--light) 84%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--secondary) 8%, var(--light)) 0%,
+    color-mix(in srgb, var(--secondary) 18%, var(--light)) 100%
+  );
   transition: border-color 160ms ease, transform 160ms ease;
 }
 
@@ -847,7 +851,11 @@ body[data-slug="support-the-blog/index"] #quartz-body > footer {
   padding: 1rem 1.1rem;
   border: 1px solid var(--lightgray);
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--light) 84%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--secondary) 8%, var(--light)) 0%,
+    color-mix(in srgb, var(--secondary) 18%, var(--light)) 100%
+  );
   transition: border-color 160ms ease, transform 160ms ease;
 }
 
