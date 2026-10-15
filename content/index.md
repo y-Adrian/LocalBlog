@@ -16,7 +16,12 @@ Stay curious. Keep building.
 
 # Projects
 + [forknote](https://github.com/y-Adrian/forknote)
+
+  A powerful agent.
+
 + [pocket](https://github.com/y-Adrian/pocket)
+
+  An pocket app runs on Milkv-Duo-S
 
 # Blogs
 

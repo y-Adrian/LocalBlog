@@ -830,7 +830,7 @@ body[data-slug="support-the-blog/index"] #quartz-body > footer {
 
 .home-page #projects + ul > li {
   min-width: 0;
-  padding: 1rem 1.1rem;
+  padding: 0.35rem 0.85rem;
   border: 1px solid var(--lightgray);
   border-radius: var(--radius-md);
   background: linear-gradient(
@@ -839,6 +839,24 @@ body[data-slug="support-the-blog/index"] #quartz-body > footer {
     color-mix(in srgb, var(--secondary) 18%, var(--light)) 100%
   );
   transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.home-page #projects + ul > li > p {
+  margin: 0;
+}
+
+.home-page #projects + ul > li > p:first-child {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.home-page #projects + ul > li > p + p {
+  margin-top: 0.3rem;
+  color: var(--darkgray);
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
 
 .home-page #projects + ul > li:hover {
