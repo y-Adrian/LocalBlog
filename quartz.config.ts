@@ -25,9 +25,9 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        /* Latin headings use Space Grotesk; Noto Sans SC is the CJK fallback. */
-        title: { name: "Space Grotesk", weights: [400, 500, 600, 700], includeItalic: false },
-        header: { name: "Space Grotesk", weights: [400, 500, 600, 700], includeItalic: false },
+        /* Roboto Slab headings; Noto Sans SC remains the CJK fallback. */
+        title: { name: "Roboto Slab", weights: [400, 500, 600, 700], includeItalic: false },
+        header: { name: "Roboto Slab", weights: [400, 500, 600, 700], includeItalic: false },
         /* Chinese prose fallback; custom.scss uses locally hosted Go Mono for Powerline first. */
         body: { name: "LXGW WenKai", weights: [400, 700], includeItalic: true },
         /* Fira Code for code; Sarasa Mono SC remains the CJK fallback. */

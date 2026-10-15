@@ -10,11 +10,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Typography: Space Grotesk + Noto Sans SC headings, Go Mono for Powerline prose with LXGW WenKai CJK fallback,
+/* Typography: Roboto Slab + Noto Sans SC headings, Go Mono for Powerline prose with LXGW WenKai CJK fallback,
    and Fira Code with Sarasa Mono SC fallback for code. */
 :root {
-  --titleFont: "Space Grotesk", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
-  --headerFont: "Space Grotesk", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
+  --titleFont: "Roboto Slab", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
+  --headerFont: "Roboto Slab", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
   --bodyFont: "Go Mono for Powerline", "LXGW WenKai", "霞鹜文楷", "Kaiti SC", "STKaiti", serif;
   --codeFont: "Fira Code", "Sarasa Mono SC", ui-monospace, SFMono-Regular, monospace;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -1050,9 +1050,10 @@ article.knowledge-title-duplicate > h1:first-child {
 }
 
 
-/* Quartz appends theme variables after custom styles. Keep these font overrides
-   more specific so the locally hosted body font and CJK fallbacks survive. */
+/* Quartz appends theme variables after custom styles. Keep these overrides more specific. */
 :root:root {
+  --titleFont: "Roboto Slab", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
+  --headerFont: "Roboto Slab", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
   --bodyFont: "Go Mono for Powerline", "LXGW WenKai", "霞鹜文楷", "Kaiti SC", "STKaiti", serif;
   --codeFont: "Fira Code", "Sarasa Mono SC", ui-monospace, SFMono-Regular, monospace;
 }
