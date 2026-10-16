@@ -9,7 +9,7 @@ hideReadingTime: true
 
 As a software engineer with **4** years of experience, I specialize in the design, development, and troubleshooting of interprocess communication components and memory management components for resource-constrained environments, such as embedded devices. 
 
-If you are interested, you can [email](mailto:storyVS7263@gmail.com) me. You can see my skills below.
+If you are interested, you can [email me](mailto:storyVS7263@gmail.com). You can see my skills below.
 
 ## What can I do for you
 ### 1. High-Performance Communication Frameworks

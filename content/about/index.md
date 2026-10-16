@@ -33,6 +33,8 @@ I live in Hangzhou, Zhejiang, China. I enjoy hiking, traveling and cooking.
 - **System Software** : C/C++, Concurrent Programming, Performance Analysis
 - **Networking & Infrastructure** : Network Programming, DPDK, Distributed Systems
 
+You can see the details [[hire-me/index#what-can-i-do-for-you|here]].
+
 ---
 
 ## Contact me
