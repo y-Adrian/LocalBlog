@@ -7,6 +7,8 @@ created: 2026-10-14
 hideTitle: false
 hideCreatedDate: false
 hideReadingTime: false
+tags:
+  - thoughts
 ---
 
 ## Decision

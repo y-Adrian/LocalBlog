@@ -10,12 +10,12 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Typography: Roboto Slab + Noto Sans SC headings, Go Mono for Powerline prose with LXGW WenKai CJK fallback,
-   and Fira Code with Sarasa Mono SC fallback for code. */
+/* Typography preview: JMH Typewriter for Latin text with AiDian-QianFengXingKai CJK fallback;
+   keep Fira Code for code blocks. */
 :root {
-  --titleFont: "Roboto Slab", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
-  --headerFont: "Roboto Slab", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
-  --bodyFont: "Go Mono for Powerline", "LXGW WenKai", "霞鹜文楷", "Kaiti SC", "STKaiti", serif;
+  --titleFont: "JMH Typewriter", "AiDian-QianFengXingKai", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
+  --headerFont: "JMH Typewriter", "AiDian-QianFengXingKai", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
+  --bodyFont: "JMH Typewriter", "AiDian-QianFengXingKai", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
   --codeFont: "Fira Code", "Sarasa Mono SC", ui-monospace, SFMono-Regular, monospace;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
@@ -692,7 +692,7 @@ li.section-li > .section > .tags a.tag-link {
 body[data-slug="index"] .home-page > h1:first-of-type {
   margin-top: 0.5rem;
   font-size: clamp(2.2rem, 4.5vw, 2.8rem);
-  font-family: "Playfair Display", "Ma Shan Zheng", cursive;
+  font-family: "JMH Typewriter", "AiDian-QianFengXingKai", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
   line-height: 1.05;
   letter-spacing: -0.04em;
 }
@@ -1105,11 +1105,10 @@ article.knowledge-title-duplicate > h1:first-child {
 }
 
 
-/* Quartz appends theme variables after custom styles. Keep these font overrides
-   more specific so the locally hosted body font and CJK fallbacks survive. */
+/* Quartz appends theme variables after custom styles. Keep these font overrides more specific. */
 :root:root {
-  --titleFont: "Roboto Slab", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
-  --headerFont: "Roboto Slab", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
-  --bodyFont: "Go Mono for Powerline", "LXGW WenKai", "霞鹜文楷", "Kaiti SC", "STKaiti", serif;
+  --titleFont: "JMH Typewriter", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
+  --headerFont: "JMH Typewriter", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
+  --bodyFont: "JMH Typewriter", "LXGW WenKai", "Noto Sans SC", "Source Han Sans SC", "思源黑体", sans-serif;
   --codeFont: "Fira Code", "Sarasa Mono SC", ui-monospace, SFMono-Regular, monospace;
 }
