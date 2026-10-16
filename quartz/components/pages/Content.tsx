@@ -167,7 +167,7 @@ const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentP
             icon: "github",
             label: "Stars",
             color: "ffffff",
-            labelColor: "ffffff",
+            labelColor: "181717",
           }).toString()
 
           badgeContainer.children.push(text(" "))
