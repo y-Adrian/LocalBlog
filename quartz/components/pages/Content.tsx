@@ -161,16 +161,13 @@ const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentP
 
         for (const repository of repositories) {
           const badgeUrl = new URL(
-            `https://img.shields.io/github/stars/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.repo)}`,
+            `https://badgen.net/github/stars/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.repo)}`,
           )
           badgeUrl.search = new URLSearchParams({
-            style: "flat",
-            logo: "github",
-            logoColor: "181717",
+            icon: "github",
             label: "Stars",
             color: "ffffff",
             labelColor: "ffffff",
-            cacheSeconds: "300",
           }).toString()
 
           badgeContainer.children.push(text(" "))
