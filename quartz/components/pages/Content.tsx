@@ -1,5 +1,5 @@
 import { ComponentChildren } from "preact"
-import { Element, ElementContent } from "hast"
+import { Element, ElementContent, Root } from "hast"
 import { visit } from "unist-util-visit"
 import { htmlToJsx } from "../../util/jsx"
 import { resolveRelative } from "../../util/path"
@@ -15,7 +15,7 @@ function element(
   return {
     type: "element",
     tagName,
-    properties: className ? { ...properties, className: [className] } : properties,
+    properties: className ? { ...properties, className: className.split(" ") } : properties,
     children,
   }
 }
@@ -62,10 +62,83 @@ function githubRepository(href: unknown): { url: string; owner: string; repo: st
 
 const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentProps) => {
   if (fileData.slug === "index") {
+    const projectGroups = new Set(["projects-i-started", "projects-i-contributed"])
+    const nextNonWhitespaceIndex = (nodes: typeof tree.children, start: number): number => {
+      let index = start
+      while (
+        index < nodes.length &&
+        nodes[index].type === "text" &&
+        nodes[index].value.trim() === ""
+      ) {
+        index++
+      }
+      return index
+    }
+    const wrapProjectSections = (parent: Root | Element): void => {
+      const children = [...parent.children]
+      const wrapped: typeof parent.children = []
+      for (let index = 0; index < children.length; index++) {
+        const child = children[index]
+        if (child.type === "element") wrapProjectSections(child)
+
+        const headingId =
+          child.type === "element" && ["h1", "h2", "h3"].includes(child.tagName)
+            ? child.properties.id
+            : undefined
+        const nextIndex = nextNonWhitespaceIndex(children, index + 1)
+        const next = children[nextIndex]
+        if (
+          typeof headingId === "string" &&
+          projectGroups.has(headingId) &&
+          next?.type === "element" &&
+          next.tagName === "ul"
+        ) {
+          const groupClass =
+            headingId === "projects-i-contributed"
+              ? "home-project-group home-project-contributed"
+              : "home-project-group home-project-started"
+          wrapped.push(element("section", groupClass, [child, next]))
+          index = nextIndex
+        } else {
+          wrapped.push(child)
+        }
+      }
+
+      const columns: typeof parent.children = []
+      for (let index = 0; index < wrapped.length; index++) {
+        const child = wrapped[index]
+        if (
+          child.type === "element" &&
+          Array.isArray(child.properties.className) &&
+          child.properties.className.includes("home-project-group")
+        ) {
+          const groups: ElementContent[] = [child]
+          let nextIndex = nextNonWhitespaceIndex(wrapped, index + 1)
+          while (
+            nextIndex < wrapped.length &&
+            wrapped[nextIndex].type === "element" &&
+            Array.isArray(wrapped[nextIndex].properties.className) &&
+            wrapped[nextIndex].properties.className.includes("home-project-group")
+          ) {
+            groups.push(wrapped[nextIndex])
+            index = nextIndex
+            nextIndex = nextNonWhitespaceIndex(wrapped, index + 1)
+          }
+          columns.push(element("div", "home-project-columns", groups))
+        } else {
+          columns.push(child)
+        }
+      }
+      parent.children = columns
+    }
+    wrapProjectSections(tree)
+
     let followsProjectsHeading = false
     visit(tree, "element", (node) => {
       if (node.tagName === "h1" || node.tagName === "h2" || node.tagName === "h3") {
-        followsProjectsHeading = node.properties.id === "projects"
+        followsProjectsHeading =
+          typeof node.properties.id === "string" &&
+          projectGroups.has(node.properties.id)
         return
       }
       if (node.tagName !== "ul" || !followsProjectsHeading) return

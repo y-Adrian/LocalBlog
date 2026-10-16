@@ -14,7 +14,7 @@ cssclasses:
 
 Stay curious. Keep building.
 
-# Projects
+# Projects I started
 + [forknote](https://github.com/y-Adrian/forknote)
 
   A powerful agent.
@@ -22,6 +22,9 @@ Stay curious. Keep building.
 + [pocket](https://github.com/y-Adrian/pocket)
 
   An pocket app runs on Milkv-Duo-S
+
+# Projects I contributed
++ Contributions will be listed here.
 
 # Blogs
 
