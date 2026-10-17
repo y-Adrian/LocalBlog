@@ -1,8 +1,15 @@
 import { FullSlug, isFolderPath, resolveRelative } from "../util/path"
 import { QuartzPluginData } from "../plugins/vfile"
-import { Date, getDate } from "./Date"
+import { getDate } from "./Date"
 import { QuartzComponent, QuartzComponentProps } from "./types"
 import { GlobalConfiguration } from "../cfg"
+
+function formatNumericDate(date: Date): string {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, "0")
+  const day = String(date.getDate()).padStart(2, "0")
+  return `${year}-${month}-${day}`
+}
 
 export type SortFn = (f1: QuartzPluginData, f2: QuartzPluginData) => number
 
@@ -74,7 +81,11 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
           <li class="section-li">
             <div class="section">
               <p class="meta">
-                {page.dates && <Date date={getDate(cfg, page)!} locale="en-GB" />}
+                {page.dates && (
+                  <time datetime={getDate(cfg, page)!.toISOString()}>
+                    {formatNumericDate(getDate(cfg, page)!)}
+                  </time>
+                )}
               </p>
               <div class="desc">
                 <h3>

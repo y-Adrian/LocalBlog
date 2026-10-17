@@ -506,7 +506,7 @@ a.external {
   }
 }
 
-body:not([data-slug="index"]) .center article img {
+.center article.document-content img {
   display: block;
   max-width: min(100%, 900px);
   max-height: 75vh;
@@ -637,15 +637,21 @@ footer {
 
 /* 文章列表：加宽日期列，避免「2026年5月15日」换行 */
 li.section-li > .section {
-  grid-template-columns: fit-content(12em) minmax(0, 1fr) fit-content(42%);
+  grid-template-columns: fit-content(8em) minmax(0, 1fr) fit-content(42%);
   align-items: baseline;
   column-gap: 0.6rem;
 }
 
 li.section-li > .section > .meta {
   white-space: nowrap;
-  min-width: 10.5em;
+  min-width: 7em;
   flex-shrink: 0;
+  font-size: 0.82rem;
+}
+
+li.section-li > .section > .desc > h3 > a {
+  font-size: 1rem;
+  line-height: 1.4;
 }
 
 /* 列表标签：紧凑单行，空间不足时只滚动标签，不撑宽正文。 */

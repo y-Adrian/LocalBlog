@@ -243,6 +243,10 @@ const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentP
 
   const content = htmlToJsx(fileData.filePath!, tree) as ComponentChildren
   const classes: string[] = fileData.frontmatter?.cssclasses ?? []
+  const contentType = fileData.frontmatter?.contentType
+  if (contentType === "article" || contentType === "knowledge") {
+    classes.push("document-content")
+  }
   const firstElement = tree.children.find((node): node is Element => node.type === "element")
   const title = fileData.frontmatter?.title?.trim()
   const hasDuplicateKnowledgeTitle =
