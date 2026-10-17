@@ -4,10 +4,12 @@ import {
   RelativeURL,
   SimpleSlug,
   TransformOptions,
+  resolveRelative,
   stripSlashes,
   simplifySlug,
   splitAnchor,
   transformLink,
+  transformInternalLink,
 } from "../../util/path"
 import path from "path"
 import { visit } from "unist-util-visit"
@@ -149,11 +151,29 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options>> = (userOpts) 
 
                 if (!isAbsoluteUrl(node.properties.src, { httpOnly: false })) {
                   let dest = node.properties.src as RelativeURL
-                  dest = node.properties.src = transformLink(
-                    file.data.slug!,
-                    dest,
-                    transformOptions,
-                  )
+                  const assetPath = dest.replace(/^\.\//u, "")
+                  const isAssetFolderPath = assetPath.startsWith("assets/")
+                  const isBareAssetName =
+                    !assetPath.includes("/") &&
+                    /\.(?:png|jpe?g|gif|bmp|svg|webp|avif)$/iu.test(assetPath)
+
+                  if (isAssetFolderPath || isBareAssetName) {
+                    const noteDirectory = path.posix.dirname(file.data.slug!)
+                    const noteRelativePath = isBareAssetName
+                      ? path.posix.join(noteDirectory, "assets", assetPath)
+                      : path.posix.join(noteDirectory, assetPath)
+                    const target = transformInternalLink(noteRelativePath).replace(/^\.\//u, "")
+                    dest = node.properties.src = resolveRelative(
+                      file.data.slug!,
+                      target as FullSlug,
+                    )
+                  } else {
+                    dest = node.properties.src = transformLink(
+                      file.data.slug!,
+                      dest,
+                      transformOptions,
+                    )
+                  }
                   node.properties.src = dest
                 }
               }
