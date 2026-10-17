@@ -21,7 +21,8 @@ Then came the DuckDB. DuckDB is a new purpose-built embeddable relational databa
 ## Design and implementation
 DuckDB's design decisions are informed by its intended use case: embedded analytics.
 The main components: parser, logical planner, optimizer, physical planner, execution engine.
-![Component Overview|577](Pasted%20image%2020261017154942.png)
+
+![[assets/Pasted image 20261017154942.png|415]]
 
 Being an embedded database, DuckDB does not have a client protocol interface or a server process, but instead is accessed using a C/C++ API.
 

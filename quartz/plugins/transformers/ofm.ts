@@ -235,15 +235,14 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options>>
                     const alt = match?.groups?.alt ?? ""
                     const width = match?.groups?.width ?? "auto"
                     const height = match?.groups?.height ?? "auto"
+                    const imageProperties: Record<string, string> = { alt }
+                    if (width !== "auto") imageProperties.width = width
+                    if (height !== "auto") imageProperties.height = height
                     return {
                       type: "image",
                       url,
                       data: {
-                        hProperties: {
-                          width,
-                          height,
-                          alt,
-                        },
+                        hProperties: imageProperties,
                       },
                     }
                   } else if ([".mp4", ".webm", ".ogv", ".mov", ".mkv"].includes(ext)) {

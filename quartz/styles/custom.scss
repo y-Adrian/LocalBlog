@@ -506,6 +506,14 @@ a.external {
   }
 }
 
+body:not([data-slug="index"]) .center article img {
+  display: block;
+  max-width: min(100%, 900px);
+  max-height: 75vh;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
 /* 列表页：标题链接悬停强调 */
 li.section-li > .section .desc h3 a {
   transition: color 0.2s ease;
