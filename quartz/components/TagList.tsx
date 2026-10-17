@@ -34,8 +34,8 @@ TagList.css = `
   flex-wrap: wrap;
 }
 
-.section-li > .section > .tags {
-  justify-content: flex-end;
+.section-li > .section > .desc > .tags {
+  justify-content: flex-start;
 }
   
 .tags > li {
