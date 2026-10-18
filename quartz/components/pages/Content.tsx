@@ -1,4 +1,6 @@
 import { ComponentChildren } from "preact"
+// @ts-ignore
+import projectStatsScript from "../scripts/projectStats.inline"
 import { Element, ElementContent, Root } from "hast"
 import { visit } from "unist-util-visit"
 import { htmlToJsx } from "../../util/jsx"
@@ -160,32 +162,47 @@ const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentP
         })
 
         for (const repository of repositories) {
-          const badgeUrl = new URL(
-            `https://badgen.net/github/stars/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.repo)}`,
-          )
-          badgeUrl.search = new URLSearchParams({
-            icon: "github",
-            label: "Stars",
-            color: "ffffff",
-            labelColor: "181717",
-          }).toString()
-
-          badgeContainer.children.push(text(" "))
-          badgeContainer.children.push(
-            element("a", "home-project-stars", [
-              element("img", undefined, [], {
-                src: badgeUrl.toString(),
-                alt: "GitHub Stars",
-                loading: "lazy",
-                decoding: "async",
-              }),
+          for (const metric of ["stars", "forks"] as const) {
+            const label = metric === "stars" ? "Star" : "Fork"
+            const icon = element("svg", "home-project-stat-icon", [
+              ...(metric === "stars"
+                ? [element("path", undefined, [], {
+                    d: "m12 3 2.8 5.7 6.3.9-4.5 4.4 1 6.2-5.6-3-5.6 3 1-6.2L2.9 9.6l6.3-.9Z",
+                  })]
+                : [
+                    element("path", undefined, [], { d: "M6 6v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V6M12 12v6" }),
+                    ...[[6, 4], [18, 4], [12, 20]].map(([cx, cy]) =>
+                      element("circle", undefined, [], { cx, cy, r: 2 }),
+                    ),
+                  ]),
             ], {
-              href: repository.url,
-              target: "_blank",
-              rel: "noopener noreferrer",
-              "aria-label": `GitHub stars for ${repository.owner}/${repository.repo}`,
-            }),
-          )
+              viewBox: "0 0 24 24",
+              fill: "none",
+              stroke: "currentColor",
+              strokeWidth: 2,
+              strokeLinecap: "round",
+              strokeLinejoin: "round",
+              "aria-hidden": "true",
+            })
+
+            badgeContainer.children.push(text(" "))
+            badgeContainer.children.push(
+              element("a", `home-project-badge home-project-${metric}`, [
+                icon,
+                element("span", "home-project-stat-label", [text(label)]),
+                element("span", "home-project-stat-count", [text("…")], {
+                  "data-project-metric": metric,
+                  "aria-label": "Loading count",
+                }),
+              ], {
+                href: metric === "forks" ? `${repository.url}/forks` : repository.url,
+                target: "_blank",
+                rel: "noopener noreferrer",
+                "data-project-repository": `${repository.owner}/${repository.repo}`,
+                "aria-label": `GitHub ${metric} for ${repository.owner}/${repository.repo}`,
+              }),
+            )
+          }
         }
       }
     })
@@ -260,5 +277,7 @@ const Content: QuartzComponent = ({ fileData, tree, allFiles }: QuartzComponentP
   const classString = ["popover-hint", ...classes].join(" ")
   return <article class={classString}>{content}</article>
 }
+
+Content.afterDOMLoaded = projectStatsScript
 
 export default (() => Content) satisfies QuartzComponentConstructor
