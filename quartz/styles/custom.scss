@@ -948,6 +948,15 @@ body[data-slug="support-the-blog/index"] #quartz-body > footer {
   }
 }
 
+:root[saved-theme="dark"] .home-project-group > ul .home-project-badge {
+  &,
+  &:hover,
+  &:focus-visible,
+  .home-project-stat-count {
+    color: #fff;
+  }
+}
+
 @media all and (max-width: 650px) {
   .home-project-group > ul {
     grid-template-columns: minmax(0, 1fr);
