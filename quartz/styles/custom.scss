@@ -1093,10 +1093,10 @@ article.knowledge-title-duplicate > h1:first-child {
   display: none;
 }
 
-/* Knowledge articles keep the main column centered independently of the right rail.
+/* Knowledge entries and blog articles keep the main column centered independently of the right rail.
    The graph and TOC float outside the content grid, so their width never shifts the article. */
 @media (min-width: 1360px) {
-  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body {
+  body:is([data-slug^="knowledge/"], [data-slug^="articles/"]):not([data-slug$="/index"]) > .page > #quartz-body {
     position: relative;
     grid-template-columns: minmax(0, 46rem);
     grid-template-rows: auto auto;
@@ -1106,11 +1106,11 @@ article.knowledge-title-duplicate > h1:first-child {
     justify-content: center;
   }
 
-  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .sidebar.left {
+  body:is([data-slug^="knowledge/"], [data-slug^="articles/"]):not([data-slug$="/index"]) > .page > #quartz-body > .sidebar.left {
     display: none;
   }
 
-  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .sidebar.right {
+  body:is([data-slug^="knowledge/"], [data-slug^="articles/"]):not([data-slug$="/index"]) > .page > #quartz-body > .sidebar.right {
     position: fixed;
     top: 6rem;
     left: calc(50% + 24rem);
@@ -1124,8 +1124,8 @@ article.knowledge-title-duplicate > h1:first-child {
     overflow-y: auto;
   }
 
-  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .center,
-  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > footer {
+  body:is([data-slug^="knowledge/"], [data-slug^="articles/"]):not([data-slug$="/index"]) > .page > #quartz-body > .center,
+  body:is([data-slug^="knowledge/"], [data-slug^="articles/"]):not([data-slug$="/index"]) > .page > #quartz-body > footer {
     box-sizing: border-box;
     width: min(100%, 46rem);
     min-width: 0;
@@ -1135,7 +1135,7 @@ article.knowledge-title-duplicate > h1:first-child {
 }
 
 @media (max-width: 1359px) {
-  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body {
+  body:is([data-slug^="knowledge/"], [data-slug^="articles/"]):not([data-slug$="/index"]) > .page > #quartz-body {
     grid-template-columns: minmax(0, 46rem);
     grid-template-rows: auto auto;
     grid-template-areas:
@@ -1145,12 +1145,12 @@ article.knowledge-title-duplicate > h1:first-child {
     column-gap: 0;
   }
 
-  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .sidebar {
+  body:is([data-slug^="knowledge/"], [data-slug^="articles/"]):not([data-slug$="/index"]) > .page > #quartz-body > .sidebar {
     display: none;
   }
 
-  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > .center,
-  body[data-slug^="knowledge/"]:not([data-slug$="/index"]) > .page > #quartz-body > footer {
+  body:is([data-slug^="knowledge/"], [data-slug^="articles/"]):not([data-slug$="/index"]) > .page > #quartz-body > .center,
+  body:is([data-slug^="knowledge/"], [data-slug^="articles/"]):not([data-slug$="/index"]) > .page > #quartz-body > footer {
     box-sizing: border-box;
     width: min(100%, 46rem);
     min-width: 0;
