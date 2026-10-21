@@ -98,7 +98,7 @@ The weaknesses follow from the design:
 - **Memory accounting is indirect.** Queued data is charged to the sender's buffer by `skb` `truesize`, which exceeds the payload size, and the memory comes out of the kernel's slab allocator rather than from anything the application can inspect or free directly.
 - **Scope is one kernel.** The mechanism does nothing for communication with another host, a different OS image, or a microcontroller core on the same die.
 
-None if these is a flaw on a workstation. On a constrained SoC, several become first-order concerns.
+None of these is a flaw on a workstation. On a constrained SoC, several become first-order concerns.
 
 ## 5. What changes on constrained embedded hardware
 
@@ -106,7 +106,7 @@ By "Mid-range constrained" we mean roughly: one to four cores at round 1 GHz, te
 
 ### Copies compete with the accelerators for bandwidth
 
-Consider uncompressed 1080p video in NV12. A frame is $1920 * 1080 * 1.5 ≈ 3.1MB$, so 30 frames per second is about 93MB/s of payload. Send that through UNIX socket copies roughly 186 MB/s. Because each copy is a read plus a write. the upper bound on DDR traffic is on the order of 370 MB/s (caches may absorb some of this, but frame-sized buffers rarely fit in a small L2).
+Consider uncompressed 1080p video in NV12. A frame is $1920 * 1080 * 1.5 ≈ 3.1MB$, so 30 frames per second is about 93MB/s of payload. Send that through UNIX socket copies roughly 186 MB/s. Because each copy is a read plus a write, the upper bound on DDR traffic is on the order of 370 MB/s (caches may absorb some of this, but frame-sized buffers rarely fit in a small L2).
 
 On a desktop this is noise. On an SoC where the ISP, NPU, display controller, and CPU all share one memory controller, it is bandwidth taken directly from the components that produce your product's actual output. The copies also evict useful cache lines, which shows unrelated code running on the same cores.
 
@@ -114,7 +114,7 @@ The situation worsens with fan-out. If three consumers (say, interface, display,
 
 ### Fixed per-message costs weigh more on slow cores
 
-A system cal plus context switch costs a certain number of microseconds on a 3 GHz server core and noticeably more on a 1 GHz in-order core. At a few thousand messages per second, the kernel path can consume a visible fraction of a CPU that is also expected to run application logic. Latency is also at the mercy of the scheduler: sockets provide no priority inheritance, and wakeup latency depends on load, so they are a poor fit for paths with hard deadlines even on a `PREEMPT_RT` kernel.
+A system call plus context switch costs a certain number of microseconds on a 3 GHz server core and noticeably more on a 1 GHz in-order core. At a few thousand messages per second, the kernel path can consume a visible fraction of a CPU that is also expected to run application logic. Latency is also at the mercy of the scheduler: sockets provide no priority inheritance, and wakeup latency depends on load, so they are a poor fit for paths with hard deadlines even on a `PREEMPT_RT` kernel.
 
 ### Kernel memory is a shared, hard-to-see budget
 
