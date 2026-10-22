@@ -186,10 +186,10 @@ contentType: knowledge
 
 - [x] **板卡与环境** 登记（内核版本、triplet、串口）→ [[knowledge/linux/驱动与模块/riscv-驱动开发日志/index|日志索引 §1]]、[[articles/riscv-driver-development-log/2026-05-30 — 环境搭建]]
 - [x] **字符设备 hello** 模块 `insmod` + `/dev` 或 sysfs 验证 → [[articles/riscv-driver-development-log/2026-05-31 — 创建字符设备文件]]
-- [x] **设备树** 节点与 `compatible` / `probe` 打通（对照 [[knowledge/linux/学习路径/设备树实战指南]]）→ [[articles/riscv-driver-development-log/2026-06-02 —— 完善学习规划，进行测试问题定位]]
+- [x] **设备树** 节点与 `compatible` / `probe` 打通（对照 [[knowledge/linux/学习路径/设备树实战指南]]）→ [[../../articles/riscv-driver-development-log/完善学习规划，进行测试问题定位]]
 - [x] **RISC-V 特权模式与 OpenSBI**（教程）→ [[knowledge/linux/学习路径/RISC-V 特权模式与 OpenSBI]]
 - [x] **RISC-V 异常入口 / entry.S**（教程）→ [[knowledge/linux/学习路径/RISC-V 异常入口与 entry.S 精读]]
-- [x] **并发 / 定时器 / I2C 扫描**（日志）→ [[articles/riscv-driver-development-log/2026-06-03 —— 学习并发、中断与定时器]]、[[articles/riscv-driver-development-log/2026-06-05]]
+- [x] **并发 / 定时器 / I2C 扫描**（日志）→ [[../../articles/riscv-driver-development-log/Learn concurrency, interrupts, and timers]]、[[articles/riscv-driver-development-log/2026-06-05]]
 - [x] **OV5647 I2C 驱动骨架**（接 `0x36` / Chip ID）→ [[knowledge/linux/驱动与模块/Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架]]
 
 ---

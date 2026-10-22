@@ -250,7 +250,7 @@ dmesg | tail
 # 期望：OV5647 detected (id=0x5647) on i2c-2 addr 0x36
 ```
 
-与字符设备练习的衔接：前期 `debris` 模块练的是 **fops / waitqueue / hrtimer**（[[2026-06-03 —— 学习并发、中断与定时器]]）；本篇换成 **总线 client**。两者最后在「帧生产 → 用户态读」汇合，但 **不要**一上来把 ISP 全塞进字符设备。
+与字符设备练习的衔接：前期 `debris` 模块练的是 **fops / waitqueue / hrtimer**（[[../../../articles/riscv-driver-development-log/Learn concurrency, interrupts, and timers]]）；本篇换成 **总线 client**。两者最后在「帧生产 → 用户态读」汇合，但 **不要**一上来把 ISP 全塞进字符设备。
 
 ---
 

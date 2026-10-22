@@ -22,7 +22,7 @@ contentType: knowledge
 
 ## 1. 板卡与环境
 
-来自 [[articles/riscv-driver-development-log/2026-05-30 — 环境搭建]] / [[articles/riscv-driver-development-log/2026-06-02 —— 完善学习规划，进行测试问题定位]]；变更时改本表。
+来自 [[articles/riscv-driver-development-log/2026-05-30 — 环境搭建]] / [[../../../../articles/riscv-driver-development-log/完善学习规划，进行测试问题定位]]；变更时改本表。
 
 | 项 | 记录 |
 |----|------|
@@ -64,8 +64,8 @@ contentType: knowledge
 | 日期 | 日志 |
 |------|------|
 | 2026-06-05 | [[articles/riscv-driver-development-log/2026-06-05]]（I2C 扫描，总线 2 上 `0x36`） |
-| 2026-06-03 | [[articles/riscv-driver-development-log/2026-06-03 —— 学习并发、中断与定时器]]（waitqueue / hrtimer / tasklet） |
-| 2026-06-02 | [[articles/riscv-driver-development-log/2026-06-02 —— 完善学习规划，进行测试问题定位]]（llseek、DT 节点） |
+| 2026-06-03 | [[../../../../articles/riscv-driver-development-log/Learn concurrency, interrupts, and timers]]（waitqueue / hrtimer / tasklet） |
+| 2026-06-02 | [[../../../../articles/riscv-driver-development-log/完善学习规划，进行测试问题定位]]（llseek、DT 节点） |
 | 2026-05-31 | [[articles/riscv-driver-development-log/2026-05-31 — 创建字符设备文件]]（含 dynamic debug） |
 | 2026-05-30 | [[articles/riscv-driver-development-log/2026-05-30 — 环境搭建]] |
 
