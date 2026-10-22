@@ -154,7 +154,7 @@ phase 1 完结：
 
 ## 1.7 参考
 
-- [[articles/riscv-driver-development-log/index]]
+- [[index]]
 - [[2026-05-30 — 环境搭建]]
 - [[knowledge/linux/驱动与模块/sysfs 与 proc 调试接口#15-dynamic-debugdynamic_debug]]
 - [[knowledge/linux/学习路径/字符设备驱动入门]]

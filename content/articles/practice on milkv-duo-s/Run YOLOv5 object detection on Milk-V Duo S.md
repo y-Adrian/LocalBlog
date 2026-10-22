@@ -3,7 +3,7 @@ contentType: article
 showArticleMeta: true
 date: 2026/10/21
 ---
-## Prepare env
+## 0.1 Prepare env
 
 Basic information:
 ```bash
@@ -11,14 +11,14 @@ uname -a
 Linux adrian 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:34:27 UTC  aarch64 aarch64 aarch64 GNU/Linux
 ```
 
-### install conda
+### 0.1.1 install conda
 
-Here I install conda with miniforge3:
+Here I installed conda with miniforge3:
 ```bash
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" bash Miniforge3-$(uname)-$(uname -m).sh
 ```
 
-Then use conda to init env:
+Then use conda to init env (we use python 3.9.0 here):
 ```bash
 # create a new env with conda
 conda create --name duotpu python=3.9.0
@@ -38,11 +38,11 @@ pip install torch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1
 pip install "numpy==1.26.4"
 ```
 
-Also there are no such libraries on my arm linux, so I need to install them:
+Also there are no such libraries in my arm linux, so I need to install them:
 ```bash
 sudo apt install -y libxcb1 libgl1 libglib2.0-0
 ```
-### Generate `yolov5n_jit.pt`
+### 0.1.2 Generate `yolov5n_jit.pt`
 
 ```bash
 # get yolov5-master code zip
@@ -66,11 +66,10 @@ Find `yolov5-master/models/yolo.py`, comment out the lines from line 99 to line 
 
 ![[assets/Pasted image 20261021114234.png|576]]
 
-
 Find the file `upsampling.py` (in my case the file is at`/home/adrian/miniforge3/envs/duotpu/lib/python3.9/site-packages/torch/nn/modules/upsampling.py`). Modify the line 153: 
 ![[assets/Pasted image 20261021114209.png|596]]
 
-We also need add `main.py` under `yolov5-master`:
+We also need add `main.py` under directory `yolov5-master`:
 ```python
 import torch
 from models.experimental import attempt_download
@@ -81,10 +80,9 @@ model.model[-1].export = True
 torch.jit.trace(model, torch.rand(1, 3, 640, 640), strict=False).save('./yolov5n_jit.pt')
 ```
 
-
 Then we can run command `python main.py` in directory `yolov5-master`, then we will get `yolov5n_jit.pt`.
 
-### prepare docker environment on Mac
+### 0.1.3 prepare docker environment on Mac (for model conversion)
 
 Because I am using a Mac, and the official pre-compiled `tpu-mlir` is built for `x86-64`. So I only perform model conversion in docker. 
 ```bash
@@ -110,9 +108,9 @@ cp -rf ${TPUC_ROOT}/regression/image .
 mkdir work && cd work
 ```
 
-## Model conversion
+## 0.2 Model conversion
 
-### TORCH model converted to MLIR
+### 0.2.1 TORCH model converted to MLIR
 ```bash
 model_transform.py \  
 --model_name yolov5n \  
@@ -134,7 +132,7 @@ Example of successful operation:
 Then you will see these files:
 ![[assets/Pasted image 20261021162749.png|709]]
 
-### Generate calibration tables required for quantification
+### 0.2.2 Generate calibration tables required for quantification
 
 Before converting to the INT8 model, you need to generate a calibration table.
 ```bash
@@ -150,7 +148,7 @@ Example of successful operation:
 After the operation is completed, the `yolov5n_cali_table` file will be generated, which is used for subsequent compilation of the INT8 model.
 ![[assets/Pasted image 20261021163708.png|729]]
 
-### MLIR quantized into INT8 asymmetric cvimodel
+### 0.2.3 MLIR quantized into INT8 asymmetric cvimodel
 
 Convert MLIR model to INT8 model. Here I use Milk-V Duo S, so the parameter `--chip` is `cv181x`:
 ```bash
@@ -163,7 +161,7 @@ model_deploy.py \
  --test_reference yolov5n_top_outputs.npz \
  --compare_all \
  --tolerance 0.96,0.72 \
- --fuse_preprocess \
+ --fuse_preprocess \ 
  --debug \
  --model yolov5n_int8_fuse.cvimodel
 ```
@@ -175,9 +173,9 @@ Then you can find the `yolov5n_int8_fuse.cvimodel` file:
 ![[assets/Pasted image 20261021164015.png|696]]
 
 
-## Validate on Milk-V Duo S
+## 0.3 Validate on Milk-V Duo S
 
-### Get tpu-sdk
+### 0.3.1 Get tpu-sdk
 
 Switch to the `/workspace` directory in the Docker terminal, and download tpu sdk:
 ```bash
@@ -188,7 +186,7 @@ git clone https://github.com/milkv-duo/tpu-sdk-sg200x.git
 mv ./tpu-sdk-sg200x ./tpu-sdk
 ```
 
-### Copy tpu-sdk and model files to Duo S
+### 0.3.2 Copy tpu-sdk and model files to Duo S
 
 In the terminal of Duo S, create a new directory, and copy `tpu-sdk` and model files to Duo S:
 ```bash
@@ -200,7 +198,7 @@ scp -r /workspace/tpu-sdk root@192.168.42.1:/mnt/tpu/
 scp /workspace/yolov5n_torch/work/yolov5n_int8_fuse.cvimodel root@192.168.42.1:/mnt/tpu/tpu-sdk/
 ```
 
-### Set environment variables
+### 0.3.3 Set environment variables
 
 In the terminal of Duo S:
 ```bash
@@ -208,7 +206,7 @@ cd /mnt/tpu/tpu-sdk
 source ./envs_tpu_sdk.sh
 ```
 
-### Perform object detection
+### 0.3.4 Perform object detection
 
 On the Duo S board, perform object detection on the image:
 ![[assets/Pasted image 20261022144604.png|546]]
@@ -238,6 +236,6 @@ Input (this is a picture I download from the internet):
 output:
 ![[assets/walking_dog_out.jpg|346]]
 
-## Reference
+## 0.4 Reference
 
 This guide is primarily base on this [Object Detection Based on YOLOv5](https://milkv.io/docs/duo/application-development/tpu/tpu-yolov5#2-configure-docker-development-environment), and I made some adjustments based on some differences in my own develop environment.

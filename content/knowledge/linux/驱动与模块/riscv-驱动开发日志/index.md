@@ -16,7 +16,7 @@ contentType: knowledge
 ---
 # RISC-V 驱动开发日志
 
-本页保存 RISC-V 驱动实践的学习路线、通用笔记和日志模板。按日期记录的板端经历、故障定位与阶段性取舍，统一发布在 [[articles/riscv-driver-development-log/index|RISC-V Linux 驱动开发日志]]。专题原理与可复用教程留在本知识库。
+本页保存 RISC-V 驱动实践的学习路线、通用笔记和日志模板。按日期记录的板端经历、故障定位与阶段性取舍，统一发布在 [[../../../../articles/practice on milkv-duo-s/index|RISC-V Linux 驱动开发日志]]。专题原理与可复用教程留在本知识库。
 
 ---
 
@@ -64,7 +64,7 @@ contentType: knowledge
 | 日期 | 日志 |
 |------|------|
 | 2026-06-05 | [[articles/riscv-driver-development-log/2026-06-05]]（I2C 扫描，总线 2 上 `0x36`） |
-| 2026-06-03 | [[../../../../articles/riscv-driver-development-log/Learn concurrency, interrupts, and timers]]（waitqueue / hrtimer / tasklet） |
+| 2026-06-03 | [[../../../../articles/practice on milkv-duo-s/Learn concurrency, interrupts, and timers]]（waitqueue / hrtimer / tasklet） |
 | 2026-06-02 | [[../../../../articles/riscv-driver-development-log/完善学习规划，进行测试问题定位]]（llseek、DT 节点） |
 | 2026-05-31 | [[articles/riscv-driver-development-log/2026-05-31 — 创建字符设备文件]]（含 dynamic debug） |
 | 2026-05-30 | [[articles/riscv-driver-development-log/2026-05-30 — 环境搭建]] |

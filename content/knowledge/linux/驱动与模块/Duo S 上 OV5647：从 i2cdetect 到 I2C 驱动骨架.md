@@ -15,7 +15,7 @@ contentType: knowledge
 showArticleMeta: true
 ---
 
-# Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架
+# 1 Duo S 上 OV5647：从 i2cdetect 到 I2C 驱动骨架
 
 [[articles/riscv-driver-development-log/2026-06-05|2026-06-05 日志]] 已在 Milk-V Duo S 的 **i2c-2** 上扫到地址 `0x36`，并用 `i2ctransfer` 读出 Chip ID `0x5647`——这是 **OV5647** 的典型指纹。本文把流水账收成 **可复现的 bring-up + 最小 `i2c_driver`**，对应学习路线 **项目 B（I²C 设备驱动）** 的前半段：先证明「总线通、ID 对、probe 能绑」，再谈 MIPI / V4L2 出图。
 
@@ -23,7 +23,7 @@ showArticleMeta: true
 
 ---
 
-## 1. 读完能带走什么
+## 1.1 读完能带走什么
 
 - 能用 **`i2cdetect` / `i2ctransfer`** 独立确认 OV5647，并解释为何有时是 `UU`、有时看不到节点。  
 - 能写 **设备树子节点 + `i2c_driver`**，在 `probe` 里读 Chip ID 判活。  
@@ -31,7 +31,7 @@ showArticleMeta: true
 
 ---
 
-## 2. 场景与问题
+## 1.2 场景与问题
 
 | 现象（日志） | 要回答的问题 |
 |--------------|--------------|
@@ -58,7 +58,7 @@ flowchart TB
 
 ---
 
-## 3. 核心概念
+## 1.3 核心概念
 
 | 概念 | 本场景落点 |
 |------|------------|
@@ -70,11 +70,11 @@ flowchart TB
 
 ---
 
-## 4. 用户态确认（先于写驱动）
+## 1.4 用户态确认（先于写驱动）
 
 环境以日志为准：内核 `5.10.4-tag-`、板卡 **milkv-duo**、总线 `i2c-2`。
 
-### 4.1 扫总线
+### 1.4.1 扫总线
 
 ```bash
 for b in 1 2 3 4; do
@@ -91,7 +91,7 @@ cat /sys/bus/i2c/devices/*/name
 lsmod | grep -iE 'snsr|sensor|ov|cvi'
 ```
 
-### 4.2 读 Chip ID（16-bit 寄存器地址）
+### 1.4.2 读 Chip ID（16-bit 寄存器地址）
 
 OV5647 要用 **先写 2 字节寄存器地址、再读 1 字节**（不是简单的 `i2cget` 单字节寄存器）：
 
@@ -114,7 +114,7 @@ sequenceDiagram
 
 若读出 `0x00` / `NACK`：优先查 **供电、PWDN/RESET、XCLK**，而不是先改驱动代码（树莓派系模块常见「regulator GPIO 未拉高则总线上无设备」）。
 
-### 4.3 对照厂商路径
+### 1.4.3 对照厂商路径
 
 日志里已有 `snsr_i2c`、`sample_vio` 等——说明 **出图可以先走 SDK sample**，自研驱动用于 **学习 I2C client / 面试手写骨架**，两者目标不同：
 
@@ -126,7 +126,7 @@ sequenceDiagram
 
 ---
 
-## 5. 设备树：挂上 client 节点
+## 1.5 设备树：挂上 client 节点
 
 示意（总线 phandle、时钟、复位脚以 **你的 Duo S DTS** 为准；先最小节点跑通 probe）：
 
@@ -159,7 +159,7 @@ sequenceDiagram
 
 ---
 
-## 6. 最小 `i2c_driver`：probe 读 ID
+## 1.6 最小 `i2c_driver`：probe 读 ID
 
 学习向骨架（out-of-tree 模块即可；**不是**完整 V4L2 subdev）：
 
@@ -250,11 +250,11 @@ dmesg | tail
 # 期望：OV5647 detected (id=0x5647) on i2c-2 addr 0x36
 ```
 
-与字符设备练习的衔接：前期 `debris` 模块练的是 **fops / waitqueue / hrtimer**（[[../../../articles/riscv-driver-development-log/Learn concurrency, interrupts, and timers]]）；本篇换成 **总线 client**。两者最后在「帧生产 → 用户态读」汇合，但 **不要**一上来把 ISP 全塞进字符设备。
+与字符设备练习的衔接：前期 `debris` 模块练的是 **fops / waitqueue / hrtimer**（[[../../../articles/practice on milkv-duo-s/Learn concurrency, interrupts, and timers]]）；本篇换成 **总线 client**。两者最后在「帧生产 → 用户态读」汇合，但 **不要**一上来把 ISP 全塞进字符设备。
 
 ---
 
-## 7. 进阶方向（按目标选一条）
+## 1.7 进阶方向（按目标选一条）
 
 | 方向 | 做什么 | 参考 |
 |------|--------|------|
@@ -266,7 +266,7 @@ dmesg | tail
 
 ---
 
-## 8. 边界与排障
+## 1.8 边界与排障
 
 | 现象 | 检查顺序 |
 |------|----------|
@@ -278,7 +278,7 @@ dmesg | tail
 
 ---
 
-## 9. 检查清单
+## 1.9 检查清单
 
 - [ ] 能复述日志结论：`i2c-2` + `0x36` + Chip ID `0x5647` = OV5647  
 - [ ] 不看文档能写出 **16-bit 寄存器地址** 的 `i2c_msg` 两段式读写  
@@ -288,7 +288,7 @@ dmesg | tail
 
 ---
 
-## 10. 相关链接
+## 1.10 相关链接
 
 | 文档 | 用途 |
 |------|------|
@@ -298,4 +298,4 @@ dmesg | tail
 | [[knowledge/linux/驱动与模块/riscv-驱动开发日志/学习路线]] | Phase 5 项目 B |
 | upstream | [`drivers/media/i2c/ov5647.c`](https://github.com/torvalds/linux/blob/master/drivers/media/i2c/ov5647.c) |
 
-*实践进度勾选见 [[knowledge/成长路径/index#六、嵌入式 Linux · 驱动与模块]]；新板日志继续追加到 [[articles/riscv-driver-development-log/index]]。*
+*实践进度勾选见 [[knowledge/成长路径/index#六、嵌入式 Linux · 驱动与模块]]；新板日志继续追加到 [[../../../articles/practice on milkv-duo-s/index]]。*

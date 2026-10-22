@@ -26,6 +26,6 @@ My perspective on technical ideas: what matters, where the trade-offs are, and w
 
 Development journals and case studies: the problems I encountered, the choices I made, and what I learned along the way.
 
-[[articles/riscv-driver-development-log/index|RISC-V Linux driver development]]
+[[practice on milkv-duo-s/index|RISC-V Linux driver development]]
 
 ---

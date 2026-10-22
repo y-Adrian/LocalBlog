@@ -205,5 +205,5 @@ echo "环境初始化完成，CC=$CC"
 
 ## 1.6 参考
 
-- [[articles/riscv-driver-development-log/index]]
+- [[index]]
 - 
