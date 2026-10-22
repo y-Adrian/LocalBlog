@@ -1,5 +1,5 @@
 ---
-title: I2C 扫描摄像头
+title: I2C camera scanning
 description: Duo S 上 i2cdetect 发现 0x36，对照摄像头驱动线索
 date: 2026/07/01
 tags:
@@ -8,8 +8,8 @@ tags:
   - 驱动
   - I2C
 aliases:
-  - "linux/驱动与模块/riscv-驱动开发日志/2026-06-05"
-  - "articles/linux/驱动与模块/riscv-驱动开发日志/2026-06-05"
+  - linux/驱动与模块/riscv-驱动开发日志/2026-06-05
+  - articles/linux/驱动与模块/riscv-驱动开发日志/2026-06-05
 contentType: article
 ---
 # I2C 扫描摄像头

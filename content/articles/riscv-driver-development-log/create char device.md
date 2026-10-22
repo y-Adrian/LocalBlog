@@ -1,5 +1,5 @@
 ---
-title: 创建字符设备文件
+title: Create char device
 description: debris 字符设备 ko、proc/debugfs 统计与 dynamic debug 实践（Milk-V Duo）
 date: 2026/06/03
 tags:
@@ -8,8 +8,8 @@ tags:
   - 驱动
   - dynamic-debug
 aliases:
-  - "linux/驱动与模块/riscv-驱动开发日志/2026-05-31 — 创建字符设备文件"
-  - "articles/linux/驱动与模块/riscv-驱动开发日志/2026-05-31 — 创建字符设备文件"
+  - linux/驱动与模块/riscv-驱动开发日志/2026-05-31 — 创建字符设备文件
+  - articles/linux/驱动与模块/riscv-驱动开发日志/2026-05-31 — 创建字符设备文件
 contentType: article
 ---
 # 创建字符设备文件

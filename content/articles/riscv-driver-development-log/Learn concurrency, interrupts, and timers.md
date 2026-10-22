@@ -1,5 +1,5 @@
 ---
-title: 并发、中断与定时器
+title: Learn concurrency, interrupts, and timers
 description: waitqueue、hrtimer、tasklet 与虚拟帧生产，为摄像头驱动打基础
 date: 2026/07/01
 tags:
@@ -7,8 +7,8 @@ tags:
   - RISC-V
   - 驱动
 aliases:
-  - "linux/驱动与模块/riscv-驱动开发日志/2026-06-03 —— 学习并发、中断与定时器"
-  - "articles/linux/驱动与模块/riscv-驱动开发日志/2026-06-03 —— 学习并发、中断与定时器"
+  - linux/驱动与模块/riscv-驱动开发日志/2026-06-03 —— 学习并发、中断与定时器
+  - articles/linux/驱动与模块/riscv-驱动开发日志/2026-06-03 —— 学习并发、中断与定时器
 contentType: article
 ---
 # 并发、中断与定时器

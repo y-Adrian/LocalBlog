@@ -1,5 +1,5 @@
 ---
-title: 环境搭建
+title: prepare the develop environment
 description: Milk-V Duo S Docker 交叉编译、烧录与首个模块加载
 date: 2026/05/31
 tags:
@@ -7,8 +7,8 @@ tags:
   - RISC-V
   - 驱动
 aliases:
-  - "linux/驱动与模块/riscv-驱动开发日志/2026-05-30 — 环境搭建"
-  - "articles/linux/驱动与模块/riscv-驱动开发日志/2026-05-30 — 环境搭建"
+  - linux/驱动与模块/riscv-驱动开发日志/2026-05-30 — 环境搭建
+  - articles/linux/驱动与模块/riscv-驱动开发日志/2026-05-30 — 环境搭建
 contentType: article
 ---
 # 环境搭建
