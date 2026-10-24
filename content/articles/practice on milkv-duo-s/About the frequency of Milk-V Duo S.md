@@ -185,4 +185,4 @@ The relevant fields are as follows. [SG2000 Technical Reference Manual, Chapter 
 > With a **25 MHz reference clock and integer PLL operation**, the output frequency is:
   $PLL output frequency = 25 MHz * div\_sel / pre\_div\_sel / post\_div\_sel$
 
-More about PLL, you can refer to [Clock and Pinctrl subsystem](../../knowledge/linux/内核机制/Clock%20and%20Pinctrl%20subsystem.md).
+More about PLL, you can refer to [[knowledge/linux/内核机制/Clock and Pinctrl subsystem|Clock and Pinctrl subsystem]].
