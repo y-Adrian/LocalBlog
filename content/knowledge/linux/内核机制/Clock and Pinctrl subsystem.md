@@ -3,14 +3,15 @@ tags:
   - Linux
   - 内核
   - 驱动
-title: Clock 与 Pinctrl 子系统
+title: Clock and Pinctrl subsystem
 description: 时钟树与 CCF、clk 消费者 API、Pinctrl 引脚复用、与设备树的配合
 date: 2026/07/01
 aliases:
-  - "linux/内核机制/Clock 与 Pinctrl 子系统"
-  - "articles/linux/内核机制/Clock 与 Pinctrl 子系统"
+  - linux/内核机制/Clock 与 Pinctrl 子系统
+  - articles/linux/内核机制/Clock 与 Pinctrl 子系统
 contentType: knowledge
 showArticleMeta: true
+hideTitle: true
 ---
 # 1 Clock and Pinctrl subsystem
 
