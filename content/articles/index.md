@@ -8,24 +8,24 @@ contentType: page
 hideCreatedDate: true
 hideReadingTime: true
 ---
-# Articles
+# 1 Articles
 
 Here I share my own thoughts, my own interpretations of technology, engineering decisions, and lessons from practice. Definitions and reusable reference material live in [[knowledge/index|Knowledge]].
 
-## Just my thoughts
+## 1.1 Just my thoughts
 
 Here are some of my [[articles/thoughts/index|thoughts]].
 
-## Technical Interpretation
+## 1.2 Technical Interpretation
 
 My perspective on technical ideas: what matters, where the trade-offs are, and why I reach a particular conclusion.
 
 [[articles/technical-interpretation/index|Technical interpretations]]
 
-## Practice
+## 1.3 Practice
 
 Development journals and case studies: the problems I encountered, the choices I made, and what I learned along the way.
 
-[[practice on milkv-duo-s/index|RISC-V Linux driver development]]
+[[articles/practice on milkv-duo-s/index|RISC-V Linux driver development]]
 
 ---
