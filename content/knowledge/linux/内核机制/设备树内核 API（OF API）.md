@@ -411,7 +411,7 @@ err_clk:
 ## 延伸阅读
 
 - [[knowledge/linux/学习路径/设备树实战指南]]（DTS 语法与编译）
-- [[knowledge/linux/内核机制/Clock 与 Pinctrl 子系统]]（时钟树与引脚复用原理）
+- [[Clock and Pinctrl subsystem]]（时钟树与引脚复用原理）
 - [[knowledge/linux/内核机制/GPIO 与 gpiod 子系统]]（GPIO descriptor API 深入）
 - [[knowledge/linux/驱动与模块/platform 驱动完整案例]]（完整案例代码）
 - `Documentation/driver-api/driver-model/devres.rst`（devm 机制说明）

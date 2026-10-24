@@ -41,7 +41,7 @@ contentType: knowledge
 
 - [[设备树内核 API（OF API）]] — of_property_read_*、GPIO/IRQ/Clock 获取
 - [[GPIO 与 gpiod 子系统]] — gpiod descriptor API、GPIO 中断
-- [[Clock 与 Pinctrl 子系统]] — 时钟树/CCF、引脚复用
+- [[Clock and Pinctrl subsystem]] — 时钟树/CCF、引脚复用
 - [[DMA 与 Cache 一致性入门]] — 一致性/流式映射、Cache 一致性
 
 ## 调试与日志

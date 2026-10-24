@@ -11,13 +11,13 @@ contentType: knowledge
 showArticleMeta: true
 ---
 
-# coredump 分析基础
+# 1 coredump 分析基础
 
 程序崩溃时，内核可以把进程的内存快照转储到文件——这就是 **core dump**（核心转储）。借助 GDB 或 `addr2line`，可以精确定位崩溃发生在哪行代码，**而不需要复现**。
 
 ---
 
-## 1. 启用 core dump
+## 1.1 启用 core dump
 
 默认情况下，很多系统把 core dump 大小限制为 0（不产生）：
 
@@ -33,7 +33,7 @@ echo "* soft core unlimited" >> /etc/security/limits.conf
 echo "* hard core unlimited" >> /etc/security/limits.conf
 ```
 
-### 1.1 配置输出路径
+### 1.1.1 配置输出路径
 
 `/proc/sys/kernel/core_pattern` 控制 core 文件的命名和存放位置：
 
@@ -56,7 +56,7 @@ echo "/tmp/core.%e.%p.%t" | sudo tee /proc/sys/kernel/core_pattern
 | `%s` | 触发 core 的信号编号 |
 | `%u` / `%g` | UID / GID |
 
-### 1.2 验证配置生效
+### 1.1.2 验证配置生效
 
 ```bash
 # 触发一个 SIGSEGV，检查 core 是否生成
@@ -67,9 +67,9 @@ ls /tmp/core.*
 
 ---
 
-## 2. GDB 分析 core dump
+## 1.2 GDB 分析 core dump
 
-### 2.1 基本分析流程
+### 1.2.1 基本分析流程
 
 ```bash
 # 加载可执行文件和 core
@@ -86,7 +86,7 @@ gdb ./app /tmp/core.app.12345
 (gdb) info registers  # 查看所有寄存器
 ```
 
-### 2.2 典型 backtrace 解读
+### 1.2.2 典型 backtrace 解读
 
 ```text
 Program received signal SIGSEGV, Segmentation fault.
@@ -104,7 +104,7 @@ Program received signal SIGSEGV, Segmentation fault.
 - 往上看：`process_data` 在 `main.cpp:42` 传了一个 `data=0x0`（空指针）
 - 真正的 bug 在 `main.cpp:18`，没有检查指针是否为空就传给了 `process_data`
 
-### 2.3 多线程程序
+### 1.2.3 多线程程序
 
 ```bash
 (gdb) info threads          # 查看所有线程
@@ -114,7 +114,7 @@ Program received signal SIGSEGV, Segmentation fault.
 
 ---
 
-## 3. 编译时必须保留调试信息
+## 1.3 编译时必须保留调试信息
 
 **没有调试信息，backtrace 只有地址，没有行号：**
 
@@ -138,7 +138,7 @@ gcc -g -O1 -o app app.c
 
 ---
 
-## 4. addr2line：没有 GDB 时的替代
+## 1.4 addr2line：没有 GDB 时的替代
 
 嵌入式板子上往往没有 GDB，只有崩溃日志里的地址：
 
@@ -169,7 +169,7 @@ aarch64-linux-gnu-addr2line -e ./app 0x00012345
 
 ---
 
-## 5. 嵌入式环境的限制与应对
+## 1.5 嵌入式环境的限制与应对
 
 | 挑战 | 解决方案 |
 |------|----------|
@@ -179,7 +179,7 @@ aarch64-linux-gnu-addr2line -e ./app 0x00012345
 | 生产版本 strip 了符号 | 交叉编译时同时出 `.debug` 包，主机侧分析 |
 | 没有 GDB | `addr2line` + 崩溃地址 + 串口调用栈日志 |
 
-### 5.1 嵌入式 core_pattern 配置
+### 1.5.1 嵌入式 core_pattern 配置
 
 ```bash
 # 写到可写数据分区
@@ -189,7 +189,7 @@ echo "/data/core.%e.%p" | tee /proc/sys/kernel/core_pattern
 echo "|/usr/bin/gzip -c > /data/core.%e.%p.gz" | tee /proc/sys/kernel/core_pattern
 ```
 
-### 5.2 从 dmesg 提取用户态崩溃信息
+### 1.5.2 从 dmesg 提取用户态崩溃信息
 
 ```bash
 dmesg | grep "segfault at"
@@ -202,7 +202,7 @@ dmesg | grep "segfault at"
 
 ---
 
-## 6. 完整调试流程
+## 1.6 完整调试流程
 
 ```mermaid
 flowchart TB
@@ -218,7 +218,7 @@ flowchart TB
 
 ---
 
-## 延伸阅读
+## 1.7 延伸阅读
 
 - [[knowledge/系统调试/ASan 与 Valgrind 桌面验证]]（在崩溃前就发现内存错误）
 - [[knowledge/系统调试/反汇编在嵌入式问题定位中的应用：环境、工具与可读性]]（没有行号时看汇编）

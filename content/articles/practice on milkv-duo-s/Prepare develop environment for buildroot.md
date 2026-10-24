@@ -11,7 +11,7 @@ aliases:
   - articles/linux/驱动与模块/riscv-驱动开发日志/2026-05-30 — 环境搭建
 contentType: article
 ---
-# 环境搭建
+# 1 环境搭建
 
 ---
 

@@ -12,15 +12,15 @@ aliases:
 contentType: knowledge
 showArticleMeta: true
 ---
-# Clock 与 Pinctrl 子系统
+# 1 Clock and Pinctrl subsystem
 
 几乎每个外设驱动都会用到这两个子系统：**Clock（时钟）** 控制外设的工作频率，**Pinctrl（引脚控制）** 配置引脚的复用功能。两者都通过设备树描述、通过 API 使用，是驱动开发的基础设施。
 
 ---
 
-## 第一部分：Clock 子系统
+## 1.1 第一部分：Clock 子系统
 
-### 1. 为什么需要 Clock 子系统
+### 1.1.1 为什么需要 Clock 子系统
 
 SoC 内部有一棵**时钟树**：有晶振（根时钟）、PLL（锁相环，倍频）、分频器、门控等节点。外设挂在时钟树的某个节点上，需要：
 - **使能时钟**（开关，控制功耗）
@@ -29,7 +29,7 @@ SoC 内部有一棵**时钟树**：有晶振（根时钟）、PLL（锁相环，
 
 **CCF（Common Clock Framework）** 是 Linux 统一管理所有时钟的框架，驱动通过 `clk_*` API 使用时钟，不直接操作寄存器。
 
-### 2. 时钟树示意
+### 1.1.2 时钟树示意
 
 ```mermaid
 flowchart TB
@@ -43,7 +43,7 @@ flowchart TB
 
 驱动只关心自己的那个节点，不需要了解整棵树的细节。
 
-### 3. 设备树中声明时钟
+### 1.1.3 设备树中声明时钟
 
 ```dts
 /* 时钟提供者（由 BSP/SoC 厂商写，驱动开发者通常不需要写）*/
@@ -62,7 +62,7 @@ uart0: serial@ff000000 {
 };
 ```
 
-### 4. 消费者 API（驱动开发者常用）
+### 1.1.4 消费者 API（驱动开发者常用）
 
 ```c
 #include <linux/clk.h>
@@ -105,7 +105,7 @@ int ret = clk_set_rate(clk, 115200 * 16);  /* UART 需要 baud * 16 的时钟 */
 unsigned long actual = clk_round_rate(clk, 115200 * 16);
 ```
 
-### 5. prepare 和 enable 的区别
+### 1.1.5 prepare 和 enable 的区别
 
 | 操作 | 说明 |
 |------|------|
@@ -114,7 +114,7 @@ unsigned long actual = clk_round_rate(clk, 115200 * 16);
 | `clk_prepare_enable` | 两步合并，**只能在进程上下文**调用 |
 | `clk_disable_unprepare` | 关闭，两步合并 |
 
-### 6. devm 与 remove 时的资源管理
+### 1.1.6 devm 与 remove 时的资源管理
 
 使用 `devm_clk_get` 后，不需要手动 `clk_put`，但仍需手动 `clk_disable_unprepare`（因为 CCF 不知道你 enable 了多少次）：
 
@@ -141,9 +141,9 @@ static int mydev_probe(struct platform_device *pdev)
 
 ---
 
-## 第二部分：Pinctrl 子系统
+## 1.2 第二部分：Pinctrl 子系统
 
-### 7. 为什么需要 Pinctrl
+### 1.2.1 为什么需要 Pinctrl
 
 SoC 的引脚是**复用**的：同一个物理引脚可以是 GPIO、UART TX、I2C SDA、PWM 等不同功能。**Pinctrl 子系统**管理引脚的功能切换（mux）和电气特性（pull-up/down、驱动强度、电平标准）。
 
@@ -155,7 +155,7 @@ SoC 的引脚是**复用**的：同一个物理引脚可以是 GPIO、UART TX、
   - 功能 3：PWM0
 ```
 
-### 8. 设备树中描述引脚配置
+### 1.2.2 设备树中描述引脚配置
 
 ```dts
 /* Pinctrl 节点（由 BSP 厂商写，描述所有可能的引脚状态）*/
@@ -190,7 +190,7 @@ SoC 的引脚是**复用**的：同一个物理引脚可以是 GPIO、UART TX、
 };
 ```
 
-### 9. 驱动侧 API
+### 1.2.3 驱动侧 API
 
 **大多数情况下，驱动不需要手动操作 Pinctrl**——内核会自动在 `probe` 时切到 `default` 状态，在 `suspend` 时切到 `sleep` 状态。
 
@@ -212,7 +212,7 @@ struct pinctrl_state *state_active  = pinctrl_lookup_state(pctl, "active");
 ret = pinctrl_select_state(pctl, state_active);
 ```
 
-### 10. 常见电气属性
+### 1.2.4 常见电气属性
 
 | DTS 属性 | 含义 |
 |----------|------|
@@ -226,9 +226,9 @@ ret = pinctrl_select_state(pctl, state_active);
 
 ---
 
-## 第三部分：Clock 与 Pinctrl 联合调试
+## 1.3 第三部分：Clock 与 Pinctrl 联合调试
 
-### 11. 时钟调试
+### 1.3.1 时钟调试
 
 ```bash
 # 查看系统时钟树（需要 CONFIG_COMMON_CLK_DEBUG=y）
@@ -246,7 +246,7 @@ cat /sys/kernel/debug/clk/apb-clk/clk_rate
 cat /sys/kernel/debug/clk/apb-clk/clk_enable_count
 ```
 
-### 12. Pinctrl 调试
+### 1.3.2 Pinctrl 调试
 
 ```bash
 # 查看所有已注册的 pinctrl 设备
@@ -261,7 +261,7 @@ cat /sys/kernel/debug/pinctrl/pinctrl-rockchip/pingroups
 
 ---
 
-## 常见问题排查
+## 1.4 常见问题排查
 
 | 问题 | 原因 | 排查 |
 |------|------|------|
@@ -273,7 +273,7 @@ cat /sys/kernel/debug/pinctrl/pinctrl-rockchip/pingroups
 
 ---
 
-## 延伸阅读
+## 1.5 延伸阅读
 
 - [[knowledge/linux/内核机制/设备树内核 API（OF API）]]（`devm_clk_get`、`devm_gpiod_get` 等 API 汇总）
 - [[knowledge/linux/内核机制/GPIO 与 gpiod 子系统]]（GPIO 专题）

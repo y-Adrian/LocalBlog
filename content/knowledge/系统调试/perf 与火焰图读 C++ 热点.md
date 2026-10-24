@@ -12,16 +12,17 @@ aliases:
 contentType: knowledge
 showArticleMeta: true
 ---
+# 1 perf 与火焰图读 C++ 热点
 
-# perf 与火焰图读 C++ 热点
+性能优化的第一步是找到热点——哪个函数占用了最多 CPU？
 
-性能优化的第一步是找到热点——哪个函数占用了最多 CPU？**perf + 火焰图**是 Linux 上最主流的 CPU 性能剖析手段，适用于用户态 C/C++、内核代码，以及 DPDK 数据面。
+**perf + 火焰图**是 Linux 上最主流的 CPU 性能剖析手段，适用于用户态 C/C++、内核代码，以及 DPDK 数据面。
 
 ---
 
-## 1. perf 基础
+## 1.1 perf 基础
 
-### 1.1 安装
+### 1.1.1 安装
 
 ```bash
 # Ubuntu/Debian
@@ -31,7 +32,46 @@ sudo apt install linux-perf linux-tools-$(uname -r)
 perf --version
 ```
 
-### 1.2 采样（record）
+### 1.1.2 Manual
+```bash
+# perf --help
+
+ usage: perf [--version] [--help] [OPTIONS] COMMAND [ARGS]
+
+ The most commonly used perf commands are:
+   annotate        Read perf.data (created by perf record) and display annotated code
+   archive         Create archive with object files with build-ids found in perf.data file
+   bench           General framework for benchmark suites
+   buildid-cache   Manage build-id cache.
+   buildid-list    List the buildids in a perf.data file
+   c2c             Shared Data C2C/HITM Analyzer.
+   config          Get and set variables in a configuration file.
+   data            Data file related processing
+   diff            Read perf.data files and display the differential profile
+   evlist          List the event names in a perf.data file
+   ftrace          simple wrapper for kernel's ftrace functionality
+   inject          Filter to augment the events stream with additional information
+   kallsyms        Searches running kernel for symbols
+   kmem            Tool to trace/measure kernel memory properties
+   kvm             Tool to trace/measure kvm guest os
+   list            List all symbolic event types
+   lock            Analyze lock events
+   mem             Profile memory accesses
+   record          Run a command and record its profile into perf.data
+   report          Read perf.data (created by perf record) and display the profile
+   sched           Tool to trace/measure scheduler properties (latencies)
+   script          Read perf.data (created by perf record) and display trace output
+   stat            Run a command and gather performance counter statistics
+   test            Runs sanity tests.
+   timechart       Tool to visualize total system behavior during a workload
+   top             System profiling tool.
+   version         display the version of perf binary
+
+ See 'perf help COMMAND' for more information on a specific command.
+```
+
+
+### 1.1.3 采样（record）
 
 ```bash
 # 基本用法：以 99Hz 采样，带调用栈
@@ -57,7 +97,7 @@ perf record -C 2,3 -g --call-graph dwarf -F 99 -- sleep 30
 | `-F 99` | 采样频率 99Hz（避免与 100Hz 时钟同步造成偏差） |
 | `-a` | 系统级采样（所有 CPU 所有进程） |
 
-### 1.3 查看报告（report）
+### 1.1.4 查看报告（report）
 
 ```bash
 perf report
@@ -78,11 +118,11 @@ Overhead  Command  Shared Object      Symbol
 
 ---
 
-## 2. 火焰图（Flame Graph）
+## 1.2 火焰图（Flame Graph）
 
 火焰图把调用栈可视化，**横轴 = CPU 占比，纵轴 = 调用深度**，让热点一眼可见。
 
-### 2.1 生成火焰图
+### 1.2.1 生成火焰图
 
 ```bash
 # 1. 采集数据
@@ -100,7 +140,7 @@ open fg.svg   # macOS
 xdg-open fg.svg  # Linux
 ```
 
-### 2.2 解读火焰图
+### 1.2.2 解读火焰图
 
 ```
         ┌──────────────────────────────────────────┐
@@ -116,7 +156,7 @@ xdg-open fg.svg  # Linux
 - **宽但有高子塔**：热点在子函数里，本函数只是路由
 - **很深的调用栈**：C++ 模板/STL 的典型表现，关注最底部的叶子
 
-### 2.3 差分火焰图（对比优化前后）
+### 1.2.3 差分火焰图（对比优化前后）
 
 ```bash
 # 优化前
@@ -135,9 +175,9 @@ perf script > after.perf
 
 ---
 
-## 3. C++ 特有注意事项
+## 1.3 C++ 特有注意事项
 
-### 3.1 名字修饰（Name Mangling）
+### 1.3.1 名字修饰（Name Mangling）
 
 C++ 函数名在符号表里是 mangled 的，perf report 默认会 demangle，但有时需要手动：
 
@@ -147,7 +187,7 @@ echo "_ZN3Foo7processEPKci" | c++filt
 # 输出：Foo::process(char const*, int)
 ```
 
-### 3.2 模板展开后的符号膨胀
+### 1.3.2 模板展开后的符号膨胀
 
 模板函数每个实例化都是独立符号，火焰图里可能看到：
 
@@ -159,7 +199,7 @@ std::vector<int>::push_back(int&&)
 
 关注**业务层**的函数名，STL 内部函数通常不是真正的热点。
 
-### 3.3 内联函数消失
+### 1.3.3 内联函数消失
 
 `-O2` 及以上会大量内联函数，导致在 perf report 里看不到那个函数的名字，热点归到调用它的上层函数。
 
@@ -169,13 +209,13 @@ std::vector<int>::push_back(int&&)
 __attribute__((noinline)) void hot_function() { ... }
 ```
 
-### 3.4 LTO（Link-Time Optimization）
+### 1.3.4 LTO（Link-Time Optimization）
 
 LTO 会在链接时合并和优化，导致符号可能被合并或消失，建议对比**有 LTO 和无 LTO** 的版本，确认热点归因正确。
 
 ---
 
-## 4. DPDK 数据面采样
+## 1.4 DPDK 数据面采样
 
 DPDK 数据面跑在独占 CPU 核上（`isolcpus`），需要对特定核心采样：
 
@@ -195,7 +235,7 @@ perf record -C 2,3 -g --call-graph dwarf -F 99 -- sleep 30
 
 ---
 
-## 5. 与 ftrace/bpftrace 的分工
+## 1.5 与 ftrace/bpftrace 的分工
 
 | 工具 | 适合场景 | 开销 |
 |------|----------|------|
@@ -206,7 +246,7 @@ perf record -C 2,3 -g --call-graph dwarf -F 99 -- sleep 30
 
 ---
 
-## 6. 实践清单
+## 1.6 实践清单
 
 - [ ] 用 `perf record -g` 对自己写的应用采集 30 秒数据
 - [ ] 生成火焰图，找到 `Overhead > 5%` 的函数
@@ -215,7 +255,7 @@ perf record -C 2,3 -g --call-graph dwarf -F 99 -- sleep 30
 
 ---
 
-## 延伸阅读
+## 1.7 延伸阅读
 
 - [[knowledge/linux/内核机制/eBPF 与 bpftrace 入门]]（更灵活的观测方式）
 - [[knowledge/网络与DPDK/实践/DPDK 性能剖析与绑核 checklist]]

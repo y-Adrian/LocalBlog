@@ -311,6 +311,6 @@ ret = devm_request_threaded_irq(dev, irq,
 ## 延伸阅读
 
 - [[knowledge/linux/内核机制/设备树内核 API（OF API）]]（GPIO 在 OF API 里的位置）
-- [[knowledge/linux/内核机制/Clock 与 Pinctrl 子系统]]（Pinctrl 配置 GPIO 复用功能）
+- [[Clock and Pinctrl subsystem]]（Pinctrl 配置 GPIO 复用功能）
 - [[knowledge/linux/内核机制/Linux 中断机制详解]]（threaded IRQ 原理）
 - `Documentation/driver-api/gpio/consumer.rst`（内核官方文档）

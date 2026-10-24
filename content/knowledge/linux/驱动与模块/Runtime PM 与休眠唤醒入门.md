@@ -152,5 +152,5 @@ grep -R . /sys/devices/.../power/ 2>/dev/null | head
 
 - [[knowledge/linux/驱动与模块/platform 驱动完整案例]]\
 - [[knowledge/linux/学习路径/设备树实战指南]]\
-- [[knowledge/linux/内核机制/Clock 与 Pinctrl 子系统]]\
+- [[../内核机制/Clock and Pinctrl subsystem]]\
 - 内核文档：`Documentation/driver-api/pm/`、`Documentation/power/`
