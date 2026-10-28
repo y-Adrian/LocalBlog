@@ -1,3 +1,15 @@
+// Constrain the inline diagram without changing the expanded SVG viewer.
+.center article pre > code.mermaid {
+  width: 50%;
+  margin-inline: auto;
+
+  & > svg {
+    display: block;
+    height: auto;
+    margin-inline: auto;
+  }
+}
+
 .expand-button {
   position: absolute;
   display: flex;
