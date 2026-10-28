@@ -192,7 +192,7 @@ document.addEventListener("nav", async () => {
 
   mermaidImport ||= await import(
     // @ts-ignore
-    "https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs"
+    "https://cdn.jsdelivr.net/npm/mermaid@12.2.0/dist/mermaid.esm.min.mjs"
   )
   const mermaid = mermaidImport.default
 
@@ -222,6 +222,9 @@ document.addEventListener("nav", async () => {
     const darkMode = document.documentElement.getAttribute("saved-theme") === "dark"
     mermaid.initialize({
       startOnLoad: false,
+      // Keep existing diagrams on the classic layout and appearance after upgrading to v12.
+      layout: "dagre",
+      look: "classic",
       securityLevel: "loose",
       theme: darkMode ? "dark" : "base",
       themeVariables: {
